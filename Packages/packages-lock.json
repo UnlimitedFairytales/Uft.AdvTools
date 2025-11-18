@@ -267,6 +267,15 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.unlimited-fairytales.unityutils": {
+      "version": "https://github.com/UnlimitedFairytales/Uft.UnityUtils.git?path=Assets/Uft.UnityUtils",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.ugui": "2.0.0"
+      },
+      "hash": "c684f4f56f23f1c6c2c4a89863c90437f8b5169d"
+    },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
       "depth": 0,
