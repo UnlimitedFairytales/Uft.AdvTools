@@ -1,0 +1,5 @@
+﻿Label,Type,X,Y,Z,Pivot,Scale,Conditional,FileName,FileType,SubFileName,Animation,RenderTexture,RenderRect,Thumbnail,CgCategolly
+背景その1,Bg,,,,,,,bg_ryokan_hiroen_1280x720.jpg,,,,,,,
+背景その2,Bg,,,,,,,bg_chiheisen_green_1280x720.jpg,,,,,,,
+猫1,Sprite,,,,,,,cat_koubakozuwari_brown.png,,,,,,,
+猫2,Sprite,,,,,,,cat_koubakozuwari_gray.png,,,,,,,

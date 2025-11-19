@@ -1,0 +1,27 @@
+{
+    "name": "Uft.AdvTools.Samples.SimpleSample",
+    "rootNamespace": "Uft.AdvTools.Samples",
+    "references": [
+        "Unity.TextMeshPro",
+        "Unity.ResourceManager",
+        "Unity.Addressables",
+        "Unity.Addressables.Android",
+        "DOTween.Modules",
+        "UniTask",
+        "UniTask.Addressables",
+        "UniTask.DOTween",
+        "UniTask.Linq",
+        "UniTask.TextMeshPro",
+        "Unity.Cinemachine",
+        "Uft.AdvTools"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -295,6 +295,13 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.unlimited-fairytales.fadeeffects": {
+      "version": "https://github.com/UnlimitedFairytales/Uft.FadeEffects.git?path=Assets/Uft.FadeEffects",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "d846d9fe541cc59e7558bc3fef09f99dc7a837ca"
+    },
     "com.unlimited-fairytales.unityutils": {
       "version": "https://github.com/UnlimitedFairytales/Uft.UnityUtils.git?path=Assets/Uft.UnityUtils",
       "depth": 0,
@@ -302,7 +309,7 @@
       "dependencies": {
         "com.unity.ugui": "2.0.0"
       },
-      "hash": "c684f4f56f23f1c6c2c4a89863c90437f8b5169d"
+      "hash": "a9272f68b83447531d073448cf079083fef2fbfc"
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",

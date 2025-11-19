@@ -1,0 +1,94 @@
+#nullable enable
+
+using System;
+using UnityEngine;
+
+namespace Uft.AdvTools.Commands
+{
+    public class CmdText : ICommand
+    {
+        public enum PageCtrlType
+        {
+            InputBrPage,
+            InputBrPageAndNoHide,
+            InputBr,
+            Input,
+            Next,
+        }
+
+        public CommandCategory CommandCategory { get; } = CommandCategory.Text;
+
+        protected string Name { get; set; }
+        protected string Text { get; set; }
+        protected PageCtrlType PageCtrl { get; set; }
+        protected string? Voice { get; set; } // TODO: 対応
+        protected string WindowType { get; set; } // NOTE: 対応予定なし
+
+        // NOTE: Character値
+        protected string? Pattern { get; set; }
+        protected int? ImageIndex { get; set; }
+        protected float? OffsetX { get; set; }
+        protected float? OffsetY { get; set; }
+        protected float FadeSeconds { get; set; }
+
+        public CmdText(string? name, string? text, string? pageCtrl, string? voice, string? windowType,
+            string? pattern, int? imageIndex, float? offsetX, float? offsetY, float? fadeSeconds)
+        {
+            this.Name = name ?? "";
+            this.Text = text ?? "";
+            this.PageCtrl = Enum.TryParse<PageCtrlType>(pageCtrl, true, out var casted) ? casted : PageCtrlType.InputBrPage;
+            this.Voice = voice;
+            this.WindowType = windowType ?? "";
+
+            // NOTE: Character値
+            this.Pattern = pattern;
+            this.ImageIndex = imageIndex is int idx ?
+                Mathf.Clamp(idx, 0, 7) :
+                null;
+            this.OffsetX = offsetX;
+            this.OffsetY = offsetY;
+            this.FadeSeconds = fadeSeconds ?? 0.2f;
+        }
+
+        public virtual void Run(ScenarioExecutor scenarioExecutor, AdvRoot advRoot)
+        {
+            scenarioExecutor.IsWaitingForInput = true;
+            if (this.PageCtrl == PageCtrlType.Next)
+            {
+                advRoot.IsAutoInputOnce = true;
+            }
+
+            if (advRoot.CharacterDictionary.ContainsKey(this.Name))
+            {
+                // NOTE: Arg2～Arg5（Pattern、ImageIndex、OffsetX、OffsetY）が空欄の場合は、デフォルトまたは現在の表示を継続する
+                var character = advRoot.CharacterDictionary[this.Name];
+                var pattern = string.IsNullOrWhiteSpace(this.Pattern) ? character.LastPattern : this.Pattern;
+                var detail = character.CharacterDetailDictionary[pattern];
+
+                var sprite = detail.Sprite;
+                var imageIndex = this.ImageIndex ?? character.LastImageIndex;
+                var x = this.OffsetX ?? character.LastOffsetX;
+                var y = this.OffsetY ?? character.LastOffsetY;
+                var pivot = detail.Pivot;
+                var scale = detail.Scale;
+
+                advRoot.SpriteManager.SetCharacter(character, sprite, imageIndex, x, y, pivot, scale, this.FadeSeconds);
+
+                // NOTE: 本文がない場合は、キャラクター名も表示しない
+                var name = string.IsNullOrWhiteSpace(this.Text) ? "" : character.NameText;
+                advRoot.MessageArea.SetText(name, this.Text, this.PageCtrl, this.WindowType);
+
+                character.LastPattern = pattern;
+                character.LastImageIndex = imageIndex;
+                character.LastOffsetX = x;
+                character.LastOffsetY = y;
+            }
+            else
+            {
+                // NOTE: 本文がない場合は、キャラクター名も表示しない
+                var name = string.IsNullOrWhiteSpace(this.Text) ? "" : this.Name;
+                advRoot.MessageArea.SetText(name, this.Text, this.PageCtrl, this.WindowType);
+            }
+        }
+    }
+}
