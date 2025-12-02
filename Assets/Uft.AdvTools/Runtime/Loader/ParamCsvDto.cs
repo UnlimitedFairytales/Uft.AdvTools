@@ -3,12 +3,20 @@
 using CsvHelper;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using Uft.UnityUtils.Csv;
 
 namespace Uft.AdvTools.Loader
 {
     public class ParamCsvDto
     {
+        static readonly PropertyInfo[] stringPropertyInfos =
+        typeof(ParamCsvDto)
+            .GetProperties()
+            .Where(p => p.PropertyType == typeof(string))
+            .ToArray();
+
         public static IReadOnlyList<ParamCsvDto> Load(FileInfo fileInfo)
         {
             var config =  CsvUtil.GetCsvConfiguration(CsvUtil.UTF8);
@@ -42,6 +50,12 @@ namespace Uft.AdvTools.Loader
         public string? Type { get; set; }
         public string? Value { get; set; }
         public string? FileType { get; set; }
+
+        public virtual bool IsAllNullOrWhiteSpace()
+        {
+            return stringPropertyInfos
+                .All(p => string.IsNullOrWhiteSpace((string?)p.GetValue(this)!));
+        }
 
         public override string ToString() =>
             $"{this.Label},{this.Type},{this.Value},{this.FileType}";

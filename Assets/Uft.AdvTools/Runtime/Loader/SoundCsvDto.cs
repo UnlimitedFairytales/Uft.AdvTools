@@ -3,12 +3,20 @@
 using CsvHelper;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using Uft.UnityUtils.Csv;
 
 namespace Uft.AdvTools.Loader
 {
     public class SoundCsvDto
     {
+        static readonly PropertyInfo[] stringPropertyInfos =
+        typeof(SoundCsvDto)
+            .GetProperties()
+            .Where(p => p.PropertyType == typeof(string))
+            .ToArray();
+
         public static IReadOnlyList<SoundCsvDto> Load(FileInfo fileInfo)
         {
             var config =  CsvUtil.GetCsvConfiguration(CsvUtil.UTF8);
@@ -48,6 +56,12 @@ namespace Uft.AdvTools.Loader
         public string? IntroTime { get; set; }
 
         public string? Volume { get; set; }
+
+        public virtual bool IsAllNullOrWhiteSpace()
+        {
+            return stringPropertyInfos
+                .All(p => string.IsNullOrWhiteSpace((string?)p.GetValue(this)!));
+        }
 
         public override string ToString() =>
             $"{this.Label},{this.Title},{this.Type},{this.FileName},{this.IntroTime},{this.Volume}";

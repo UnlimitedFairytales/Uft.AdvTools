@@ -1,5 +1,6 @@
 CharacterName,NameText,Pattern,X,Y,Z,Pivot,Scale,Conditional,FileName,SubFileName,FileType,Animation,RenderTexture,RenderRect,EyeBlink,LipSynch,Icon,IconSubFileName,IconRect,IconAutoFlip
 男子学生,男子学生,通常,,-420,,Bottom,0.8,,schoolboy/smartphone_schoolboy_stand.png,,,,,,,,,,,
 ,,笑い,,-420,,Bottom,1.0,,schoolboy/smartphone_schoolboy_stand_smile.png,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,
 女子学生,女子学生,通常,,-120,,Center,0.8,,schoolgirl/smartphone_schoolgirl_stand.png,,,,,,,,,,,
 ,,笑い,,-120,,Center,0.8,,schoolgirl/smartphone_schoolgirl_stand_smile.png,,,,,,,,,,,

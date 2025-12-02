@@ -3,12 +3,20 @@
 using CsvHelper;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using Uft.UnityUtils.Csv;
 
 namespace Uft.AdvTools.Loader
 {
     public class CharacterCsvDto
     {
+        static readonly PropertyInfo[] stringPropertyInfos =
+        typeof(CharacterCsvDto)
+            .GetProperties()
+            .Where(p => p.PropertyType == typeof(string))
+            .ToArray();
+
         public static IReadOnlyList<CharacterCsvDto> Load(FileInfo fileInfo)
         {
             var config =  CsvUtil.GetCsvConfiguration(CsvUtil.UTF8);
@@ -82,6 +90,12 @@ namespace Uft.AdvTools.Loader
         // IconRect
         // IconAutoFlip
         public string? Loop { get; set; }
+
+        public virtual bool IsAllNullOrWhiteSpace()
+        {
+            return stringPropertyInfos
+                .All(p => string.IsNullOrWhiteSpace((string?)p.GetValue(this)!));
+        }
 
         public override string ToString() =>
             $"{this.CharacterName},{this.NameText},{this.Pattern},{this.X},{this.Y},{this.Z},{this.Pivot},{this.Scale},{this.Conditional},{this.FileName},{this.SubFileName},{this.FileType},...";

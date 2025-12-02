@@ -48,6 +48,7 @@ namespace Uft.AdvTools.Loader
                 for (i = 0; i < csvDtoList.Count; i++)
                 {
                     dto = csvDtoList[i];
+                    if (dto.IsAllNullOrWhiteSpace()) continue;
                     if (string.IsNullOrWhiteSpace(dto.Label)) continue;
 
                     var type = dto.Type!.ToLower();

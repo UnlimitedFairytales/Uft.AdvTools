@@ -4,12 +4,20 @@ using CsvHelper;
 using CsvHelper.Configuration.Attributes;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using Uft.UnityUtils.Csv;
 
 namespace Uft.AdvTools.Loader
 {
     public class ScenarioCsvDto
     {
+        static readonly PropertyInfo[] stringPropertyInfos =
+        typeof(ScenarioCsvDto)
+            .GetProperties()
+            .Where(p => p.PropertyType == typeof(string))
+            .ToArray();
+
         public static IReadOnlyList<ScenarioCsvDto> Load(FileInfo fileInfo)
         {
             return fileInfo.ReadCsv(
@@ -43,18 +51,24 @@ namespace Uft.AdvTools.Loader
             };
         }
 
-        [Name("Command")] public string? Command { get; set; }
-        [Name("Arg1")] public string? Arg1 { get; set; }
-        [Name("Arg2")] public string? Arg2 { get; set; }
-        [Name("Arg3")] public string? Arg3 { get; set; }
-        [Name("Arg4")] public string? Arg4 { get; set; }
-        [Name("Arg5")] public string? Arg5 { get; set; }
-        [Name("Arg6")] public string? Arg6 { get; set; }
-        [Name("WaitType")] public string? WaitType { get; set; }
-        [Name("Text")] public string? Text { get; set; }
-        [Name("PageCtrl")] public string? PageCtrl { get; set; }
-        [Name("Voice")] public string? Voice { get; set; }
-        [Name("WindowType")] public string? WindowType { get; set; }
+        public string? Command { get; set; }
+        public string? Arg1 { get; set; }
+        public string? Arg2 { get; set; }
+        public string? Arg3 { get; set; }
+        public string? Arg4 { get; set; }
+        public string? Arg5 { get; set; }
+        public string? Arg6 { get; set; }
+        public string? WaitType { get; set; }
+        public string? Text { get; set; }
+        public string? PageCtrl { get; set; }
+        public string? Voice { get; set; }
+        public string? WindowType { get; set; }
+
+        public virtual bool IsAllNullOrWhiteSpace()
+        {
+            return stringPropertyInfos
+                .All(p => string.IsNullOrWhiteSpace((string?)p.GetValue(this)!));
+        }
 
         public override string ToString() =>
             $"{this.Command},{this.Arg1},{this.Arg2},{this.Arg3},{this.Arg4},{this.Arg5},{this.Arg6},{this.WaitType},{this.Text},{this.PageCtrl},{this.Voice},{this.WindowType}";

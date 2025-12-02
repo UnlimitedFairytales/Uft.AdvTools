@@ -3,12 +3,20 @@
 using CsvHelper;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using Uft.UnityUtils.Csv;
 
 namespace Uft.AdvTools.Loader
 {
     public class TextureCsvDto
     {
+        static readonly PropertyInfo[] stringPropertyInfos =
+        typeof(TextureCsvDto)
+            .GetProperties()
+            .Where(p => p.PropertyType == typeof(string))
+            .ToArray();
+
         public static IReadOnlyList<TextureCsvDto> Load(FileInfo fileInfo)
         {
             var config =  CsvUtil.GetCsvConfiguration(CsvUtil.UTF8);
@@ -76,6 +84,12 @@ namespace Uft.AdvTools.Loader
         public string? Thumbnail { get; set; }
         public string? CgCategolly { get; set; }
         public string? Loop { get; set; }
+
+        public virtual bool IsAllNullOrWhiteSpace()
+        {
+            return stringPropertyInfos
+                .All(p => string.IsNullOrWhiteSpace((string?)p.GetValue(this)!));
+        }
 
         public override string ToString() =>
             $"{this.Label},{this.Type},{this.X},{this.Y},{this.Z},{this.Pivot},{this.Scale},{this.Conditional},{this.FileName},{this.SubFileName},{this.FileType},...";

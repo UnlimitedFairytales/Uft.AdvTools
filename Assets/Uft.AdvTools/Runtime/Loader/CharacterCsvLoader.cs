@@ -37,6 +37,7 @@ namespace Uft.AdvTools.Loader
                 for (i = 0; i < csvDtoList.Count; i++)
                 {
                     dto = csvDtoList[i];
+                    if (dto.IsAllNullOrWhiteSpace()) continue;
                     var name = dto.CharacterName!;
 
                     var pattern = new CharacterDetail(
