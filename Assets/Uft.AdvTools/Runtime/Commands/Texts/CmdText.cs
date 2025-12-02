@@ -7,6 +7,8 @@ namespace Uft.AdvTools.Commands
 {
     public class CmdText : ICommand
     {
+        public static readonly string  PATTERN_OFF = "<Off>";
+
         public enum PageCtrlType
         {
             InputBrPage,
@@ -25,7 +27,7 @@ namespace Uft.AdvTools.Commands
         protected string WindowType { get; set; } // NOTE: 対応予定なし
 
         // NOTE: Character値
-        protected string? Pattern { get; set; }
+        protected string? Pattern { get; set; } // NOTE: "<Off>"の場合、画像表示の抑制が可能
         protected int? ImageIndex { get; set; }
         protected float? OffsetX { get; set; }
         protected float? OffsetY { get; set; }
@@ -63,16 +65,29 @@ namespace Uft.AdvTools.Commands
                 // NOTE: Arg2～Arg5（Pattern、ImageIndex、OffsetX、OffsetY）が空欄の場合は、デフォルトまたは現在の表示を継続する
                 var character = advRoot.CharacterDictionary[this.Name];
                 var pattern = string.IsNullOrWhiteSpace(this.Pattern) ? character.LastPattern : this.Pattern;
-                var detail = character.CharacterDetailDictionary[pattern];
+                var imageIndex = character.LastImageIndex;
+                var x = character.LastOffsetX;
+                var y = character.LastOffsetY;
+                if (pattern == PATTERN_OFF)
+                {
+                    if (advRoot.SpriteManager.IsCharacterDisplayed(character))
+                    {
+                        advRoot.SpriteManager.SetCharacterOff(character, this.FadeSeconds);
+                    }
+                }
+                else
+                {
+                    var detail = character.CharacterDetailDictionary[pattern];
 
-                var sprite = detail.Sprite;
-                var imageIndex = this.ImageIndex ?? character.LastImageIndex;
-                var x = this.OffsetX ?? character.LastOffsetX;
-                var y = this.OffsetY ?? character.LastOffsetY;
-                var pivot = detail.Pivot;
-                var scale = detail.Scale;
+                    var sprite = detail.Sprite;
+                    imageIndex = this.ImageIndex ?? character.LastImageIndex;
+                    x = this.OffsetX ?? character.LastOffsetX;
+                    y = this.OffsetY ?? character.LastOffsetY;
+                    var pivot = detail.Pivot;
+                    var scale = detail.Scale;
 
-                advRoot.SpriteManager.SetCharacter(character, sprite, imageIndex, x, y, pivot, scale, this.FadeSeconds);
+                    advRoot.SpriteManager.SetCharacter(character, sprite, imageIndex, x, y, pivot, scale, this.FadeSeconds);
+                }
 
                 // NOTE: 本文がない場合は、キャラクター名も表示しない
                 var name = string.IsNullOrWhiteSpace(this.Text) ? "" : character.NameText;

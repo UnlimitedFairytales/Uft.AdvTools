@@ -61,7 +61,7 @@ using UnityEngine;
 コマンド         |カテゴリ|制限事項
 -----------------|--------|--------------------------------------------------------
 空欄(Arg1未指定) |Text    |PageCtrlはInput系3種とNextのみ対応。利用可能なタグはTMPが自動的に対応するもののみ
-空欄(Arg1あり)   |Text    |レイヤーは0～7を指定する簡易実装。Arg1～Arg6でのparamタグ、Characterタグ、Offタグなどは全て非対応。PageCtrlやText等はArg1未指定と同様の制限事項
+空欄(Arg1あり)   |Text    |レイヤーは0～7を指定する簡易実装。Arg1～Arg6でのparamタグ、Characterタグなどは、Arg2へのOffタグ以外は全て非対応。PageCtrlやText等はArg1未指定と同様の制限事項
 CharacterOff     |Object  |Arg1はキャラクター指定のみ対応
 Bg               |Object  |レイヤーに非対応
 BgOff            |Object  |-

@@ -26,6 +26,8 @@ namespace Uft.AdvTools
 
         // Methods
 
+        public bool IsCharacterDisplayed(Character character) => this._characterImageIndexList.Contains(character);
+
         public void SetCharacter(Character character, Sprite sprite, int index, float offsetX, float offsetY, AnchorPreset pivot, float scale, float fadeTime_sec)
         {
             var ease = Ease.OutQuad;
@@ -87,7 +89,7 @@ namespace Uft.AdvTools
                     return;
                 }
             }
-            DevLog.LogWarning($"[{nameof(SpriteManager)}] character is not found : character.CharacterName={character.CharacterName}");
+            DevLog.LogWarning($"[{nameof(SpriteManager)}.{nameof(SetCharacterOff)}] Displayed character is not found : character.CharacterName={character.CharacterName}");
         }
 
         public void SetSprite(Sprite sprite, int index, float offsetX, float offsetY, AnchorPreset pivot, float scale, float fadeTime_sec)

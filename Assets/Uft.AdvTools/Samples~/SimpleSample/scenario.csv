@@ -3,7 +3,7 @@
 # コマンド         |カテゴリ|制限事項
 # -----------------|--------|--------------------------------------------------------
 # 空欄(Arg1未指定) |Text    |PageCtrlはInput系3種とNextのみ対応。利用可能なタグはTMPが自動的に対応するもののみ
-# 空欄(Arg1あり)   |Text    |レイヤーは0～7を指定する簡易実装。Arg1～Arg6でのparamタグ、Characterタグ、Offタグなどは全て非対応。PageCtrlやText等はArg1未指定と同様の制限事項
+# 空欄(Arg1あり)   |Text    |レイヤーは0～7を指定する簡易実装。Arg1～Arg6でのparamタグ、Characterタグなどは、Arg2へのOffタグ以外は全て非対応。PageCtrlやText等はArg1未指定と同様の制限事項
 # CharacterOff     |Object  |Arg1はキャラクター指定のみ対応
 # Bg               |Object  |レイヤーに非対応
 # BgOff            |Object  |-
@@ -59,6 +59,7 @@ Wait,,,,,,1,,,,,
 ,女子学生,,2,-350,,1.0,,,Next,,
 Wait,,,,,,1,,,,,
 ,,,,,,,,"複数キャラの同時表示も実現可能。",,,
+,女子学生,<Off>,,,,,,"Arg2に<Off>タグ（互換性のために大文字小文字区別します）でキャラ表示を抑制・非表示化します。",,,
 ,,,,,,,,"Commandが空欄でテキスト表示。\nPageCtrlにInputBrPageを指定した場合、",InputBrPage,,
 ,,,,,,,,"改ページされる。",InputBrPage,,
 ,,,,,,,,"PageCtrlを省略した場合、",,,
