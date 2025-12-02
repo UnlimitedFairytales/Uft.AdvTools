@@ -11,9 +11,9 @@ namespace Uft.AdvTools.Commands
         public CommandCategory CommandCategory { get; } = CommandCategory.Logic;
 
         protected string ScenarioLabel { get; set; }
-        protected string Expression { get; set; }
+        protected string? Expression { get; set; }
 
-        public CmdJump(string scenarioLabel, string expression)
+        public CmdJump(string scenarioLabel, string? expression)
         {
             this.ScenarioLabel = scenarioLabel;
             this.Expression = expression;
@@ -23,7 +23,8 @@ namespace Uft.AdvTools.Commands
         {
             try
             {
-                if (Param.EvaluateBoolean(this.Expression, advRoot))
+
+                if (string.IsNullOrWhiteSpace(this.Expression) || Param.EvaluateBoolean(this.Expression, advRoot))
                 {
                     scenarioExecutor.JumpTo(this.ScenarioLabel);
                 }

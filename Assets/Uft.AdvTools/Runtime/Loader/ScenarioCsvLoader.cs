@@ -181,7 +181,7 @@ namespace Uft.AdvTools.Loader
                             commandList.Add(new CmdParam(dto.Arg1));
                             break;
                         case Jump:
-                            if (string.IsNullOrWhiteSpace(dto.Arg1) || string.IsNullOrWhiteSpace(dto.Arg2)) throw new Exception($"{nameof(CmdJump)} : Arg1,Arg2 are required.");
+                            if (string.IsNullOrWhiteSpace(dto.Arg1)) throw new Exception($"{nameof(CmdJump)} : Arg1 are required.");
                             commandList.Add(new CmdJump(dto.Arg1, dto.Arg2));
                             break;
                         case Selection:
