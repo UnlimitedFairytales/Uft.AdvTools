@@ -1,6 +1,7 @@
 #nullable enable
 
 using System;
+using System.IO;
 using UnityEngine;
 
 namespace Uft.AdvTools.Commands
@@ -23,7 +24,7 @@ namespace Uft.AdvTools.Commands
         protected string Name { get; set; }
         protected string Text { get; set; }
         protected PageCtrlType PageCtrl { get; set; }
-        protected string? Voice { get; set; } // TODO: 対応
+        protected string? Voice { get; set; }
         protected string WindowType { get; set; } // NOTE: 対応予定なし
 
         // NOTE: Character値
@@ -62,6 +63,7 @@ namespace Uft.AdvTools.Commands
 
             if (advRoot.CharacterDictionary.ContainsKey(this.Name))
             {
+                // 1. Character sprite
                 // NOTE: Arg2～Arg5（Pattern、ImageIndex、OffsetX、OffsetY）が空欄の場合は、デフォルトまたは現在の表示を継続する
                 var character = advRoot.CharacterDictionary[this.Name];
                 var pattern = string.IsNullOrWhiteSpace(this.Pattern) ? character.LastPattern : this.Pattern;
@@ -88,15 +90,29 @@ namespace Uft.AdvTools.Commands
 
                     advRoot.SpriteManager.SetCharacter(character, sprite, imageIndex, x, y, pivot, scale, this.FadeSeconds);
                 }
-
-                // NOTE: 本文がない場合は、キャラクター名も表示しない
-                var name = string.IsNullOrWhiteSpace(this.Text) ? "" : character.NameText;
-                advRoot.MessageArea.SetText(name, this.Text, this.PageCtrl, this.WindowType);
-
                 character.LastPattern = pattern;
                 character.LastImageIndex = imageIndex;
                 character.LastOffsetX = x;
                 character.LastOffsetY = y;
+
+                // 2. Text
+                // NOTE: 本文がない場合は、キャラクター名も表示しない
+                var name = string.IsNullOrWhiteSpace(this.Text) ? "" : character.NameText;
+                advRoot.MessageArea.SetText(name, this.Text, this.PageCtrl, this.WindowType);
+
+                // 3. Voice
+                if (!string.IsNullOrWhiteSpace(this.Voice))
+                {
+                    // NOTE: 宴と異なりSoundシートでのType=Voiceに対応してある (本来の宴4はファイル直接記入のみ)
+                    var voiceClip = advRoot.AllowsVoiceLabel && advRoot.VoiceDictionary.ContainsKey(this.Voice) ?
+                            advRoot.VoiceDictionary[this.Voice] :
+                            Resources.Load<AudioClip>(advRoot.VoiceRoot + Path.ChangeExtension(this.Voice, null));
+                    advRoot.SoundManager.PlayVoice(voiceClip, false, 1.0f);
+                }
+                else
+                {
+                    advRoot.SoundManager.StopVoice();
+                }
             }
             else
             {

@@ -28,6 +28,8 @@ using UnityEngine;
 
 - Label, Type, FileNameのみ対応
 - Typeでは、Se, Bgmのみ対応
+- AdvRootのAllowsVoiceLabelをtrueにすると、SoundシートでVoiceタイプを認識し、使用できるようになります
+    - この機能は宴4互換ではないため、デフォルトではfalseになっています
 
 ## Paramシート : 宴4に対する制限事項
 
@@ -61,7 +63,7 @@ using UnityEngine;
 コマンド         |カテゴリ|制限事項
 -----------------|--------|--------------------------------------------------------
 空欄(Arg1未指定) |Text    |PageCtrlはInput系3種とNextのみ対応。利用可能なタグはTMPが自動的に対応するもののみ
-空欄(Arg1あり)   |Text    |レイヤーは0～7を指定する簡易実装。Arg1～Arg6でのparamタグ、Characterタグなどは、Arg2へのOffタグ以外は全て非対応。PageCtrlやText等はArg1未指定と同様の制限事項
+空欄(Arg1あり)   |Text    |レイヤーは0～7を指定する簡易実装。Arg1～Arg6でのparamタグ、Characterタグなどは、Arg2へのOffタグ以外は全て非対応。PageCtrlやText等はArg1未指定と同様の制限事項。Voiceは後述
 CharacterOff     |Object  |Arg1はキャラクター指定のみ対応
 Bg               |Object  |レイヤーに非対応
 BgOff            |Object  |-
@@ -80,6 +82,12 @@ Jump             |Logic   |宴4互換で使用可能な演算子が少ない。�
 Selection        |Logic   |プレハブ、X、Yの個別指定は非対応。宴と仕様が異なり、直前のテキスト内容は非表示にならない。また、選択肢を出した後にテキストをさらに出すことも出来ない
 
 .
+
+### Voiceについて
+
+- デフォルトでは宴4互換でVoiceフォルダ以下からのファイル名のみ許容します
+- AdvRootのAllowsVoiceLabelをtrueにすると、SoundシートでVoiceタイプを認識し、使用できるようになります
+    - この機能は宴4互換ではないため、デフォルトではfalseになっています
 
 ### 宴4互換で使用可能な変数、演算子
 
@@ -105,6 +113,7 @@ Selection        |Logic   |プレハブ、X、Yの個別指定は非対応。宴
 ### 補足
 
 - 改ページ直後の演出コマンド時、自動的にWindowをHide。（宴準拠）
+    - AdvRootのEmulatesUtageEffectCommandをfalseにすると、演出コマンドに対してWindowが非表示にならなくなります
 - Text時、自動的にWindowをShow。（宴準拠）
 */
 
@@ -115,6 +124,7 @@ namespace Uft.AdvTools
         // Parameters
 
         [SerializeField] protected bool _emulatesUtageEffectCommand = true; public bool EmulatesUtageEffectCommand => this._emulatesUtageEffectCommand;
+        [SerializeField] protected bool _allowsVoiceLabel = false; public bool AllowsVoiceLabel => this._allowsVoiceLabel;
 
         [SerializeField] protected Bg _bg; public Bg Bg => this._bg;
 
@@ -128,6 +138,9 @@ namespace Uft.AdvTools
         [SerializeField] protected FadeEffect _fadeEffect; public FadeEffect FadeEffect => this._fadeEffect;
 
         // Status
+
+        public string ResourcesFolderPathPart { get; protected set; }
+        public string VoiceRoot => this.ResourcesFolderPathPart + "Sound/Voice/";
 
         public Dictionary<string, Character> CharacterDictionary { get; protected set; }
         public Dictionary<string, TextureRow> BgDictionary { get; protected set; }
@@ -173,6 +186,8 @@ namespace Uft.AdvTools
         public virtual void Setup(string scenarioCsvText, string characterCsvText, string textureCsvText, string soundCsvText, string paramCsvText, string resourcesFolderPathPart)
         {
             this.Cleanup();
+
+            this.ResourcesFolderPathPart = resourcesFolderPathPart;
 
             this.CharacterDictionary = new CharacterCsvLoader().Load(characterCsvText, resourcesFolderPathPart);
 

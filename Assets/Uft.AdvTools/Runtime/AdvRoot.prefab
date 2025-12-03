@@ -366,6 +366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _emulatesUtageEffectCommand: 1
+  _allowsVoiceLabel: 0
   _bg: {fileID: 8364876910701061120}
   _spriteManager: {fileID: 4815723313035957612}
   _soundManager: {fileID: 8048299226933598990}

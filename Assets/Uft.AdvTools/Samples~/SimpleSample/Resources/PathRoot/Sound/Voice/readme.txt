@@ -14,4 +14,5 @@ https://zunko.jp/con_ongen_kiyaku.html
 以下の音声ファイルは、VOICEVOXおよび四国めたんの利用規約(2025/11/16時点)に基づき作成しています。
 本プロジェクトへの同梱は、VOICEVOXおよび四国めたん音源利用規約に基づく適法な利用です。
 
-001_四国めたん（ノーマル）_ボイステスト、ボイ….wav
+sample_voice1.wav
+sample_voice2.wav
