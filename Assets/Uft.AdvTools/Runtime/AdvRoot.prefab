@@ -724,7 +724,7 @@ GameObject:
   - component: {fileID: 6664591588442357803}
   - component: {fileID: 6578103987387291897}
   m_Layer: 5
-  m_Name: UISprite
+  m_Name: CanvasSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -826,7 +826,7 @@ GameObject:
   - component: {fileID: 3786673883889332882}
   - component: {fileID: 1441403045730833683}
   m_Layer: 5
-  m_Name: UIBg
+  m_Name: CanvasBg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1003,7 +1003,7 @@ GameObject:
   - component: {fileID: 4281699438995874626}
   - component: {fileID: 1491094906382713275}
   m_Layer: 5
-  m_Name: UI
+  m_Name: CanvasUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1151,8 +1151,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6238002637867543365}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -890.1826}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

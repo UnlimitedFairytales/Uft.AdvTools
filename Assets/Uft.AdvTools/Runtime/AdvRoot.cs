@@ -54,7 +54,7 @@ using UnityEngine;
 - 宴レイヤー機能はなく、簡易実装
     - Layerシートはない。Bgは専用、SpriteとCharacterはそれぞれ(奥)0～7(手前)を指定する
     - SpriteとCharacterが同じレイヤー番号の場合、Characterが手前
-    - 構造としては、Bg用のUIBg、SpriteやCharacter用のUISprite、メッセージウィンドウのUIの3つのCanvasに分かれている
+    - 構造としては、Bg用のCanvasBg、SpriteやCharacter用のCanvasSprite、メッセージウィンドウなどのCanvasUIの3つのCanvasに分かれている
 - TODO: Voice
 - Skipの挙動が宴4と異なる。Wait全般がWaitを待つ
 
