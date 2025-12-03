@@ -210,7 +210,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 510617428262375393}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -723,7 +723,7 @@ GameObject:
   - component: {fileID: 509596591526914922}
   - component: {fileID: 6664591588442357803}
   - component: {fileID: 6578103987387291897}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: CanvasSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -760,7 +760,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 2310202696384541243}
+  m_Camera: {fileID: 8025926332305904443}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -825,7 +825,7 @@ GameObject:
   - component: {fileID: 2095414738307282826}
   - component: {fileID: 3786673883889332882}
   - component: {fileID: 1441403045730833683}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: CanvasBg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -862,7 +862,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 2310202696384541243}
+  m_Camera: {fileID: 8025926332305904443}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
