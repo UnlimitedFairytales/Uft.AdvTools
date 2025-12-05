@@ -66,6 +66,7 @@ namespace Uft.AdvTools
                             if (result.Value == null || result.Status != View.OperationResultStatus.Accepted) return;
 
                             var cmdSelection = result.Value;
+                            advRoot.LogManager.Add(CmdText.PageCtrlType.InputBrPage, null, "", "[" + cmdSelection.Text + "]");
                             if (!string.IsNullOrWhiteSpace(cmdSelection.OnSelectExpression))
                             {
                                 Param.AssignIntParamFromExpression(cmdSelection.OnSelectExpression, advRoot);

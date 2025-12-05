@@ -15,7 +15,8 @@
         "Unity.Cinemachine",
         "Uft.UnityUtils",
         "Uft.UnityUtils.Common",
-        "Uft.FadeEffects"
+        "Uft.FadeEffects",
+        "Uft.VirtualizedList"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

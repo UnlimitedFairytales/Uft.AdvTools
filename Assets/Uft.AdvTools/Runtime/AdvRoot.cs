@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Uft.AdvTools.Commands;
 using Uft.AdvTools.Entities;
 using Uft.AdvTools.Loader;
 using Uft.AdvTools.View;
@@ -165,7 +166,10 @@ namespace Uft.AdvTools
         [SerializeField] protected SoundManager _soundManager; public SoundManager SoundManager => this._soundManager;
         [SerializeField] protected SelectionList _selectionList; public SelectionList SelectionList => this._selectionList;
 
+        [SerializeField] protected LogController _logController; public bool LogControllerIsVisible => this._logController.gameObject.activeSelf;
+
         [SerializeField] protected Toggle _tglAutoNext;
+        [SerializeField] protected Toggle _tglLogView;
 
         [SerializeField] protected string[] _cameraPrefixes = new[] { "WideCamera", "ACamera", "BCamera" };
         [SerializeField] protected string _uiEffectPrefix = "UIEffect_";
@@ -176,6 +180,7 @@ namespace Uft.AdvTools
 
         public PostEffectManager PostEffectManager { get; protected set; }
         public AutoNext AutoNext { get; protected set; }
+        public LogManager LogManager { get; protected set; }
 
         public string ResourcesFolderPathPart { get; protected set; }
         public string VoiceRoot => this.ResourcesFolderPathPart + "Sound/Voice/";
@@ -203,6 +208,7 @@ namespace Uft.AdvTools
         void Awake()
         {
             this._tglAutoNext.onValueChanged.AddListener((isOn) => this.ChangeAutoMode(isOn));
+            this._tglLogView.onValueChanged.AddListener((isOn) => this.ChangeLogView(isOn));
         }
 
         protected virtual void Update()
@@ -235,6 +241,8 @@ namespace Uft.AdvTools
             this.Cleanup();
 
             this.AutoNext = new AutoNext();
+            this.LogManager = new LogManager();
+            this._tglLogView.SetIsOnWithoutNotify(false);
 
             this.PostEffectManager = new PostEffectManager(this);
 
@@ -289,6 +297,21 @@ namespace Uft.AdvTools
             this._tglAutoNext.SetIsOnWithoutNotify(isOn);
         }
 
+        public virtual void ChangeLogView(bool isOn)
+        {
+            if (isOn)
+            {
+                this.ChangeAutoMode(false); // NOTE: Logを表示したら自動的にAutoNextをオフにする
+                _ = this._logController.ShowAsync(this.LogManager.LogItemList);
+            }
+            else
+            {
+                _ = this._logController.CloseAsync();
+            }
+
+            this._tglLogView.SetIsOnWithoutNotify(isOn);
+        }
+
         public virtual void Next(bool playsNextSound = true)
         {
             if (this.MessageArea.IsTypewriting)
@@ -303,12 +326,21 @@ namespace Uft.AdvTools
         {
             this.MessageArea.Hide();
             this._tglAutoNext.gameObject.SetActive(false);
+            this._tglLogView.gameObject.SetActive(false);
         }
 
         public virtual void ShowUI()
         {
             this.MessageArea.Show();
             this._tglAutoNext.gameObject.SetActive(true);
+            this._tglLogView.gameObject.SetActive(true);
+        }
+
+        public virtual void SetText(Character character, string name, string text, CmdText.PageCtrlType pageCtrl, string windowType)
+        {
+            var lastPageCtrl = this.MessageArea.LastPageCtrl;
+            this.LogManager.Add(lastPageCtrl, character, name, text);
+            this.MessageArea.SetText(this, name, text, pageCtrl, windowType);
         }
     }
 }

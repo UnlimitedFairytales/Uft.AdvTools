@@ -8,6 +8,11 @@ namespace Uft.AdvTools.Commands
 {
     public class CmdText : ICommand
     {
+        public static bool IsNewPage(PageCtrlType lastPageCtrl)
+        {
+            return lastPageCtrl == PageCtrlType.InputBrPage || lastPageCtrl == PageCtrlType.InputBrPageAndNoHide;
+        }
+
         public static readonly string  PATTERN_OFF = "<Off>";
 
         public enum PageCtrlType
@@ -98,7 +103,7 @@ namespace Uft.AdvTools.Commands
                 // 2. Text
                 // NOTE: 本文がない場合は、キャラクター名も表示しない
                 var name = string.IsNullOrWhiteSpace(this.Text) ? "" : character.NameText;
-                advRoot.MessageArea.SetText(advRoot, name, this.Text, this.PageCtrl, this.WindowType);
+                advRoot.SetText(character, name, this.Text, this.PageCtrl, this.WindowType);
 
                 // 3. Voice
                 if (!string.IsNullOrWhiteSpace(this.Voice))
@@ -120,7 +125,7 @@ namespace Uft.AdvTools.Commands
             {
                 // NOTE: 本文がない場合は、キャラクター名も表示しない
                 var name = string.IsNullOrWhiteSpace(this.Text) ? "" : this.Name;
-                advRoot.MessageArea.SetText(advRoot, name, this.Text, this.PageCtrl, this.WindowType);
+                advRoot.SetText(null, name, this.Text, this.PageCtrl, this.WindowType);
                 advRoot.AutoNext.ClearCounter();
                 advRoot.AutoNext.SetIsAutoNextReadyTimeAdjust(this.Text.Length);
             }
