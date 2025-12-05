@@ -46,7 +46,7 @@ namespace Uft.AdvTools
                 {
                     if (this.CommandList[this.SeekPoint].CommandCategory == CommandCategory.Effect && advRoot.MessageArea.LastPageCtrl == CmdText.PageCtrlType.InputBrPage)
                     {
-                        advRoot.MessageArea.Hide();
+                        advRoot.HideUI();
                     }
                 }
                 advRoot.MessageArea.FixLastPageCtrl();

@@ -49,10 +49,10 @@ namespace Uft.AdvTools.View
             }
         }
 
-        public virtual void SetText(string name, string text, CmdText.PageCtrlType pageCtrl, string windowType)
+        public virtual void SetText(AdvRoot advRoot, string name, string text, CmdText.PageCtrlType pageCtrl, string windowType)
         {
             this.DisableImgNextSymbol();
-            this.Show();
+            advRoot.ShowUI();
 
             this._txtName.text = name;
             switch (this.LastPageCtrl)

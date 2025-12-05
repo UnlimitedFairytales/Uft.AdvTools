@@ -10,7 +10,7 @@ namespace Uft.AdvTools.Commands
 
         public virtual void Run(ScenarioExecutor scenarioExecutor, AdvRoot advRoot)
         {
-            advRoot.MessageArea.Show();
+            advRoot.ShowUI();
         }
     }
 }

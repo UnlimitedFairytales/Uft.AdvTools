@@ -298,5 +298,17 @@ namespace Uft.AdvTools
             }
             this.ScenarioExecutor.IsWaitingForInput = false;
         }
+
+        public virtual void HideUI()
+        {
+            this.MessageArea.Hide();
+            this._tglAutoNext.gameObject.SetActive(false);
+        }
+
+        public virtual void ShowUI()
+        {
+            this.MessageArea.Show();
+            this._tglAutoNext.gameObject.SetActive(true);
+        }
     }
 }
