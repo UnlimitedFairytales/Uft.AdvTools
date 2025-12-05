@@ -11,9 +11,9 @@ namespace Uft.AdvTools.View
     {
         // Parameters
 
-        [SerializeField] protected CanvasGroup _canvasGroup; public CanvasGroup CanvasGroup => this._canvasGroup;
-        [SerializeField] protected Button _button; public Button Button => this._button;
-        [SerializeField] protected TMP_Text _txtText;
+        [SerializeField] protected CanvasGroup? _canvasGroup; public CanvasGroup CanvasGroup => this._canvasGroup!;
+        [SerializeField] protected Button? _button; public Button Button => this._button!;
+        [SerializeField] protected TMP_Text? _txtText;
 
         // Status
 

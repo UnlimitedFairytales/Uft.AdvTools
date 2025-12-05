@@ -15,7 +15,7 @@ namespace Uft.AdvTools.View
 
         // Parameters
 
-        [SerializeField] protected SelectionItem _selectionItemPrototype;
+        [SerializeField] protected SelectionItem? _selectionItemPrototype;
         [SerializeField] protected int _maxListLength = 16;
         [SerializeField] protected int _itemSpacing = 80;
 
@@ -31,7 +31,7 @@ namespace Uft.AdvTools.View
             for (int i = 0; i < this._maxListLength; i++)
             {
                 var awaken = ComponentUtil.Instantiate(this._selectionItemPrototype, this.transform, false, true);
-                awaken.gameObject.SetActive(false);
+                awaken!.gameObject.SetActive(false);
                 awaken.Button.onClick.AddListener(() => this.OnSelectionItemClicked(awaken));
                 this._selectionItemList.Add(awaken);
             }
@@ -57,6 +57,7 @@ namespace Uft.AdvTools.View
             }
 
             // 設定・表示
+            var ease = Ease.OutQuad;
             var tasks = new List<UniTask>();
             int length = Mathf.Min(this._selectionItemList.Count, data.Count);
             var center = (length - 1) / 2.0f;
@@ -68,7 +69,7 @@ namespace Uft.AdvTools.View
 
                 var canvasGroup = this._selectionItemList[i].CanvasGroup;
                 canvasGroup.alpha = 0;
-                tasks.Add(canvasGroup.DOFade(1, 0.2f).AwaitForComplete());
+                tasks.Add(canvasGroup.DOFade(1, 0.2f).SetEase(ease).AwaitForComplete());
             }
             await UniTask.WhenAll(tasks);
             tasks.Clear();
@@ -88,7 +89,7 @@ namespace Uft.AdvTools.View
             for (int i = 0; i < length; i++)
             {
                 this._selectionItemList[i].CanvasGroup.DOComplete();
-                tasks.Add(this._selectionItemList[i].CanvasGroup.DOFade(0, 0.2f).AwaitForComplete());
+                tasks.Add(this._selectionItemList[i].CanvasGroup.DOFade(0, 0.2f).SetEase(ease).AwaitForComplete());
             }
             await UniTask.WhenAll(tasks);
             for (int i = 0; i < length; i++)
