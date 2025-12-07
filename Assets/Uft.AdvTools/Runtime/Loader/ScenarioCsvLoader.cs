@@ -32,6 +32,8 @@ namespace Uft.AdvTools.Loader
         public const string Wait = "wait";
         public const string FadeOut = "fadeout";
         public const string FadeIn = "fadein";
+        public const string ImageEffect = "imageeffect";
+        public const string ImageEffectOff = "imageeffectoff";
 
         // UI
         public const string HideMessageWindow = "hidemessagewindow";
@@ -166,6 +168,14 @@ namespace Uft.AdvTools.Loader
                         case FadeIn:
                             {
                                 commandList.Add(new CmdFadeIn(dto.Arg1, dto.Arg2, InvariantCultureUtil.FloatTryParse(dto.Arg6, out var fadeSeconds) ? fadeSeconds : null));
+                            }
+                            break;
+                        case ImageEffect:
+                        case ImageEffectOff:
+                            {
+                                var isOn = cmd == ImageEffect;
+                                if (string.IsNullOrWhiteSpace(dto.Arg2)) throw new Exception($"{nameof(CmdImageEffect)} or Off : Arg2 is required.");
+                                commandList.Add(new CmdImageEffect(isOn, dto.Arg2, InvariantCultureUtil.FloatTryParse(dto.Arg6, out var fadeSeconds) ? fadeSeconds : null));
                             }
                             break;
                         // UI

@@ -367,6 +367,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _emulatesUtageEffectCommand: 1
   _allowsVoiceLabel: 0
+  _wideCameraSimplePostEffectCollection: {fileID: 633982265801508198}
   _bg: {fileID: 8364876910701061120}
   _spriteManager: {fileID: 4815723313035957612}
   _soundManager: {fileID: 8048299226933598990}
@@ -552,6 +553,7 @@ GameObject:
   - component: {fileID: 680832469981232947}
   - component: {fileID: 6179935715672477314}
   - component: {fileID: 8388412338523306189}
+  - component: {fileID: 633982265801508198}
   m_Layer: 0
   m_Name: WideCamera
   m_TagString: Untagged
@@ -711,6 +713,58 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
+--- !u!114 &633982265801508198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3132662289560333229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6b4180bd2b4fec47ba9bd05f0df9dc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _simplePostEffects:
+  - _materialPrototype: {fileID: 2100000, guid: c3b26de046cfad24fba9395e92c86e2e, type: 2}
+    _amount: 0
+    _angle: 0
+  - _materialPrototype: {fileID: 2100000, guid: 83f5751cf81e11b4399b83eba7bd9ac4, type: 2}
+    _amount: 0
+    _angle: 0
+  - _materialPrototype: {fileID: 2100000, guid: bcfb82d32b8d3d84b821be7a8fabc453, type: 2}
+    _amount: 0
+    _angle: 0
+  - _materialPrototype: {fileID: 0}
+    _amount: 0
+    _angle: 0
+  - _materialPrototype: {fileID: 0}
+    _amount: 0
+    _angle: 0
+  - _materialPrototype: {fileID: 0}
+    _amount: 0
+    _angle: 0
+  - _materialPrototype: {fileID: 0}
+    _amount: 0
+    _angle: 0
+  - _materialPrototype: {fileID: 0}
+    _amount: 0
+    _angle: 0
+  - _materialPrototype: {fileID: 0}
+    _amount: 0
+    _angle: 0
+  - _materialPrototype: {fileID: 0}
+    _amount: 0
+    _angle: 0
+  - _materialPrototype: {fileID: 2100000, guid: 930388ea8495b26478ab0ad18513d2e1, type: 2}
+    _amount: 0
+    _angle: 0
+  - _materialPrototype: {fileID: 2100000, guid: 9dac4446ecf6eb54f986a1f466ca08a4, type: 2}
+    _amount: 0
+    _angle: 0
+  - _materialPrototype: {fileID: 2100000, guid: 004ea20ca3466da45a058217c463c129, type: 2}
+    _amount: 0
+    _angle: 0
 --- !u!1 &3136927288652075483
 GameObject:
   m_ObjectHideFlags: 0

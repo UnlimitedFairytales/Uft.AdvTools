@@ -6,6 +6,7 @@ using Uft.AdvTools.View;
 using Uft.FadeEffects;
 using Uft.UnityUtils;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 /*
 # 仕様
@@ -75,6 +76,8 @@ StopBgm          |Sound   |-
 Wait             |Effect  |-
 FadeIn           |Effect  |カメラ、ルール画像・境界線フェード、アニメ指定は非対応
 FadeOut          |Effect  |カメラ、ルール画像・境界線フェード、アニメ指定は非対応
+ImageEffect      |Effect  |カメラ、アニメ指定は非対応。GrayScale、Sepiaのみ指定可能
+ImageEffectOff   |Effect  |カメラ、アニメ指定は非対応。GrayScale、Sepiaのみ指定可能
 ShowMessageWindow|UI      |-
 HideMessageWindow|UI      |-
 Param            |Logic   |宴4互換で使用可能な演算子が少ない。詳細後述。変数にも制限あり
@@ -126,6 +129,35 @@ namespace Uft.AdvTools
         [SerializeField] protected bool _emulatesUtageEffectCommand = true; public bool EmulatesUtageEffectCommand => this._emulatesUtageEffectCommand;
         [SerializeField] protected bool _allowsVoiceLabel = false; public bool AllowsVoiceLabel => this._allowsVoiceLabel;
 
+        [SerializeField] protected SimplePostEffectCollection _wideCameraSimplePostEffectCollection; public SimplePostEffectCollection WideCameraSimplePostEffectCollection => this._wideCameraSimplePostEffectCollection;
+        public SimplePostEffectConfig WideCameraDirectionalGhostPostEffect
+        {
+            get
+            {
+                var index =  0;
+                if (GraphicsSettings.currentRenderPipeline == null) index += 10;
+                return this.WideCameraSimplePostEffectCollection.SimplePostEffects[index];
+            }
+        }
+        public SimplePostEffectConfig WideCameraGrayscalePostEffect
+        {
+            get
+            {
+                var index =  1;
+                if (GraphicsSettings.currentRenderPipeline == null) index += 10;
+                return this.WideCameraSimplePostEffectCollection.SimplePostEffects[index];
+            }
+        }
+        public SimplePostEffectConfig WideCameraSepiaPostEffect
+        {
+            get
+            {
+                var index =  2;
+                if (GraphicsSettings.currentRenderPipeline == null) index += 10;
+                return this.WideCameraSimplePostEffectCollection.SimplePostEffects[index];
+            }
+        }
+
         [SerializeField] protected Bg _bg; public Bg Bg => this._bg;
 
         [SerializeField] protected SpriteManager _spriteManager; public SpriteManager SpriteManager => this._spriteManager;
@@ -138,6 +170,8 @@ namespace Uft.AdvTools
         [SerializeField] protected FadeEffect _fadeEffect; public FadeEffect FadeEffect => this._fadeEffect;
 
         // Status
+
+        public PostEffectManager PostEffectManager { get; protected set; }
 
         public string ResourcesFolderPathPart { get; protected set; }
         public string VoiceRoot => this.ResourcesFolderPathPart + "Sound/Voice/";
@@ -187,6 +221,8 @@ namespace Uft.AdvTools
         {
             this.Cleanup();
 
+            this.PostEffectManager = new PostEffectManager(this);
+
             this.ResourcesFolderPathPart = resourcesFolderPathPart;
 
             this.CharacterDictionary = new CharacterCsvLoader().Load(characterCsvText, resourcesFolderPathPart);
@@ -219,6 +255,7 @@ namespace Uft.AdvTools
         }
         public virtual void Cleanup()
         {
+            this.PostEffectManager = null;
             this.ScenarioExecutor = null;
             this.IsPausingScenario = false;
             this.MessageArea = null;

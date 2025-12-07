@@ -15,6 +15,8 @@
 # Wait             |Effect  |-
 # FadeIn           |Effect  |カメラ、ルール画像・境界線フェード、アニメ指定は非対応
 # FadeOut          |Effect  |カメラ、ルール画像・境界線フェード、アニメ指定は非対応
+# ImageEffect      |Effect  |カメラ、アニメ指定は非対応。GrayScale、Sepiaのみ指定可能
+# ImageEffectOff   |Effect  |カメラ、アニメ指定は非対応。GrayScale、Sepiaのみ指定可能
 # ShowMessageWindow|UI      |-
 # HideMessageWindow|UI      |-
 # Param            |Logic   |宴4互換で使用可能な演算子が少ない。詳細後述。変数にも制限あり
@@ -81,6 +83,7 @@ Selection,*Labelその1,,flag_b = 0,,,,,手前に戻る（前の選択肢の選�
 Selection,*Labelその3,,,,,,,次へ,,,,
 Selection,*Labelその4,,,,,,,Bg説明までジャンプ,,,,
 Selection,*Labelその5,flag_b <= 0,,,,,,Se説明までジャンプ,,,,
+Selection,*Labelその6,,,,,,,ImageEffect説明までジャンプ,,,,
 *Labelその3,,,,,,,,,,,
 ,名無し,,,,,,,"Arg1に名前を指定できる。",,,
 ,男子学生,,,,,,,"Arg1にCharacterシートの内容を指定すると、そのキャラクターの表示も行われる。",,,
@@ -152,4 +155,16 @@ Bgm,BGMその2,,,,2.0,2.0,,,,,,
 ,,,,,,,,"StopBgmで現在のBGMを終了。",,,
 StopBgm,,,,,,2,,,,,
 Wait,,,,,,2,,,,,
+*Labelその6,,,,,,,,,,,
+,,,,,,,,"ImageEffectは、URPの場合は互換モード設定、パイプラインに追加の2手順が必要になります。\n（Builtinの場合は特に何もしなくても動きます。）",,,
+,,,,,,,,"URPの場合は、以下を設定してください\n1. メニューのEditから Project Settings > Graphics > Render Graph\nCompatibility Mode (Render Graph Disabled) にチェック",,,
+,,,,,,,,"URPの場合は、以下を設定してください\n2. プロジェクトビューから Assets > Settings > XX_Renderer ファイル\nRenderer Feature に SimplePostEffectRenderer を追加",,,
+,,,,,,,,"ImageEffectでGrayScaleまたはSepiaが可能。",,,
+ImageEffect,,GrayScale,,,,2,,,,,
+,,,,,,,,"ImageEffectOffで解除可能。",,,
+ImageEffectOff,,GrayScale,,,,2,,,,,
+,,,,,,,,"Sepiaの場合。",,,
+ImageEffect,,Sepia,,,,1,,,,,
+,,,,,,,,"解除。",,,
+ImageEffectOff,,Sepia,,,,1,,,,,
 ,,,,,,,,"以上、基本的な使い方でした。",,,
