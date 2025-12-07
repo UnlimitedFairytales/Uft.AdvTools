@@ -17,6 +17,8 @@ namespace Uft.AdvTools
             WaitingForSelected,
         }
 
+        public bool IsAutoNext { get; set; }
+
         public bool IsWaiting { get; set; }
         public bool IsWaitingForInput { get; set; }
 
@@ -32,6 +34,11 @@ namespace Uft.AdvTools
 
         public virtual void UpdateFrame(AdvRoot advRoot)
         {
+            if (this.IsWaitingForInput && this.IsAutoNext && advRoot.AutoNext.IsReady)
+            {
+                advRoot.Next();
+            }
+
             while (this.SeekPoint < this.CommandList.Count && !this.IsWaiting && !this.IsWaitingForInput && this.ReadMode != CommandReadMode.WaitingForSelected)
             {
                 // NOTE: 宴仕様に準拠させる。改ページ直後に演出系コマンドが来た場合、MessageAreaを非表示にする

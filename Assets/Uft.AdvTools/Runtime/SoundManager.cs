@@ -16,6 +16,8 @@ namespace Uft.AdvTools
         bool _currentBgmIsBgm1 = false;
         bool _currentVoiceIsVoice1 = false;
 
+        public bool IsAnyVoicePlaying => this._audioVoice1.isPlaying || this._audioVoice2.isPlaying;
+
         public void ChangeBgm(AudioClip clip, bool isLoop, float volume, float prevFadeOutSeconds, float fadeInSeconds)
         {
             this._audioBgm1.DOComplete();

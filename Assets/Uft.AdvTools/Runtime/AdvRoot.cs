@@ -7,6 +7,7 @@ using Uft.FadeEffects;
 using Uft.UnityUtils;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 /*
 # 仕様
@@ -164,6 +165,8 @@ namespace Uft.AdvTools
         [SerializeField] protected SoundManager _soundManager; public SoundManager SoundManager => this._soundManager;
         [SerializeField] protected SelectionList _selectionList; public SelectionList SelectionList => this._selectionList;
 
+        [SerializeField] protected Toggle _tglAutoNext;
+
         [SerializeField] protected string[] _cameraPrefixes = new[] { "WideCamera", "ACamera", "BCamera" };
         [SerializeField] protected string _uiEffectPrefix = "UIEffect_";
         [SerializeField] protected string _defaultParentName = "Stage"; public string DefaultParentName => this._defaultParentName;
@@ -172,6 +175,7 @@ namespace Uft.AdvTools
         // Status
 
         public PostEffectManager PostEffectManager { get; protected set; }
+        public AutoNext AutoNext { get; protected set; }
 
         public string ResourcesFolderPathPart { get; protected set; }
         public string VoiceRoot => this.ResourcesFolderPathPart + "Sound/Voice/";
@@ -196,10 +200,19 @@ namespace Uft.AdvTools
 
         // Methods
 
+        void Awake()
+        {
+            this._tglAutoNext.onValueChanged.AddListener((isOn) => this.ChangeAutoMode(isOn));
+        }
+
         protected virtual void Update()
         {
             if (this.ScenarioExecutor == null) return;
             if (this.IsPausingScenario) return;
+
+            // IsAutoNextReady制御
+            var isCountable = !this.MessageArea.IsTypewriting && !this.SoundManager.IsAnyVoicePlaying;
+            this.AutoNext.UpdateFrame(isCountable, Time.deltaTime);
 
             this.ScenarioExecutor.UpdateFrame(this);
             if (!this.ScenarioExecutor.IsWaiting && this.ScenarioExecutor.IsWaitingForInput && !this.MessageArea.IsTypewriting)
@@ -221,6 +234,8 @@ namespace Uft.AdvTools
         {
             this.Cleanup();
 
+            this.AutoNext = new AutoNext();
+
             this.PostEffectManager = new PostEffectManager(this);
 
             this.ResourcesFolderPathPart = resourcesFolderPathPart;
@@ -239,6 +254,7 @@ namespace Uft.AdvTools
             this.ParamDictionary = new ParamCsvLoader().Load(paramCsvText);
 
             this.ScenarioExecutor = new ScenarioExecutor(new ScenarioCsvLoader().Load(scenarioCsvText, "test"));
+            this._tglAutoNext.SetIsOnWithoutNotify(this.ScenarioExecutor.IsAutoNext);
             this.MessageArea = this.GetComponentInChildren<MessageArea>();
             foreach (var cameraPrefix in this._cameraPrefixes)
             {
@@ -267,7 +283,13 @@ namespace Uft.AdvTools
         public virtual void PauseScenario() => this.IsPausingScenario = true;
         public virtual void ResumeScenario() => this.IsPausingScenario = false;
 
-        public virtual void Next()
+        public virtual void ChangeAutoMode(bool isOn)
+        {
+            this.ScenarioExecutor.IsAutoNext = isOn;
+            this._tglAutoNext.SetIsOnWithoutNotify(isOn);
+        }
+
+        public virtual void Next(bool playsNextSound = true)
         {
             if (this.MessageArea.IsTypewriting)
             {

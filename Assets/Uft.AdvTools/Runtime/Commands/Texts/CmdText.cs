@@ -113,12 +113,16 @@ namespace Uft.AdvTools.Commands
                 {
                     advRoot.SoundManager.StopVoice();
                 }
+                advRoot.AutoNext.ClearCounter();
+                advRoot.AutoNext.SetIsAutoNextReadyTimeAdjust(this.Text.Length, string.IsNullOrWhiteSpace(this.Voice) ? AutoNext.DEFAULT_ADJUST_WEIGHT : 0.01f);
             }
             else
             {
                 // NOTE: 本文がない場合は、キャラクター名も表示しない
                 var name = string.IsNullOrWhiteSpace(this.Text) ? "" : this.Name;
                 advRoot.MessageArea.SetText(name, this.Text, this.PageCtrl, this.WindowType);
+                advRoot.AutoNext.ClearCounter();
+                advRoot.AutoNext.SetIsAutoNextReadyTimeAdjust(this.Text.Length);
             }
         }
     }
