@@ -311,6 +311,13 @@
       },
       "hash": "c7c0098c25e0c2eb8dc2366dae84712074717d41"
     },
+    "com.unlimited-fairytales.virtualizedlist": {
+      "version": "https://github.com/UnlimitedFairytales/Uft.VirtualizedList.git?path=Assets/Uft.VirtualizedList",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "1f8644aa2071fae31519a9f451f7e13eec89de27"
+    },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
       "depth": 0,

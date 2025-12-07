@@ -19,6 +19,7 @@
     "com.unity.visualscripting": "1.9.7",
     "com.unlimited-fairytales.fadeeffects": "https://github.com/UnlimitedFairytales/Uft.FadeEffects.git?path=Assets/Uft.FadeEffects",
     "com.unlimited-fairytales.unityutils": "https://github.com/UnlimitedFairytales/Uft.UnityUtils.git?path=Assets/Uft.UnityUtils",
+    "com.unlimited-fairytales.virtualizedlist": "https://github.com/UnlimitedFairytales/Uft.VirtualizedList.git?path=Assets/Uft.VirtualizedList",
     "com.unity.modules.accessibility": "1.0.0",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
