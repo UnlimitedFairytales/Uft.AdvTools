@@ -70,6 +70,15 @@ namespace Uft.AdvTools.Loader
                     dto = csvDtoList[i];
                     if (dto.IsAllNullOrWhiteSpace()) continue;
                     var cmd = dto.Command!.ToLower();
+
+                    // カスタム用
+                    var loaded = this.CustomCommand(dto, cmd);
+                    if (loaded != null)
+                    {
+                        commandList.Add(loaded);
+                        continue;
+                    }
+
                     switch (cmd)
                     {
                         // Text
@@ -223,6 +232,17 @@ namespace Uft.AdvTools.Loader
                 DevLog.LogError($"[{nameof(ScenarioCsvLoader)}] Invalid format : i={i}, dto=({dto})\n{ex.Message}");
                 throw;
             }
+        }
+
+        /// <summary>
+        /// 自作コマンドに対応するにはこちらをoverride。<br/>Commandをnewして返すとリストに追加されます。dtoに対応するカスタムコマンドが見つからない場合はnullを返してください。
+        /// </summary>
+        /// <param name="dto">csvから読み取られた情報</param>
+        /// <param name="lowerCmd">Command列をToLowerしたもの</param>
+        /// <returns></returns>
+        protected virtual ICommand? CustomCommand(ScenarioCsvDto? dto, string lowerCmd)
+        {
+            return null;
         }
     }
 }

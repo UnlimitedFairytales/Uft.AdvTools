@@ -236,8 +236,11 @@ namespace Uft.AdvTools
             }
         }
 
-        public virtual void Setup(string scenarioCsvText, string characterCsvText, string textureCsvText, string soundCsvText, string paramCsvText, string resourcesFolderPathPart)
+        public virtual void Setup(string scenarioCsvText, string characterCsvText, string textureCsvText, string soundCsvText, string paramCsvText, string resourcesFolderPathPart,
+            ScenarioCsvLoader scenarioCsvLoader = null)
         {
+            scenarioCsvLoader ??= new ScenarioCsvLoader();
+
             this.Cleanup();
 
             this.AutoNext = new AutoNext();
@@ -261,7 +264,7 @@ namespace Uft.AdvTools
 
             this.ParamDictionary = new ParamCsvLoader().Load(paramCsvText);
 
-            this.ScenarioExecutor = new ScenarioExecutor(new ScenarioCsvLoader().Load(scenarioCsvText, "test"));
+            this.ScenarioExecutor = new ScenarioExecutor(scenarioCsvLoader.Load(scenarioCsvText, "test"));
             this._tglAutoNext.SetIsOnWithoutNotify(this.ScenarioExecutor.IsAutoNext);
             this.MessageArea = this.GetComponentInChildren<MessageArea>();
             foreach (var cameraPrefix in this._cameraPrefixes)
