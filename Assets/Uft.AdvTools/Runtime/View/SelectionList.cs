@@ -15,9 +15,10 @@ namespace Uft.AdvTools.View
 
         // Parameters
 
+        [SerializeField] protected SelectionTitle? _selectionTitle;
         [SerializeField] protected SelectionItem? _selectionItemPrototype;
         [SerializeField] protected int _maxListLength = 16;
-        [SerializeField] protected int _itemSpacing = 80;
+        [SerializeField] protected int _itemSpacing = 70;
 
         // Status
 
@@ -28,6 +29,10 @@ namespace Uft.AdvTools.View
 
         protected void Awake()
         {
+            if (this._selectionTitle != null)
+            {
+                this._selectionTitle.gameObject.SetActive(false);
+            }
             for (int i = 0; i < this._maxListLength; i++)
             {
                 var awaken = ComponentUtil.Instantiate(this._selectionItemPrototype, this.transform, false, true);
@@ -39,7 +44,7 @@ namespace Uft.AdvTools.View
 
         // Methods
 
-        public virtual async UniTask<OperationResult<CmdSelection?>> ShowAsync(List<CmdSelection> data)
+        public virtual async UniTask<OperationResult<CmdSelection?>> ShowAsync(string? title, List<CmdSelection> data)
         {
             // 引数チェック
             if (data.Count == 0) return CANCEL_RESULT;
@@ -71,6 +76,15 @@ namespace Uft.AdvTools.View
                 canvasGroup.alpha = 0;
                 tasks.Add(canvasGroup.DOFade(1, 0.2f).SetEase(ease).AwaitForComplete());
             }
+            if (this._selectionTitle != null && title != null)
+            {
+                this._selectionTitle.SetData(title, new Vector2(0, this._itemSpacing * (center + 1)));
+                this._selectionTitle.gameObject.SetActive(true);
+
+                var canvasGroup = this._selectionTitle.CanvasGroup;
+                canvasGroup.alpha = 0;
+                tasks.Add(canvasGroup.DOFade(1, 0.2f).SetEase(ease).AwaitForComplete());
+            }
             await UniTask.WhenAll(tasks);
             tasks.Clear();
 
@@ -91,7 +105,15 @@ namespace Uft.AdvTools.View
                 this._selectionItemList[i].CanvasGroup.DOComplete();
                 tasks.Add(this._selectionItemList[i].CanvasGroup.DOFade(0, 0.2f).SetEase(ease).AwaitForComplete());
             }
+            if (this._selectionTitle != null)
+            {
+                tasks.Add(this._selectionTitle.CanvasGroup.DOFade(0, 0.2f).SetEase(ease).AwaitForComplete());
+            }
             await UniTask.WhenAll(tasks);
+            if (this._selectionTitle != null)
+            {
+                this._selectionTitle.gameObject.SetActive(false);
+            }
             for (int i = 0; i < length; i++)
             {
                 this._selectionItemList[i].gameObject.SetActive(false);

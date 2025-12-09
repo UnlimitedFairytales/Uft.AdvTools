@@ -42,6 +42,7 @@ namespace Uft.AdvTools.Loader
         // Logic
         public const string Param = "param";
         public const string Jump = "jump";
+        public const string SelectionTitle = "selectiontitle"; // 宴にない非互換機能
         public const string Selection = "selection";
 
         // instance
@@ -202,6 +203,9 @@ namespace Uft.AdvTools.Loader
                         case Jump:
                             if (string.IsNullOrWhiteSpace(dto.Arg1)) throw new Exception($"{nameof(CmdJump)} : Arg1 are required.");
                             commandList.Add(new CmdJump(dto.Arg1, dto.Arg2));
+                            break;
+                        case SelectionTitle:
+                            commandList.Add(new CmdSelectionTitle(dto.Text));
                             break;
                         case Selection:
                             {

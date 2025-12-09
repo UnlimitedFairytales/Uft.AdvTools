@@ -25,6 +25,7 @@ namespace Uft.AdvTools
         protected IReadOnlyList<ICommand> CommandList { get; set; }
         protected int SeekPoint { get; set; }
         protected CommandReadMode ReadMode { get; set; } = CommandReadMode.Normal;
+        protected CmdSelectionTitle SelectionTitle { get; private set; }
         protected List<CmdSelection> SelectionList { get; private set; } = new();
 
         public ScenarioExecutor(IReadOnlyList<ICommand> commandList)
@@ -62,7 +63,7 @@ namespace Uft.AdvTools
                             var visibleList = this.SelectionList
                                 .Where(s => s.IsVisible(advRoot))
                                 .ToList();
-                            var result = await advRoot.SelectionList.ShowAsync(visibleList);
+                            var result = await advRoot.SelectionList.ShowAsync(this.SelectionTitle?.Title, visibleList);
                             if (result.Value == null || result.Status != View.OperationResultStatus.Accepted) return;
 
                             var cmdSelection = result.Value;
@@ -91,10 +92,22 @@ namespace Uft.AdvTools
             }
         }
 
+        public virtual void SetCmdSelectionTitle(CmdSelectionTitle CmdSelectionTitle)
+        {
+            if (this.ReadMode != CommandReadMode.Selection)
+            {
+                this.SelectionTitle = null;
+                this.SelectionList.Clear();
+                this.ReadMode = CommandReadMode.Selection;
+            }
+            this.SelectionTitle = CmdSelectionTitle;
+        }
+
         public virtual void AddCmdSelection(CmdSelection cmdSelection)
         {
             if (this.ReadMode != CommandReadMode.Selection)
             {
+                this.SelectionTitle = null;
                 this.SelectionList.Clear();
                 this.ReadMode = CommandReadMode.Selection;
             }
