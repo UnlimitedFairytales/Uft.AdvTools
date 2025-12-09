@@ -7,6 +7,8 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using Uft.UnityUtils;
 using Uft.UnityUtils.Common;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace Uft.AdvTools.Commands
 {
@@ -150,14 +152,14 @@ namespace Uft.AdvTools.Commands
             {
                 try
                 {
-                    switch (this.TargetName)
+                    var img =
+                        this.TargetName == CmdBg.SPRITE_NAME_BG ?  advRoot.Bg.GetBgImg() :
+                        advRoot.CharacterDictionary.ContainsKey(this.TargetName) ? advRoot.SpriteManager.GetCharacterImage(advRoot.CharacterDictionary[this.TargetName]) :
+                        advRoot.SpriteDictionary.ContainsKey(this.TargetName) ? advRoot.SpriteManager.GetSpriteImage(advRoot.SpriteDictionary[this.TargetName].Sprite) :
+                        null;
+                    if (img != null)
                     {
-                        case CmdBg.SPRITE_NAME_BG:
-                            await advRoot.Bg.TweenAsync(this.Tween, this.Parameter, this.Ease);
-                            break;
-                        default:
-                            // TODO: いつかやる
-                            break;
+                        await TweenAsync(img, this.Tween, this.Parameter, this.Ease);
                     }
                 }
                 finally
@@ -165,6 +167,83 @@ namespace Uft.AdvTools.Commands
                     scenarioExecutor.IsWaiting = false;
                 }
             });
+        }
+
+        static async UniTask TweenAsync(Image img, TweenType tweenType, TweenParameter parameter, Ease? ease)
+        {
+            ease ??= DG.Tweening.Ease.OutQuad;
+            var rt = img.rectTransform;
+            switch (tweenType)
+            {
+                case TweenType.MoveTo:
+                case TweenType.MoveFrom:
+                    {
+                        var tweener = rt
+                            .DOAnchorPos(
+                                new Vector2(parameter.x ?? rt.anchoredPosition.x, parameter.y ?? rt.anchoredPosition.y),
+                                parameter.IsSpeed ? parameter.speed!.Value : parameter.time!.Value);
+                        if (tweenType == TweenType.MoveFrom)
+                        {
+                            tweener = tweener.From();
+                        }
+                        await tweener
+                            .SetSpeedBased(parameter.IsSpeed)
+                            .SetDelay(parameter.delay)
+                            .SetEase(ease!.Value);
+                    }
+                    break;
+                case TweenType.MoveBy:
+                    {
+                        await rt
+                            .DOAnchorPos(
+                                new Vector2(parameter.x ?? 0, parameter.y ?? 0),
+                                parameter.IsSpeed ? parameter.speed!.Value : parameter.time!.Value)
+                            .SetSpeedBased(parameter.IsSpeed)
+                            .SetDelay(parameter.delay)
+                            .SetEase(ease!.Value)
+                            .SetRelative();
+                    }
+                    break;
+                case TweenType.PunchPosition:
+                    {
+                        await rt
+                            .DOPunchAnchorPos(
+                                new Vector2(parameter.x ?? 0, parameter.y ?? 0),
+                                parameter.time!.Value)
+                            .SetDelay(parameter.delay)
+                            .SetEase(ease!.Value);
+                    }
+                    break;
+                case TweenType.ShakePosition:
+                    {
+                        await rt
+                            .DOShakeAnchorPos(
+                                parameter.time!.Value,
+                                new Vector3(parameter.x ?? 0, parameter.y ?? 0, parameter.z ?? 0),
+                                20, 90, false, false)
+                            .SetDelay(parameter.delay)
+                            .SetEase(ease!.Value);
+                    }
+                    break;
+                case TweenType.PunchScale:
+                    await rt
+                        .DOPunchScale(
+                            new Vector3(parameter.x ?? 0, parameter.y ?? 0, 0),
+                            parameter.time!.Value)
+                        .SetDelay(parameter.delay)
+                        .SetEase(ease!.Value);
+                    break;
+                case TweenType.ShakeScale:
+                    await rt
+                        .DOShakeScale(parameter.time!.Value,
+                             new Vector3(parameter.x ?? 0, parameter.y ?? 0, 0),
+                             20, 90, false)
+                        .SetDelay(parameter.delay)
+                        .SetEase(ease!.Value);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

@@ -65,7 +65,7 @@
 #Wait             |Effect  |-
 #FadeIn           |Effect  |カメラ、ルール画像・境界線フェード、アニメ指定は非対応
 #FadeOut          |Effect  |カメラ、ルール画像・境界線フェード、アニメ指定は非対応
-#Tween            |Effect  |(※)個別名のみ指定可能（背景はBGで指定可能）で、レイヤー指定は未対応。TweenTypeはMoveTo/From/Byの3種、Punch/Shake系のPositionとScale4種で計7種のみ。TweenParameterはislocalが指定可能なものはislocal=trueを指定しないとエラー(グローバルが許容されない)、色関連は非対応、=の左右に空白は許容されない制限あり。Easeはspringだけ非対応。loop非対応。Easeライブラリが宴と異なるため、挙動差がある可能性あり
+#Tween            |Effect  |個別名のみ指定可能（背景はBGで指定可能）で、レイヤー指定は未対応。TweenTypeはMoveTo/From/Byの3種、Punch/Shake系のPositionとScale4種で計7種のみ。TweenParameterはislocalが指定可能なものはislocal=trueを指定しないとエラー(グローバルが許容されない)、色関連は非対応、=の左右に空白は許容されない制限あり。Easeはspringだけ非対応。loop非対応。Easeライブラリが宴と異なるため、挙動差がある可能性あり
 #ImageEffect      |Effect  |カメラ、アニメ指定は非対応。GrayScale、Sepiaのみ指定可能
 #ImageEffectOff   |Effect  |カメラ、アニメ指定は非対応。GrayScale、Sepiaのみ指定可能
 #ShowMessageWindow|UI      |-
@@ -74,7 +74,7 @@
 #Jump             |Logic   |宴4互換で使用可能な演算子が少ない。詳細後述。変数にも制限あり
 #Selection        |Logic   |プレハブ、X、Yの個別指定は非対応。宴と仕様が異なり、直前のテキスト内容は非表示にならない。また、選択肢を出した後にテキストをさらに出すことも出来ない
 #
-#(※) 実装途中。BG（背景）のみ操作可能
+#.
 #
 #### 独自コマンド
 #
@@ -213,6 +213,17 @@ Tween,BG,PunchPosition,time=2 delay=0 x=10 y=10,,,,,,,,,
 Tween,BG,ShakePosition,time=2 delay=0 x=10 y=10 islocal=true,,,,,,,,,
 Tween,BG,PunchScale,time=2 delay=0 x=0.1 y=0.1,,,,,,,,,
 Tween,BG,ShakeScale,time=2 delay=0 x=0.1 y=0.1,,,,,,,,,
+,,,,,,,,"CharacterもTweenコマンドで移動できます。",,,
+Tween,男子学生,MoveTo,time=2 delay=0 x=100 y=200 islocal=true,,,,,,,,,
+Tween,男子学生,MoveFrom,time=1 delay=2 x=200 y=50 islocal=true,easeInQuad,,,,,,,,
+Tween,男子学生,MoveBy,time=1 delay=0 x=20 y=10,easeInOutCubic,,,,,,,,
+Tween,男子学生,MoveTo,time=2 delay=0 x=0 y=0 islocal=true,easeInOutBounce,,,,,,,,
+Tween,男子学生,MoveTo,time=2 delay=0 x=200 y=0 islocal=true,easeInOutBounce,,,,,,,,
+,,,,,,,,"CharacterもTweenコマンドでPunchPosition, ShakePosition, PunchScale, ShakeScaleに対応。",,,
+Tween,男子学生,PunchPosition,time=2 delay=0 x=10 y=10,,,,,,,,,
+Tween,男子学生,ShakePosition,time=2 delay=0 x=10 y=10 islocal=true,,,,,,,,,
+Tween,男子学生,PunchScale,time=2 delay=0 x=0.1 y=0.1,,,,,,,,,
+Tween,男子学生,ShakeScale,time=2 delay=0 x=0.1 y=0.1,,,,,,,,,
 ,,,,,,,,"Spriteでスプライトを表示。",,,
 Sprite,猫1,,,,,2.0,,,,,,
 ,,,,,,,,"同名のSpriteを再指定すると移動する。複数表示されない。(スプライト名は非対応)",,,
@@ -223,6 +234,17 @@ Sprite,猫2,,1,0,0,2.0,,,,,,
 Sprite,猫1,,2,-100,0,2.0,,,,,,
 ,,,,,,,,"SpriteOffで非表示に。",,,
 SpriteOff,猫1,,,,,1.0,,,,,,
+,,,,,,,,"SpriteもTweenコマンドで移動できます。",,,
+Tween,猫2,MoveTo,time=2 delay=0 x=100 y=200 islocal=true,,,,,,,,,
+Tween,猫2,MoveFrom,time=1 delay=2 x=200 y=50 islocal=true,easeInQuad,,,,,,,,
+Tween,猫2,MoveBy,time=1 delay=0 x=20 y=10,easeInOutCubic,,,,,,,,
+Tween,猫2,MoveTo,time=2 delay=0 x=0 y=0 islocal=true,easeInOutBounce,,,,,,,,
+Tween,猫2,MoveTo,time=2 delay=0 x=-200 y=0 islocal=true,easeInOutBounce,,,,,,,,
+,,,,,,,,"SpriteもTweenコマンドでPunchPosition, ShakePosition, PunchScale, ShakeScaleに対応。",,,
+Tween,猫2,PunchPosition,time=2 delay=0 x=10 y=10,,,,,,,,,
+Tween,猫2,ShakePosition,time=2 delay=0 x=10 y=10 islocal=true,,,,,,,,,
+Tween,猫2,PunchScale,time=2 delay=0 x=0.1 y=0.1,,,,,,,,,
+Tween,猫2,ShakeScale,time=2 delay=0 x=0.1 y=0.1,,,,,,,,,
 *Labelその5,,,,,,,,,,,
 ,,,,,,,,"SeでSeを再生。Seは多重に再生可能。",,,
 Se,SEその1,,,,,,,,,,,

@@ -1,6 +1,8 @@
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using System;
 using System.Linq;
+using Uft.AdvTools.Commands;
 using Uft.AdvTools.Entities;
 using Uft.UnityUtils;
 using Uft.UnityUtils.UI;
@@ -27,6 +29,18 @@ namespace Uft.AdvTools
         // Methods
 
         public bool IsCharacterDisplayed(Character character) => this._characterImageIndexList.Contains(character);
+
+        public int? GetSpriteIndex(Sprite sprite)
+        {
+            for (int i = 0; i < this._imgSpriteList.Length; i++)
+            {
+                if (this._imgSpriteList[i].sprite == sprite)
+                {
+                    return i;
+                }
+            }
+            return null;
+        }
 
         public void SetCharacter(Character character, Sprite sprite, int index, float offsetX, float offsetY, AnchorPreset pivot, float scale, float fadeTime_sec)
         {
@@ -150,6 +164,22 @@ namespace Uft.AdvTools
                 }
             }
             DevLog.LogWarning($"[{nameof(SpriteManager)}] sprite is not found : sprite.name={sprite.name}");
+        }
+
+        public Image GetCharacterImage(Character character)
+        {
+            if (!this.IsCharacterDisplayed(character)) return null;
+
+            int i = Array.IndexOf(this._characterImageIndexList, character);
+            return this._imgCharacterList[i];
+        }
+
+        public Image GetSpriteImage(Sprite sprite)
+        {
+            var i = this.GetSpriteIndex(sprite);
+            if (i == null) return null;
+
+            return this._imgSpriteList[i.Value];
         }
     }
 }
