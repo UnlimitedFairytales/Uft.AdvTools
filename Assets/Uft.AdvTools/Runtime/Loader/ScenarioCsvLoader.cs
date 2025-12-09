@@ -32,6 +32,7 @@ namespace Uft.AdvTools.Loader
         public const string Wait = "wait";
         public const string FadeOut = "fadeout";
         public const string FadeIn = "fadein";
+        public const string Tween = "tween";
         public const string ImageEffect = "imageeffect";
         public const string ImageEffectOff = "imageeffectoff";
 
@@ -178,6 +179,18 @@ namespace Uft.AdvTools.Loader
                         case FadeIn:
                             {
                                 commandList.Add(new CmdFadeIn(dto.Arg1, dto.Arg2, InvariantCultureUtil.FloatTryParse(dto.Arg6, out var fadeSeconds) ? fadeSeconds : null));
+                            }
+                            break;
+                        case Tween:
+                            {
+                                var arg4IsSpecified = !string.IsNullOrWhiteSpace(dto.Arg4);
+                                if (string.IsNullOrWhiteSpace(dto.Arg1) ||
+                                    string.IsNullOrWhiteSpace(dto.Arg2) ||
+                                    string.IsNullOrWhiteSpace(dto.Arg3)) throw new Exception($"{nameof(CmdTween)} : Arg1,Arg2,Arg3 is required.");
+                                if (!CmdTween.TweenTypeTryParse(dto.Arg2, out var tween)) throw new Exception($"{nameof(CmdTween)} : Arg2 unsupported tweenType. {dto.Arg2}");
+                                if (!CmdTween.TweenParameter.TryParse(tween, dto.Arg3, out var tweenParameter)) throw new Exception($"{nameof(CmdTween)} : Arg3 unsupported tweenParameter. : {dto.Arg3}");
+                                if (!CmdTween.EaseTryParse(dto.Arg4, out var ease) && arg4IsSpecified) throw new Exception($"{nameof(CmdTween)} : Arg4 unsupported ease. : {dto.Arg4}");
+                                commandList.Add(new CmdTween(dto.Arg1, tween, tweenParameter, arg4IsSpecified ? ease : null));
                             }
                             break;
                         case ImageEffect:
