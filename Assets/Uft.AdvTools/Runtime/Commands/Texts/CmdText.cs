@@ -61,16 +61,25 @@ namespace Uft.AdvTools.Commands
         public virtual void Run(ScenarioExecutor scenarioExecutor, AdvRoot advRoot)
         {
             scenarioExecutor.IsWaitingForInput = true;
-            if (this.PageCtrl == PageCtrlType.Next)
+
+            // NOTE: 本文がEmptyの場合、キャラクター名も表示せず、Next扱いにする
+            var character = advRoot.CharacterDictionary.ContainsKey(this.Name) ? advRoot.CharacterDictionary[this.Name] : null;
+            var name = "";
+            var pageCtrl = PageCtrlType.Next;
+            if (!string.IsNullOrEmpty(this.Text))
+            {
+                name = character?.NameText ?? this.Name;
+                pageCtrl = this.PageCtrl;
+            }
+            if (pageCtrl == PageCtrlType.Next)
             {
                 advRoot.IsAutoInputOnce = true;
             }
 
-            if (advRoot.CharacterDictionary.ContainsKey(this.Name))
+            if (character != null)
             {
                 // 1. Character sprite
                 // NOTE: Arg2～Arg5（Pattern、ImageIndex、OffsetX、OffsetY）が空欄の場合は、デフォルトまたは現在の表示を継続する
-                var character = advRoot.CharacterDictionary[this.Name];
                 var pattern = string.IsNullOrWhiteSpace(this.Pattern) ? character.LastPattern : this.Pattern;
                 var imageIndex = character.LastImageIndex;
                 var x = character.LastOffsetX;
@@ -101,9 +110,7 @@ namespace Uft.AdvTools.Commands
                 character.LastOffsetY = y;
 
                 // 2. Text
-                // NOTE: 本文がない場合は、キャラクター名も表示しない
-                var name = string.IsNullOrWhiteSpace(this.Text) ? "" : character.NameText;
-                advRoot.SetText(character, name, this.Text, this.PageCtrl, this.WindowType);
+                advRoot.SetText(character, name, this.Text, pageCtrl, this.WindowType);
 
                 // 3. Voice
                 if (!string.IsNullOrWhiteSpace(this.Voice))
@@ -123,9 +130,7 @@ namespace Uft.AdvTools.Commands
             }
             else
             {
-                // NOTE: 本文がない場合は、キャラクター名も表示しない
-                var name = string.IsNullOrWhiteSpace(this.Text) ? "" : this.Name;
-                advRoot.SetText(null, name, this.Text, this.PageCtrl, this.WindowType);
+                advRoot.SetText(null, name, this.Text, pageCtrl, this.WindowType);
                 advRoot.AutoNext.ClearCounter();
                 advRoot.AutoNext.SetIsAutoNextReadyTimeAdjust(this.Text.Length);
             }
