@@ -1,9 +1,6 @@
-using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using System;
-using System.Linq;
-using Uft.AdvTools.Commands;
 using Uft.AdvTools.Entities;
+using Uft.AdvTools.View;
 using Uft.UnityUtils;
 using Uft.UnityUtils.UI;
 using UnityEngine;
@@ -15,20 +12,44 @@ namespace Uft.AdvTools
     {
         public const int IMG_COUNT = 8;
 
-        static readonly Color TRANSPARENT = new(1, 1, 1, 0);
+        public static readonly Color TRANSPARENT = new(1, 1, 1, 0);
 
         // Parameters
 
         [SerializeField] protected Image[] _imgSpriteList;
-        [SerializeField] protected Image[] _imgCharacterList;
+        [SerializeField] protected CharacterView[] _characterViewList;
+        [SerializeField] protected bool _controlsCharacterGrayout = true; public bool ControlsCharacterGrayout => this._controlsCharacterGrayout;
+        [SerializeField] protected Color _grayoutColor = Color.gray;
 
         // Status
 
-        protected Character[] _characterImageIndexList = new Character[IMG_COUNT]; // HACK: 本当は _imgCharacterList と統合するべき
+        /// <summary>誰も表示しなくなった時、nullになる</summary>
+        protected Character _lastSpeaker = null;
 
         // Methods
 
-        public bool IsCharacterDisplayed(Character character) => this._characterImageIndexList.Contains(character);
+        protected bool IsAnyCharacterDisplayed()
+        {
+            var list = this._characterViewList;
+            for (int i = 0; i < list.Length; i++)
+            {
+                if (list[i].IsDisplayed) return true;
+            }
+            return false;
+        }
+
+        protected int GetCharacterViewIndex(Character character)
+        {
+            var list = this._characterViewList;
+            for (int i = 0; i < list.Length; i++)
+            {
+                if (list[i].Character == character)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
 
         public int? GetSpriteIndex(Sprite sprite)
         {
@@ -44,64 +65,27 @@ namespace Uft.AdvTools
 
         public void SetCharacter(Character character, Sprite sprite, int index, float offsetX, float offsetY, AnchorPreset pivot, float scale, float fadeTime_sec)
         {
-            var ease = Ease.OutQuad;
-            var list = this._imgCharacterList;
-            var fromColor = TRANSPARENT;
-            var toColor = Color.white;
-            var fromPos = new Vector2(offsetX, offsetY);
-            var toPos = new Vector2(offsetX, offsetY);
-            if (this._characterImageIndexList.Contains(character))
+            var list = this._characterViewList;
+            var i = this.GetCharacterViewIndex(character);
+            if (0 <= i)
             {
-                int i = Array.IndexOf(this._characterImageIndexList, character);
-                {
-                    var prevImg = list[i];
-                    prevImg.DOComplete();
-                    prevImg.rectTransform.DOComplete();
-                    fromColor = prevImg.color;
-                    fromPos = prevImg.rectTransform.anchoredPosition;
-                    if (i == index)
-                    {
-                        prevImg.sprite = sprite;
-                        prevImg.rectTransform.pivot = pivot.GetPivot();
-                        prevImg.rectTransform.localScale = new Vector3(scale, scale, scale);
-                        prevImg.rectTransform.DOAnchorPos(toPos, fadeTime_sec).SetEase(ease);
-                        return;
-                    }
-                    else
-                    {
-                        this._characterImageIndexList[i] = null;
-                        prevImg.color = TRANSPARENT;
-                        prevImg.sprite = null;
-                    }
-                }
+                list[i].SetCharacterOff(0);
             }
-            this._characterImageIndexList[index] = character;
-
-            list[index].sprite = sprite;
-            list[index].color = fromColor;
-            list[index].rectTransform.pivot = pivot.GetPivot();
-            list[index].rectTransform.localScale = new Vector3(scale, scale, scale);
-            list[index].rectTransform.anchoredPosition = fromPos;
-            list[index].SetNativeSize();
-            list[index].DOColor(toColor, fadeTime_sec).SetEase(ease);
-            list[index].rectTransform.DOAnchorPos(toPos, fadeTime_sec).SetEase(ease);
+            list[index].SetCharacter(0 <= i, character, sprite, new Vector2(offsetX, offsetY), pivot, scale, fadeTime_sec);
         }
 
         public void SetCharacterOff(Character character, float fadeTime_sec)
         {
-            var ease = Ease.OutQuad;
-            var list = this._imgCharacterList;
-            if (this._characterImageIndexList.Contains(character))
+            var list = this._characterViewList;
+            var i = this.GetCharacterViewIndex(character);
+            if (0 <= i)
             {
-                var i = Array.IndexOf(this._characterImageIndexList, character);
+                list[i].SetCharacterOff(fadeTime_sec);
+                if (!this.IsAnyCharacterDisplayed())
                 {
-                    var prevImg = list[i];
-                    prevImg.DOComplete();
-                    prevImg.rectTransform.DOComplete();
-                    prevImg.DOColor(TRANSPARENT, fadeTime_sec).SetEase(ease);
-                    this._characterImageIndexList[i] = null;
-                    return;
+                    this._lastSpeaker = null;
                 }
+                return;
             }
             DevLog.LogWarning($"[{nameof(SpriteManager)}.{nameof(SetCharacterOff)}] Displayed character is not found : character.CharacterName={character.CharacterName}");
         }
@@ -166,20 +150,46 @@ namespace Uft.AdvTools
             DevLog.LogWarning($"[{nameof(SpriteManager)}] sprite is not found : sprite.name={sprite.name}");
         }
 
-        public Image GetCharacterImage(Character character)
-        {
-            if (!this.IsCharacterDisplayed(character)) return null;
-
-            int i = Array.IndexOf(this._characterImageIndexList, character);
-            return this._imgCharacterList[i];
-        }
-
         public Image GetSpriteImage(Sprite sprite)
         {
             var i = this.GetSpriteIndex(sprite);
             if (i == null) return null;
 
             return this._imgSpriteList[i.Value];
+        }
+
+        public CharacterView GetCharacterView(Character character)
+        {
+            var i = this.GetCharacterViewIndex(character);
+            return 0 <= i ? this._characterViewList[i] : null;
+        }
+
+        /// <summary>
+        /// 制御する場合、以下の通り<br/>
+        /// 1. 指定キャラクターを通常カラーにする(発言の有無は問わない)<br/>
+        /// 2. 「手前に発言者がいた」かつ「手前の発言者と異なる」かつ「名前と発言がある」場合、指定キャラクター以外をグレーアウトする。
+        /// </summary>
+        public void ControlCharacterGrayout(Character currentCharacter, bool hasNameAndText)
+        {
+            if (!this.ControlsCharacterGrayout) return;
+
+            var cView = this.GetCharacterView(currentCharacter);
+            if (cView != null)
+            {
+                cView.ToMain();
+            }
+            if (this._lastSpeaker != null && this._lastSpeaker != currentCharacter && hasNameAndText)
+            {
+                var list = this._characterViewList;
+                for (int i = 0; i < list.Length; i++)
+                {
+                    if (list[i].IsDisplayed && list[i].Character != currentCharacter)
+                    {
+                        list[i].ToSub(this._grayoutColor);
+                    }
+                }
+            }
+            if (hasNameAndText) this._lastSpeaker = currentCharacter;
         }
     }
 }

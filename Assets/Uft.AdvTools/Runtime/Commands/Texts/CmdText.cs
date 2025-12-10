@@ -86,7 +86,7 @@ namespace Uft.AdvTools.Commands
                 var y = character.LastOffsetY;
                 if (pattern == PATTERN_OFF)
                 {
-                    if (advRoot.SpriteManager.IsCharacterDisplayed(character))
+                    if (advRoot.SpriteManager.GetCharacterView(character) != null)
                     {
                         advRoot.SpriteManager.SetCharacterOff(character, this.FadeSeconds);
                     }

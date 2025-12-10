@@ -232,6 +232,7 @@ namespace Uft.AdvTools
             var lastPageCtrl = this.MessageArea.LastPageCtrl;
             this.LogManager.Add(lastPageCtrl, character, name, text);
             this.MessageArea.SetText(this, name, text, pageCtrl, windowType);
+            this.SpriteManager.ControlCharacterGrayout(character, !string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(text));
         }
     }
 }

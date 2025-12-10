@@ -152,14 +152,14 @@ namespace Uft.AdvTools.Commands
             {
                 try
                 {
-                    var img =
-                        this.TargetName == CmdBg.SPRITE_NAME_BG ?  advRoot.Bg.GetBgImg() :
-                        advRoot.CharacterDictionary.ContainsKey(this.TargetName) ? advRoot.SpriteManager.GetCharacterImage(advRoot.CharacterDictionary[this.TargetName]) :
-                        advRoot.SpriteDictionary.ContainsKey(this.TargetName) ? advRoot.SpriteManager.GetSpriteImage(advRoot.SpriteDictionary[this.TargetName].Sprite) :
+                    var rt =
+                        this.TargetName == CmdBg.SPRITE_NAME_BG ?  advRoot.Bg.GetBgImg().rectTransform :
+                        advRoot.CharacterDictionary.ContainsKey(this.TargetName) ? advRoot.SpriteManager.GetCharacterView(advRoot.CharacterDictionary[this.TargetName]).Image.rectTransform :
+                        advRoot.SpriteDictionary.ContainsKey(this.TargetName) ? advRoot.SpriteManager.GetSpriteImage(advRoot.SpriteDictionary[this.TargetName].Sprite).rectTransform :
                         null;
-                    if (img != null)
+                    if (rt != null)
                     {
-                        await TweenAsync(img, this.Tween, this.Parameter, this.Ease);
+                        await TweenAsync(rt, this.Tween, this.Parameter, this.Ease);
                     }
                 }
                 finally
@@ -169,10 +169,9 @@ namespace Uft.AdvTools.Commands
             });
         }
 
-        static async UniTask TweenAsync(Image img, TweenType tweenType, TweenParameter parameter, Ease? ease)
+        static async UniTask TweenAsync(RectTransform rt, TweenType tweenType, TweenParameter parameter, Ease? ease)
         {
             ease ??= DG.Tweening.Ease.OutQuad;
-            var rt = img.rectTransform;
             switch (tweenType)
             {
                 case TweenType.MoveTo:
