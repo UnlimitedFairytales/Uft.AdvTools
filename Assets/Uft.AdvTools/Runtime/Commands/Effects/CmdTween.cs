@@ -154,8 +154,8 @@ namespace Uft.AdvTools.Commands
                 {
                     var rt =
                         this.TargetName == CmdBg.SPRITE_NAME_BG ?  advRoot.Bg.GetBgImg().rectTransform :
-                        advRoot.CharacterDictionary.ContainsKey(this.TargetName) ? advRoot.SpriteManager.GetCharacterView(advRoot.CharacterDictionary[this.TargetName]).Image.rectTransform :
-                        advRoot.SpriteDictionary.ContainsKey(this.TargetName) ? advRoot.SpriteManager.GetSpriteImage(advRoot.SpriteDictionary[this.TargetName].Sprite).rectTransform :
+                        advRoot.CharacterDictionary.ContainsKey(this.TargetName) ? advRoot.SpriteManager.GetCharacterView(advRoot.CharacterDictionary[this.TargetName])!.Image!.rectTransform :
+                        advRoot.SpriteDictionary.ContainsKey(this.TargetName) ? advRoot.SpriteManager.GetSpriteImage(advRoot.SpriteDictionary[this.TargetName].Sprite)!.rectTransform :
                         null;
                     if (rt != null)
                     {

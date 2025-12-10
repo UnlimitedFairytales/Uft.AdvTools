@@ -17,7 +17,7 @@ namespace Uft.AdvTools.View
         public bool IsDisplayed => this.Character != null;
         public Image? Image => this._img!;
 
-        public void SetCharacter(bool isAlreadyDisplayed, Character character, Sprite sprite, Vector2 toPos, AnchorPreset pivot, float scale, float fadeTime_sec)
+        public void SetCharacter(bool isAlreadyDisplayed, Character character, Sprite? sprite, Vector2 toPos, AnchorPreset pivot, float scale, float fadeTime_sec)
         {
             var img = this._img; if (img == null) return;
             var cg = this._canvasGroup; if (cg == null) return;

@@ -1,3 +1,5 @@
+#nullable enable
+
 using DG.Tweening;
 using Uft.AdvTools.Entities;
 using Uft.AdvTools.View;
@@ -24,7 +26,7 @@ namespace Uft.AdvTools
         // Status
 
         /// <summary>誰も表示しなくなった時、nullになる</summary>
-        protected Character _lastSpeaker = null;
+        protected Character? _lastSpeaker = null;
 
         // Methods
 
@@ -51,19 +53,19 @@ namespace Uft.AdvTools
             return -1;
         }
 
-        public int? GetSpriteIndex(Sprite sprite)
+        public int GetSpriteIndex(Sprite sprite)
         {
             for (int i = 0; i < this._imgSpriteList.Length; i++)
             {
-                if (this._imgSpriteList[i].sprite == sprite)
+                if (this._imgSpriteList[i].sprite == sprite && 0 < this._imgSpriteList[i].color.a)
                 {
                     return i;
                 }
             }
-            return null;
+            return -1;
         }
 
-        public void SetCharacter(Character character, Sprite sprite, int index, float offsetX, float offsetY, AnchorPreset pivot, float scale, float fadeTime_sec)
+        public void SetCharacter(Character character, Sprite? sprite, int index, float offsetX, float offsetY, AnchorPreset pivot, float scale, float fadeTime_sec)
         {
             var list = this._characterViewList;
             var i = this.GetCharacterViewIndex(character);
@@ -92,73 +94,61 @@ namespace Uft.AdvTools
 
         public void SetSprite(Sprite sprite, int index, float offsetX, float offsetY, AnchorPreset pivot, float scale, float fadeTime_sec)
         {
-            var ease = Ease.OutQuad;
             var list = this._imgSpriteList;
-            var fromColor = TRANSPARENT;
-            var toColor = Color.white;
-            var fromPos = new Vector2(offsetX, offsetY);
-            var toPos = new Vector2(offsetX, offsetY);
-            for (int i = 0; i < list.Length; i++)
+            var i = this.GetSpriteIndex(sprite);
+            if (0 <= i)
             {
-                if (list[i].sprite == sprite)
-                {
-                    var prevImg = list[i];
-                    prevImg.DOComplete();
-                    prevImg.rectTransform.DOComplete();
-                    fromColor = prevImg.color;
-                    fromPos = prevImg.rectTransform.anchoredPosition;
-                    if (i == index)
-                    {
-                        prevImg.rectTransform.pivot = pivot.GetPivot();
-                        prevImg.rectTransform.localScale = new Vector3(scale, scale, scale);
-                        prevImg.rectTransform.DOAnchorPos(toPos, fadeTime_sec).SetEase(ease);
-                        return;
-                    }
-                    else
-                    {
-                        prevImg.color = TRANSPARENT;
-                        prevImg.sprite = null;
-                    }
-                    break;
-                }
+                this.SetSpriteOff(sprite, 0);
             }
-            list[index].sprite = sprite;
-            list[index].color = fromColor;
-            list[index].rectTransform.pivot = pivot.GetPivot();
-            list[index].rectTransform.localScale = new Vector3(scale, scale, scale);
-            list[index].rectTransform.anchoredPosition = fromPos;
-            list[index].SetNativeSize();
-            list[index].DOColor(toColor, fadeTime_sec).SetEase(ease);
-            list[index].rectTransform.DOAnchorPos(toPos, fadeTime_sec).SetEase(ease);
+            var img = list[index];
+            var toPos = new Vector2(offsetX, offsetY);
+            var isAlreadyDisplayed = 0 <= i;
+            img.sprite = sprite;
+            img.DOComplete();
+            if (isAlreadyDisplayed)
+            {
+                img.color = Color.white;
+            }
+            else
+            {
+                img.color = TRANSPARENT;
+                img.DOColor(Color.white, fadeTime_sec);
+            }
+            img.SetNativeSize();
+            img.rectTransform.pivot = pivot.GetPivot();
+            img.rectTransform.anchoredPosition = toPos;
+            img.rectTransform.localScale = new Vector3(scale, scale, scale);
         }
 
         public void SetSpriteOff(Sprite sprite, float fadeTime_sec)
         {
-            var ease = Ease.OutQuad;
             var list = this._imgSpriteList;
-            for (int i = 0; i < list.Length; i++)
+            var i = this.GetSpriteIndex(sprite);
+            if (0 <= i)
             {
-                if (list[i].sprite == sprite)
+                var prevImg = list[i];
+                prevImg.DOComplete();
+                if (0 < fadeTime_sec)
                 {
-                    var prevImg = list[i];
-                    prevImg.DOComplete();
-                    prevImg.rectTransform.DOComplete();
-                    prevImg.DOColor(TRANSPARENT, fadeTime_sec).SetEase(ease);
-                    return;
+                    prevImg.DOColor(TRANSPARENT, fadeTime_sec);
                 }
+                else
+                {
+                    prevImg.color = TRANSPARENT;
+                }
+                return;
             }
             DevLog.LogWarning($"[{nameof(SpriteManager)}] sprite is not found : sprite.name={sprite.name}");
         }
 
-        public Image GetSpriteImage(Sprite sprite)
+        public Image? GetSpriteImage(Sprite sprite)
         {
             var i = this.GetSpriteIndex(sprite);
-            if (i == null) return null;
-
-            return this._imgSpriteList[i.Value];
+            if (0 <= i) return this._imgSpriteList[i];
+            return null;
         }
 
-        public CharacterView GetCharacterView(Character character)
+        public CharacterView? GetCharacterView(Character character)
         {
             var i = this.GetCharacterViewIndex(character);
             return 0 <= i ? this._characterViewList[i] : null;
