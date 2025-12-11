@@ -11,9 +11,11 @@ namespace Uft.AdvTools.Commands
 
         protected Color FadeColor { get; set; }
         protected string? CameraName { get; set; } // TODO: 対応
+        protected string? RuleName { get; set; }
+        protected float RuleSoftness { get; set; }
         protected float FadeSeconds { get; set; }
 
-        public CmdFadeOut(string? fadeColor, string? cameraName, float? fadeSeconds)
+        public CmdFadeOut(string? fadeColor, string? cameraName, string? ruleName, float? ruleSoftness, float? fadeSeconds)
         {
             if (!ColorUtility.TryParseHtmlString(fadeColor, out var colorValue))
             {
@@ -21,6 +23,8 @@ namespace Uft.AdvTools.Commands
             }
             this.FadeColor = colorValue;
             this.CameraName = cameraName;
+            this.RuleName = ruleName;
+            this.RuleSoftness = Mathf.Clamp01(ruleSoftness ?? 0.2f);
             this.FadeSeconds = fadeSeconds ?? 0.2f;
         }
 
@@ -31,7 +35,14 @@ namespace Uft.AdvTools.Commands
             {
                 try
                 {
-                    await advRoot.FadeEffect.StartFadeAsync(true, this.FadeSeconds, this.FadeColor);
+                    if (string.IsNullOrWhiteSpace(this.RuleName))
+                    {
+                        await advRoot.FadeEffect.StartFadeAsync(true, this.FadeSeconds, this.FadeColor);
+                    }
+                    else
+                    {
+                        await advRoot.PostEffectManager.SetRuleFadeAsync(this.RuleName, this.FadeColor, this.RuleSoftness, 1.0f, false, this.FadeSeconds);
+                    }
                 }
                 finally
                 {

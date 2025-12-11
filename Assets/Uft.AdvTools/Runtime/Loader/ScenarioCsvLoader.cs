@@ -173,12 +173,18 @@ namespace Uft.AdvTools.Loader
                             break;
                         case FadeOut:
                             {
-                                commandList.Add(new CmdFadeOut(dto.Arg1, dto.Arg2, InvariantCultureUtil.FloatTryParse(dto.Arg6, out var fadeSeconds) ? fadeSeconds : null));
+                                commandList.Add(new CmdFadeOut(dto.Arg1, dto.Arg2,
+                                    dto.Arg3,
+                                    InvariantCultureUtil.FloatTryParse(dto.Arg4, out var softness) ? softness : null,
+                                    InvariantCultureUtil.FloatTryParse(dto.Arg6, out var fadeSeconds) ? fadeSeconds : null));
                             }
                             break;
                         case FadeIn:
                             {
-                                commandList.Add(new CmdFadeIn(dto.Arg1, dto.Arg2, InvariantCultureUtil.FloatTryParse(dto.Arg6, out var fadeSeconds) ? fadeSeconds : null));
+                                commandList.Add(new CmdFadeIn(dto.Arg1, dto.Arg2,
+                                    dto.Arg3,
+                                    InvariantCultureUtil.FloatTryParse(dto.Arg4, out var softness) ? softness : null,
+                                    InvariantCultureUtil.FloatTryParse(dto.Arg6, out var fadeSeconds) ? fadeSeconds : null));
                             }
                             break;
                         case Tween:

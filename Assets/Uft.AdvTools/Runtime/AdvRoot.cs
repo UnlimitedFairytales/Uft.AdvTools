@@ -47,11 +47,21 @@ namespace Uft.AdvTools
                 return this.WideCameraSimplePostEffectCollection.SimplePostEffects[index];
             }
         }
+        public SimplePostEffectConfig WideCameraRuleFadePostEffect
+        {
+            get
+            {
+                var index =  3;
+                if (GraphicsSettings.currentRenderPipeline == null) index += 10;
+                return this.WideCameraSimplePostEffectCollection.SimplePostEffects[index];
+            }
+        }
 
         [SerializeField] protected Bg _bg; public Bg Bg => this._bg;
 
         [SerializeField] protected SpriteManager _spriteManager; public SpriteManager SpriteManager => this._spriteManager;
         [SerializeField] protected SoundManager _soundManager; public SoundManager SoundManager => this._soundManager;
+        [SerializeField] protected PostEffectManager _postEffectManager; public PostEffectManager PostEffectManager => this._postEffectManager;
         [SerializeField] protected SelectionList _selectionList; public SelectionList SelectionList => this._selectionList;
 
         [SerializeField] protected LogController _logController; public bool LogControllerIsVisible => this._logController.gameObject.activeSelf;
@@ -66,7 +76,6 @@ namespace Uft.AdvTools
 
         // Status
 
-        public PostEffectManager PostEffectManager { get; protected set; }
         public AutoNext AutoNext { get; protected set; }
         public LogManager LogManager { get; protected set; }
 
@@ -135,7 +144,7 @@ namespace Uft.AdvTools
             this.LogManager = new LogManager();
             this._tglLogView.SetIsOnWithoutNotify(false);
 
-            this.PostEffectManager = new PostEffectManager(this);
+            this.PostEffectManager.Setup(this);
 
             this.ResourcesFolderPathPart = resourcesFolderPathPart;
 
@@ -170,7 +179,6 @@ namespace Uft.AdvTools
         }
         public virtual void Cleanup()
         {
-            this.PostEffectManager = null;
             this.ScenarioExecutor = null;
             this.IsPausingScenario = false;
             this.MessageArea = null;

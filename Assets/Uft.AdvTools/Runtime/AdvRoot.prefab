@@ -350,6 +350,7 @@ Transform:
   - {fileID: 1154941469793968024}
   - {fileID: 2862689320088775823}
   - {fileID: 579397580610819678}
+  - {fileID: 3853274149537245861}
   - {fileID: 5184539330665236119}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -371,6 +372,7 @@ MonoBehaviour:
   _bg: {fileID: 8364876910701061120}
   _spriteManager: {fileID: 4815723313035957612}
   _soundManager: {fileID: 8048299226933598990}
+  _postEffectManager: {fileID: 2879592881480441499}
   _selectionList: {fileID: 7366029907825876559}
   _logController: {fileID: 8485549884975987682}
   _tglAutoNext: {fileID: 1054747244624601679}
@@ -732,42 +734,115 @@ MonoBehaviour:
   - _materialPrototype: {fileID: 2100000, guid: c3b26de046cfad24fba9395e92c86e2e, type: 2}
     _amount: 0
     _angle: 0
+    _softness: 0
+    _subTex: {fileID: 0}
+    _subTexColor: {r: 0, g: 0, b: 0, a: 0}
+    _ruleTex: {fileID: 0}
+    _invert: 0
   - _materialPrototype: {fileID: 2100000, guid: 83f5751cf81e11b4399b83eba7bd9ac4, type: 2}
     _amount: 0
     _angle: 0
+    _softness: 0
+    _subTex: {fileID: 0}
+    _subTexColor: {r: 0, g: 0, b: 0, a: 0}
+    _ruleTex: {fileID: 0}
+    _invert: 0
   - _materialPrototype: {fileID: 2100000, guid: bcfb82d32b8d3d84b821be7a8fabc453, type: 2}
     _amount: 0
     _angle: 0
+    _softness: 0
+    _subTex: {fileID: 0}
+    _subTexColor: {r: 0, g: 0, b: 0, a: 0}
+    _ruleTex: {fileID: 0}
+    _invert: 0
+  - _materialPrototype: {fileID: 2100000, guid: 18ee0416eb837634da8cfcac360418c0, type: 2}
+    _amount: 0
+    _angle: 0
+    _softness: 0
+    _subTex: {fileID: 2800000, guid: 37f32b150e9134e4f8a5136512a89586, type: 3}
+    _subTexColor: {r: 0, g: 0, b: 0, a: 0}
+    _ruleTex: {fileID: 0}
+    _invert: 0
   - _materialPrototype: {fileID: 0}
     _amount: 0
     _angle: 0
+    _softness: 0
+    _subTex: {fileID: 0}
+    _subTexColor: {r: 0, g: 0, b: 0, a: 0}
+    _ruleTex: {fileID: 0}
+    _invert: 0
   - _materialPrototype: {fileID: 0}
     _amount: 0
     _angle: 0
+    _softness: 0
+    _subTex: {fileID: 0}
+    _subTexColor: {r: 0, g: 0, b: 0, a: 0}
+    _ruleTex: {fileID: 0}
+    _invert: 0
   - _materialPrototype: {fileID: 0}
     _amount: 0
     _angle: 0
+    _softness: 0
+    _subTex: {fileID: 0}
+    _subTexColor: {r: 0, g: 0, b: 0, a: 0}
+    _ruleTex: {fileID: 0}
+    _invert: 0
   - _materialPrototype: {fileID: 0}
     _amount: 0
     _angle: 0
+    _softness: 0
+    _subTex: {fileID: 0}
+    _subTexColor: {r: 0, g: 0, b: 0, a: 0}
+    _ruleTex: {fileID: 0}
+    _invert: 0
   - _materialPrototype: {fileID: 0}
     _amount: 0
     _angle: 0
+    _softness: 0
+    _subTex: {fileID: 0}
+    _subTexColor: {r: 0, g: 0, b: 0, a: 0}
+    _ruleTex: {fileID: 0}
+    _invert: 0
   - _materialPrototype: {fileID: 0}
     _amount: 0
     _angle: 0
-  - _materialPrototype: {fileID: 0}
-    _amount: 0
-    _angle: 0
+    _softness: 0
+    _subTex: {fileID: 0}
+    _subTexColor: {r: 0, g: 0, b: 0, a: 0}
+    _ruleTex: {fileID: 0}
+    _invert: 0
   - _materialPrototype: {fileID: 2100000, guid: 930388ea8495b26478ab0ad18513d2e1, type: 2}
     _amount: 0
     _angle: 0
+    _softness: 0
+    _subTex: {fileID: 0}
+    _subTexColor: {r: 0, g: 0, b: 0, a: 0}
+    _ruleTex: {fileID: 0}
+    _invert: 0
   - _materialPrototype: {fileID: 2100000, guid: 9dac4446ecf6eb54f986a1f466ca08a4, type: 2}
     _amount: 0
     _angle: 0
+    _softness: 0
+    _subTex: {fileID: 0}
+    _subTexColor: {r: 0, g: 0, b: 0, a: 0}
+    _ruleTex: {fileID: 0}
+    _invert: 0
   - _materialPrototype: {fileID: 2100000, guid: 004ea20ca3466da45a058217c463c129, type: 2}
     _amount: 0
     _angle: 0
+    _softness: 0
+    _subTex: {fileID: 0}
+    _subTexColor: {r: 0, g: 0, b: 0, a: 0}
+    _ruleTex: {fileID: 0}
+    _invert: 0
+  - _materialPrototype: {fileID: 2100000, guid: 1c35629173a8fd047b0d88cdf0a545a8, type: 2}
+    _amount: 0
+    _angle: 0
+    _softness: 0
+    _subTex: {fileID: 2800000, guid: 37f32b150e9134e4f8a5136512a89586, type: 3}
+    _subTexColor: {r: 0, g: 0, b: 0, a: 0}
+    _ruleTex: {fileID: 0}
+    _invert: 0
 --- !u!1 &3136927288652075483
 GameObject:
   m_ObjectHideFlags: 0
@@ -2487,6 +2562,79 @@ PrefabInstance:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7783307963262255237, guid: 00967fafb87067743a56fcbe9e1e1d15, type: 3}
   m_PrefabInstance: {fileID: 7660228579732701366}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8485690186054242785
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3575990414806013117}
+    m_Modifications:
+    - target: {fileID: 1256992146939777246, guid: ed1054191daf2564495afd145188ebff, type: 3}
+      propertyPath: m_Name
+      value: PostEffectManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664231884011928388, guid: ed1054191daf2564495afd145188ebff, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664231884011928388, guid: ed1054191daf2564495afd145188ebff, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664231884011928388, guid: ed1054191daf2564495afd145188ebff, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664231884011928388, guid: ed1054191daf2564495afd145188ebff, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664231884011928388, guid: ed1054191daf2564495afd145188ebff, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664231884011928388, guid: ed1054191daf2564495afd145188ebff, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664231884011928388, guid: ed1054191daf2564495afd145188ebff, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664231884011928388, guid: ed1054191daf2564495afd145188ebff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664231884011928388, guid: ed1054191daf2564495afd145188ebff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664231884011928388, guid: ed1054191daf2564495afd145188ebff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ed1054191daf2564495afd145188ebff, type: 3}
+--- !u!114 &2879592881480441499 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5923751092992774010, guid: ed1054191daf2564495afd145188ebff, type: 3}
+  m_PrefabInstance: {fileID: 8485690186054242785}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ae94621804d82c44a773e531f66c12d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &3853274149537245861 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4664231884011928388, guid: ed1054191daf2564495afd145188ebff, type: 3}
+  m_PrefabInstance: {fileID: 8485690186054242785}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9052138077913364870
 PrefabInstance:
