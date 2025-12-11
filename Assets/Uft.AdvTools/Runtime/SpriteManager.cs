@@ -18,8 +18,8 @@ namespace Uft.AdvTools
 
         // Parameters
 
-        [SerializeField] protected Image[] _imgSpriteList;
-        [SerializeField] protected CharacterView[] _characterViewList;
+        [SerializeField] protected Image[]? _imgSpriteList;
+        [SerializeField] protected CharacterView[]? _characterViewList;
         [SerializeField] protected bool _controlsCharacterGrayout = true; public bool ControlsCharacterGrayout => this._controlsCharacterGrayout;
         [SerializeField] protected Color _grayoutColor = Color.gray;
 
@@ -32,6 +32,8 @@ namespace Uft.AdvTools
 
         protected bool IsAnyCharacterDisplayed()
         {
+            if (this._characterViewList == null) return false;
+
             var list = this._characterViewList;
             for (int i = 0; i < list.Length; i++)
             {
@@ -42,6 +44,8 @@ namespace Uft.AdvTools
 
         protected int GetCharacterViewIndex(Character character)
         {
+            if (this._characterViewList == null) return -1;
+
             var list = this._characterViewList;
             for (int i = 0; i < list.Length; i++)
             {
@@ -55,6 +59,8 @@ namespace Uft.AdvTools
 
         public int GetSpriteIndex(Sprite sprite)
         {
+            if (this._imgSpriteList == null) return -1;
+
             for (int i = 0; i < this._imgSpriteList.Length; i++)
             {
                 if (this._imgSpriteList[i].sprite == sprite && 0 < this._imgSpriteList[i].color.a)
@@ -67,6 +73,8 @@ namespace Uft.AdvTools
 
         public void SetCharacter(Character character, Sprite? sprite, int index, float offsetX, float offsetY, AnchorPreset pivot, float scale, float fadeTime_sec)
         {
+            if (this._characterViewList == null) return;
+
             var list = this._characterViewList;
             var i = this.GetCharacterViewIndex(character);
             if (0 <= i)
@@ -78,6 +86,8 @@ namespace Uft.AdvTools
 
         public void SetCharacterOff(Character character, float fadeTime_sec)
         {
+            if (this._characterViewList == null) return;
+
             var list = this._characterViewList;
             var i = this.GetCharacterViewIndex(character);
             if (0 <= i)
@@ -94,6 +104,8 @@ namespace Uft.AdvTools
 
         public void SetSprite(Sprite sprite, int index, float offsetX, float offsetY, AnchorPreset pivot, float scale, float fadeTime_sec)
         {
+            if (this._imgSpriteList == null) return;
+
             var list = this._imgSpriteList;
             var i = this.GetSpriteIndex(sprite);
             if (0 <= i)
@@ -122,6 +134,8 @@ namespace Uft.AdvTools
 
         public void SetSpriteOff(Sprite sprite, float fadeTime_sec)
         {
+            if (this._imgSpriteList == null) return;
+
             var list = this._imgSpriteList;
             var i = this.GetSpriteIndex(sprite);
             if (0 <= i)
@@ -143,6 +157,8 @@ namespace Uft.AdvTools
 
         public Image? GetSpriteImage(Sprite sprite)
         {
+            if (this._imgSpriteList == null) return null;
+
             var i = this.GetSpriteIndex(sprite);
             if (0 <= i) return this._imgSpriteList[i];
             return null;
@@ -150,6 +166,8 @@ namespace Uft.AdvTools
 
         public CharacterView? GetCharacterView(Character character)
         {
+            if (this._characterViewList == null) return null;
+
             var i = this.GetCharacterViewIndex(character);
             return 0 <= i ? this._characterViewList[i] : null;
         }
@@ -161,6 +179,7 @@ namespace Uft.AdvTools
         /// </summary>
         public void ControlCharacterGrayout(Character currentCharacter, bool hasNameAndText)
         {
+            if (this._characterViewList == null) return;
             if (!this.ControlsCharacterGrayout) return;
 
             var cView = this.GetCharacterView(currentCharacter);
