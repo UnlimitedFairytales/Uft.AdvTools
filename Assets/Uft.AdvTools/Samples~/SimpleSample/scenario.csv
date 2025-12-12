@@ -62,8 +62,8 @@
 #Bgm              |Sound   |-
 #StopBgm          |Sound   |-
 #Wait             |Effect  |-
-#FadeIn           |Effect  |カメラ、ルール画像・境界線フェード、アニメ指定は非対応
-#FadeOut          |Effect  |カメラ、ルール画像・境界線フェード、アニメ指定は非対応
+#FadeIn           |Effect  |カメラ、アニメ指定は非対応。ルール画像はFadeHorizontal、Cloudのみ対応
+#FadeOut          |Effect  |カメラ、アニメ指定は非対応。ルール画像はFadeHorizontal、Cloudのみ対応
 #Tween            |Effect  |個別名のみ指定可能（背景はBGで指定可能）で、レイヤー指定は未対応。TweenTypeはMoveTo/From/Byの3種、Punch/Shake系のPositionとScale4種で計7種のみ。TweenParameterはislocalが指定可能なものはislocal=trueを指定しないとエラー(グローバルが許容されない)、色関連は非対応、=の左右に空白は許容されない制限あり。Easeはspringだけ非対応。loop非対応。Easeライブラリが宴と異なるため、挙動差がある可能性あり
 #ImageEffect      |Effect  |カメラ、アニメ指定は非対応。GrayScale、Sepiaのみ指定可能
 #ImageEffectOff   |Effect  |カメラ、アニメ指定は非対応。GrayScale、Sepiaのみ指定可能
