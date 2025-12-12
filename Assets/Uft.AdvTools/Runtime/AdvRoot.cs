@@ -76,6 +76,7 @@ namespace Uft.AdvTools
 
         // Status
 
+        public MessageWindowManager MessageWindowManager { get; protected set; }
         public AutoNext AutoNext { get; protected set; }
         public LogManager LogManager { get; protected set; }
 
@@ -95,7 +96,6 @@ namespace Uft.AdvTools
         public ScenarioExecutor ScenarioExecutor { get; protected set; }
         public bool IsPausingScenario { get; protected set; } = false;
         public bool IsAutoInputOnce { get; set; } = false;
-        public MessageArea MessageArea { get; protected set; } // NOTE: Setup() 自動検出
         // public Dictionary<string, (Camera, List<CinemachineCamera>)> CameraDictionary { get; protected set; } = new Dictionary<string, (Camera, List<CinemachineCamera>)>();
         public List<Animator> UiEffectList { get; protected set; } = new List<Animator>(); // NOTE: Setup() 自動検出
         public Dictionary<string, (Object, Animator, SpriteRenderer)> ObjectDictionary { get; protected set; } = new Dictionary<string, (Object, Animator, SpriteRenderer)>(); // NOTE: 調整中
@@ -114,22 +114,22 @@ namespace Uft.AdvTools
             if (this.IsPausingScenario) return;
 
             // IsAutoNextReady制御
-            var isCountable = !this.MessageArea.IsTypewriting && !this.SoundManager.IsAnyVoicePlaying;
+            var isCountable = !this.MessageWindowManager.MessageArea.IsTypewriting && !this.SoundManager.IsAnyVoicePlaying;
             this.AutoNext.UpdateFrame(isCountable, Time.deltaTime);
 
             this.ScenarioExecutor.UpdateFrame(this);
-            if (!this.ScenarioExecutor.IsWaiting && this.ScenarioExecutor.IsWaitingForInput && !this.MessageArea.IsTypewriting)
+            if (!this.ScenarioExecutor.IsWaiting && this.ScenarioExecutor.IsWaitingForInput && !this.MessageWindowManager.MessageArea.IsTypewriting)
             {
                 if (this.IsAutoInputOnce)
                 {
                     this.IsAutoInputOnce = false;
                     this.Next();
                 }
-                this.MessageArea.EnableImgNextSymbol();
+                this.MessageWindowManager.MessageArea.EnableImgNextSymbol();
             }
             else
             {
-                this.MessageArea.DisableImgNextSymbol();
+                this.MessageWindowManager.MessageArea.DisableImgNextSymbol();
             }
         }
 
@@ -140,6 +140,7 @@ namespace Uft.AdvTools
 
             this.Cleanup();
 
+            this.MessageWindowManager = new MessageWindowManager();
             this.AutoNext = new AutoNext();
             this.LogManager = new LogManager();
             this._tglLogView.SetIsOnWithoutNotify(false);
@@ -163,7 +164,7 @@ namespace Uft.AdvTools
 
             this.ScenarioExecutor = new ScenarioExecutor(scenarioCsvLoader.Load(scenarioCsvText, "test"));
             this._tglAutoNext.SetIsOnWithoutNotify(this.ScenarioExecutor.IsAutoNext);
-            this.MessageArea = this.GetComponentInChildren<MessageArea>();
+            this.MessageWindowManager.Setup(new[] { this.GetComponentInChildren<MessageArea>() });
             foreach (var cameraPrefix in this._cameraPrefixes)
             {
                 var camera =
@@ -181,7 +182,7 @@ namespace Uft.AdvTools
         {
             this.ScenarioExecutor = null;
             this.IsPausingScenario = false;
-            this.MessageArea = null;
+            this.MessageWindowManager?.Cleanup();
             // this.CameraDictionary.Clear();
             this.ObjectDictionary.Clear();
             this.UiEffectList.Clear();
@@ -213,9 +214,9 @@ namespace Uft.AdvTools
 
         public virtual void Next(bool playsNextSound = true)
         {
-            if (this.MessageArea.IsTypewriting)
+            if (this.MessageWindowManager.MessageArea.IsTypewriting)
             {
-                this.MessageArea.EndTypewriting();
+                this.MessageWindowManager.MessageArea.EndTypewriting();
                 return;
             }
             this.ScenarioExecutor.IsWaitingForInput = false;
@@ -223,23 +224,23 @@ namespace Uft.AdvTools
 
         public virtual void HideUI()
         {
-            this.MessageArea.Hide();
+            this.MessageWindowManager.MessageArea.Hide();
             this._tglAutoNext.gameObject.SetActive(false);
             this._tglLogView.gameObject.SetActive(false);
         }
 
         public virtual void ShowUI()
         {
-            this.MessageArea.Show();
+            this.MessageWindowManager.MessageArea.Show();
             this._tglAutoNext.gameObject.SetActive(true);
             this._tglLogView.gameObject.SetActive(true);
         }
 
         public virtual void SetText(Character character, string name, string text, CmdText.PageCtrlType pageCtrl, string windowType)
         {
-            var lastPageCtrl = this.MessageArea.LastPageCtrl;
+            var lastPageCtrl = this.MessageWindowManager.MessageArea.LastPageCtrl;
             this.LogManager.Add(lastPageCtrl, character, name, text);
-            this.MessageArea.SetText(this, name, text, pageCtrl, windowType);
+            this.MessageWindowManager.MessageArea.SetText(this, name, text, pageCtrl, windowType);
             this.SpriteManager.ControlCharacterGrayout(character, !string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(text));
         }
     }
