@@ -114,22 +114,22 @@ namespace Uft.AdvTools
             if (this.IsPausingScenario) return;
 
             // IsAutoNextReady制御
-            var isCountable = !this.MessageWindowManager.MessageWindow.IsTypewriting && !this.SoundManager.IsAnyVoicePlaying;
+            var isCountable = !this.MessageWindowManager.CurrentMessageWindow.IsTypewriting && !this.SoundManager.IsAnyVoicePlaying;
             this.AutoNext.UpdateFrame(isCountable, Time.deltaTime);
 
             this.ScenarioExecutor.UpdateFrame(this);
-            if (!this.ScenarioExecutor.IsWaiting && this.ScenarioExecutor.IsWaitingForInput && !this.MessageWindowManager.MessageWindow.IsTypewriting)
+            if (!this.ScenarioExecutor.IsWaiting && this.ScenarioExecutor.IsWaitingForInput && !this.MessageWindowManager.CurrentMessageWindow.IsTypewriting)
             {
                 if (this.IsAutoInputOnce)
                 {
                     this.IsAutoInputOnce = false;
                     this.Next();
                 }
-                this.MessageWindowManager.MessageWindow.EnableImgNextSymbol();
+                this.MessageWindowManager.CurrentMessageWindow.EnableImgNextSymbol();
             }
             else
             {
-                this.MessageWindowManager.MessageWindow.DisableImgNextSymbol();
+                this.MessageWindowManager.CurrentMessageWindow.DisableImgNextSymbol();
             }
         }
 
@@ -214,9 +214,9 @@ namespace Uft.AdvTools
 
         public virtual void Next(bool playsNextSound = true)
         {
-            if (this.MessageWindowManager.MessageWindow.IsTypewriting)
+            if (this.MessageWindowManager.CurrentMessageWindow.IsTypewriting)
             {
-                this.MessageWindowManager.MessageWindow.EndTypewriting();
+                this.MessageWindowManager.CurrentMessageWindow.EndTypewriting();
                 return;
             }
             this.ScenarioExecutor.IsWaitingForInput = false;
@@ -224,23 +224,23 @@ namespace Uft.AdvTools
 
         public virtual void HideUI()
         {
-            this.MessageWindowManager.MessageWindow.Hide();
+            this.MessageWindowManager.CurrentMessageWindow.Hide();
             this._tglAutoNext.gameObject.SetActive(false);
             this._tglLogView.gameObject.SetActive(false);
         }
 
         public virtual void ShowUI()
         {
-            this.MessageWindowManager.MessageWindow.Show();
+            this.MessageWindowManager.CurrentMessageWindow.Show();
             this._tglAutoNext.gameObject.SetActive(true);
             this._tglLogView.gameObject.SetActive(true);
         }
 
         public virtual void SetText(Character character, string name, string text, CmdText.PageCtrlType pageCtrl, string windowType)
         {
-            var lastPageCtrl = this.MessageWindowManager.MessageWindow.LastPageCtrl;
+            var lastPageCtrl = this.MessageWindowManager.CurrentMessageWindow.LastPageCtrl;
             this.LogManager.Add(lastPageCtrl, character, name, text);
-            this.MessageWindowManager.MessageWindow.SetText(this, name, text, pageCtrl, windowType);
+            this.MessageWindowManager.CurrentMessageWindow.SetText(this, name, text, pageCtrl, windowType);
             this.SpriteManager.ControlCharacterGrayout(character, !string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(text));
         }
     }

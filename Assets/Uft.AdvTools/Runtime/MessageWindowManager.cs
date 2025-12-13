@@ -10,16 +10,16 @@ namespace Uft.AdvTools
     /// </summary>
     public class MessageWindowManager
     {
-        public MessageWindow? MessageWindow { get; protected set; }
+        public MessageWindow? CurrentMessageWindow { get; protected set; }
 
         public void Setup(MessageWindow[] messageWindowList)
         {
-            this.MessageWindow = messageWindowList[0];
+            this.CurrentMessageWindow = messageWindowList[0];
         }
 
         public void Cleanup()
         {
-            this.MessageWindow = null;
+            this.CurrentMessageWindow = null;
         }
     }
 }

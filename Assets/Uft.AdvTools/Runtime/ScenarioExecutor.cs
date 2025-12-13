@@ -45,12 +45,12 @@ namespace Uft.AdvTools
                 // NOTE: 宴仕様に準拠させる。改ページ直後に演出系コマンドが来た場合、MessageWindowを非表示にする
                 if (advRoot.EmulatesUtageEffectCommand)
                 {
-                    if (this.CommandList[this.SeekPoint].CommandCategory == CommandCategory.Effect && advRoot.MessageWindowManager.MessageWindow.LastPageCtrl == CmdText.PageCtrlType.InputBrPage)
+                    if (this.CommandList[this.SeekPoint].CommandCategory == CommandCategory.Effect && advRoot.MessageWindowManager.CurrentMessageWindow.LastPageCtrl == CmdText.PageCtrlType.InputBrPage)
                     {
                         advRoot.HideUI();
                     }
                 }
-                advRoot.MessageWindowManager.MessageWindow.FixLastPageCtrl();
+                advRoot.MessageWindowManager.CurrentMessageWindow.FixLastPageCtrl();
 
                 // Selection制御
                 if (this.ReadMode == CommandReadMode.Selection && this.CommandList[this.SeekPoint] is not CmdSelection)
