@@ -8,7 +8,6 @@ using System.Text.RegularExpressions;
 using Uft.UnityUtils;
 using Uft.UnityUtils.Common;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Uft.AdvTools.Commands
 {
