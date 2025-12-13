@@ -65,8 +65,8 @@
 #FadeIn           |Effect  |カメラ、アニメ指定は非対応。ルール画像はFadeHorizontal、Cloudのみ対応
 #FadeOut          |Effect  |カメラ、アニメ指定は非対応。ルール画像はFadeHorizontal、Cloudのみ対応
 #Tween            |Effect  |個別名のみ指定可能（背景はBGで指定可能）で、レイヤー指定は未対応。TweenTypeはMoveTo/From/Byの3種、Punch/Shake系のPositionとScale4種で計7種のみ。TweenParameterはislocalが指定可能なものはislocal=trueを指定しないとエラー(グローバルが許容されない)、色関連は非対応、=の左右に空白は許容されない制限あり。Easeはspringだけ非対応。loop非対応。Easeライブラリが宴と異なるため、挙動差がある可能性あり
-#ImageEffect      |Effect  |カメラ、アニメ指定は非対応。GrayScale、Sepiaのみ指定可能
-#ImageEffectOff   |Effect  |カメラ、アニメ指定は非対応。GrayScale、Sepiaのみ指定可能
+#ImageEffect      |Effect  |カメラ、アニメ指定は非対応。ただし、カメラにはSpriteCameraを指定してください。GrayScale、Sepiaのみ指定可能
+#ImageEffectOff   |Effect  |カメラ、アニメ指定は非対応。ただし、カメラにはSpriteCameraを指定してください。GrayScale、Sepiaのみ指定可能
 #ShowMessageWindow|UI      |-
 #HideMessageWindow|UI      |-
 #ChangeMessageWindow|UI    |-
@@ -269,13 +269,13 @@ Wait,,,,,,2,,,,,
 ,,,,,,,,"URPの場合は、以下を設定してください\n1. メニューのEditから Project Settings > Graphics > Render Graph\nCompatibility Mode (Render Graph Disabled) にチェック",,,
 ,,,,,,,,"URPの場合は、以下を設定してください\n2. プロジェクトビューから Assets > Settings > XX_Renderer ファイル\nRenderer Feature に SimplePostEffectRenderer を追加",,,
 ,,,,,,,,"ImageEffectでGrayScaleまたはSepiaが可能。",,,
-ImageEffect,,GrayScale,,,,2,,,,,
+ImageEffect,SpriteCamera,GrayScale,,,,2,,,,,
 ,,,,,,,,"ImageEffectOffで解除可能。",,,
-ImageEffectOff,,GrayScale,,,,2,,,,,
+ImageEffectOff,SpriteCamera,GrayScale,,,,2,,,,,
 ,,,,,,,,"Sepiaの場合。",,,
-ImageEffect,,Sepia,,,,1,,,,,
+ImageEffect,SpriteCamera,Sepia,,,,1,,,,,
 ,,,,,,,,"解除。",,,
-ImageEffectOff,,Sepia,,,,1,,,,,
+ImageEffectOff,SpriteCamera,Sepia,,,,1,,,,,
 ,,,,,,,,"ルール画像指定フェードは、FadeHorizontal、Cloudのみ対応。コマンドはFadeOut、FadeInですが、ルールを指定した場合、内部的にはImageEffectと同じ仕組みで駆動します。",,,
 FadeOut,"#441100",,FadeHorizontal,0.2,,1,,,,,
 Wait,,,,,,1,,,,,

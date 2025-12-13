@@ -205,8 +205,9 @@ namespace Uft.AdvTools.Loader
                         case ImageEffectOff:
                             {
                                 var isOn = cmd == ImageEffect;
-                                if (string.IsNullOrWhiteSpace(dto.Arg2)) throw new Exception($"{nameof(CmdImageEffect)} or Off : Arg2 is required.");
-                                commandList.Add(new CmdImageEffect(isOn, dto.Arg2, InvariantCultureUtil.FloatTryParse(dto.Arg6, out var fadeSeconds) ? fadeSeconds : null));
+                                if (string.IsNullOrWhiteSpace(dto.Arg1) ||
+                                    string.IsNullOrWhiteSpace(dto.Arg2)) throw new Exception($"{nameof(CmdImageEffect)} or Off : Arg1,Arg2 is required.");
+                                commandList.Add(new CmdImageEffect(isOn, dto.Arg1, dto.Arg2, InvariantCultureUtil.FloatTryParse(dto.Arg6, out var fadeSeconds) ? fadeSeconds : null));
                             }
                             break;
                         // UI
