@@ -2471,7 +2471,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3585817740673098636, guid: 00967fafb87067743a56fcbe9e1e1d15, type: 3}
       propertyPath: m_Name
-      value: MessageArea
+      value: MessageWindow
       objectReference: {fileID: 0}
     - target: {fileID: 7783307963262255237, guid: 00967fafb87067743a56fcbe9e1e1d15, type: 3}
       propertyPath: m_Pivot.x

@@ -114,22 +114,22 @@ namespace Uft.AdvTools
             if (this.IsPausingScenario) return;
 
             // IsAutoNextReady制御
-            var isCountable = !this.MessageWindowManager.MessageArea.IsTypewriting && !this.SoundManager.IsAnyVoicePlaying;
+            var isCountable = !this.MessageWindowManager.MessageWindow.IsTypewriting && !this.SoundManager.IsAnyVoicePlaying;
             this.AutoNext.UpdateFrame(isCountable, Time.deltaTime);
 
             this.ScenarioExecutor.UpdateFrame(this);
-            if (!this.ScenarioExecutor.IsWaiting && this.ScenarioExecutor.IsWaitingForInput && !this.MessageWindowManager.MessageArea.IsTypewriting)
+            if (!this.ScenarioExecutor.IsWaiting && this.ScenarioExecutor.IsWaitingForInput && !this.MessageWindowManager.MessageWindow.IsTypewriting)
             {
                 if (this.IsAutoInputOnce)
                 {
                     this.IsAutoInputOnce = false;
                     this.Next();
                 }
-                this.MessageWindowManager.MessageArea.EnableImgNextSymbol();
+                this.MessageWindowManager.MessageWindow.EnableImgNextSymbol();
             }
             else
             {
-                this.MessageWindowManager.MessageArea.DisableImgNextSymbol();
+                this.MessageWindowManager.MessageWindow.DisableImgNextSymbol();
             }
         }
 
@@ -164,7 +164,7 @@ namespace Uft.AdvTools
 
             this.ScenarioExecutor = new ScenarioExecutor(scenarioCsvLoader.Load(scenarioCsvText, "test"));
             this._tglAutoNext.SetIsOnWithoutNotify(this.ScenarioExecutor.IsAutoNext);
-            this.MessageWindowManager.Setup(new[] { this.GetComponentInChildren<MessageArea>() });
+            this.MessageWindowManager.Setup(new[] { this.GetComponentInChildren<MessageWindow>() });
             foreach (var cameraPrefix in this._cameraPrefixes)
             {
                 var camera =
@@ -214,9 +214,9 @@ namespace Uft.AdvTools
 
         public virtual void Next(bool playsNextSound = true)
         {
-            if (this.MessageWindowManager.MessageArea.IsTypewriting)
+            if (this.MessageWindowManager.MessageWindow.IsTypewriting)
             {
-                this.MessageWindowManager.MessageArea.EndTypewriting();
+                this.MessageWindowManager.MessageWindow.EndTypewriting();
                 return;
             }
             this.ScenarioExecutor.IsWaitingForInput = false;
@@ -224,23 +224,23 @@ namespace Uft.AdvTools
 
         public virtual void HideUI()
         {
-            this.MessageWindowManager.MessageArea.Hide();
+            this.MessageWindowManager.MessageWindow.Hide();
             this._tglAutoNext.gameObject.SetActive(false);
             this._tglLogView.gameObject.SetActive(false);
         }
 
         public virtual void ShowUI()
         {
-            this.MessageWindowManager.MessageArea.Show();
+            this.MessageWindowManager.MessageWindow.Show();
             this._tglAutoNext.gameObject.SetActive(true);
             this._tglLogView.gameObject.SetActive(true);
         }
 
         public virtual void SetText(Character character, string name, string text, CmdText.PageCtrlType pageCtrl, string windowType)
         {
-            var lastPageCtrl = this.MessageWindowManager.MessageArea.LastPageCtrl;
+            var lastPageCtrl = this.MessageWindowManager.MessageWindow.LastPageCtrl;
             this.LogManager.Add(lastPageCtrl, character, name, text);
-            this.MessageWindowManager.MessageArea.SetText(this, name, text, pageCtrl, windowType);
+            this.MessageWindowManager.MessageWindow.SetText(this, name, text, pageCtrl, windowType);
             this.SpriteManager.ControlCharacterGrayout(character, !string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(text));
         }
     }

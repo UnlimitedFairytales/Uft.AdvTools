@@ -6,16 +6,16 @@ namespace Uft.AdvTools
 {
     public class MessageWindowManager
     {
-        public MessageArea? MessageArea { get; protected set; } // NOTE: Setup() 自動検出
+        public MessageWindow? MessageWindow { get; protected set; } // NOTE: Setup() 自動検出
 
-        public void Setup(MessageArea[] messageAreaList)
+        public void Setup(MessageWindow[] messageWindowList)
         {
-            this.MessageArea = messageAreaList[0];
+            this.MessageWindow = messageWindowList[0];
         }
 
         public void Cleanup()
         {
-            this.MessageArea = null;
+            this.MessageWindow = null;
         }
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Uft.AdvTools.View
 {
-    public class MessageArea : MonoBehaviour
+    public class MessageWindow : MonoBehaviour
     {
         // Parameters
 

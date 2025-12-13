@@ -107,9 +107,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7783307963262255237}
-  - component: {fileID: 8841346307089235602}
+  - component: {fileID: 4310710679803516163}
   m_Layer: 5
-  m_Name: MessageArea
+  m_Name: MessageWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,7 +136,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8841346307089235602
+--- !u!114 &4310710679803516163
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3585817740673098636}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64498d5ff11025b459c58ba7f0889776, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d6e3126df1a32e49867c63f58a4a97c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _isTypewritingEnabled: 1
