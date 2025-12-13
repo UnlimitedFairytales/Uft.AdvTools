@@ -309,14 +309,14 @@
       "dependencies": {
         "com.unity.ugui": "2.0.0"
       },
-      "hash": "c7c0098c25e0c2eb8dc2366dae84712074717d41"
+      "hash": "5eee4175d368002d80c22dc74efebc8aa2e9a35f"
     },
     "com.unlimited-fairytales.virtualizedlist": {
       "version": "https://github.com/UnlimitedFairytales/Uft.VirtualizedList.git?path=Assets/Uft.VirtualizedList",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "67d3e9ee34fdf35289c5e10aca79f310278fac94"
+      "hash": "818cdc8067756642f06ff08b5968f8d2ab825cb8"
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
