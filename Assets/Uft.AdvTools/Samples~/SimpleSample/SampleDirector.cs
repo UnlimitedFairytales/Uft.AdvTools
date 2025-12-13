@@ -14,23 +14,28 @@ namespace Uft.AdvTools.Samples
         [SerializeField] string _resourcesFolderPathPart;
         [SerializeField] AdvRoot _advRoot;
 
-        void Start()
-        {
-            if (this._advRoot != null)
-            {
-                this._advRoot.Setup(
-                    this._scenarioFile.text,
-                    this._characterFile.text,
-                    this._textureFile.text,
-                    this._soundFile.text,
-                    this._paramFile.text,
-                    this._resourcesFolderPathPart);
-                this._advRoot.ResumeScenario();
-            }
-        }
+        bool _isInitialized = false;
 
         void Update()
         {
+            // HACK: シーン配置ActiveオブジェクトStart済み保証タイミング
+            if (!this._isInitialized)
+            {
+                this._isInitialized = true;
+
+                if (this._advRoot != null)
+                {
+                    this._advRoot.Setup(
+                        this._scenarioFile.text,
+                        this._characterFile.text,
+                        this._textureFile.text,
+                        this._soundFile.text,
+                        this._paramFile.text,
+                        this._resourcesFolderPathPart);
+                    this._advRoot.ResumeScenario();
+                }
+            }
+
             if (Input.GetButtonUp("Submit") || (Input.GetMouseButtonUp(0) && !this.IsPointerOverUI()))
             {
                 this._advRoot.Next();

@@ -164,7 +164,7 @@ namespace Uft.AdvTools
 
             this.ScenarioExecutor = new ScenarioExecutor(scenarioCsvLoader.Load(scenarioCsvText, "test"));
             this._tglAutoNext.SetIsOnWithoutNotify(this.ScenarioExecutor.IsAutoNext);
-            this.MessageWindowManager.Setup(new[] { this.GetComponentInChildren<MessageWindow>() });
+            this.MessageWindowManager.Setup(this.GetComponentsInChildren<MessageWindow>(true));
             foreach (var cameraPrefix in this._cameraPrefixes)
             {
                 var camera =

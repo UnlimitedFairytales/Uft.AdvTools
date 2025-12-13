@@ -40,7 +40,7 @@
 #
 #### Scenarioシート
 #
-#- WaitType, WindowTypeは非対応
+#- WaitType, WindowTypeは非対応。ただし、ChangeMessageWindowコマンドは使用可能
 #- 宴レイヤー機能はなく、簡易実装
 #    - Layerシートはない。Bgは専用、SpriteとCharacterはそれぞれ(奥)0～7(手前)を指定する
 #    - SpriteとCharacterが同じレイヤー番号の場合、Characterが手前
@@ -69,6 +69,7 @@
 #ImageEffectOff   |Effect  |カメラ、アニメ指定は非対応。GrayScale、Sepiaのみ指定可能
 #ShowMessageWindow|UI      |-
 #HideMessageWindow|UI      |-
+#ChangeMessageWindow|UI    |-
 #Param            |Logic   |宴4互換で使用可能な演算子が少ない。詳細後述。変数にも制限あり
 #Jump             |Logic   |宴4互換で使用可能な演算子が少ない。詳細後述。変数にも制限あり
 #Selection        |Logic   |プレハブ、X、Yの個別指定は非対応。宴と仕様が異なり、直前のテキスト内容は非表示にならない。また、選択肢を出した後にテキストをさらに出すことも出来ない
@@ -142,6 +143,7 @@ SelectionTitle,,,,,,,,１つ選んでください,,,
 Selection,*Labelその1,,flag_b = 1,,,,,選択肢その1：手前に戻る（選択肢3の開放）,,,,
 Selection,*Labelその2,,,,,,,選択肢その2：次へ,,,,
 Selection,*Labelその4,flag_b > 0,,,,,,選択肢その3：Bg説明までジャンプ,,,,
+Selection,*Labelその7,,,,,,,選択肢その4：ChangeMessageWindowまでジャンプ,,,,
 *Labelその2,,,,,,,,,,,
 ,,,,,,,,"選択肢の別のサンプル",,,
 SelectionTitle,,,,,,,,どれか選んでください,,,
@@ -281,4 +283,12 @@ FadeIn,"#441100",,Cloud,0.2,,1,,,,,
 FadeOut,"#999988",,Cloud,0.2,,1,,,,,
 Wait,,,,,,1,,,,,
 FadeIn,"#999988",,FadeHorizontal,0.2,,1,,,,,
+*Labelその7,,,,,,,,,,,
+,,,,,,,,"ChangeMessageWindowでMessageWindowの切り替えが可能。",,,
+ChangeMessageWindow,MessageWindowFull,,,,,,,,,,
+,,,,,,,,"切り替わりました。InputBr指定テスト。",InputBr,,
+,,,,,,,,"改行テスト\n改行テスト",,,
+,,,,,,,,"改行テスト\n改行テスト",,,
+ChangeMessageWindow,MessageWindow,,,,,,,,,,
+,,,,,,,,"元のウィンドウに切り替え。",,,
 ,,,,,,,,"以上、基本的な使い方でした。",,,

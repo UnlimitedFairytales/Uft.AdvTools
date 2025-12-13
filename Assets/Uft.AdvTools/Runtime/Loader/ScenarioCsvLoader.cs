@@ -9,6 +9,7 @@ using Uft.UnityUtils.Common;
 
 namespace Uft.AdvTools.Loader
 {
+    /// <summary>「必須チェック」「キャスト」までが責任範囲</summary>
     public class ScenarioCsvLoader
     {
         // static
@@ -39,6 +40,7 @@ namespace Uft.AdvTools.Loader
         // UI
         public const string HideMessageWindow = "hidemessagewindow";
         public const string ShowMessageWindow = "showmessagewindow";
+        public const string ChangeMessageWindow = "changemessagewindow";
 
         // Logic
         public const string Param = "param";
@@ -71,7 +73,7 @@ namespace Uft.AdvTools.Loader
                 {
                     dto = csvDtoList[i];
                     if (dto.IsAllNullOrWhiteSpace()) continue;
-                    var cmd = dto.Command!.ToLower();
+                    var cmd = dto.Command!.ToLowerInvariant();
 
                     // カスタム用
                     var loaded = this.CustomCommand(dto, cmd);
@@ -213,6 +215,10 @@ namespace Uft.AdvTools.Loader
                             break;
                         case ShowMessageWindow:
                             commandList.Add(new CmdShowMessageWindow());
+                            break;
+                        case ChangeMessageWindow:
+                            if (string.IsNullOrWhiteSpace(dto.Arg1)) throw new Exception($"{nameof(CmdChangeMessageWindow)} : Arg1 is required.");
+                            commandList.Add(new CmdChangeMessageWindow(dto.Arg1));
                             break;
                         // Logic
                         case Param:
