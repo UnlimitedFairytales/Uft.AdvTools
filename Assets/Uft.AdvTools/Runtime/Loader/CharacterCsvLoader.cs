@@ -39,14 +39,27 @@ namespace Uft.AdvTools.Loader
                     dto = csvDtoList[i];
                     if (dto.IsAllNullOrWhiteSpace()) continue;
                     var name = dto.CharacterName!;
+                    if (!FileType.TryParse(dto.FileType, out FileType fileType)) throw new Exception($"{nameof(Character)} : FileType is unsupported value. : {dto.FileType}");
 
+                    Sprite? sprite = null;
+                    GameObject? prefab = null;
+                    if (fileType == FileType.None)
+                    {
+                        sprite = Resources.Load<Sprite>(textureCharacterRoot + Path.ChangeExtension(dto.FileName, null));
+                    }
+                    else if (fileType == FileType.Prefab2D || fileType == FileType.Prefab3D)
+                    {
+                        prefab = Resources.Load<GameObject>(textureCharacterRoot + Path.ChangeExtension(dto.FileName, null));
+                    }
                     var pattern = new CharacterDetail(
                         dto.Pattern!,
                         InvariantCultureUtil.FloatTryParse(dto.X, out var x) ? x : null,
                         InvariantCultureUtil.FloatTryParse(dto.Y, out var y) ? y : null,
+                        InvariantCultureUtil.FloatTryParse(dto.Z, out var z) ? z : null,
                         AnchorPresetUtil.TryParseLooseAnchorPreset(dto.Pivot, out var pivot) ? pivot : null,
                         InvariantCultureUtil.FloatTryParse(dto.Scale, out var scale) ? scale : null,
-                        Resources.Load<Sprite>(textureCharacterRoot + Path.ChangeExtension(dto.FileName, null)));
+                        sprite,
+                        dto.AnimationState);
 
                     // 行のキャラクター切り替わり
                     if (lastCharacter == null || (!string.IsNullOrWhiteSpace(name) && lastCharacter.CharacterName != name))
@@ -57,7 +70,7 @@ namespace Uft.AdvTools.Loader
                         }
                         else
                         {
-                            lastCharacter = new Character(dto.CharacterName!, dto.NameText!, pattern);
+                            lastCharacter = new Character(dto.CharacterName!, dto.NameText!, fileType, prefab, pattern);
                             characterDict.Add(name, lastCharacter);
                             continue;
                         }

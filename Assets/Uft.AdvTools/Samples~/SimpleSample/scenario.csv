@@ -4,7 +4,10 @@
 #
 ### Characterシート : 宴4に対する制限事項
 #
-#- CharacterName, NameText, Pattern, X, Y, Pivot, Scale, FileNameのみ機能する
+#- CharacterName, NameText, Pattern, X, Y, Pivot, Scale, FileName, FileType, AnimationStateのみ機能する
+#- FileTypeは、空欄、2DPrefabのみ対応。RenderTextureモードは非対応
+#    - FileTypeに2DPrefabを指定した場合のみ、プレハブ直下に設定されたAnimatorを認識し、AnimationStateでAnimator.Play(stateName)する
+#    - 単一のキャラクターが複数のFileTypeを持つことは出来ず、全てのパターンは同一のFileTypeである必要がある
 #- NameTextはキャラごとの1行目に必須。paramは非対応
 #- Pivotの数値指定は未対応
 #
@@ -25,7 +28,7 @@
 #
 #- Label, Valueのみ機能する
 #- TypeはIntのみ固定
-#- 変数置換に string.Replace を使用しているため、変数名が部分一致で変換される危険があります。
+#- 変数置換に string.Replace を使用しているため、変数名が部分一致で変換される危険があります
 #
 ### 宴4互換フォルダ構成
 #
@@ -88,7 +91,7 @@
 #
 ##### レイヤー全般について
 #
-#- レイヤーの自作等の機能はなく、0～7の指定があるのみです。同一番号ではSpriteとCharacterはCharacterが手前に来ます。
+#- レイヤーの自作等の機能はなく、0～7の指定があるのみです。同一番号ではSpriteとCharacterはCharacterが手前に来ます
 #
 ##### Voiceについて
 #
@@ -143,15 +146,15 @@ SelectionTitle,,,,,,,,１つ選んでください,,,
 Selection,*Labelその1,,flag_b = 1,,,,,選択肢その1：手前に戻る（選択肢3の開放）,,,,
 Selection,*Labelその2,,,,,,,選択肢その2：次へ,,,,
 Selection,*Labelその4,flag_b > 0,,,,,,選択肢その3：Bg説明までジャンプ,,,,
-Selection,*Labelその7,,,,,,,選択肢その4：ChangeMessageWindowまでジャンプ,,,,
 *Labelその2,,,,,,,,,,,
 ,,,,,,,,"選択肢の別のサンプル",,,
 SelectionTitle,,,,,,,,どれか選んでください,,,
 Selection,*Labelその1,,flag_b = 0,,,,,手前に戻る（前の選択肢の選択肢3の秘匿、こちらの選択肢4の開放）,,,,
 Selection,*Labelその3,,,,,,,次へ,,,,
-Selection,*Labelその4,,,,,,,Bg説明までジャンプ,,,,
 Selection,*Labelその5,flag_b <= 0,,,,,,Se説明までジャンプ,,,,
 Selection,*Labelその6,,,,,,,ImageEffect説明までジャンプ,,,,
+Selection,*Labelその7,,,,,,,ChangeMessageWindowまでジャンプ,,,,
+Selection,*Labelその8,,,,,,,Prefabを使用したキャラクターへジャンプ,,,,
 *Labelその3,,,,,,,,,,,
 ,名無し,,,,,,,"Arg1に名前を指定できる。",,,
 ,男子学生,,,,,,,"Arg1にCharacterシートの内容を指定すると、そのキャラクターの表示も行われる。",,,
@@ -162,6 +165,9 @@ Selection,*Labelその6,,,,,,,ImageEffect説明までジャンプ,,,,
 ,男子学生,,,,,,,発言者が変わりました。,,,
 ,,,,,,,,キャラクターも名前も指定がない場合は、発言者が変わったことにならない,,,
 ,？？？,,,,,,,名前の指定がある場合、発言者が変わった扱いになる,,,
+,男子学生,,2,,,,,"キャラクターを表示しているレイヤーを指定すると前のキャラクターは消える（移動による2への上書き）",,,
+,女子学生,,2,,,,,"キャラクターを表示しているレイヤーを指定すると前のキャラクターは消える（表示開始による2への上書き）",,,
+,男子学生,,1,,,,,"再度表示",,,
 ,男子学生,,,,,,,"CharacterOffで指定したキャラクターを非表示にできる。",,,
 CharacterOff,男子学生,,,,,1.0,,,,,
 ,女子学生,,,,,,,"フェードアウト時間も指定できる",,,
@@ -289,8 +295,29 @@ FadeIn,"#999988",,FadeHorizontal,0.2,,1,,,,,
 ,,,,,,,,"ChangeMessageWindowでMessageWindowの切り替えが可能。",,,
 ChangeMessageWindow,MessageWindowFull,,,,,,,,,,
 ,,,,,,,,"切り替わりました。InputBr指定テスト。",InputBr,,
-,,,,,,,,"改行テスト\n改行テスト",,,
-,,,,,,,,"改行テスト\n改行テスト",,,
+,,,,,,,,"改行テスト\n改行テスト\n次は通常のCtrlPage省略",,,
+,,,,,,,,"改行テスト2\n改行テスト2",,,
 ChangeMessageWindow,MessageWindow,,,,,,,,,,
 ,,,,,,,,"元のウィンドウに切り替え。",,,
+*Labelその8,,,,,,,,,,,
+,,,,,,,,"Prefabを使用したキャラクター表示の例。CharacterシートでFileTypeに2DPrefabまたは3DPrefabを指定すると、画像ではなくPrefabを読み込む",,,
+,,,,,,,,"2DPrefabの詳細。結論としてはピクセル等倍になるようにしています。\n各CanvasはカメラのFov・CanvasScaler・Match・参照解像度を逆算し、\nカメラから見て1pixel=1UUになるような距離にしてあります",,,
+,,,,,,,,"この状態はでは、Canvasが自動算出するScaleが1になります。\nよって、Canvasの子にインスタンスをぶら下げても、Scaleは1のままになります。",,,
+,,,,,,,,"そして、SpriteRendererに設定されているSpriteのPPUを読み取り、その値をインスタンスのScaleにかけ、SpriteのPPU影響をなくしています。",,,
+,,,,,,,,"SpriteRendererは独自にOrderInLayerを持てるため、そちらで前後関係を制御できます。なお、背景は-200、Prefabでない表示は-100、UIが+100です。",,,
+,Prefab猫01,,1,300,100,2.0,,Prefabを使用したキャラクター表示の例。（PPU=100）,,,
+,Prefab猫02,,2,-300,-100,2.0,,Prefabを使用したキャラクター表示の例。（PPU=50）,,,
+,Prefab猫01,,2,,,,,同じレイヤーに上書きした場合,,,
+,男子学生,,2,0,0,2.0,,非2DPrefabで同じレイヤーに上書きした場合,,,
+,Prefab猫01,,3,300,100,2.0,,表示,,,
+,女子学生,,4,400,0,2.0,,表示,,,
+,Prefab猫01,,4,-640,,,,上書き,,,
+,？？？,,,,,,,話している人の判定の切り替わり,,,
+,Prefab猫02,,3,-300,-100,2.0,,表示,,,
+,女子学生,,1,400,0,2.0,,表示,,,
+,男子学生,,2,,,,,話者切り替わり,,,
+,Prefab猫01,,,,,,,話者切り替わり,,,
+,Prefab猫01,早い,,,,,,別パターン指定,,,
+,Prefab猫01,,,,,,,継続,,,
+,Prefab猫01,通常,,,,,,通常に戻す,,,
 ,,,,,,,,"以上、基本的な使い方でした。",,,

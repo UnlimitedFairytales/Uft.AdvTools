@@ -53,6 +53,7 @@ namespace Uft.AdvTools.Loader
                 SubFileName = reader.GetField<string>("SubFileName"),
 
                 FileType = reader.GetField<string>("FileType"),
+                AnimationState = reader.GetField<string>("AnimationState"),
                 Animation = reader.GetField<string>("Animation"),
                 RenderTexture = reader.GetField<string>("RenderTexture"),
                 RenderRect = reader.GetField<string>("RenderRect"),
@@ -77,7 +78,7 @@ namespace Uft.AdvTools.Loader
         public string? SubFileName { get; set; }
 
         public string? FileType { get; set; }
-        // AnimationState
+        public string? AnimationState { get; set; }
         public string? Animation { get; set; }
         public string? RenderTexture { get; set; }
         public string? RenderRect { get; set; }
@@ -98,6 +99,6 @@ namespace Uft.AdvTools.Loader
         }
 
         public override string ToString() =>
-            $"{this.CharacterName},{this.NameText},{this.Pattern},{this.X},{this.Y},{this.Z},{this.Pivot},{this.Scale},{this.Conditional},{this.FileName},{this.SubFileName},{this.FileType},...";
+            $"{this.CharacterName},{this.NameText},{this.Pattern},{this.X},{this.Y},{this.Z},{this.Pivot},{this.Scale},{this.Conditional},{this.FileName},{this.SubFileName},{this.FileType},{this.AnimationState}...";
     }
 }

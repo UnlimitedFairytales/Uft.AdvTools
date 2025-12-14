@@ -2,6 +2,7 @@
 
 using System;
 using System.IO;
+using Uft.AdvTools.Entities;
 using UnityEngine;
 
 namespace Uft.AdvTools.Commands
@@ -101,8 +102,11 @@ namespace Uft.AdvTools.Commands
                     y = this.OffsetY ?? character.LastOffsetY;
                     var pivot = detail.Pivot;
                     var scale = detail.Scale;
-
-                    advRoot.SpriteManager.SetCharacter(character, sprite, imageIndex, x, y, pivot, scale, this.FadeSeconds);
+                    advRoot.SpriteManager.SetCharacter(character, sprite, character.Instantiated, imageIndex, x, y, pivot, scale, this.FadeSeconds);
+                    if (character.Animator != null && !string.IsNullOrWhiteSpace(detail.AnimatorState))
+                    {
+                        character.Animator.Play(detail.AnimatorState);
+                    }
                 }
                 character.LastPattern = pattern;
                 character.LastImageIndex = imageIndex;

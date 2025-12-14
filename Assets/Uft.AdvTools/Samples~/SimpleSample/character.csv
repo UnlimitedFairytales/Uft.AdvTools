@@ -1,6 +1,10 @@
-CharacterName,NameText,Pattern,X,Y,Z,Pivot,Scale,Conditional,FileName,SubFileName,FileType,Animation,RenderTexture,RenderRect,EyeBlink,LipSynch,Icon,IconSubFileName,IconRect,IconAutoFlip
-男子学生,学生太郎,通常,,-120,,Center,0.8,,schoolboy/smartphone_schoolboy_stand.png,,,,,,,,,,,
-,,笑い,,-420,,Bottom,1.0,,schoolboy/smartphone_schoolboy_stand_smile.png,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-女子学生,学生花子,通常,,-420,,Bottom,0.8,,schoolgirl/smartphone_schoolgirl_stand.png,,,,,,,,,,,
-,,笑い,,-120,,Center,0.8,,schoolgirl/smartphone_schoolgirl_stand_smile.png,,,,,,,,,,,
+CharacterName,NameText,Pattern,X,Y,Z,Pivot,Scale,Conditional,FileName,SubFileName,FileType,AnimationState,Animation,RenderTexture,RenderRect,EyeBlink,LipSynch,Icon,IconSubFileName,IconRect,IconAutoFlip
+男子学生,学生太郎,通常,,-120,,Center,0.8,,schoolboy/smartphone_schoolboy_stand.png,,,,,,,,,,,,
+,,笑い,,-420,,Bottom,1.0,,schoolboy/smartphone_schoolboy_stand_smile.png,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,
+女子学生,学生花子,通常,,-420,,Bottom,0.8,,schoolgirl/smartphone_schoolgirl_stand.png,,,,,,,,,,,,
+,,笑い,,-120,,Center,0.8,,schoolgirl/smartphone_schoolgirl_stand_smile.png,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,
+Prefab猫01,茶猫,通常,,,,,,,prefabcat01/Cat01.prefab,,2DPrefab,Normal,,,,,,,,,
+,,早い,,,,,,,,,,Fast,,,,,,,,,
+Prefab猫02,灰猫,通常,,,,,,,prefabcat02/Cat02.prefab,,2DPrefab,Normal,,,,,,,,,

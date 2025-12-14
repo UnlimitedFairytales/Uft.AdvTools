@@ -71,7 +71,7 @@ namespace Uft.AdvTools
             return -1;
         }
 
-        public void SetCharacter(Character character, Sprite? sprite, int index, float offsetX, float offsetY, AnchorPreset pivot, float scale, float fadeTime_sec)
+        public void SetCharacter(Character character, Sprite? sprite, GameObject? instantiated, int index, float offsetX, float offsetY, AnchorPreset pivot, float scale, float fadeTime_sec)
         {
             if (this._characterViewList == null) return;
 
@@ -81,7 +81,7 @@ namespace Uft.AdvTools
             {
                 list[i].SetCharacterOff(0);
             }
-            list[index].SetCharacter(0 <= i, character, sprite, new Vector2(offsetX, offsetY), pivot, scale, fadeTime_sec);
+            list[index].SetCharacter(0 <= i, character, sprite, instantiated, new Vector2(offsetX, offsetY), pivot, scale, fadeTime_sec);
         }
 
         public void SetCharacterOff(Character character, float fadeTime_sec)
