@@ -194,10 +194,10 @@ namespace Uft.AdvTools.Loader
                                 var arg4IsSpecified = !string.IsNullOrWhiteSpace(dto.Arg4);
                                 if (string.IsNullOrWhiteSpace(dto.Arg1) ||
                                     string.IsNullOrWhiteSpace(dto.Arg2) ||
-                                    string.IsNullOrWhiteSpace(dto.Arg3)) throw new Exception($"{nameof(CmdTween)} : Arg1,Arg2,Arg3 is required.");
-                                if (!CmdTween.TweenTypeTryParse(dto.Arg2, out var tween)) throw new Exception($"{nameof(CmdTween)} : Arg2 unsupported tweenType. {dto.Arg2}");
-                                if (!CmdTween.TweenParameter.TryParse(tween, dto.Arg3, out var tweenParameter)) throw new Exception($"{nameof(CmdTween)} : Arg3 unsupported tweenParameter. : {dto.Arg3}");
-                                if (!CmdTween.EaseTryParse(dto.Arg4, out var ease) && arg4IsSpecified) throw new Exception($"{nameof(CmdTween)} : Arg4 unsupported ease. : {dto.Arg4}");
+                                    string.IsNullOrWhiteSpace(dto.Arg3)) throw new Exception($"{nameof(CmdTween)} : Arg1,Arg2,Arg3 are required.");
+                                if (!CmdTween.TweenTypeTryParse(dto.Arg2, out var tween)) throw new Exception($"{nameof(CmdTween)} : Arg2 is unsupported tweenType. : {dto.Arg2}");
+                                if (!CmdTween.TweenParameter.TryParse(tween, dto.Arg3, out var tweenParameter)) throw new Exception($"{nameof(CmdTween)} : Arg3 is unsupported tweenParameter. : {dto.Arg3}");
+                                if (!CmdTween.EaseTryParse(dto.Arg4, out var ease) && arg4IsSpecified) throw new Exception($"{nameof(CmdTween)} : Arg4 is unsupported ease. : {dto.Arg4}");
                                 commandList.Add(new CmdTween(dto.Arg1, tween, tweenParameter, arg4IsSpecified ? ease : null));
                             }
                             break;
@@ -206,7 +206,7 @@ namespace Uft.AdvTools.Loader
                             {
                                 var isOn = cmd == ImageEffect;
                                 if (string.IsNullOrWhiteSpace(dto.Arg1) ||
-                                    string.IsNullOrWhiteSpace(dto.Arg2)) throw new Exception($"{nameof(CmdImageEffect)} or Off : Arg1,Arg2 is required.");
+                                    string.IsNullOrWhiteSpace(dto.Arg2)) throw new Exception($"{nameof(CmdImageEffect)} or Off : Arg1,Arg2 are required.");
                                 commandList.Add(new CmdImageEffect(isOn, dto.Arg1, dto.Arg2, InvariantCultureUtil.FloatTryParse(dto.Arg6, out var fadeSeconds) ? fadeSeconds : null));
                             }
                             break;
@@ -227,7 +227,7 @@ namespace Uft.AdvTools.Loader
                             commandList.Add(new CmdParam(dto.Arg1));
                             break;
                         case Jump:
-                            if (string.IsNullOrWhiteSpace(dto.Arg1)) throw new Exception($"{nameof(CmdJump)} : Arg1 are required.");
+                            if (string.IsNullOrWhiteSpace(dto.Arg1)) throw new Exception($"{nameof(CmdJump)} : Arg1 is required.");
                             commandList.Add(new CmdJump(dto.Arg1, dto.Arg2));
                             break;
                         case SelectionTitle:
