@@ -85,7 +85,7 @@ namespace Uft.AdvTools.View
                 this.SpriteRenderers = instantiated.GetComponentsInChildren<SpriteRenderer>();
 
                 var t = instantiated.transform;
-                t.localPosition = new Vector3(toPos.x, toPos.y, 0);
+                t.localPosition = (Vector3)toPos;
                 if (this.SpriteRenderers != null && 0 < this.SpriteRenderers.Length)
                 {
                     var ppu = this.SpriteRenderers[0].sprite.pixelsPerUnit;
