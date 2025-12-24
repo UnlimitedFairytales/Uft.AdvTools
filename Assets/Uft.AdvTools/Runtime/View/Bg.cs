@@ -1,4 +1,7 @@
+#nullable enable
+
 using DG.Tweening;
+using System;
 using Uft.UnityUtils.UI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,13 +14,15 @@ namespace Uft.AdvTools.View
 
         // Parameters
 
-        [SerializeField] protected Image _imgBg1;
-        [SerializeField] protected Image _imgBg2;
+        [SerializeField] protected Image? _imgBg1;
+        [SerializeField] protected Image? _imgBg2;
 
         // Methods
 
-        public void ChangeBg(Sprite sprite, float offsetX, float offsetY, AnchorPreset pivot, float scale, float fadeTime_sec)
+        public void ChangeBg(Sprite? sprite, float offsetX, float offsetY, AnchorPreset pivot, float scale, float fadeTime_sec)
         {
+            if (this._imgBg1 == null || this._imgBg2 == null) throw new InvalidOperationException($"{nameof(this._imgBg1)}, {nameof(this._imgBg2)} are required.");
+
             var ease = Ease.OutQuad;
 
             this._imgBg1.sprite = this._imgBg2.sprite;
@@ -40,6 +45,11 @@ namespace Uft.AdvTools.View
             this._imgBg2.DOColor(imgBg2Color, fadeTime_sec).SetEase(ease);
         }
 
-        public Image GetBgImg() => this._imgBg2;
+        public Image GetBgImg()
+        {
+            if (this._imgBg1 == null || this._imgBg2 == null) throw new InvalidOperationException($"{nameof(this._imgBg1)}, {nameof(this._imgBg2)} are required.");
+
+            return this._imgBg2;
+        }
     }
 }
