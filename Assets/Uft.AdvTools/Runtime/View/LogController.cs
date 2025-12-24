@@ -2,11 +2,9 @@
 
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
-using Uft.UnityUtils;
 using Uft.VirtualizedList;
 using UnityEngine;
 using UnityEngine.UI;
-using static CodiceApp.Gravatar.GravatarImagesProvider.Result;
 
 namespace Uft.AdvTools.View
 {

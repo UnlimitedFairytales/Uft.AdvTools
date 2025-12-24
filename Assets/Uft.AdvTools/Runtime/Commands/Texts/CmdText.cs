@@ -2,7 +2,6 @@
 
 using System;
 using System.IO;
-using Uft.AdvTools.Entities;
 using UnityEngine;
 
 namespace Uft.AdvTools.Commands

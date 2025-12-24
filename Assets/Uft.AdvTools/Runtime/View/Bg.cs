@@ -1,7 +1,4 @@
-using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using System;
-using Uft.AdvTools.Commands;
 using Uft.UnityUtils.UI;
 using UnityEngine;
 using UnityEngine.UI;

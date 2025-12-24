@@ -1,7 +1,6 @@
 #nullable enable
 
 using CsvHelper;
-using CsvHelper.Configuration.Attributes;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
