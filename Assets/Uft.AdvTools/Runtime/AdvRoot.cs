@@ -168,7 +168,7 @@ namespace Uft.AdvTools
             foreach (var cameraPrefix in this._cameraPrefixes)
             {
                 var camera =
-                    this.GetComponentsInChildrenOrderByName<Camera>(component => component.gameObject.name.StartsWith(cameraPrefix))
+                    this.GetComponentsInChildrenOrderByName<Camera>(true, component => component.gameObject.name.StartsWith(cameraPrefix))
                     .FirstOrDefault();
                 if (camera != null)
                 {
@@ -176,7 +176,7 @@ namespace Uft.AdvTools
                     // this.CameraDictionary.Add(camera.gameObject.name, (camera, vCameraList));
                 }
             }
-            this.UiEffectList = this.GetComponentsInChildrenOrderByName<Animator>(component => component.gameObject.name.StartsWith(this._uiEffectPrefix));
+            this.UiEffectList = this.GetComponentsInChildrenOrderByName<Animator>(true,component => component.gameObject.name.StartsWith(this._uiEffectPrefix));
         }
         public virtual void Cleanup()
         {
