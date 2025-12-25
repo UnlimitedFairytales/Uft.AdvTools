@@ -1,3 +1,5 @@
+#nullable enable
+
 namespace Uft.AdvTools
 {
     public class AutoNext
