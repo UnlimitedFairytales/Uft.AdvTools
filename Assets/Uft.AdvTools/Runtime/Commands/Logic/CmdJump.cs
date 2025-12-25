@@ -23,7 +23,6 @@ namespace Uft.AdvTools.Commands
         {
             try
             {
-
                 if (string.IsNullOrWhiteSpace(this.Expression) || Param.EvaluateBoolean(this.Expression, advRoot))
                 {
                     scenarioExecutor.JumpTo(this.ScenarioLabel);
