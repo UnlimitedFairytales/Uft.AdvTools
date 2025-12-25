@@ -3,6 +3,7 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using DG.Tweening.Core;
+using Uft.UnityUtils;
 using UnityEngine;
 
 namespace Uft.AdvTools
@@ -10,8 +11,8 @@ namespace Uft.AdvTools
     public class PostEffectManager : MonoBehaviour
     {
         const string DIRECTIONAL_GHOST = "DIRECTIONAL_GHOST";
-        const string GRAY_SCALE = "GRAY_SCALE";
-        const string SEPIA = "SEPIA";
+        const string GrayScale = "GrayScale";
+        const string Sepia = "Sepia";
         const string RULE = "RULE";
 
         const string FADE_HORIZONTAL = "FadeHorizontal";
@@ -46,30 +47,34 @@ namespace Uft.AdvTools
                 completesPrevious);
         }
 
-        public async UniTask SetGrayScaleAsync(float endValue, float fadeSeconds, bool completesPrevious = false)
+        public async UniTask SetImageEffectAsync(string imageEffectName, float endValue, float fadeSeconds, bool completesPrevious = false)
         {
             if (this._advRootRef == null) return;
 
-            await this.SetEffectAsync(
-                GRAY_SCALE,
-                () => this._advRootRef.WideCameraGrayscalePostEffect.Amount,
-                x => this._advRootRef.WideCameraGrayscalePostEffect.Amount = x,
-                endValue,
-                fadeSeconds,
-                completesPrevious);
-        }
-
-        public async UniTask SetSepiaAsync(float endValue, float fadeSeconds, bool completesPrevious = false)
-        {
-            if (this._advRootRef == null) return;
-
-            await this.SetEffectAsync(
-                SEPIA,
-                () => this._advRootRef.WideCameraSepiaPostEffect.Amount,
-                x => this._advRootRef.WideCameraSepiaPostEffect.Amount = x,
-                endValue,
-                fadeSeconds,
-                completesPrevious);
+            if (imageEffectName == Sepia)
+            {
+                await this.SetEffectAsync(
+                    Sepia,
+                    () => this._advRootRef.WideCameraSepiaPostEffect.Amount,
+                    x => this._advRootRef.WideCameraSepiaPostEffect.Amount = x,
+                    endValue,
+                    fadeSeconds,
+                    completesPrevious);
+            }
+            else if (imageEffectName == GrayScale)
+            {
+                await this.SetEffectAsync(
+                    GrayScale,
+                    () => this._advRootRef.WideCameraGrayscalePostEffect.Amount,
+                    x => this._advRootRef.WideCameraGrayscalePostEffect.Amount = x,
+                    endValue,
+                    fadeSeconds,
+                    completesPrevious);
+            }
+            else
+            {
+                DevLog.LogWarning($"[{nameof(PostEffectManager)}] Invalid {nameof(imageEffectName)}. e.g. the effect name is case-sensitive.");
+            }
         }
 
         public async UniTask SetRuleFadeAsync(string ruleName, Color color, float ruleSoftness, float endValue, bool isInvert, float fadeSeconds, bool completesPrevious = false)
@@ -132,8 +137,8 @@ namespace Uft.AdvTools
         {
             return
                 key == DIRECTIONAL_GHOST ? this._directionalGhostTweener :
-                key == GRAY_SCALE ? this._grayScaleTweener :
-                key == SEPIA ? this._sepiaTweener :
+                key == GrayScale ? this._grayScaleTweener :
+                key == Sepia ? this._sepiaTweener :
                 key == RULE ? this._ruleFadeTweener :
                 null;
         }
@@ -143,11 +148,11 @@ namespace Uft.AdvTools
             {
                 this._directionalGhostTweener = tweener;
             }
-            else if (key == GRAY_SCALE)
+            else if (key == GrayScale)
             {
                 this._grayScaleTweener = tweener;
             }
-            else if (key == SEPIA)
+            else if (key == Sepia)
             {
                 this._sepiaTweener = tweener;
             }
