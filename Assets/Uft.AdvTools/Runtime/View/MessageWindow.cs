@@ -1,3 +1,5 @@
+#nullable enable
+
 using System;
 using TMPro;
 using Uft.AdvTools.Commands;
@@ -13,16 +15,16 @@ namespace Uft.AdvTools.View
         [SerializeField] protected bool _isTypewritingEnabled = true;
         [SerializeField] protected float _typewriterInterval_sec = 0.05f;
 
-        [SerializeField] protected TMP_Text _txtName;
-        [SerializeField] protected TMP_Text _txtText;
-        [SerializeField] protected Image _imgNextSymbol;
+        [SerializeField] protected TMP_Text? _txtName;
+        [SerializeField] protected TMP_Text? _txtText;
+        [SerializeField] protected Image? _imgNextSymbol;
         [SerializeField] protected Vector2 _offsetImgNext = new(32, 12);
 
         // Status
 
-        [NonSerialized] protected RectTransform _parentRectTransform;
-        [NonSerialized] protected Animator _animNextSymbol;
-        [NonSerialized] protected float _typewriterIntervalCounter_sec = 0;
+        protected RectTransform? _parentRectTransform;
+        protected Animator? _animNextSymbol;
+        protected float _typewriterIntervalCounter_sec = 0;
 
         public bool IsDisplayed => this.gameObject.activeSelf;
 
@@ -33,6 +35,8 @@ namespace Uft.AdvTools.View
 
         protected virtual void Awake()
         {
+            if (this._txtName == null || this._txtText == null || this._imgNextSymbol == null) throw new InvalidOperationException($"{nameof(this._txtName)}, {nameof(this._txtText)}, {nameof(this._imgNextSymbol)} are required.");
+
             this._parentRectTransform = this._txtText.rectTransform.parent as RectTransform;
             this._animNextSymbol = this._imgNextSymbol.GetComponent<Animator>();
             this._txtName.text = "";
@@ -41,6 +45,7 @@ namespace Uft.AdvTools.View
 
         protected virtual void Update()
         {
+            if (this._txtName == null || this._txtText == null || this._imgNextSymbol == null) throw new InvalidOperationException($"{nameof(this._txtName)}, {nameof(this._txtText)}, {nameof(this._imgNextSymbol)} are required.");
             if (!this.IsTypewriting) return;
 
             this._typewriterIntervalCounter_sec += Time.deltaTime;
@@ -53,6 +58,8 @@ namespace Uft.AdvTools.View
 
         public virtual void SetText(AdvRoot advRoot, string name, string text, CmdText.PageCtrlType pageCtrl, string windowType)
         {
+            if (this._txtName == null || this._txtText == null || this._imgNextSymbol == null) throw new InvalidOperationException($"{nameof(this._txtName)}, {nameof(this._txtText)}, {nameof(this._imgNextSymbol)} are required.");
+
             this.DisableImgNextSymbol();
             advRoot.ShowUI();
 
@@ -94,16 +101,23 @@ namespace Uft.AdvTools.View
 
         public virtual void EndTypewriting()
         {
+            if (this._txtName == null || this._txtText == null || this._imgNextSymbol == null) throw new InvalidOperationException($"{nameof(this._txtName)}, {nameof(this._txtText)}, {nameof(this._imgNextSymbol)} are required.");
+
             this._txtText.maxVisibleCharacters = this._txtText.textInfo.characterCount;
         }
 
         public virtual void DisableImgNextSymbol()
         {
+            if (this._txtName == null || this._txtText == null || this._imgNextSymbol == null) throw new InvalidOperationException($"{nameof(this._txtName)}, {nameof(this._txtText)}, {nameof(this._imgNextSymbol)} are required.");
+
             this._imgNextSymbol.enabled = false;
         }
 
         public virtual void EnableImgNextSymbol()
         {
+            if (this._txtName == null || this._txtText == null || this._imgNextSymbol == null) throw new InvalidOperationException($"{nameof(this._txtName)}, {nameof(this._txtText)}, {nameof(this._imgNextSymbol)} are required.");
+            if (this._animNextSymbol == null) throw new InvalidOperationException($"{nameof(this._animNextSymbol)} is required.");
+
             if (this._imgNextSymbol.enabled) return;
 
             this._txtText.ForceMeshUpdate();
