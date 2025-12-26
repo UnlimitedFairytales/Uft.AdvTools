@@ -19,8 +19,6 @@ namespace Uft.AdvTools.Commands
         {
             var textureRow = advRoot.SpriteDictionary[this.Label];
             advRoot.SpriteManager.SetSpriteOff(textureRow.Sprite, this.FadeSeconds);
-
-            textureRow.ResetLastStatus();
         }
     }
 }

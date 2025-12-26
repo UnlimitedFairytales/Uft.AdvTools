@@ -152,9 +152,9 @@ namespace Uft.AdvTools.Commands
                 try
                 {
                     var rt =
-                        this.TargetName == CmdBg.SPRITE_NAME_BG ?  advRoot.Bg.GetBgImg().rectTransform :
+                        this.TargetName == CmdBg.SPRITE_NAME_BG ? advRoot.Bg.GetBgOi().RootRectTransform :
                         advRoot.CharacterDictionary.ContainsKey(this.TargetName) ? advRoot.SpriteManager.GetCharacterView(advRoot.CharacterDictionary[this.TargetName])!.Image!.rectTransform :
-                        advRoot.SpriteDictionary.ContainsKey(this.TargetName) ? advRoot.SpriteManager.GetSpriteImage(advRoot.SpriteDictionary[this.TargetName].Sprite)!.rectTransform :
+                        advRoot.SpriteDictionary.ContainsKey(this.TargetName) ? advRoot.SpriteManager.GetSpriteOi(advRoot.SpriteDictionary[this.TargetName].Sprite)!.RootRectTransform :
                         null;
                     if (rt != null)
                     {

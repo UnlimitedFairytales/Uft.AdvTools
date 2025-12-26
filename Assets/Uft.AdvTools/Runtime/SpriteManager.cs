@@ -6,19 +6,18 @@ using Uft.AdvTools.View;
 using Uft.UnityUtils;
 using Uft.UnityUtils.UI;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Uft.AdvTools
 {
     public class SpriteManager : MonoBehaviour
     {
-        public const int IMG_COUNT = 8;
-
         public static readonly Color TRANSPARENT = new(1, 1, 1, 0);
+
+        public const int IMG_COUNT = 8;
 
         // Parameters
 
-        [SerializeField] protected Image[]? _imgSpriteList;
+        [SerializeField] protected OffsettableImage[]? _oiSpriteList;
         [SerializeField] protected CharacterView[]? _characterViewList;
         [SerializeField] protected bool _controlsCharacterGrayout = true; public bool ControlsCharacterGrayout => this._controlsCharacterGrayout;
         [SerializeField] protected Color _grayoutColor = Color.gray;
@@ -59,11 +58,12 @@ namespace Uft.AdvTools
 
         public int GetSpriteIndex(Sprite sprite)
         {
-            if (this._imgSpriteList == null) return -1;
+            if (this._oiSpriteList == null) return -1;
 
-            for (int i = 0; i < this._imgSpriteList.Length; i++)
+            for (int i = 0; i < this._oiSpriteList.Length; i++)
             {
-                if (this._imgSpriteList[i].sprite == sprite && 0 < this._imgSpriteList[i].color.a)
+                var oi = this._oiSpriteList[i];
+                if (oi.Image.sprite == sprite && oi.IsOn)
                 {
                     return i;
                 }
@@ -102,65 +102,85 @@ namespace Uft.AdvTools
             DevLog.LogWarning($"[{nameof(SpriteManager)}.{nameof(SetCharacterOff)}] Displayed character is not found : character.CharacterName={character.CharacterName}");
         }
 
-        public void SetSprite(Sprite sprite, int index, float offsetX, float offsetY, AnchorPreset pivot, float scale, float fadeTime_sec)
+        public void SetSprite(TextureRow row, int i, float? posX, float? posY, float fadeTime_sec)
         {
-            if (this._imgSpriteList == null) return;
+            if (this._oiSpriteList == null) return;
 
-            var list = this._imgSpriteList;
-            var i = this.GetSpriteIndex(sprite);
-            if (0 <= i)
-            {
-                this.SetSpriteOff(sprite, 0);
-            }
-            var img = list[index];
-            var toPos = new Vector2(offsetX, offsetY);
-            var isAlreadyDisplayed = 0 <= i;
-            img.sprite = sprite;
-            img.DOComplete();
+            var sprite = row.Sprite;
+            var prevIndex = this.GetSpriteIndex(sprite);
+            var isAlreadyDisplayed = 0 <= prevIndex;
             if (isAlreadyDisplayed)
             {
-                img.color = Color.white;
+                this.SetSpriteOff(sprite, 0);
+                this._oiSpriteList[i].RootRectTransform.anchoredPosition = this._oiSpriteList[prevIndex].RootRectTransform.anchoredPosition;
             }
             else
             {
-                img.color = TRANSPARENT;
-                img.DOColor(Color.white, fadeTime_sec);
+                this._oiSpriteList[i].RootRectTransform.anchoredPosition = Vector2.zero;
             }
-            img.SetNativeSize();
-            img.rectTransform.pivot = pivot.GetPivot();
-            img.rectTransform.anchoredPosition = toPos;
-            img.rectTransform.localScale = new Vector3(scale, scale, scale);
+
+            var pivot = row.Pivot;
+            var scale = row.Scale;
+            var x = posX != null ? posX.Value : this._oiSpriteList[i].RootRectTransform.anchoredPosition.x;
+            var y = posY != null ? posY.Value : this._oiSpriteList[i].RootRectTransform.anchoredPosition.y;
+
+            this._oiSpriteList[i].IsOn = true;
+            var img2 = this._oiSpriteList[i].Image;
+            img2.DOComplete();
+
+            img2.sprite = sprite;
+            img2.rectTransform.pivot = pivot.GetPivot();
+            img2.rectTransform.localScale = new Vector3(scale, scale, scale);
+            this._oiSpriteList[i].RootRectTransform.anchoredPosition = new Vector2(x, y);
+            img2.rectTransform.anchoredPosition = new Vector2(row?.OffsetX ?? 0, row?.OffsetY ?? 0);
+            img2.SetNativeSize();
+            if (isAlreadyDisplayed)
+            {
+                img2.color = Color.white;
+            }
+            else
+            {
+                img2.color = TRANSPARENT;
+                img2.DOColor(Color.white, fadeTime_sec);
+            }
         }
 
         public void SetSpriteOff(Sprite sprite, float fadeTime_sec)
         {
-            if (this._imgSpriteList == null) return;
+            if (this._oiSpriteList == null) return;
 
-            var list = this._imgSpriteList;
             var i = this.GetSpriteIndex(sprite);
             if (0 <= i)
             {
-                var prevImg = list[i];
+                this._oiSpriteList[i].IsOn = false;
+                var prevImg = this._oiSpriteList[i].Image;
                 prevImg.DOComplete();
                 if (0 < fadeTime_sec)
                 {
-                    prevImg.DOColor(TRANSPARENT, fadeTime_sec);
+                    prevImg.DOColor(TRANSPARENT, fadeTime_sec).OnComplete(() =>
+                    {
+                        if (prevImg.sprite == sprite)
+                        {
+                            prevImg.sprite = null;
+                        }
+                    });
                 }
                 else
                 {
                     prevImg.color = TRANSPARENT;
+                    prevImg.sprite = null;
                 }
                 return;
             }
             DevLog.LogWarning($"[{nameof(SpriteManager)}] sprite is not found : sprite.name={sprite.name}");
         }
 
-        public Image? GetSpriteImage(Sprite sprite)
+        public OffsettableImage? GetSpriteOi(Sprite sprite)
         {
-            if (this._imgSpriteList == null) return null;
+            if (this._oiSpriteList == null) return null;
 
             var i = this.GetSpriteIndex(sprite);
-            if (0 <= i) return this._imgSpriteList[i];
+            if (0 <= i) return this._oiSpriteList[i];
             return null;
         }
 

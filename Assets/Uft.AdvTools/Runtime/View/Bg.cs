@@ -2,54 +2,62 @@
 
 using DG.Tweening;
 using System;
+using Uft.AdvTools.Entities;
 using Uft.UnityUtils.UI;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Uft.AdvTools.View
 {
     public class Bg : MonoBehaviour
     {
-        static readonly Color transparent = new(1, 1, 1, 0);
+        static readonly Color TRANSPARENT = new(1, 1, 1, 0);
 
         // Parameters
 
-        [SerializeField] protected Image? _imgBg1;
-        [SerializeField] protected Image? _imgBg2;
+        [SerializeField] protected OffsettableImage? _oiBg1;
+        [SerializeField] protected OffsettableImage? _oiBg2;
 
         // Methods
 
-        public void ChangeBg(Sprite? sprite, float offsetX, float offsetY, AnchorPreset pivot, float scale, float fadeTime_sec)
+        public void ChangeBg(TextureRow? row, float? posX, float? posY, float fadeTime_sec)
         {
-            if (this._imgBg1 == null || this._imgBg2 == null) throw new InvalidOperationException($"{nameof(this._imgBg1)}, {nameof(this._imgBg2)} are required.");
+            if (this._oiBg1 == null || this._oiBg2 == null) throw new InvalidOperationException($"{nameof(this._oiBg1)}, {nameof(this._oiBg2)} are required.");
 
-            var ease = Ease.OutQuad;
+            var img1 = this._oiBg1.Image;
+            var img2 = this._oiBg2.Image;
 
-            this._imgBg1.sprite = this._imgBg2.sprite;
-            this._imgBg1.rectTransform.pivot = this._imgBg2.rectTransform.pivot;
-            this._imgBg1.rectTransform.localScale = this._imgBg2.rectTransform.localScale;
-            this._imgBg1.rectTransform.anchoredPosition = this._imgBg2.rectTransform.anchoredPosition;
-            this._imgBg1.SetNativeSize();
-            this._imgBg1.color = this._imgBg2.color;
+            img1.sprite = img2.sprite;
+            img1.rectTransform.pivot = img2.rectTransform.pivot;
+            img1.rectTransform.localScale = img2.rectTransform.localScale;
+            this._oiBg1.RootRectTransform.anchoredPosition = this._oiBg2.RootRectTransform.anchoredPosition;
+            img1.rectTransform.anchoredPosition = img2.rectTransform.anchoredPosition;
+            img1.SetNativeSize();
+            img1.color = img2.color;
 
-            this._imgBg2.sprite = sprite;
-            this._imgBg2.rectTransform.pivot = pivot.GetPivot();
-            this._imgBg2.rectTransform.localScale = new Vector3(scale, scale, scale);
-            this._imgBg2.rectTransform.anchoredPosition = new Vector2(offsetX, offsetY);
-            this._imgBg2.SetNativeSize();
-            this._imgBg2.color = transparent;
+            var pivot = row?.Pivot ?? AnchorPreset.MiddleCenter;
+            var scale = row?.Scale ?? 1f;
+            var x = posX != null ? posX.Value : this._oiBg2.RootRectTransform.anchoredPosition.x;
+            var y = posY != null ? posY.Value : this._oiBg2.RootRectTransform.anchoredPosition.y;
 
-            var imgBg2Color = sprite == null ? transparent : Color.white;
-
-            this._imgBg1.DOColor(transparent, fadeTime_sec).SetEase(ease);
-            this._imgBg2.DOColor(imgBg2Color, fadeTime_sec).SetEase(ease);
+            img2.sprite = row?.Sprite;
+            img2.rectTransform.pivot = pivot.GetPivot();
+            img2.rectTransform.localScale = new Vector3(scale, scale, scale);
+            this._oiBg2.RootRectTransform.anchoredPosition = new Vector2(x, y);
+            img2.rectTransform.anchoredPosition = new Vector2(row?.OffsetX ?? 0, row?.OffsetY ?? 0);
+            img2.SetNativeSize();
+            img2.color = TRANSPARENT;
+            var imgBg2Color = row == null ? TRANSPARENT : Color.white;
+            img1.DOComplete();
+            img1.DOColor(TRANSPARENT, fadeTime_sec);
+            img2.DOComplete();
+            img2.DOColor(imgBg2Color, fadeTime_sec);
         }
 
-        public Image GetBgImg()
+        public OffsettableImage GetBgOi()
         {
-            if (this._imgBg1 == null || this._imgBg2 == null) throw new InvalidOperationException($"{nameof(this._imgBg1)}, {nameof(this._imgBg2)} are required.");
+            if (this._oiBg1 == null || this._oiBg2 == null) throw new InvalidOperationException($"{nameof(this._oiBg1)}, {nameof(this._oiBg2)} are required.");
 
-            return this._imgBg2;
+            return this._oiBg2;
         }
     }
 }

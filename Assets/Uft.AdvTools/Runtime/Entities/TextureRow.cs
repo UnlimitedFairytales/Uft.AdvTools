@@ -21,10 +21,6 @@ namespace Uft.AdvTools.Entities
 
         /// <summary>初期値、非表示後（SpriteOff、BgOffなど）はParameter値になる想定。</summary>
         public int LastImageIndex { get; set; }
-        /// <summary>初期値、非表示後（SpriteOff、BgOffなど）はParameter値になる想定。</summary>
-        public float LastOffsetX { get; set; }
-        /// <summary>初期値、非表示後（SpriteOff、BgOffなど）はParameter値になる想定。</summary>
-        public float LastOffsetY { get; set; }
 
         // Methods
 
@@ -37,15 +33,6 @@ namespace Uft.AdvTools.Entities
             this.Pivot = pivot ?? AnchorPreset.MiddleCenter;
             this.Scale = scale ?? 1.0f;
             this.Sprite = sprite;
-
-            this.ResetLastStatus();
-        }
-
-        public void ResetLastStatus()
-        {
-            this.LastImageIndex = 0;
-            this.LastOffsetX = this.OffsetX;
-            this.LastOffsetY = this.OffsetY;
         }
 
         public override string ToString() => $"{this.Label},{this.Type},{this.OffsetX},{this.OffsetY},{this.Pivot},{this.Scale},{this.Sprite}";
