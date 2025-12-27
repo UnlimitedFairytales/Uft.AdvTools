@@ -50,10 +50,6 @@ namespace Uft.AdvTools.Entities
         public string LastPattern { get; set; }
         /// <summary>初期値、CharacterOff後はDefaultDetailの値になる想定。</summary>
         public int LastImageIndex { get; set; }
-        /// <summary>初期値、CharacterOff後はDefaultDetailの値になる想定。</summary>
-        public float LastOffsetX { get; set; }
-        /// <summary>初期値、CharacterOff後はDefaultDetailの値になる想定。</summary>
-        public float LastOffsetY { get; set; }
 
         // Methods
 
@@ -74,8 +70,6 @@ namespace Uft.AdvTools.Entities
         {
             this.LastPattern = this.DefaultDetail.Pattern;
             this.LastImageIndex = 0;
-            this.LastOffsetX = this.DefaultDetail.OffsetX;
-            this.LastOffsetY = this.DefaultDetail.OffsetY;
         }
 
         public override string ToString() => $"{this.CharacterName}, Count={this.CharacterDetailDictionary.Count}";

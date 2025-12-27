@@ -1,5 +1,6 @@
 #nullable enable
 
+using DG.Tweening;
 using System;
 using Uft.AdvTools.Entities;
 using Uft.AdvTools.View;
@@ -38,14 +39,15 @@ namespace Uft.AdvTools
             return false;
         }
 
-        protected int GetCharacterViewIndex(Character character)
+        protected int GetOnCharacterViewIndex(Character character)
         {
             if (this._characterViewList == null) throw new InvalidOperationException($"{nameof(this._characterViewList)} is required.");
 
             var list = this._characterViewList;
             for (int i = 0; i < list.Length; i++)
             {
-                if (list[i].Character == character)
+                var oi = list[i];
+                if (oi.IsOn && Equals(character, oi.KeyObject))
                 {
                     return i;
                 }
@@ -53,28 +55,73 @@ namespace Uft.AdvTools
             return -1;
         }
 
-        public void SetCharacter(Character character, Sprite? sprite, GameObject? instantiated, int index, float offsetX, float offsetY, AnchorPreset pivot, float scale, float fadeTime_sec)
+        public void SetCharacter(Character character, CharacterDetail detail, int i, float? posX, float? posY, float fadeTime_sec)
         {
             if (this._characterViewList == null) throw new InvalidOperationException($"{nameof(this._characterViewList)} is required.");
+            if ((uint)i >= (uint)this._characterViewList.Length) throw new ArgumentOutOfRangeException(nameof(i));
 
-            var list = this._characterViewList;
-            var i = this.GetCharacterViewIndex(character);
-            if (0 <= i)
+            var sprite = detail.Sprite;
+            var instantiated = character.Instantiated;
+            var prevIndex = this.GetOnCharacterViewIndex(character);
+            var oi = this._characterViewList[i];
+            var isAlreadyDisplayed = 0 <= prevIndex;
+            // NOTE: prevIndex == i の場合もDOCompleteしてOff。問題が出るようなら後で再調整
+            if (isAlreadyDisplayed)
             {
-                list[i].Off(0);
+                var prevOi = this._characterViewList[prevIndex];
+                oi.RootRectTransform.DOComplete();
+                prevOi.RootRectTransform.DOComplete();
+                oi.RootRectTransform.anchoredPosition = prevOi.RootRectTransform.anchoredPosition;
+                prevOi.Off(0);
             }
-            list[index].Set(0 <= i, character, sprite, instantiated, new Vector2(offsetX, offsetY), pivot, scale, fadeTime_sec);
+            else
+            {
+                oi.RootRectTransform.anchoredPosition = Vector2.zero;
+            }
+
+            var pivot = detail.Pivot;
+            var scale = detail.Scale;
+            var x = posX != null ? posX.Value : oi.RootRectTransform.anchoredPosition.x; // TODO: 調整
+            var y = posY != null ? posY.Value : oi.RootRectTransform.anchoredPosition.y; // TODO: 調整
+            var fromAlpha = isAlreadyDisplayed ? 1 : 0;
+            if (sprite != null)
+            {
+                oi.Set(
+                    true,
+                    character,
+                    sprite,
+                    pivot.GetPivot(),
+                    scale,
+                    new Vector2(x, y),
+                    new Vector2(detail.OffsetX, detail.OffsetY),
+                    fromAlpha,
+                    1.0f,
+                    isAlreadyDisplayed ? 0 : fadeTime_sec);
+            }
+            else if (instantiated != null)
+            {
+                oi.Set(
+                    true,
+                    character,
+                    instantiated,
+                    pivot.GetPivot(),
+                    scale,
+                    new Vector2(x, y),
+                    new Vector2(detail.OffsetX, detail.OffsetY),
+                    fromAlpha,
+                    1.0f,
+                    isAlreadyDisplayed ? 0 : fadeTime_sec);
+            }
         }
 
         public void SetCharacterOff(Character character, float fadeTime_sec)
         {
             if (this._characterViewList == null) throw new InvalidOperationException($"{nameof(this._characterViewList)} is required.");
 
-            var list = this._characterViewList;
-            var i = this.GetCharacterViewIndex(character);
+            var i = this.GetOnCharacterViewIndex(character);
             if (0 <= i)
             {
-                list[i].Off(fadeTime_sec);
+                this._characterViewList[i].Off(fadeTime_sec);
                 if (!this.IsAnyCharacterDisplayed())
                 {
                     this._lastSpeaker = null;
@@ -88,8 +135,9 @@ namespace Uft.AdvTools
         {
             if (this._characterViewList == null) throw new InvalidOperationException($"{nameof(this._characterViewList)} is required.");
 
-            var i = this.GetCharacterViewIndex(character);
-            return 0 <= i ? this._characterViewList[i] : null;
+            var i = this.GetOnCharacterViewIndex(character);
+            if (0 <= i) return this._characterViewList[i];
+            return null;
         }
 
         /// <summary>
@@ -113,7 +161,7 @@ namespace Uft.AdvTools
                 var list = this._characterViewList;
                 for (int i = 0; i < list.Length; i++)
                 {
-                    if (list[i].IsOn && list[i].Character != currentCharacter)
+                    if (list[i].IsOn && !Equals(currentCharacter, list[i].KeyObject))
                     {
                         list[i].ToSub(this._grayoutColor);
                     }

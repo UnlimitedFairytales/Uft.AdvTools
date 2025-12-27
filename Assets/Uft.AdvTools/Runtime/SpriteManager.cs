@@ -2,7 +2,6 @@
 
 using Uft.AdvTools.Entities;
 using Uft.AdvTools.View;
-using Uft.UnityUtils.UI;
 using UnityEngine;
 
 namespace Uft.AdvTools
@@ -21,8 +20,8 @@ namespace Uft.AdvTools
         public int GetOnSpriteIndex(Sprite sprite)
             => this._spriteSlots!.GetOnSpriteIndex(sprite);
 
-        public void SetCharacter(Character character, Sprite? sprite, GameObject? instantiated, int index, float offsetX, float offsetY, AnchorPreset pivot, float scale, float fadeTime_sec)
-            => this._characterSlots!.SetCharacter(character, sprite, instantiated, index, offsetX, offsetY, pivot, scale, fadeTime_sec);
+        public void SetCharacter(Character character, CharacterDetail detail, int i, float? posX, float? posY, float fadeTime_sec)
+            => this._characterSlots!.SetCharacter(character, detail, i, posX, posY, fadeTime_sec);
 
         public void SetCharacterOff(Character character, float fadeTime_sec)
             => this._characterSlots!.SetCharacterOff(character, fadeTime_sec);

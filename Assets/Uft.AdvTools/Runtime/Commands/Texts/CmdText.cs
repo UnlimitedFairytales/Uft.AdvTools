@@ -35,12 +35,12 @@ namespace Uft.AdvTools.Commands
         // NOTE: Character値
         protected string? Pattern { get; set; } // NOTE: "<Off>"の場合、画像表示の抑制が可能
         protected int? ImageIndex { get; set; }
-        protected float? OffsetX { get; set; }
-        protected float? OffsetY { get; set; }
+        protected float? PosX { get; set; }
+        protected float? PosY { get; set; }
         protected float FadeSeconds { get; set; }
 
         public CmdText(string? name, string? text, string? pageCtrl, string? voice, string? windowType,
-            string? pattern, int? imageIndex, float? offsetX, float? offsetY, float? fadeSeconds)
+            string? pattern, int? imageIndex, float? posX, float? posY, float? fadeSeconds)
         {
             this.Name = name ?? "";
             this.Text = text ?? "";
@@ -51,10 +51,10 @@ namespace Uft.AdvTools.Commands
             // NOTE: Character値
             this.Pattern = pattern;
             this.ImageIndex = imageIndex is int idx ?
-                Mathf.Clamp(idx, 0, 7) :
+                Mathf.Clamp(idx, 0, SpriteManager.IMG_COUNT - 1) :
                 null;
-            this.OffsetX = offsetX;
-            this.OffsetY = offsetY;
+            this.PosX = posX;
+            this.PosY = posY;
             this.FadeSeconds = fadeSeconds ?? 0.2f;
         }
 
@@ -78,12 +78,9 @@ namespace Uft.AdvTools.Commands
 
             if (character != null)
             {
-                // 1. Character sprite
-                // NOTE: Arg2～Arg5（Pattern、ImageIndex、OffsetX、OffsetY）が空欄の場合は、デフォルトまたは現在の表示を継続する
+                // 1. Character
                 var pattern = string.IsNullOrWhiteSpace(this.Pattern) ? character.LastPattern : this.Pattern;
-                var imageIndex = character.LastImageIndex;
-                var x = character.LastOffsetX;
-                var y = character.LastOffsetY;
+                var imageIndex = this.ImageIndex ?? character.LastImageIndex;
                 if (pattern == PATTERN_OFF)
                 {
                     if (advRoot.SpriteManager.GetCharacterView(character) != null)
@@ -94,14 +91,7 @@ namespace Uft.AdvTools.Commands
                 else
                 {
                     var detail = character.CharacterDetailDictionary[pattern];
-
-                    var sprite = detail.Sprite;
-                    imageIndex = this.ImageIndex ?? character.LastImageIndex;
-                    x = this.OffsetX ?? character.LastOffsetX;
-                    y = this.OffsetY ?? character.LastOffsetY;
-                    var pivot = detail.Pivot;
-                    var scale = detail.Scale;
-                    advRoot.SpriteManager.SetCharacter(character, sprite, character.Instantiated, imageIndex, x, y, pivot, scale, this.FadeSeconds);
+                    advRoot.SpriteManager.SetCharacter(character, detail, imageIndex, this.PosX, this.PosY, this.FadeSeconds);
                     if (character.Animator != null && !string.IsNullOrWhiteSpace(detail.AnimatorState))
                     {
                         character.Animator.Play(detail.AnimatorState);
@@ -109,8 +99,6 @@ namespace Uft.AdvTools.Commands
                 }
                 character.LastPattern = pattern;
                 character.LastImageIndex = imageIndex;
-                character.LastOffsetX = x;
-                character.LastOffsetY = y;
 
                 // 2. Text
                 advRoot.SetText(character, name, this.Text, pageCtrl, this.WindowType);

@@ -136,6 +136,7 @@ namespace Uft.AdvTools.View
 
             this.KeyObject = keyObject;
             this.Instantiated = instantiated;
+            img.rectTransform.localScale = new Vector3(0, 0, 0); // NOTE: Image も表示されてしまうため、とりあえず見えないようにする
 
             instantiated.transform.SetParent(cg.transform, false);
             instantiated.SetActive(true);
