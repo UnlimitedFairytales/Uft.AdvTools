@@ -28,15 +28,16 @@ namespace Uft.AdvTools.View
 
         // Methods
 
-        public virtual void Set(bool isOn, Sprite? sprite, Vector2 pivot, float scale, Vector2 position, Vector2 offset, Color fromColor, Color toColor, float fadeTime_sec)
+        public virtual void Set<T>(bool isOn, T keyObject, Sprite? sprite, Vector2 pivot, float scale, Vector2 position, Vector2 offset, float fromAlpha, float toAlpha, float fadeTime_sec)
         {
             if (this._canvasGroup == null) throw new InvalidOperationException($"{nameof(this._canvasGroup)} is required.");
             if (this._image == null) throw new InvalidOperationException($"{nameof(this._image)} is required.");
 
             this.IsOn = isOn;
             var img = this._image;
+            var cg = this._canvasGroup;
 
-            img.DOComplete();
+            cg.DOComplete();
 
             img.sprite = sprite;
             img.rectTransform.pivot = pivot;
@@ -45,22 +46,30 @@ namespace Uft.AdvTools.View
             this.RootRectTransform.anchoredPosition = position;
             img.rectTransform.anchoredPosition = offset;
 
-            img.color = fromColor;
-            img.DOColor(toColor, fadeTime_sec);
+            if (0 < fadeTime_sec)
+            {
+                cg.alpha = fromAlpha;
+                cg.DOFade(toAlpha, fadeTime_sec);
+            }
+            else
+            {
+                cg.alpha = toAlpha;
+            }
         }
 
-        public virtual void Off(Color toColor, float fadeTime_sec)
+        public virtual void Off(float fadeTime_sec)
         {
             if (this._canvasGroup == null) throw new InvalidOperationException($"{nameof(this._canvasGroup)} is required.");
             if (this._image == null) throw new InvalidOperationException($"{nameof(this._image)} is required.");
 
             this.IsOn = false;
             var img = this._image;
+            var cg = this._canvasGroup;
             var sprite = img.sprite;
-            img.DOComplete();
+            cg.DOComplete();
             if (0 < fadeTime_sec)
             {
-                img.DOColor(toColor, fadeTime_sec).OnComplete(() =>
+                cg.DOFade(0, fadeTime_sec).OnComplete(() =>
                 {
                     if (img.sprite == sprite)
                     {
@@ -70,7 +79,7 @@ namespace Uft.AdvTools.View
             }
             else
             {
-                img.color = toColor;
+                cg.alpha = 0;
                 img.sprite = null;
             }
         }

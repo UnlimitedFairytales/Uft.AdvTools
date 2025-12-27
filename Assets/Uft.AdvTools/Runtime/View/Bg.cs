@@ -9,8 +9,6 @@ namespace Uft.AdvTools.View
 {
     public class Bg : MonoBehaviour
     {
-        static readonly Color TRANSPARENT = new(1, 1, 1, 0);
-
         // Parameters
 
         [SerializeField] protected OffsettableImage? _oiBg1;
@@ -24,31 +22,33 @@ namespace Uft.AdvTools.View
 
             var prevRootRt = this._oiBg2.RootRectTransform;
             var prevImg = this._oiBg2.Image;
-            this._oiBg1.Set(
+            this._oiBg1.Set<System.Object?>(
                 false,
+                null,
                 prevImg.sprite,
                 prevImg.rectTransform.pivot,
                 prevImg.rectTransform.localScale.x,
                 prevRootRt.anchoredPosition,
                 prevImg.rectTransform.anchoredPosition,
-                prevImg.color,
-                TRANSPARENT,
+                this._oiBg2.CanvasGroup.alpha,
+                0,
                 fadeTime_sec);
 
             var pivot = row?.Pivot ?? AnchorPreset.MiddleCenter;
             var scale = row?.Scale ?? 1f;
             var x = posX != null ? posX.Value : this._oiBg2.RootRectTransform.anchoredPosition.x;
             var y = posY != null ? posY.Value : this._oiBg2.RootRectTransform.anchoredPosition.y;
-            var toColor = row == null ? TRANSPARENT : Color.white;
-            this._oiBg2.Set(
+            var toAlpha = row == null ? 0 : 1;
+            this._oiBg2.Set<System.Object?>(
                 row?.Sprite != null,
+                null,
                 row?.Sprite,
                 pivot.GetPivot(),
                 scale,
                 new Vector2(x, y),
                 new Vector2(row?.OffsetX ?? 0, row?.OffsetY ?? 0),
-                TRANSPARENT,
-                toColor,
+                0,
+                toAlpha,
                 fadeTime_sec);
         }
 

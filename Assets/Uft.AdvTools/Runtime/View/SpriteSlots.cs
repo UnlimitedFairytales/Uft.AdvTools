@@ -13,8 +13,6 @@ namespace Uft.AdvTools.View
     {
         public const string NAME = "[" + nameof(SpriteSlots) + "]";
 
-        public static readonly Color TRANSPARENT = new(1, 1, 1, 0);
-
         // Parameters
 
         [SerializeField] protected OffsettableImage[]? _oiSpriteList;
@@ -39,6 +37,7 @@ namespace Uft.AdvTools.View
         public void SetSprite(TextureRow row, int i, float? posX, float? posY, float fadeTime_sec)
         {
             if (this._oiSpriteList == null) throw new InvalidOperationException($"{nameof(this._oiSpriteList)} is required.");
+            if ((uint)i >= (uint)this._oiSpriteList.Length) throw new ArgumentOutOfRangeException(nameof(i));
 
             var sprite = row.Sprite;
             var prevIndex = this.GetOnSpriteIndex(sprite);
@@ -51,7 +50,7 @@ namespace Uft.AdvTools.View
                 oi.RootRectTransform.DOComplete();
                 prevOi.RootRectTransform.DOComplete();
                 oi.RootRectTransform.anchoredPosition = prevOi.RootRectTransform.anchoredPosition;
-                prevOi.Off(TRANSPARENT, 0);
+                prevOi.Off(0);
             }
             else
             {
@@ -62,16 +61,17 @@ namespace Uft.AdvTools.View
             var scale = row.Scale;
             var x = posX != null ? posX.Value : oi.RootRectTransform.anchoredPosition.x;
             var y = posY != null ? posY.Value : oi.RootRectTransform.anchoredPosition.y;
-            var fromColor = isAlreadyDisplayed ? Color.white : TRANSPARENT;
-            oi.Set(
+            var fromAlpha = isAlreadyDisplayed ? 1 : 0;
+            oi.Set<System.Object?>(
                 true,
+                null,
                 sprite,
                 pivot.GetPivot(),
                 scale,
                 new Vector2(x, y),
                 new Vector2(row.OffsetX, row.OffsetY),
-                fromColor,
-                Color.white,
+                fromAlpha,
+                1.0f,
                 isAlreadyDisplayed ? 0 : fadeTime_sec);
         }
 
@@ -82,7 +82,7 @@ namespace Uft.AdvTools.View
             var i = this.GetOnSpriteIndex(sprite);
             if (0 <= i)
             {
-                this._oiSpriteList[i].Off(TRANSPARENT, fadeTime_sec);
+                this._oiSpriteList[i].Off(fadeTime_sec);
                 return;
             }
             DevLog.LogWarning($"{NAME} sprite is not found : sprite.name={sprite.name}");
