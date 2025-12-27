@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6558409697021344022}
   - component: {fileID: 6965397430699057202}
   - component: {fileID: 8594658222249080984}
+  - component: {fileID: 4116990607740187351}
   m_Layer: 0
   m_Name: SpriteManager
   m_TagString: Untagged
@@ -66,17 +67,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteSlots: {fileID: 8594658222249080984}
-  _characterViewList:
-  - {fileID: 2474584106764642460}
-  - {fileID: 331777414738085673}
-  - {fileID: 5337511169276970129}
-  - {fileID: 777327050093306060}
-  - {fileID: 7972166672879593142}
-  - {fileID: 6019137638109494033}
-  - {fileID: 3112121603757687164}
-  - {fileID: 7367612339235258144}
-  _controlsCharacterGrayout: 1
-  _grayoutColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  _characterSlots: {fileID: 4116990607740187351}
 --- !u!114 &8594658222249080984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,6 +89,29 @@ MonoBehaviour:
   - {fileID: 2279447798779878428}
   - {fileID: 8477700741030842064}
   - {fileID: 2946447834012639161}
+--- !u!114 &4116990607740187351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3450594469728950978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a8c2d94b6cb4e149b7a9cdbb3b7a162, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterViewList:
+  - {fileID: 2474584106764642460}
+  - {fileID: 331777414738085673}
+  - {fileID: 5337511169276970129}
+  - {fileID: 777327050093306060}
+  - {fileID: 7972166672879593142}
+  - {fileID: 6019137638109494033}
+  - {fileID: 3112121603757687164}
+  - {fileID: 7367612339235258144}
+  _controlsCharacterGrayout: 1
+  _grayoutColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!1001 &186281963133148702
 PrefabInstance:
   m_ObjectHideFlags: 0
