@@ -1,5 +1,6 @@
 #nullable enable
 
+using System;
 using Uft.AdvTools.Entities;
 using Uft.AdvTools.View;
 using Uft.UnityUtils;
@@ -27,7 +28,7 @@ namespace Uft.AdvTools
 
         protected bool IsAnyCharacterDisplayed()
         {
-            if (this._characterViewList == null) return false;
+            if (this._characterViewList == null) throw new InvalidOperationException($"{nameof(this._characterViewList)} is required.");
 
             var list = this._characterViewList;
             for (int i = 0; i < list.Length; i++)
@@ -39,7 +40,7 @@ namespace Uft.AdvTools
 
         protected int GetCharacterViewIndex(Character character)
         {
-            if (this._characterViewList == null) return -1;
+            if (this._characterViewList == null) throw new InvalidOperationException($"{nameof(this._characterViewList)} is required.");
 
             var list = this._characterViewList;
             for (int i = 0; i < list.Length; i++)
@@ -54,7 +55,7 @@ namespace Uft.AdvTools
 
         public void SetCharacter(Character character, Sprite? sprite, GameObject? instantiated, int index, float offsetX, float offsetY, AnchorPreset pivot, float scale, float fadeTime_sec)
         {
-            if (this._characterViewList == null) return;
+            if (this._characterViewList == null) throw new InvalidOperationException($"{nameof(this._characterViewList)} is required.");
 
             var list = this._characterViewList;
             var i = this.GetCharacterViewIndex(character);
@@ -67,7 +68,7 @@ namespace Uft.AdvTools
 
         public void SetCharacterOff(Character character, float fadeTime_sec)
         {
-            if (this._characterViewList == null) return;
+            if (this._characterViewList == null) throw new InvalidOperationException($"{nameof(this._characterViewList)} is required.");
 
             var list = this._characterViewList;
             var i = this.GetCharacterViewIndex(character);
@@ -85,7 +86,7 @@ namespace Uft.AdvTools
 
         public CharacterView? GetCharacterView(Character character)
         {
-            if (this._characterViewList == null) return null;
+            if (this._characterViewList == null) throw new InvalidOperationException($"{nameof(this._characterViewList)} is required.");
 
             var i = this.GetCharacterViewIndex(character);
             return 0 <= i ? this._characterViewList[i] : null;
@@ -98,8 +99,9 @@ namespace Uft.AdvTools
         /// </summary>
         public void ControlCharacterGrayout(Character currentCharacter, bool hasNameAndText)
         {
-            if (this._characterViewList == null) return;
-            if (!this.ControlsCharacterGrayout) return;
+            if (this._characterViewList == null) throw new InvalidOperationException($"{nameof(this._characterViewList)} is required.");
+
+            if (!this._controlsCharacterGrayout) return;
 
             var cView = this.GetCharacterView(currentCharacter);
             if (cView != null)

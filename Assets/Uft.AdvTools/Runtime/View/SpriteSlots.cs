@@ -23,7 +23,7 @@ namespace Uft.AdvTools.View
 
         public int GetOnSpriteIndex(Sprite sprite)
         {
-            if (this._oiSpriteList == null) return -1;
+            if (this._oiSpriteList == null) throw new InvalidOperationException($"{nameof(this._oiSpriteList)} is required.");
 
             for (int i = 0; i < this._oiSpriteList.Length; i++)
             {
@@ -90,7 +90,7 @@ namespace Uft.AdvTools.View
 
         public OffsettableImage? GetSpriteOi(Sprite sprite)
         {
-            if (this._oiSpriteList == null) return null;
+            if (this._oiSpriteList == null) throw new InvalidOperationException($"{nameof(this._oiSpriteList)} is required.");
 
             var i = this.GetOnSpriteIndex(sprite);
             if (0 <= i) return this._oiSpriteList[i];
