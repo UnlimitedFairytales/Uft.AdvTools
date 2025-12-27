@@ -33,7 +33,7 @@ namespace Uft.AdvTools
             var list = this._characterViewList;
             for (int i = 0; i < list.Length; i++)
             {
-                if (list[i].IsDisplayed) return true;
+                if (list[i].IsOn) return true;
             }
             return false;
         }
@@ -61,9 +61,9 @@ namespace Uft.AdvTools
             var i = this.GetCharacterViewIndex(character);
             if (0 <= i)
             {
-                list[i].SetCharacterOff(0);
+                list[i].Off(0);
             }
-            list[index].SetCharacter(0 <= i, character, sprite, instantiated, new Vector2(offsetX, offsetY), pivot, scale, fadeTime_sec);
+            list[index].Set(0 <= i, character, sprite, instantiated, new Vector2(offsetX, offsetY), pivot, scale, fadeTime_sec);
         }
 
         public void SetCharacterOff(Character character, float fadeTime_sec)
@@ -74,7 +74,7 @@ namespace Uft.AdvTools
             var i = this.GetCharacterViewIndex(character);
             if (0 <= i)
             {
-                list[i].SetCharacterOff(fadeTime_sec);
+                list[i].Off(fadeTime_sec);
                 if (!this.IsAnyCharacterDisplayed())
                 {
                     this._lastSpeaker = null;
@@ -113,7 +113,7 @@ namespace Uft.AdvTools
                 var list = this._characterViewList;
                 for (int i = 0; i < list.Length; i++)
                 {
-                    if (list[i].IsDisplayed && list[i].Character != currentCharacter)
+                    if (list[i].IsOn && list[i].Character != currentCharacter)
                     {
                         list[i].ToSub(this._grayoutColor);
                     }

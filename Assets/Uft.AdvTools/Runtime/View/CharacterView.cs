@@ -14,20 +14,20 @@ namespace Uft.AdvTools.View
     public class CharacterView : MonoBehaviour
     {
         [SerializeField] protected CanvasGroup? _canvasGroup;
-        [SerializeField] protected Image? _img;
+        [SerializeField] protected Image? _image;
 
         public GameObject? Instantiated { get; protected set; }
         public SpriteRenderer[]? SpriteRenderers { get; protected set; }
 
         /// <summary>この値がある値が、現在の最新の表示箇所</summary>
         public Character? Character { get; protected set; }
-        public bool IsDisplayed => this.Character != null;
-        public Image? Image => this._img!;
+        public bool IsOn => this.Character != null;
+        public Image? Image => this._image!;
 
         /// <summary>spriteとinstantiatedはどちらしか渡せない</summary>
-        public void SetCharacter(bool isAlreadyDisplayed, Character character, Sprite? sprite, GameObject? instantiated, Vector2 toPos, AnchorPreset pivot, float scale, float fadeTime_sec)
+        public void Set(bool isAlreadyDisplayed, Character character, Sprite? sprite, GameObject? instantiated, Vector2 toPos, AnchorPreset pivot, float scale, float fadeTime_sec)
         {
-            var img = this._img; if (img == null) return;
+            var img = this._image; if (img == null) return;
             var cg = this._canvasGroup; if (cg == null) return;
             if (sprite != null && instantiated != null) throw new ArgumentException($"[{nameof(SpriteRenderer)}] You can only give {nameof(sprite)} or {nameof(instantiated)}");
 
@@ -99,9 +99,9 @@ namespace Uft.AdvTools.View
             }
         }
 
-        public void SetCharacterOff(float fadeTime_sec)
+        public void Off(float fadeTime_sec)
         {
-            var img = this._img; if (img == null) return;
+            var img = this._image; if (img == null) return;
             var cg = this._canvasGroup; if (cg == null) return;
 
             this.Character = null;
@@ -118,7 +118,7 @@ namespace Uft.AdvTools.View
 
         public void ToMain()
         {
-            var img = this._img; if (img == null) return;
+            var img = this._image; if (img == null) return;
 
             img.DOColor(Color.white, 0.2f);
             if (this.SpriteRenderers != null)
@@ -132,7 +132,7 @@ namespace Uft.AdvTools.View
 
         public void ToSub(Color grayoutColor)
         {
-            var img = this._img; if (img == null) return;
+            var img = this._image; if (img == null) return;
 
             img.DOColor(grayoutColor, 0.2f);
             if (this.SpriteRenderers != null)

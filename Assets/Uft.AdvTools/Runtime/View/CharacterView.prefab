@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 7438004501830052657}
-  _img: {fileID: 8916101386322159261}
+  _image: {fileID: 8916101386322159261}
 --- !u!1 &6066533183918055395
 GameObject:
   m_ObjectHideFlags: 0
