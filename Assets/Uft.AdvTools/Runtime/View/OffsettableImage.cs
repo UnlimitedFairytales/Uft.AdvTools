@@ -28,7 +28,8 @@ namespace Uft.AdvTools.View
 
         // Methods
 
-        public virtual void Set<T>(bool isOn, T keyObject, Sprite? sprite, Vector2 pivot, float scale, Vector2 position, Vector2 offset, float fromAlpha, float toAlpha, float fadeTime_sec)
+        public virtual void Set<T>(bool isOn, T? keyObject, Sprite? sprite, Vector2 pivot, float scale, Vector2 position, Vector2 offset, float fromAlpha, float toAlpha, float fadeTime_sec)
+            where T : class
         {
             if (this._canvasGroup == null) throw new InvalidOperationException($"{nameof(this._canvasGroup)} is required.");
             if (this._image == null) throw new InvalidOperationException($"{nameof(this._image)} is required.");

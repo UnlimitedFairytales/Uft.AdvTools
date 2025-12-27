@@ -22,9 +22,9 @@ namespace Uft.AdvTools.View
 
             var prevRootRt = this._oiBg2.RootRectTransform;
             var prevImg = this._oiBg2.Image;
-            this._oiBg1.Set<System.Object?>(
+            this._oiBg1.Set(
                 false,
-                null,
+                (object?)null,
                 prevImg.sprite,
                 prevImg.rectTransform.pivot,
                 prevImg.rectTransform.localScale.x,
@@ -39,9 +39,9 @@ namespace Uft.AdvTools.View
             var x = posX != null ? posX.Value : this._oiBg2.RootRectTransform.anchoredPosition.x;
             var y = posY != null ? posY.Value : this._oiBg2.RootRectTransform.anchoredPosition.y;
             var toAlpha = row == null ? 0 : 1;
-            this._oiBg2.Set<System.Object?>(
+            this._oiBg2.Set(
                 row?.Sprite != null,
-                null,
+                (object?)null,
                 row?.Sprite,
                 pivot.GetPivot(),
                 scale,

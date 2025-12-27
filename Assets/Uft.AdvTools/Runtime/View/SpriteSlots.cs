@@ -62,9 +62,9 @@ namespace Uft.AdvTools.View
             var x = posX != null ? posX.Value : oi.RootRectTransform.anchoredPosition.x;
             var y = posY != null ? posY.Value : oi.RootRectTransform.anchoredPosition.y;
             var fromAlpha = isAlreadyDisplayed ? 1 : 0;
-            oi.Set<System.Object?>(
+            oi.Set(
                 true,
-                null,
+                (object?)null,
                 sprite,
                 pivot.GetPivot(),
                 scale,
