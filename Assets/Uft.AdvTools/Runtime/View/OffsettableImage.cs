@@ -1,5 +1,7 @@
-// #nullable enable
+#nullable enable
 
+using DG.Tweening;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +12,7 @@ namespace Uft.AdvTools.View
     {
         // Parameters
 
-        [SerializeField] protected Image _image; public Image Image => this._image;
+        [SerializeField] protected Image? _image; public Image Image => this._image!; // NOTE: null-forgiving（警告抑制のみ）。他のメンバで必須チェック済み。
 
         public RectTransform RootRectTransform => (RectTransform)this.transform;
         public bool IsOn { get; set; } = false;
@@ -19,7 +21,54 @@ namespace Uft.AdvTools.View
 
         void Reset()
         {
-            this._image = this.GetComponentInChildren<Image>();
+            this._image = this.GetComponentInChildren<Image>(true);
+        }
+
+        // Methods
+
+        public void Set(bool isOn, Sprite? sprite, Vector2 pivot, float scale, Vector2 position, Vector2 offset, Color fromColor, Color toColor, float fadeTime_sec)
+        {
+            if (this._image == null) throw new InvalidOperationException($"{nameof(this._image)} is required.");
+
+            this.IsOn = isOn;
+            var img = this._image;
+
+            img.DOComplete();
+
+            img.sprite = sprite;
+            img.rectTransform.pivot = pivot;
+            if (sprite != null) img.SetNativeSize();
+            img.rectTransform.localScale = new Vector3(scale, scale, scale);
+            this.RootRectTransform.anchoredPosition = position;
+            img.rectTransform.anchoredPosition = offset;
+
+            img.color = fromColor;
+            img.DOColor(toColor, fadeTime_sec);
+        }
+
+        public void Off(Color toColor, float fadeTime_sec)
+        {
+            if (this._image == null) throw new InvalidOperationException($"{nameof(this._image)} is required.");
+
+            this.IsOn = false;
+            var img = this._image;
+            var sprite = img.sprite;
+            img.DOComplete();
+            if (0 < fadeTime_sec)
+            {
+                img.DOColor(toColor, fadeTime_sec).OnComplete(() =>
+                {
+                    if (img.sprite == sprite)
+                    {
+                        img.sprite = null;
+                    }
+                });
+            }
+            else
+            {
+                img.color = toColor;
+                img.sprite = null;
+            }
         }
     }
 }

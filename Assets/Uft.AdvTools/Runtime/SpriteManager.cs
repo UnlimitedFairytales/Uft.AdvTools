@@ -1,6 +1,7 @@
 #nullable enable
 
 using DG.Tweening;
+using System;
 using Uft.AdvTools.Entities;
 using Uft.AdvTools.View;
 using Uft.UnityUtils;
@@ -56,14 +57,14 @@ namespace Uft.AdvTools
             return -1;
         }
 
-        public int GetSpriteIndex(Sprite sprite)
+        public int GetOnSpriteIndex(Sprite sprite)
         {
             if (this._oiSpriteList == null) return -1;
 
             for (int i = 0; i < this._oiSpriteList.Length; i++)
             {
                 var oi = this._oiSpriteList[i];
-                if (oi.Image.sprite == sprite && oi.IsOn)
+                if (oi.IsOn && oi.Image.sprite == sprite)
                 {
                     return i;
                 }
@@ -104,72 +105,51 @@ namespace Uft.AdvTools
 
         public void SetSprite(TextureRow row, int i, float? posX, float? posY, float fadeTime_sec)
         {
-            if (this._oiSpriteList == null) return;
+            if (this._oiSpriteList == null) throw new InvalidOperationException($"{nameof(this._oiSpriteList)} is required.");
 
             var sprite = row.Sprite;
-            var prevIndex = this.GetSpriteIndex(sprite);
+            var prevIndex = this.GetOnSpriteIndex(sprite);
+            var oi = this._oiSpriteList[i];
             var isAlreadyDisplayed = 0 <= prevIndex;
+            // NOTE: prevIndex == i の場合もDOCompleteしてOff。問題が出るようなら後で再調整
             if (isAlreadyDisplayed)
             {
-                this.SetSpriteOff(sprite, 0);
-                this._oiSpriteList[i].RootRectTransform.anchoredPosition = this._oiSpriteList[prevIndex].RootRectTransform.anchoredPosition;
+                var prevOi = this._oiSpriteList[prevIndex];
+                oi.RootRectTransform.DOComplete();
+                prevOi.RootRectTransform.DOComplete();
+                oi.RootRectTransform.anchoredPosition = prevOi.RootRectTransform.anchoredPosition;
+                prevOi.Off(TRANSPARENT, 0);
             }
             else
             {
-                this._oiSpriteList[i].RootRectTransform.anchoredPosition = Vector2.zero;
+                oi.RootRectTransform.anchoredPosition = Vector2.zero;
             }
 
             var pivot = row.Pivot;
             var scale = row.Scale;
-            var x = posX != null ? posX.Value : this._oiSpriteList[i].RootRectTransform.anchoredPosition.x;
-            var y = posY != null ? posY.Value : this._oiSpriteList[i].RootRectTransform.anchoredPosition.y;
-
-            this._oiSpriteList[i].IsOn = true;
-            var img2 = this._oiSpriteList[i].Image;
-            img2.DOComplete();
-
-            img2.sprite = sprite;
-            img2.rectTransform.pivot = pivot.GetPivot();
-            img2.rectTransform.localScale = new Vector3(scale, scale, scale);
-            this._oiSpriteList[i].RootRectTransform.anchoredPosition = new Vector2(x, y);
-            img2.rectTransform.anchoredPosition = new Vector2(row?.OffsetX ?? 0, row?.OffsetY ?? 0);
-            img2.SetNativeSize();
-            if (isAlreadyDisplayed)
-            {
-                img2.color = Color.white;
-            }
-            else
-            {
-                img2.color = TRANSPARENT;
-                img2.DOColor(Color.white, fadeTime_sec);
-            }
+            var x = posX != null ? posX.Value : oi.RootRectTransform.anchoredPosition.x;
+            var y = posY != null ? posY.Value : oi.RootRectTransform.anchoredPosition.y;
+            var fromColor = isAlreadyDisplayed ? Color.white : TRANSPARENT;
+            oi.Set(
+                true,
+                sprite,
+                pivot.GetPivot(),
+                scale,
+                new Vector2(x, y),
+                new Vector2(row.OffsetX, row.OffsetY),
+                fromColor,
+                Color.white,
+                isAlreadyDisplayed ? 0 : fadeTime_sec);
         }
 
         public void SetSpriteOff(Sprite sprite, float fadeTime_sec)
         {
-            if (this._oiSpriteList == null) return;
+            if (this._oiSpriteList == null) throw new InvalidOperationException($"{nameof(this._oiSpriteList)} is required.");
 
-            var i = this.GetSpriteIndex(sprite);
+            var i = this.GetOnSpriteIndex(sprite);
             if (0 <= i)
             {
-                this._oiSpriteList[i].IsOn = false;
-                var prevImg = this._oiSpriteList[i].Image;
-                prevImg.DOComplete();
-                if (0 < fadeTime_sec)
-                {
-                    prevImg.DOColor(TRANSPARENT, fadeTime_sec).OnComplete(() =>
-                    {
-                        if (prevImg.sprite == sprite)
-                        {
-                            prevImg.sprite = null;
-                        }
-                    });
-                }
-                else
-                {
-                    prevImg.color = TRANSPARENT;
-                    prevImg.sprite = null;
-                }
+                this._oiSpriteList[i].Off(TRANSPARENT, fadeTime_sec);
                 return;
             }
             DevLog.LogWarning($"[{nameof(SpriteManager)}] sprite is not found : sprite.name={sprite.name}");
@@ -179,7 +159,7 @@ namespace Uft.AdvTools
         {
             if (this._oiSpriteList == null) return null;
 
-            var i = this.GetSpriteIndex(sprite);
+            var i = this.GetOnSpriteIndex(sprite);
             if (0 <= i) return this._oiSpriteList[i];
             return null;
         }
