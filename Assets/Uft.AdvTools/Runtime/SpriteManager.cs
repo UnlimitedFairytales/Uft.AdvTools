@@ -1,7 +1,5 @@
 #nullable enable
 
-using DG.Tweening;
-using System;
 using Uft.AdvTools.Entities;
 using Uft.AdvTools.View;
 using Uft.UnityUtils;
@@ -18,7 +16,7 @@ namespace Uft.AdvTools
 
         // Parameters
 
-        [SerializeField] protected OffsettableImage[]? _oiSpriteList;
+        [SerializeField] protected SpriteSlots? _spriteSlots;
         [SerializeField] protected CharacterView[]? _characterViewList;
         [SerializeField] protected bool _controlsCharacterGrayout = true; public bool ControlsCharacterGrayout => this._controlsCharacterGrayout;
         [SerializeField] protected Color _grayoutColor = Color.gray;
@@ -57,20 +55,7 @@ namespace Uft.AdvTools
             return -1;
         }
 
-        public int GetOnSpriteIndex(Sprite sprite)
-        {
-            if (this._oiSpriteList == null) return -1;
-
-            for (int i = 0; i < this._oiSpriteList.Length; i++)
-            {
-                var oi = this._oiSpriteList[i];
-                if (oi.IsOn && oi.Image.sprite == sprite)
-                {
-                    return i;
-                }
-            }
-            return -1;
-        }
+        public int GetOnSpriteIndex(Sprite sprite) => this._spriteSlots!.GetOnSpriteIndex(sprite);
 
         public void SetCharacter(Character character, Sprite? sprite, GameObject? instantiated, int index, float offsetX, float offsetY, AnchorPreset pivot, float scale, float fadeTime_sec)
         {
@@ -103,66 +88,11 @@ namespace Uft.AdvTools
             DevLog.LogWarning($"[{nameof(SpriteManager)}.{nameof(SetCharacterOff)}] Displayed character is not found : character.CharacterName={character.CharacterName}");
         }
 
-        public void SetSprite(TextureRow row, int i, float? posX, float? posY, float fadeTime_sec)
-        {
-            if (this._oiSpriteList == null) throw new InvalidOperationException($"{nameof(this._oiSpriteList)} is required.");
+        public void SetSprite(TextureRow row, int i, float? posX, float? posY, float fadeTime_sec) => this._spriteSlots!.SetSprite(row, i, posX, posY, fadeTime_sec);
 
-            var sprite = row.Sprite;
-            var prevIndex = this.GetOnSpriteIndex(sprite);
-            var oi = this._oiSpriteList[i];
-            var isAlreadyDisplayed = 0 <= prevIndex;
-            // NOTE: prevIndex == i の場合もDOCompleteしてOff。問題が出るようなら後で再調整
-            if (isAlreadyDisplayed)
-            {
-                var prevOi = this._oiSpriteList[prevIndex];
-                oi.RootRectTransform.DOComplete();
-                prevOi.RootRectTransform.DOComplete();
-                oi.RootRectTransform.anchoredPosition = prevOi.RootRectTransform.anchoredPosition;
-                prevOi.Off(TRANSPARENT, 0);
-            }
-            else
-            {
-                oi.RootRectTransform.anchoredPosition = Vector2.zero;
-            }
+        public void SetSpriteOff(Sprite sprite, float fadeTime_sec) => this._spriteSlots!.SetSpriteOff(sprite, fadeTime_sec);
 
-            var pivot = row.Pivot;
-            var scale = row.Scale;
-            var x = posX != null ? posX.Value : oi.RootRectTransform.anchoredPosition.x;
-            var y = posY != null ? posY.Value : oi.RootRectTransform.anchoredPosition.y;
-            var fromColor = isAlreadyDisplayed ? Color.white : TRANSPARENT;
-            oi.Set(
-                true,
-                sprite,
-                pivot.GetPivot(),
-                scale,
-                new Vector2(x, y),
-                new Vector2(row.OffsetX, row.OffsetY),
-                fromColor,
-                Color.white,
-                isAlreadyDisplayed ? 0 : fadeTime_sec);
-        }
-
-        public void SetSpriteOff(Sprite sprite, float fadeTime_sec)
-        {
-            if (this._oiSpriteList == null) throw new InvalidOperationException($"{nameof(this._oiSpriteList)} is required.");
-
-            var i = this.GetOnSpriteIndex(sprite);
-            if (0 <= i)
-            {
-                this._oiSpriteList[i].Off(TRANSPARENT, fadeTime_sec);
-                return;
-            }
-            DevLog.LogWarning($"[{nameof(SpriteManager)}] sprite is not found : sprite.name={sprite.name}");
-        }
-
-        public OffsettableImage? GetSpriteOi(Sprite sprite)
-        {
-            if (this._oiSpriteList == null) return null;
-
-            var i = this.GetOnSpriteIndex(sprite);
-            if (0 <= i) return this._oiSpriteList[i];
-            return null;
-        }
+        public OffsettableImage? GetSpriteOi(Sprite sprite) => this._spriteSlots!.GetSpriteOi(sprite);
 
         public CharacterView? GetCharacterView(Character character)
         {
