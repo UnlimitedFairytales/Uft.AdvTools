@@ -25,6 +25,7 @@ namespace Uft.AdvTools.View
 
         public bool IsOn { get; set; } = false;
         public object? KeyObject { get; protected set; }
+        public T? CastedKey<T>() where T : class => this.KeyObject as T;
         public GameObject? Instantiated { get; protected set; }
         public SpriteRenderer[]? SpriteRenderers { get; protected set; }
 
@@ -71,7 +72,7 @@ namespace Uft.AdvTools.View
 
             cg.DOComplete();
 
-            if (!ReferenceEquals(this.KeyObject, keyObject))
+            if (!Equals(keyObject, this.KeyObject))
             {
                 cg.alpha = 0;
                 if (this.Instantiated != null && this.Instantiated.transform.IsChildOf(cg.transform))
@@ -116,12 +117,12 @@ namespace Uft.AdvTools.View
 
             cg.DOComplete();
 
-            if (ReferenceEquals(this.KeyObject, keyObject) && this.Instantiated != instantiated)
+            if (Equals(keyObject, this.KeyObject) && this.Instantiated != instantiated)
             {
                 DevLog.LogWarning($"{NAME} It's the same {nameof(keyObject)}, but a different {nameof(instantiated)}.");
             }
 
-            if (!ReferenceEquals(this.KeyObject, keyObject))
+            if (!Equals(keyObject, this.KeyObject))
             {
                 cg.alpha = 0;
                 if (this.Instantiated != null && this.Instantiated.transform.IsChildOf(cg.transform))
