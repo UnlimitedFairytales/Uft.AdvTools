@@ -94,7 +94,12 @@ namespace Uft.AdvTools.Commands
                     advRoot.SpriteManager.SetCharacter(character, detail, imageIndex, this.PosX, this.PosY, this.FadeSeconds);
                     if (character.Animator != null && !string.IsNullOrWhiteSpace(detail.AnimatorState))
                     {
-                        character.Animator.Play(detail.AnimatorState);
+                        var info = character.Animator.GetCurrentAnimatorStateInfo(0);
+                        // NOTE: ループアニメーションかつ同一パターンの場合、再プレイはしない
+                        if (!info.loop || character.LastPattern != pattern)
+                        {
+                            character.Animator.Play(detail.AnimatorState);
+                        }
                     }
                 }
                 character.LastPattern = pattern;
