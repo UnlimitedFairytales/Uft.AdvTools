@@ -61,6 +61,13 @@ namespace Uft.AdvTools.View
                 oi.RootRectTransform.anchoredPosition = Vector2.zero;
             }
 
+            // NOTE: 上書き対象の確認とReset処理
+            var destLayerPrevKey = oi.CastedKey<TextureRow>();
+            if (!Equals(row, destLayerPrevKey) && destLayerPrevKey != null)
+            {
+                destLayerPrevKey.ResetLastStatus();
+            }
+
             var pivot = row.Pivot;
             var scale = row.Scale;
             var x = posX != null ? posX.Value : oi.RootRectTransform.anchoredPosition.x;
