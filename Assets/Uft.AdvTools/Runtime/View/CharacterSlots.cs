@@ -65,14 +65,16 @@ namespace Uft.AdvTools
             var prevIndex = this.GetOnCharacterViewIndex(character);
             var oi = this._characterViewList[i];
             var isAlreadyDisplayed = 0 <= prevIndex;
-            // NOTE: prevIndex == i の場合もDOCompleteしてOff。問題が出るようなら後で再調整
             if (isAlreadyDisplayed)
             {
-                var prevOi = this._characterViewList[prevIndex];
-                oi.RootRectTransform.DOComplete();
-                prevOi.RootRectTransform.DOComplete();
-                oi.RootRectTransform.anchoredPosition = prevOi.RootRectTransform.anchoredPosition;
-                prevOi.Off(0);
+                if (i != prevIndex)
+                {
+                    var prevOi = this._characterViewList[prevIndex];
+                    oi.RootRectTransform.DOComplete();
+                    prevOi.RootRectTransform.DOComplete();
+                    oi.RootRectTransform.anchoredPosition = prevOi.RootRectTransform.anchoredPosition;
+                    prevOi.Off(0);
+                }
             }
             else
             {

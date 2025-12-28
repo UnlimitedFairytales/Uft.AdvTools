@@ -44,14 +44,16 @@ namespace Uft.AdvTools.View
             var prevIndex = this.GetOnSpriteIndex(sprite);
             var oi = this._oiSpriteList[i];
             var isAlreadyDisplayed = 0 <= prevIndex;
-            // NOTE: prevIndex == i の場合もDOCompleteしてOff。問題が出るようなら後で再調整
             if (isAlreadyDisplayed)
             {
-                var prevOi = this._oiSpriteList[prevIndex];
-                oi.RootRectTransform.DOComplete();
-                prevOi.RootRectTransform.DOComplete();
-                oi.RootRectTransform.anchoredPosition = prevOi.RootRectTransform.anchoredPosition;
-                prevOi.Off(0);
+                if (i != prevIndex)
+                {
+                    var prevOi = this._oiSpriteList[prevIndex];
+                    oi.RootRectTransform.DOComplete();
+                    prevOi.RootRectTransform.DOComplete();
+                    oi.RootRectTransform.anchoredPosition = prevOi.RootRectTransform.anchoredPosition;
+                    prevOi.Off(0);
+                }
             }
             else
             {
