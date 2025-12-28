@@ -23,9 +23,10 @@ namespace Uft.AdvTools.View
         {
             if (this._oiSpriteList == null) throw new InvalidOperationException($"{nameof(this._oiSpriteList)} is required.");
 
-            for (int i = 0; i < this._oiSpriteList.Length; i++)
+            var list = this._oiSpriteList;
+            for (int i = 0; i < list.Length; i++)
             {
-                var oi = this._oiSpriteList[i];
+                var oi = list[i];
                 if (oi.IsOn && oi.Image.sprite == sprite)
                 {
                     return i;

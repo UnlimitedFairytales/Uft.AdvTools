@@ -33,6 +33,13 @@ namespace Uft.AdvTools.Entities
             this.Pivot = pivot ?? AnchorPreset.MiddleCenter;
             this.Scale = scale ?? 1.0f;
             this.Sprite = sprite;
+
+            this.ResetLastStatus();
+        }
+
+        public void ResetLastStatus()
+        {
+            this.LastImageIndex = 0;
         }
 
         public override string ToString() => $"{this.Label},{this.Type},{this.OffsetX},{this.OffsetY},{this.Pivot},{this.Scale},{this.Sprite}";
