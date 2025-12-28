@@ -5,6 +5,6 @@ CharacterName,NameText,Pattern,X,Y,Z,Pivot,Scale,Conditional,FileName,SubFileNam
 女子学生,学生花子,通常,,-420,,Bottom,0.8,,schoolgirl/smartphone_schoolgirl_stand.png,,,,,,,,,,,,
 ,,笑い,,-120,,Center,0.8,,schoolgirl/smartphone_schoolgirl_stand_smile.png,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,
-Prefab猫01,茶猫,通常,,,,,,,prefabcat01/Cat01.prefab,,2DPrefab,Normal,,,,,,,,,
+Prefab猫01,茶猫,通常,100,-100,,,,,prefabcat01/Cat01.prefab,,2DPrefab,Normal,,,,,,,,,
 ,,早い,,,,,,,,,,Fast,,,,,,,,,
 Prefab猫02,灰猫,通常,,,,,,,prefabcat02/Cat02.prefab,,2DPrefab,Normal,,,,,,,,,

@@ -141,8 +141,9 @@ namespace Uft.AdvTools.View
             instantiated.transform.SetParent(cg.transform, false);
             instantiated.SetActive(true);
             this.SpriteRenderers = instantiated.GetComponentsInChildren<SpriteRenderer>(true);
+            this.RootRectTransform.anchoredPosition = position; // NOTE: 普通に子Transformへ相対座標が効いてくれるので設定
             var t = instantiated.transform;
-            t.localPosition = (Vector3)position;
+            t.localPosition = (Vector3)offset;
             if (this.SpriteRenderers != null && 0 < this.SpriteRenderers.Length)
             {
                 var ppu = this.SpriteRenderers[0].sprite.pixelsPerUnit;
