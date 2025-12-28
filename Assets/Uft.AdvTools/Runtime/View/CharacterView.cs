@@ -8,10 +8,6 @@ namespace Uft.AdvTools.View
 {
     public class CharacterView : OffsettableImage
     {
-        // Status
-
-        public Character? CastedKeyObject => this.KeyObject as Character;
-
         // Methods
 
         public override void Set<T>(bool isOn, T? keyObject, Sprite? sprite,

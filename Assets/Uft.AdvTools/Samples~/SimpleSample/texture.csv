@@ -4,3 +4,4 @@
 ,,,,,,,,,,,,,,,
 猫1,Sprite,,,,,,,cat_koubakozuwari_brown.png,,,,,,,
 猫2,Sprite,100,200,,,,,cat_koubakozuwari_gray.png,,,,,,,
+Prefab猫1Sprite,Sprite,200,-100,,,,,prefabcat01/Cat01Sprite.prefab,2DPrefab,,,,,,

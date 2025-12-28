@@ -38,6 +38,7 @@ namespace Uft.AdvTools.Loader
                 {
                     dto = csvDtoList[i];
                     if (dto.IsAllNullOrWhiteSpace()) continue;
+
                     var name = dto.CharacterName!;
                     if (!FileType.TryParse(dto.FileType, out FileType fileType)) throw new Exception($"{nameof(Character)} : FileType is unsupported value. : {dto.FileType}");
 

@@ -154,7 +154,7 @@ namespace Uft.AdvTools.Commands
                     var rt =
                         this.TargetName == CmdBg.SPRITE_NAME_BG ? advRoot.Bg.GetBgOi().RootRectTransform :
                         advRoot.CharacterDictionary.ContainsKey(this.TargetName) ? advRoot.SpriteManager.GetCharacterView(advRoot.CharacterDictionary[this.TargetName])!.RootRectTransform :
-                        advRoot.SpriteDictionary.ContainsKey(this.TargetName) ? advRoot.SpriteManager.GetSpriteOi(advRoot.SpriteDictionary[this.TargetName].Sprite)!.RootRectTransform :
+                        advRoot.SpriteDictionary.ContainsKey(this.TargetName) ? advRoot.SpriteManager.GetTextureRowOi(advRoot.SpriteDictionary[this.TargetName])!.RootRectTransform :
                         null;
                     if (rt != null)
                     {

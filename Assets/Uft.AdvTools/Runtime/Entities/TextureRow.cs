@@ -1,5 +1,6 @@
 #nullable enable
 
+using Uft.UnityUtils;
 using Uft.UnityUtils.UI;
 using UnityEngine;
 
@@ -15,7 +16,31 @@ namespace Uft.AdvTools.Entities
         public float OffsetY { get; protected set; }
         public AnchorPreset Pivot { get; protected set; }
         public float Scale { get; protected set; }
-        public Sprite Sprite { get; protected set; }
+        public Sprite? Sprite { get; protected set; }
+
+        public GameObject? Prefab { get; protected set; }
+        GameObject? _instantiated = null;
+        public GameObject? Instantiated
+        {
+            get
+            {
+                this._instantiated = CacheUtil.GetCreatedObject(this._instantiated, this.Prefab);
+                return this._instantiated;
+            }
+        }
+        bool _hasTriedToGetAnimator;
+        Animator? _animator = null;
+        public Animator? Animator
+        {
+            get
+            {
+                if (this.Instantiated == null) return null;
+                if (this._hasTriedToGetAnimator) return this._animator;
+                this._hasTriedToGetAnimator = true;
+                this._animator = CacheUtil.GetCachedChildComponent(this._animator, this.Instantiated.transform, true);
+                return this._animator;
+            }
+        }
 
         // Status
 
@@ -24,7 +49,7 @@ namespace Uft.AdvTools.Entities
 
         // Methods
 
-        public TextureRow(string label, string type, float? offsetX, float? offsetY, AnchorPreset? pivot, float? scale, Sprite sprite)
+        public TextureRow(string label, string type, float? offsetX, float? offsetY, AnchorPreset? pivot, float? scale, Sprite? sprite, GameObject? prefab)
         {
             this.Label = label;
             this.Type = type;
@@ -33,6 +58,7 @@ namespace Uft.AdvTools.Entities
             this.Pivot = pivot ?? AnchorPreset.MiddleCenter;
             this.Scale = scale ?? 1.0f;
             this.Sprite = sprite;
+            this.Prefab = prefab;
 
             this.ResetLastStatus();
         }

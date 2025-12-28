@@ -17,8 +17,8 @@ namespace Uft.AdvTools
 
         // Methods
 
-        public int GetOnSpriteIndex(Sprite sprite)
-            => this._spriteSlots!.GetOnSpriteIndex(sprite);
+        public int GetOnSpriteIndex(TextureRow row)
+            => this._spriteSlots!.GetOnTextureRowIndex(row);
 
         public void SetCharacter(Character character, CharacterDetail detail, int i, float? posX, float? posY, float fadeTime_sec)
             => this._characterSlots!.SetCharacter(character, detail, i, posX, posY, fadeTime_sec);
@@ -29,11 +29,11 @@ namespace Uft.AdvTools
         public void SetSprite(TextureRow row, int i, float? posX, float? posY, float fadeTime_sec)
             => this._spriteSlots!.SetSprite(row, i, posX, posY, fadeTime_sec);
 
-        public void SetSpriteOff(Sprite sprite, float fadeTime_sec)
-            => this._spriteSlots!.SetSpriteOff(sprite, fadeTime_sec);
+        public void SetSpriteOff(TextureRow row, float fadeTime_sec)
+            => this._spriteSlots!.SetSpriteOff(row, fadeTime_sec);
 
-        public OffsettableImage? GetSpriteOi(Sprite sprite)
-            => this._spriteSlots!.GetSpriteOi(sprite);
+        public OffsettableImage? GetTextureRowOi(TextureRow sprite)
+            => this._spriteSlots!.GetTextureRowOi(sprite);
 
         public CharacterView? GetCharacterView(Character character)
             => this._characterSlots!.GetCharacterView(character);

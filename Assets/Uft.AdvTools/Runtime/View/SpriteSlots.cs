@@ -19,7 +19,7 @@ namespace Uft.AdvTools.View
 
         // Methods
 
-        public int GetOnSpriteIndex(Sprite sprite)
+        public int GetOnTextureRowIndex(TextureRow textureRow)
         {
             if (this._oiSpriteList == null) throw new InvalidOperationException($"{nameof(this._oiSpriteList)} is required.");
 
@@ -27,7 +27,7 @@ namespace Uft.AdvTools.View
             for (int i = 0; i < list.Length; i++)
             {
                 var oi = list[i];
-                if (oi.IsOn && oi.Image.sprite == sprite)
+                if (oi.IsOn && Equals(textureRow, oi.KeyObject))
                 {
                     return i;
                 }
@@ -41,7 +41,8 @@ namespace Uft.AdvTools.View
             if ((uint)i >= (uint)this._oiSpriteList.Length) throw new ArgumentOutOfRangeException(nameof(i));
 
             var sprite = row.Sprite;
-            var prevIndex = this.GetOnSpriteIndex(sprite);
+            var instantiated = row.Instantiated;
+            var prevIndex = this.GetOnTextureRowIndex(row);
             var oi = this._oiSpriteList[i];
             var isAlreadyDisplayed = 0 <= prevIndex;
             if (isAlreadyDisplayed)
@@ -65,37 +66,54 @@ namespace Uft.AdvTools.View
             var x = posX != null ? posX.Value : oi.RootRectTransform.anchoredPosition.x;
             var y = posY != null ? posY.Value : oi.RootRectTransform.anchoredPosition.y;
             var fromAlpha = isAlreadyDisplayed ? 1 : 0;
-            oi.Set(
-                true,
-                (object?)null,
-                sprite,
-                pivot.GetPivot(),
-                scale,
-                new Vector2(x, y),
-                new Vector2(row.OffsetX, row.OffsetY),
-                fromAlpha,
-                1.0f,
-                isAlreadyDisplayed ? 0 : fadeTime_sec);
+            if (sprite != null)
+            {
+                oi.Set(
+                    true,
+                    row,
+                    sprite,
+                    pivot.GetPivot(),
+                    scale,
+                    new Vector2(x, y),
+                    new Vector2(row.OffsetX, row.OffsetY),
+                    fromAlpha,
+                    1.0f,
+                    isAlreadyDisplayed ? 0 : fadeTime_sec);
+            }
+            else if (instantiated != null)
+            {
+                oi.Set(
+                    true,
+                    row,
+                    instantiated,
+                    pivot.GetPivot(),
+                    scale,
+                    new Vector2(x, y),
+                    new Vector2(row.OffsetX, row.OffsetY),
+                    fromAlpha,
+                    1.0f,
+                    isAlreadyDisplayed ? 0 : fadeTime_sec);
+            }
         }
 
-        public void SetSpriteOff(Sprite sprite, float fadeTime_sec)
+        public void SetSpriteOff(TextureRow row, float fadeTime_sec)
         {
             if (this._oiSpriteList == null) throw new InvalidOperationException($"{nameof(this._oiSpriteList)} is required.");
 
-            var i = this.GetOnSpriteIndex(sprite);
+            var i = this.GetOnTextureRowIndex(row);
             if (0 <= i)
             {
                 this._oiSpriteList[i].Off(fadeTime_sec);
                 return;
             }
-            DevLog.LogWarning($"{NAME} sprite is not found : sprite.name={sprite.name}");
+            DevLog.LogWarning($"{NAME} TextureRow is not found : row.Label={row.Label}");
         }
 
-        public OffsettableImage? GetSpriteOi(Sprite sprite)
+        public OffsettableImage? GetTextureRowOi(TextureRow row)
         {
             if (this._oiSpriteList == null) throw new InvalidOperationException($"{nameof(this._oiSpriteList)} is required.");
 
-            var i = this.GetOnSpriteIndex(sprite);
+            var i = this.GetOnTextureRowIndex(row);
             if (0 <= i) return this._oiSpriteList[i];
             return null;
         }

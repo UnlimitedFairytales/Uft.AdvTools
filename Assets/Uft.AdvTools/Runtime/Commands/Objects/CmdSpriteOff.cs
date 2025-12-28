@@ -18,7 +18,7 @@ namespace Uft.AdvTools.Commands
         public virtual void Run(ScenarioExecutor scenarioExecutor, AdvRoot advRoot)
         {
             var textureRow = advRoot.SpriteDictionary[this.Label];
-            advRoot.SpriteManager.SetSpriteOff(textureRow.Sprite, this.FadeSeconds);
+            advRoot.SpriteManager.SetSpriteOff(textureRow, this.FadeSeconds);
 
             textureRow.ResetLastStatus();
         }

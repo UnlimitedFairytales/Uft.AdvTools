@@ -40,7 +40,6 @@ namespace Uft.AdvTools.Entities
             }
         }
 
-
         public CharacterDetail DefaultDetail { get; protected set; }
         public Dictionary<string, CharacterDetail> CharacterDetailDictionary { get; protected set; } = new Dictionary<string, CharacterDetail>();
 

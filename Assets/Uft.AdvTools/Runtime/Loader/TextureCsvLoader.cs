@@ -51,10 +51,22 @@ namespace Uft.AdvTools.Loader
                     if (string.IsNullOrWhiteSpace(dto.Label)) continue;
 
                     var type = dto.Type!.ToLower();
+                    if (!FileType.TryParse(dto.FileType, out FileType fileType)) throw new Exception($"{nameof(Character)} : FileType is unsupported value. : {dto.FileType}");
+
                     switch (type)
                     {
                         case Bg:
                             {
+                                Sprite? sprite = null;
+                                GameObject? prefab = null;
+                                if (fileType == FileType.None)
+                                {
+                                    sprite = Resources.Load<Sprite>(textureBgRoot + Path.ChangeExtension(dto.FileName, null));
+                                }
+                                else if (fileType == FileType.Prefab2D || fileType == FileType.Prefab3D)
+                                {
+                                    prefab = Resources.Load<GameObject>(textureBgRoot + Path.ChangeExtension(dto.FileName, null));
+                                }
                                 bgDict[dto.Label] = new TextureRow(
                                     dto.Label,
                                     dto.Type,
@@ -62,11 +74,22 @@ namespace Uft.AdvTools.Loader
                                     InvariantCultureUtil.FloatTryParse(dto.Y, out var y) ? y : null,
                                     AnchorPresetUtil.TryParseLooseAnchorPreset(dto.Pivot, out var pivot) ? pivot : null,
                                     InvariantCultureUtil.FloatTryParse(dto.Scale, out var scale) ? scale : null,
-                                    Resources.Load<Sprite>(textureBgRoot + Path.ChangeExtension(dto.FileName, null)));
+                                    sprite,
+                                    prefab);
                             }
                             break;
                         case Sprite:
                             {
+                                Sprite? sprite = null;
+                                GameObject? prefab = null;
+                                if (fileType == FileType.None)
+                                {
+                                    sprite = Resources.Load<Sprite>(textureSpriteRoot + Path.ChangeExtension(dto.FileName, null));
+                                }
+                                else if (fileType == FileType.Prefab2D || fileType == FileType.Prefab3D)
+                                {
+                                    prefab = Resources.Load<GameObject>(textureSpriteRoot + Path.ChangeExtension(dto.FileName, null));
+                                }
                                 spriteDict[dto.Label] = new TextureRow(
                                     dto.Label,
                                     dto.Type,
@@ -74,7 +97,8 @@ namespace Uft.AdvTools.Loader
                                     InvariantCultureUtil.FloatTryParse(dto.Y, out var y) ? y : null,
                                     AnchorPresetUtil.TryParseLooseAnchorPreset(dto.Pivot, out var pivot) ? pivot : null,
                                     InvariantCultureUtil.FloatTryParse(dto.Scale, out var scale) ? scale : null,
-                                    Resources.Load<Sprite>(textureSpriteRoot + Path.ChangeExtension(dto.FileName, null)));
+                                    sprite,
+                                    prefab);
                             }
                             break;
                         default:

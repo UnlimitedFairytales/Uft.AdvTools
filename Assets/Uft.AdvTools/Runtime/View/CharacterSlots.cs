@@ -83,8 +83,8 @@ namespace Uft.AdvTools
 
             var pivot = detail.Pivot;
             var scale = detail.Scale;
-            var x = posX != null ? posX.Value : oi.RootRectTransform.anchoredPosition.x; // TODO: 調整
-            var y = posY != null ? posY.Value : oi.RootRectTransform.anchoredPosition.y; // TODO: 調整
+            var x = posX != null ? posX.Value : oi.RootRectTransform.anchoredPosition.x;
+            var y = posY != null ? posY.Value : oi.RootRectTransform.anchoredPosition.y;
             var fromAlpha = isAlreadyDisplayed ? 1 : 0;
             if (sprite != null)
             {
