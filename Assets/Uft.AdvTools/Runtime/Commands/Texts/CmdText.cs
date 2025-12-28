@@ -87,6 +87,7 @@ namespace Uft.AdvTools.Commands
                     {
                         advRoot.SpriteManager.SetCharacterOff(character, this.FadeSeconds);
                     }
+                    character.ResetLastStatus();
                 }
                 else
                 {
@@ -101,9 +102,9 @@ namespace Uft.AdvTools.Commands
                             character.Animator.Play(detail.AnimatorState);
                         }
                     }
+                    character.LastPattern = pattern;
+                    character.LastImageIndex = imageIndex;
                 }
-                character.LastPattern = pattern;
-                character.LastImageIndex = imageIndex;
 
                 // 2. Text
                 advRoot.SetText(character, name, this.Text, pageCtrl, this.WindowType);
