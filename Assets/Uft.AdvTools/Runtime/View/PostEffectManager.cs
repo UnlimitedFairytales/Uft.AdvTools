@@ -6,7 +6,7 @@ using DG.Tweening.Core;
 using Uft.UnityUtils;
 using UnityEngine;
 
-namespace Uft.AdvTools
+namespace Uft.AdvTools.View
 {
     public class PostEffectManager : MonoBehaviour
     {

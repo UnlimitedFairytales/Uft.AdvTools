@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-namespace Uft.AdvTools
+namespace Uft.AdvTools.View
 {
     public class SoundManager : MonoBehaviour
     {

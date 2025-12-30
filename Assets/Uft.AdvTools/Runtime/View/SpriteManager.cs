@@ -1,10 +1,9 @@
 #nullable enable
 
 using Uft.AdvTools.Entities;
-using Uft.AdvTools.View;
 using UnityEngine;
 
-namespace Uft.AdvTools
+namespace Uft.AdvTools.View
 {
     public class SpriteManager : MonoBehaviour
     {
