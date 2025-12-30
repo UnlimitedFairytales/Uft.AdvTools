@@ -9,7 +9,7 @@ namespace Uft.AdvTools.Entities
 {
     public class Param
     {
-        // static
+        // Static members
 
         public static readonly Eval Eval = new();
 
@@ -57,7 +57,11 @@ namespace Uft.AdvTools.Entities
             return expression;
         }
 
-        // instance
+        // Instance members
+
+        // operator, Equals, GetHashCode, ToString
+
+        public override string ToString() => $"{this.Label}={this.Value}";
 
         // Parameters
 
@@ -74,7 +78,5 @@ namespace Uft.AdvTools.Entities
             this.Label = label;
             this.Value = value ?? 0;
         }
-
-        public override string ToString() => $"{this.Label}={this.Value}";
     }
 }

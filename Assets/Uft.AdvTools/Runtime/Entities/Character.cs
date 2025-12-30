@@ -9,6 +9,10 @@ namespace Uft.AdvTools.Entities
 {
     public class Character
     {
+        // operator, Equals, GetHashCode, ToString
+
+        public override string ToString() => $"{this.CharacterName}, Count={this.CharacterDetailDictionary.Count}";
+
         // Parameters
 
         public string CharacterName { get; protected set; } // key
@@ -70,12 +74,15 @@ namespace Uft.AdvTools.Entities
             this.LastPattern = this.DefaultDetail.Pattern;
             this.LastImageIndex = 0;
         }
-
-        public override string ToString() => $"{this.CharacterName}, Count={this.CharacterDetailDictionary.Count}";
     }
 
     public class CharacterDetail
     {
+        // operator, Equals, GetHashCode, ToString
+
+        public override string ToString() =>
+            $"{this.Pattern},{this.OffsetX},{this.OffsetY},{this.OffsetZ},{this.Pivot},{this.Scale},{this.Sprite},{this.AnimatorState}";
+
         // Parameters
 
         public string Pattern { get; protected set; } // key
@@ -87,7 +94,7 @@ namespace Uft.AdvTools.Entities
         public Sprite? Sprite { get; protected set; }
         public string? AnimatorState { get; protected set; }
 
-        // Status
+        // Methods
 
         public CharacterDetail(
             string pattern,
@@ -108,8 +115,5 @@ namespace Uft.AdvTools.Entities
             this.Sprite = sprite;
             this.AnimatorState = animatorState;
         }
-
-        public override string ToString() =>
-            $"{this.Pattern},{this.OffsetX},{this.OffsetY},{this.OffsetZ},{this.Pivot},{this.Scale},{this.Sprite},{this.AnimatorState}";
     }
 }

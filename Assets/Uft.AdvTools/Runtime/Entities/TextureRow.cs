@@ -8,6 +8,10 @@ namespace Uft.AdvTools.Entities
 {
     public class TextureRow
     {
+        // operator, Equals, GetHashCode, ToString
+
+        public override string ToString() => $"{this.Label},{this.Type},{this.OffsetX},{this.OffsetY},{this.Pivot},{this.Scale},{this.Sprite}";
+
         // Parameters
 
         public string Label { get; protected set; } // key
@@ -67,7 +71,5 @@ namespace Uft.AdvTools.Entities
         {
             this.LastImageIndex = 0;
         }
-
-        public override string ToString() => $"{this.Label},{this.Type},{this.OffsetX},{this.OffsetY},{this.Pivot},{this.Scale},{this.Sprite}";
     }
 }

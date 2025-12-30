@@ -7,16 +7,7 @@ namespace Uft.AdvTools.Entities
 {
     public readonly struct FileType : IEquatable<FileType>
     {
-        // operator, Equals, GetHashCode, ToString
-
-        public static bool operator ==(FileType a, FileType b) => a.value == b.value;
-        public static bool operator !=(FileType a, FileType b) => a.value != b.value;
-        public override bool Equals(object? obj) => obj is FileType other && this.Equals(other);
-        public readonly bool Equals(FileType other) => this.value == other.value;
-        public override int GetHashCode() => this.value?.GetHashCode() ?? 0;
-        public override string ToString() => this.value ?? "";
-
-        // static
+        // Static members
 
         const string NONE = "";
         const string _2D_PREFAB = "2DPrefab";
@@ -45,9 +36,22 @@ namespace Uft.AdvTools.Entities
             return fileType != default;
         }
 
-        // instance
+        // Instance members
+
+        // operator, Equals, GetHashCode, ToString
+
+        public static bool operator ==(FileType a, FileType b) => a.value == b.value;
+        public static bool operator !=(FileType a, FileType b) => a.value != b.value;
+        public override bool Equals(object? obj) => obj is FileType other && this.Equals(other);
+        public readonly bool Equals(FileType other) => this.value == other.value;
+        public override int GetHashCode() => this.value?.GetHashCode() ?? 0;
+        public override string ToString() => this.value ?? "";
+
+        // Parameters
 
         public readonly string value;
+
+        // Methods
 
         private FileType(string value) => this.value = value;
     }
