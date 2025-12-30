@@ -2,6 +2,7 @@
 
 using System;
 using System.IO;
+using Uft.AdvTools.Entities;
 using UnityEngine;
 
 namespace Uft.AdvTools.Commands
@@ -68,74 +69,70 @@ namespace Uft.AdvTools.Commands
         {
             scenarioExecutor.IsWaitingForInput = true;
 
-            // NOTE: 本文がEmptyの場合、キャラクター名も表示せず、Next扱いにする
-            var character = advRoot.CharacterDictionary.ContainsKey(this.Name) ? advRoot.CharacterDictionary[this.Name] : null;
-            var name = "";
-            var pageCtrl = PageCtrlType.Next;
-            if (!string.IsNullOrEmpty(this.Text))
+            var characterOrNull = advRoot.CharacterDictionary.ContainsKey(this.Name) ? advRoot.CharacterDictionary[this.Name] : null;
+            if (characterOrNull != null)
             {
-                name = character?.NameText ?? this.Name;
-                pageCtrl = this.PageCtrl;
+                this.SetCharacter(advRoot, characterOrNull);
+                this.PlayVoice(advRoot);
             }
+
+            // NOTE: 本文がEmptyの場合、キャラクター名も表示せず、Next扱いにする
+            var name
+                = !string.IsNullOrEmpty(this.Text) ? (characterOrNull?.NameText ?? this.Name) : "";
+            var pageCtrl
+                = !string.IsNullOrEmpty(this.Text) ? this.PageCtrl : PageCtrlType.Next;
             if (pageCtrl == PageCtrlType.Next)
             {
                 advRoot.IsAutoInputOnce = true;
             }
+            advRoot.SetText(characterOrNull, name, this.Text, pageCtrl, this.WindowType);
+            advRoot.AutoNext.ClearCounter();
+            advRoot.AutoNext.SetIsAutoNextReadyTimeAdjust(this.Text.Length, string.IsNullOrWhiteSpace(this.Voice) ? AutoNext.DEFAULT_ADJUST_WEIGHT : 0.01f);
+        }
 
-            if (character != null)
+        void SetCharacter(AdvRoot advRoot, Character character)
+        {
+            var pattern = string.IsNullOrWhiteSpace(this.Pattern) ? character.LastPattern : this.Pattern;
+            var imageIndex = this.ImageIndex ?? character.LastImageIndex;
+            if (pattern == PATTERN_OFF)
             {
-                // 1. Character
-                var pattern = string.IsNullOrWhiteSpace(this.Pattern) ? character.LastPattern : this.Pattern;
-                var imageIndex = this.ImageIndex ?? character.LastImageIndex;
-                if (pattern == PATTERN_OFF)
+                if (advRoot.SpriteManager.GetCharacterView(character) != null)
                 {
-                    if (advRoot.SpriteManager.GetCharacterView(character) != null)
-                    {
-                        advRoot.SpriteManager.SetCharacterOff(character, this.FadeSeconds);
-                    }
-                    character.ResetLastStatus();
+                    advRoot.SpriteManager.SetCharacterOff(character, this.FadeSeconds);
                 }
-                else
-                {
-                    var detail = character.CharacterDetailDictionary[pattern];
-                    advRoot.SpriteManager.SetCharacter(character, detail, imageIndex, this.PosX, this.PosY, this.FadeSeconds);
-                    if (character.Animator != null && !string.IsNullOrWhiteSpace(detail.AnimatorState))
-                    {
-                        var info = character.Animator.GetCurrentAnimatorStateInfo(0);
-                        // NOTE: ループアニメーションかつ同一パターンの場合、再プレイはしない
-                        if (!info.loop || character.LastPattern != pattern)
-                        {
-                            character.Animator.Play(detail.AnimatorState);
-                        }
-                    }
-                    character.LastPattern = pattern;
-                    character.LastImageIndex = imageIndex;
-                }
-
-                // 2. Text
-                advRoot.SetText(character, name, this.Text, pageCtrl, this.WindowType);
-
-                // 3. Voice
-                if (!string.IsNullOrWhiteSpace(this.Voice))
-                {
-                    // NOTE: 宴と異なりSoundシートでのType=Voiceに対応してある (本来の宴4はファイル直接記入のみ)
-                    var voiceClip = advRoot.AllowsVoiceLabel && advRoot.VoiceDictionary.ContainsKey(this.Voice) ?
-                            advRoot.VoiceDictionary[this.Voice] :
-                            Resources.Load<AudioClip>(advRoot.VoiceRoot + Path.ChangeExtension(this.Voice, null));
-                    advRoot.SoundManager.PlayVoice(voiceClip, false, 1.0f);
-                }
-                else
-                {
-                    advRoot.SoundManager.StopVoice();
-                }
-                advRoot.AutoNext.ClearCounter();
-                advRoot.AutoNext.SetIsAutoNextReadyTimeAdjust(this.Text.Length, string.IsNullOrWhiteSpace(this.Voice) ? AutoNext.DEFAULT_ADJUST_WEIGHT : 0.01f);
+                character.ResetLastStatus();
             }
             else
             {
-                advRoot.SetText(null, name, this.Text, pageCtrl, this.WindowType);
-                advRoot.AutoNext.ClearCounter();
-                advRoot.AutoNext.SetIsAutoNextReadyTimeAdjust(this.Text.Length);
+                var detail = character.CharacterDetailDictionary[pattern];
+                advRoot.SpriteManager.SetCharacter(character, detail, imageIndex, this.PosX, this.PosY, this.FadeSeconds);
+                if (character.Animator != null && !string.IsNullOrWhiteSpace(detail.AnimatorState))
+                {
+                    var info = character.Animator.GetCurrentAnimatorStateInfo(0);
+                    // NOTE: ループアニメーションかつ同一パターンの場合、再プレイはしない
+                    if (!info.loop || character.LastPattern != pattern)
+                    {
+                        character.Animator.Play(detail.AnimatorState);
+                    }
+                }
+                character.LastPattern = pattern;
+                character.LastImageIndex = imageIndex;
+            }
+        }
+
+        void PlayVoice(AdvRoot advRoot)
+        {
+            if (!string.IsNullOrWhiteSpace(this.Voice))
+            {
+                // NOTE: 宴と異なりSoundシートでのType=Voiceに対応してある (本来の宴4はファイル直接記入のみ)
+                var voiceClip = advRoot.AllowsVoiceLabel && advRoot.VoiceDictionary.ContainsKey(this.Voice) ?
+                            advRoot.VoiceDictionary[this.Voice] :
+                            Resources.Load<AudioClip>(advRoot.VoiceRoot + Path.ChangeExtension(this.Voice, null));
+                advRoot.SoundManager.PlayVoice(voiceClip, false, 1.0f);
+            }
+            else
+            {
+                advRoot.SoundManager.StopVoice();
             }
         }
     }
