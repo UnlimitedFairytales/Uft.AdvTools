@@ -9,7 +9,11 @@ namespace Uft.AdvTools.View
 {
     public class LogList : MonoBehaviour, IVList<LogListItem, LogData>
     {
+        // Static members
+
         protected static readonly OperationResult<int> CANCEL_RESULT = new(0, OperationResultStatus.Canceled);
+
+        // Instance members
 
         // Parameters
 
@@ -17,6 +21,8 @@ namespace Uft.AdvTools.View
         [SerializeField] VerticalLayoutGroup? _verticalLayoutGroup; public VerticalLayoutGroup? VerticalLayoutGroup => this._verticalLayoutGroup;
         [SerializeField] int _initialPoolLength = 20; public int InitialPoolLength => this._initialPoolLength;
         [SerializeField] LogListItem? _itemPrototype; public LogListItem? ItemPrototype => this._itemPrototype;
+
+        // Status
 
         readonly List<LogData> _dataList = new(); public List<LogData> DataList => this._dataList;
         readonly Queue<LogListItem> _pool = new(); public Queue<LogListItem> Pool => this._pool;

@@ -10,11 +10,17 @@ namespace Uft.AdvTools.View
 {
     public class LogController : MonoBehaviour, IVController<LogList, LogListItem, LogData>
     {
+        // Parameters
+
         [SerializeField] ScrollRect? _scrollRect; public ScrollRect? ScrollRect => this._scrollRect;
         [SerializeField] LogList? _list; public LogList? Content => this._list;
         [SerializeField] float _margin = 50f; public float Margin => this._margin;
 
+        // Status
+
         public Transform Transform => this.transform;
+
+        // Unity events
 
         void Reset()
         {
@@ -27,6 +33,8 @@ namespace Uft.AdvTools.View
             if (this._scrollRect == null || this._list == null) return;
             this.Tick();
         }
+
+        // Methods
 
         public int GetIndexAtPosition(float posY)
         {

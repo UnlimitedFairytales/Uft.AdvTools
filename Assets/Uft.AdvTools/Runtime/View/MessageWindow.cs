@@ -31,7 +31,7 @@ namespace Uft.AdvTools.View
         public bool IsTypewriting => this._txtText != null && this._txtText.textInfo.characterCount != this._txtText.maxVisibleCharacters;
         public CmdText.PageCtrlType LastPageCtrl { get; protected set; } = CmdText.PageCtrlType.InputBrPageAndNoHide;
 
-        // Methods
+        // Unity events
 
         protected virtual void Awake()
         {
@@ -55,6 +55,8 @@ namespace Uft.AdvTools.View
                 this._txtText.maxVisibleCharacters++;
             }
         }
+
+        // Methods
 
         public virtual void SetText(AdvRoot advRoot, string name, string text, CmdText.PageCtrlType pageCtrl, string windowType)
         {
