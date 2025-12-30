@@ -3,12 +3,11 @@
 using DG.Tweening;
 using System;
 using Uft.AdvTools.Entities;
-using Uft.AdvTools.View;
 using Uft.UnityUtils;
 using Uft.UnityUtils.UI;
 using UnityEngine;
 
-namespace Uft.AdvTools
+namespace Uft.AdvTools.View
 {
     public class CharacterSlots : MonoBehaviour
     {
