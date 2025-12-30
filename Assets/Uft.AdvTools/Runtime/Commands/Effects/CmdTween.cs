@@ -13,6 +13,8 @@ namespace Uft.AdvTools.Commands
 {
     public class CmdTween : ICommand
     {
+        // Nested types
+
         public enum TweenType
         {
             MoveTo,
@@ -103,6 +105,8 @@ namespace Uft.AdvTools.Commands
             public readonly bool IsSpeed => this.speed != null;
         }
 
+        // Static members
+
         public static bool TweenTypeTryParse(string? s, out TweenType tween)
         {
             if (string.IsNullOrWhiteSpace(s))
@@ -127,6 +131,8 @@ namespace Uft.AdvTools.Commands
             }
             return Enum.TryParse(s, true, out ease);
         }
+
+        // Instance members
 
         public CommandCategory CommandCategory { get; } = CommandCategory.Effect;
 

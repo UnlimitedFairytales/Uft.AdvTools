@@ -8,12 +8,7 @@ namespace Uft.AdvTools.Commands
 {
     public class CmdText : ICommand
     {
-        public static bool IsNewPage(PageCtrlType lastPageCtrl)
-        {
-            return lastPageCtrl == PageCtrlType.InputBrPage || lastPageCtrl == PageCtrlType.InputBrPageAndNoHide;
-        }
-
-        public static readonly string  PATTERN_OFF = "<Off>";
+        // Nested types
 
         public enum PageCtrlType
         {
@@ -23,6 +18,17 @@ namespace Uft.AdvTools.Commands
             Input,
             Next,
         }
+
+        // Static members
+
+        public static bool IsNewPage(PageCtrlType lastPageCtrl)
+        {
+            return lastPageCtrl == PageCtrlType.InputBrPage || lastPageCtrl == PageCtrlType.InputBrPageAndNoHide;
+        }
+
+        public static readonly string  PATTERN_OFF = "<Off>";
+
+        // Instance members
 
         public CommandCategory CommandCategory { get; } = CommandCategory.Text;
 

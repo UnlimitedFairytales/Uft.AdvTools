@@ -4,7 +4,11 @@ namespace Uft.AdvTools.Commands
 {
     public class CmdBg : ICommand
     {
+        // Static members
+
         public const string SPRITE_NAME_BG = "BG";
+
+        // Instance members
 
         public CommandCategory CommandCategory { get; } = CommandCategory.Object;
 
