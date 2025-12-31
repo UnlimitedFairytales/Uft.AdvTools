@@ -3,8 +3,10 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using DG.Tweening.Core;
+using Uft.FadeEffects;
 using Uft.UnityUtils;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Uft.AdvTools.View
 {
@@ -17,6 +19,44 @@ namespace Uft.AdvTools.View
 
         const string FADE_HORIZONTAL = "FadeHorizontal";
         const string CLOUD = "Cloud";
+
+        [SerializeField] protected SimplePostEffectCollection _wideCameraSimplePostEffectCollection; public SimplePostEffectCollection WideCameraSimplePostEffectCollection => this._wideCameraSimplePostEffectCollection;
+        public SimplePostEffectConfig WideCameraDirectionalGhostPostEffect
+        {
+            get
+            {
+                var index =  0;
+                if (GraphicsSettings.currentRenderPipeline == null) index += 10;
+                return this.WideCameraSimplePostEffectCollection.SimplePostEffects[index];
+            }
+        }
+        public SimplePostEffectConfig WideCameraGrayscalePostEffect
+        {
+            get
+            {
+                var index =  1;
+                if (GraphicsSettings.currentRenderPipeline == null) index += 10;
+                return this.WideCameraSimplePostEffectCollection.SimplePostEffects[index];
+            }
+        }
+        public SimplePostEffectConfig WideCameraSepiaPostEffect
+        {
+            get
+            {
+                var index =  2;
+                if (GraphicsSettings.currentRenderPipeline == null) index += 10;
+                return this.WideCameraSimplePostEffectCollection.SimplePostEffects[index];
+            }
+        }
+        public SimplePostEffectConfig WideCameraRuleFadePostEffect
+        {
+            get
+            {
+                var index =  3;
+                if (GraphicsSettings.currentRenderPipeline == null) index += 10;
+                return this.WideCameraSimplePostEffectCollection.SimplePostEffects[index];
+            }
+        }
 
         [SerializeField] Texture? _texFadeHorizontal;
         [SerializeField] Texture? _texCloud;
@@ -40,8 +80,8 @@ namespace Uft.AdvTools.View
 
             await this.SetEffectAsync(
                 DIRECTIONAL_GHOST,
-                () => this._advRootRef.WideCameraDirectionalGhostPostEffect.Amount,
-                x => this._advRootRef.WideCameraDirectionalGhostPostEffect.Amount = x,
+                () => this.WideCameraDirectionalGhostPostEffect.Amount,
+                x => this.WideCameraDirectionalGhostPostEffect.Amount = x,
                 endValue,
                 fadeSeconds,
                 completesPrevious);
@@ -55,8 +95,8 @@ namespace Uft.AdvTools.View
             {
                 await this.SetEffectAsync(
                     Sepia,
-                    () => this._advRootRef.WideCameraSepiaPostEffect.Amount,
-                    x => this._advRootRef.WideCameraSepiaPostEffect.Amount = x,
+                    () => this.WideCameraSepiaPostEffect.Amount,
+                    x => this.WideCameraSepiaPostEffect.Amount = x,
                     endValue,
                     fadeSeconds,
                     completesPrevious);
@@ -65,8 +105,8 @@ namespace Uft.AdvTools.View
             {
                 await this.SetEffectAsync(
                     GrayScale,
-                    () => this._advRootRef.WideCameraGrayscalePostEffect.Amount,
-                    x => this._advRootRef.WideCameraGrayscalePostEffect.Amount = x,
+                    () => this.WideCameraGrayscalePostEffect.Amount,
+                    x => this.WideCameraGrayscalePostEffect.Amount = x,
                     endValue,
                     fadeSeconds,
                     completesPrevious);
@@ -87,7 +127,7 @@ namespace Uft.AdvTools.View
                 null;
             if (rule == null) return;
 
-            var effectConfig = this._advRootRef.WideCameraRuleFadePostEffect;
+            var effectConfig = this.WideCameraRuleFadePostEffect;
             effectConfig.RuleTex = rule;
             effectConfig.SubTexColor = color;
             effectConfig.Softness = ruleSoftness;

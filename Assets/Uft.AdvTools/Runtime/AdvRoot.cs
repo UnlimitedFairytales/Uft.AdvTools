@@ -19,44 +19,6 @@ namespace Uft.AdvTools
         [SerializeField] protected bool _emulatesUtageEffectCommand = true; public bool EmulatesUtageEffectCommand => this._emulatesUtageEffectCommand;
         [SerializeField] protected bool _allowsVoiceLabel = false; public bool AllowsVoiceLabel => this._allowsVoiceLabel;
 
-        [SerializeField] protected SimplePostEffectCollection _wideCameraSimplePostEffectCollection; public SimplePostEffectCollection WideCameraSimplePostEffectCollection => this._wideCameraSimplePostEffectCollection;
-        public SimplePostEffectConfig WideCameraDirectionalGhostPostEffect
-        {
-            get
-            {
-                var index =  0;
-                if (GraphicsSettings.currentRenderPipeline == null) index += 10;
-                return this.WideCameraSimplePostEffectCollection.SimplePostEffects[index];
-            }
-        }
-        public SimplePostEffectConfig WideCameraGrayscalePostEffect
-        {
-            get
-            {
-                var index =  1;
-                if (GraphicsSettings.currentRenderPipeline == null) index += 10;
-                return this.WideCameraSimplePostEffectCollection.SimplePostEffects[index];
-            }
-        }
-        public SimplePostEffectConfig WideCameraSepiaPostEffect
-        {
-            get
-            {
-                var index =  2;
-                if (GraphicsSettings.currentRenderPipeline == null) index += 10;
-                return this.WideCameraSimplePostEffectCollection.SimplePostEffects[index];
-            }
-        }
-        public SimplePostEffectConfig WideCameraRuleFadePostEffect
-        {
-            get
-            {
-                var index =  3;
-                if (GraphicsSettings.currentRenderPipeline == null) index += 10;
-                return this.WideCameraSimplePostEffectCollection.SimplePostEffects[index];
-            }
-        }
-
         [SerializeField] protected Bg _bg; public Bg Bg => this._bg;
 
         [SerializeField] protected SpriteManager _spriteManager; public SpriteManager SpriteManager => this._spriteManager;

@@ -368,7 +368,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _emulatesUtageEffectCommand: 1
   _allowsVoiceLabel: 0
-  _wideCameraSimplePostEffectCollection: {fileID: 633982265801508198}
   _bg: {fileID: 8364876910701061120}
   _spriteManager: {fileID: 4815723313035957612}
   _soundManager: {fileID: 8048299226933598990}
@@ -468,6 +467,7 @@ MonoBehaviour:
     color: {r: 0, g: 0, b: 0, a: 1}
     sprite: {fileID: 0}
     ease: 6
+    raycastTarget: 1
   _canvas: {fileID: 0}
   _image: {fileID: 0}
 --- !u!1 &2120281273467204257
@@ -2742,6 +2742,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5923751092992774010, guid: ed1054191daf2564495afd145188ebff, type: 3}
+      propertyPath: _wideCameraSimplePostEffectCollection
+      value: 
+      objectReference: {fileID: 633982265801508198}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
