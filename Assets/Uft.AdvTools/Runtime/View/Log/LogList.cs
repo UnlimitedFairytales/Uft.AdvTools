@@ -1,6 +1,7 @@
 #nullable enable
 
 using System.Collections.Generic;
+using Uft.UnityUtils.Common;
 using Uft.VirtualizedList;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,9 +19,9 @@ namespace Uft.AdvTools.View
         // Parameters
 
         public RectTransform RectTransform => (RectTransform)this.transform;
-        [SerializeField] VerticalLayoutGroup? _verticalLayoutGroup; public VerticalLayoutGroup? VerticalLayoutGroup => this._verticalLayoutGroup;
+        [SerializeField] VerticalLayoutGroup? _verticalLayoutGroup; public VerticalLayoutGroup VerticalLayoutGroup => ThrowIf.Unassigned(this._verticalLayoutGroup);
         [SerializeField] int _initialPoolLength = 20; public int InitialPoolLength => this._initialPoolLength;
-        [SerializeField] LogListItem? _itemPrototype; public LogListItem? ItemPrototype => this._itemPrototype;
+        [SerializeField] LogListItem? _itemPrototype; public LogListItem ItemPrototype => ThrowIf.Unassigned(this._itemPrototype);
 
         // Status
 

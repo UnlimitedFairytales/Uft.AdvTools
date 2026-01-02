@@ -2,6 +2,7 @@
 
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
+using Uft.UnityUtils.Common;
 using Uft.VirtualizedList;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,8 +13,8 @@ namespace Uft.AdvTools.View
     {
         // Parameters
 
-        [SerializeField] ScrollRect? _scrollRect; public ScrollRect? ScrollRect => this._scrollRect;
-        [SerializeField] LogList? _list; public LogList? Content => this._list;
+        [SerializeField] ScrollRect? _scrollRect; public ScrollRect ScrollRect => ThrowIf.Unassigned(this._scrollRect);
+        [SerializeField] LogList? _list; public LogList Content => ThrowIf.Unassigned(this._list);
         [SerializeField] float _margin = 50f; public float Margin => this._margin;
 
         // Status
@@ -30,7 +31,9 @@ namespace Uft.AdvTools.View
 
         void Update()
         {
-            if (this._scrollRect == null || this._list == null) return;
+            if (this._scrollRect == null) throw new UnassignedReferenceException(nameof(this._scrollRect));
+            if (this._list == null) throw new UnassignedReferenceException(nameof(this._list));
+
             this.Tick();
         }
 
@@ -38,7 +41,8 @@ namespace Uft.AdvTools.View
 
         public int GetIndexAtPosition(float posY)
         {
-            if (this._list == null || this._list.ItemPrototype == null) return 0;
+            if (this._scrollRect == null) throw new UnassignedReferenceException(nameof(this._scrollRect));
+            if (this._list == null) throw new UnassignedReferenceException(nameof(this._list));
 
             var layoutGroup = this._list.VerticalLayoutGroup;
             if (layoutGroup == null) return 0;
@@ -62,7 +66,8 @@ namespace Uft.AdvTools.View
 
         public virtual async UniTask<OperationResult<int>> ShowAsync(IReadOnlyList<LogData> dataList)
         {
-            if (this._list == null) return CANCEL_RESULT;
+            if (this._scrollRect == null) throw new UnassignedReferenceException(nameof(this._scrollRect));
+            if (this._list == null) throw new UnassignedReferenceException(nameof(this._list));
 
             // Awake保証
             this.gameObject.SetActive(true);

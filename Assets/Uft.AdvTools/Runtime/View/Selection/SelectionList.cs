@@ -2,7 +2,6 @@
 
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using System;
 using System.Collections.Generic;
 using Uft.AdvTools.Commands;
 using Uft.UnityUtils;
@@ -30,9 +29,9 @@ namespace Uft.AdvTools.View
 
         protected void Awake()
         {
-            if (this._selectionItemPrototype == null) throw new InvalidOperationException($"{nameof(this._selectionItemPrototype)} is required.");
+            if (this._selectionItemPrototype == null) throw new UnassignedReferenceException(nameof(this._selectionItemPrototype));
 
-            if (this._selectionTitle != null)
+            if (this._selectionTitle != null) // NOTE: _selectionTitleは未設定を許容する
             {
                 this._selectionTitle.gameObject.SetActive(false);
             }

@@ -1,6 +1,5 @@
 #nullable enable
 
-using System;
 using Uft.AdvTools.Entities;
 using Uft.UnityUtils.UI;
 using UnityEngine;
@@ -18,7 +17,8 @@ namespace Uft.AdvTools.View
 
         public void ChangeBg(TextureRow? row, float? posX, float? posY, float fadeTime_sec)
         {
-            if (this._oiBg1 == null || this._oiBg2 == null) throw new InvalidOperationException($"{nameof(this._oiBg1)}, {nameof(this._oiBg2)} are required.");
+            if (this._oiBg1 == null) throw new UnassignedReferenceException(nameof(this._oiBg1));
+            if (this._oiBg2 == null) throw new UnassignedReferenceException(nameof(this._oiBg2));
 
             var prevRootRt = this._oiBg2.RootRectTransform;
             var prevImg = this._oiBg2.Image;
@@ -54,7 +54,8 @@ namespace Uft.AdvTools.View
 
         public OffsettableImage GetBgOi()
         {
-            if (this._oiBg1 == null || this._oiBg2 == null) throw new InvalidOperationException($"{nameof(this._oiBg1)}, {nameof(this._oiBg2)} are required.");
+            if (this._oiBg1 == null) throw new UnassignedReferenceException(nameof(this._oiBg1));
+            if (this._oiBg2 == null) throw new UnassignedReferenceException(nameof(this._oiBg2));
 
             return this._oiBg2;
         }

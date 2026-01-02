@@ -2,17 +2,19 @@
 
 using TMPro;
 using Uft.AdvTools.Commands;
+using Uft.UnityUtils.Common;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Uft.AdvTools.View
 {
+    [RequireComponent(typeof(RectTransform))]
     public class SelectionItem : MonoBehaviour
     {
         // Parameters
 
-        [SerializeField] protected CanvasGroup? _canvasGroup; public CanvasGroup CanvasGroup => this._canvasGroup!;
-        [SerializeField] protected Button? _button; public Button Button => this._button!;
+        [SerializeField] protected CanvasGroup? _canvasGroup; public CanvasGroup CanvasGroup => ThrowIf.Unassigned(this._canvasGroup);
+        [SerializeField] protected Button? _button; public Button Button => ThrowIf.Unassigned(this._button);
         [SerializeField] protected TMP_Text? _txtText;
 
         // Status
@@ -23,15 +25,23 @@ namespace Uft.AdvTools.View
 
         public void SetData(CmdSelection data, Vector2 anchoredPosition)
         {
+            if (this._canvasGroup == null) throw new UnassignedReferenceException(nameof(this._canvasGroup));
+            if (this._button == null) throw new UnassignedReferenceException(nameof(this._button));
+            if (this._txtText == null) throw new UnassignedReferenceException(nameof(this._txtText));
+
             this.CmdSelection = data;
-            if (this._txtText != null) this._txtText.text = data.Text;
+            this._txtText.text = data.Text;
             ((RectTransform)this.transform).anchoredPosition = anchoredPosition;
         }
 
         public virtual void Clear()
         {
+            if (this._canvasGroup == null) throw new UnassignedReferenceException(nameof(this._canvasGroup));
+            if (this._button == null) throw new UnassignedReferenceException(nameof(this._button));
+            if (this._txtText == null) throw new UnassignedReferenceException(nameof(this._txtText));
+
             ((RectTransform)this.transform).anchoredPosition = Vector2.zero;
-            if (this._txtText != null) this._txtText.text = string.Empty;
+            this._txtText.text = string.Empty;
             this.CmdSelection = null;
         }
     }
