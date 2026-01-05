@@ -6,6 +6,7 @@ using Uft.AdvTools.Entities;
 using Uft.UnityUtils;
 using Uft.UnityUtils.UI;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Uft.AdvTools.View
 {
@@ -28,7 +29,7 @@ namespace Uft.AdvTools.View
 
         protected bool IsAnyCharacterDisplayed()
         {
-            if (this._characterViewList == null) throw new InvalidOperationException($"{nameof(this._characterViewList)} is required.");
+            if (this._characterViewList == null) throw new UnassignedReferenceException(nameof(this._characterViewList));
 
             var list = this._characterViewList;
             for (int i = 0; i < list.Length; i++)
@@ -40,13 +41,13 @@ namespace Uft.AdvTools.View
 
         protected int GetOnCharacterViewIndex(Character character)
         {
-            if (this._characterViewList == null) throw new InvalidOperationException($"{nameof(this._characterViewList)} is required.");
+            if (this._characterViewList == null) throw new UnassignedReferenceException(nameof(this._characterViewList));
 
             var list = this._characterViewList;
             for (int i = 0; i < list.Length; i++)
             {
                 var oi = list[i];
-                if (oi.IsOn && Equals(character, oi.KeyObject))
+                if (oi.IsOn && Equals(character, oi.KeyObject)) // NOTE: KeyObjectはオーバーライドが機能するようにEquals比較
                 {
                     return i;
                 }
@@ -56,11 +57,14 @@ namespace Uft.AdvTools.View
 
         public void SetCharacter(Character character, CharacterDetail detail, int i, float? posX, float? posY, float fadeTime_sec)
         {
-            if (this._characterViewList == null) throw new InvalidOperationException($"{nameof(this._characterViewList)} is required.");
+            if (this._characterViewList == null) throw new UnassignedReferenceException(nameof(this._characterViewList));
+
             if ((uint)i >= (uint)this._characterViewList.Length) throw new ArgumentOutOfRangeException(nameof(i));
 
             var sprite = detail.Sprite;
             var instantiated = character.Instantiated;
+            Assert.IsTrue(sprite != null || instantiated != null);
+
             var prevIndex = this.GetOnCharacterViewIndex(character);
             var oi = this._characterViewList[i];
             var isAlreadyDisplayed = 0 <= prevIndex;
@@ -82,7 +86,7 @@ namespace Uft.AdvTools.View
 
             // NOTE: 上書き対象の確認とReset処理
             var destLayerPrevKey = oi.CastedKey<Character>();
-            if (!Equals(character, destLayerPrevKey) && destLayerPrevKey != null)
+            if (character != destLayerPrevKey && destLayerPrevKey != null)
             {
                 destLayerPrevKey.ResetLastStatus();
             }
@@ -124,7 +128,7 @@ namespace Uft.AdvTools.View
 
         public void SetCharacterOff(Character character, float fadeTime_sec)
         {
-            if (this._characterViewList == null) throw new InvalidOperationException($"{nameof(this._characterViewList)} is required.");
+            if (this._characterViewList == null) throw new UnassignedReferenceException(nameof(this._characterViewList));
 
             var i = this.GetOnCharacterViewIndex(character);
             if (0 <= i)
@@ -141,7 +145,7 @@ namespace Uft.AdvTools.View
 
         public CharacterView? GetCharacterView(Character character)
         {
-            if (this._characterViewList == null) throw new InvalidOperationException($"{nameof(this._characterViewList)} is required.");
+            if (this._characterViewList == null) throw new UnassignedReferenceException(nameof(this._characterViewList));
 
             var i = this.GetOnCharacterViewIndex(character);
             if (0 <= i) return this._characterViewList[i];
@@ -155,7 +159,7 @@ namespace Uft.AdvTools.View
         /// </summary>
         public void ControlCharacterGrayout(Character currentCharacter, bool hasNameAndText)
         {
-            if (this._characterViewList == null) throw new InvalidOperationException($"{nameof(this._characterViewList)} is required.");
+            if (this._characterViewList == null) throw new UnassignedReferenceException(nameof(this._characterViewList));
 
             if (!this._controlsCharacterGrayout) return;
 
@@ -169,7 +173,7 @@ namespace Uft.AdvTools.View
                 var list = this._characterViewList;
                 for (int i = 0; i < list.Length; i++)
                 {
-                    if (list[i].IsOn && !Equals(currentCharacter, list[i].KeyObject))
+                    if (list[i].IsOn && !Equals(currentCharacter, list[i].KeyObject)) // NOTE: KeyObjectはオーバーライドが機能するようにEquals比較
                     {
                         list[i].ToSub(this._grayoutColor);
                     }

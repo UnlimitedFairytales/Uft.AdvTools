@@ -1,8 +1,8 @@
 #nullable enable
 
 using DG.Tweening;
-using System;
 using Uft.UnityUtils;
+using Uft.UnityUtils.Common;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,14 +16,14 @@ namespace Uft.AdvTools.View
 
         // Parameters
 
-        [SerializeField] protected CanvasGroup? _canvasGroup; public CanvasGroup CanvasGroup => this._canvasGroup!; // NOTE: null-forgiving（警告抑制のみ）。他のメンバで必須チェック済み。
-        [SerializeField] protected Image? _image; public Image Image => this._image!; // NOTE: null-forgiving（警告抑制のみ）。他のメンバで必須チェック済み。
+        [SerializeField] protected CanvasGroup? _canvasGroup; public CanvasGroup CanvasGroup => ThrowIf.Unassigned(this._canvasGroup);
+        [SerializeField] protected Image? _image; public Image Image => ThrowIf.Unassigned(this._image);
 
         public RectTransform RootRectTransform => (RectTransform)this.transform;
 
         // Status
 
-        public bool IsOn { get; set; } = false;
+        public bool IsOn { get; protected set; } = false;
         public object? KeyObject { get; protected set; }
         public T? CastedKey<T>() where T : class => this.KeyObject as T;
         public GameObject? Instantiated { get; protected set; }
@@ -39,7 +39,10 @@ namespace Uft.AdvTools.View
 
         public virtual void LateUpdate()
         {
-            if (this.SpriteRenderers == null || this._canvasGroup == null) return;
+            if (this._canvasGroup == null) throw new UnassignedReferenceException(nameof(this._canvasGroup));
+            if (this._image == null) throw new UnassignedReferenceException(nameof(this._image));
+
+            if (this.SpriteRenderers == null) return;
 
             var canvasGroupAlpha = this._canvasGroup.alpha;
             foreach (var renderer in this.SpriteRenderers)
@@ -63,8 +66,8 @@ namespace Uft.AdvTools.View
             Vector2 pivot, float scale, Vector2 position, Vector2 offset, float fromAlpha, float toAlpha, float fadeTime_sec)
             where T : class
         {
-            if (this._canvasGroup == null) throw new InvalidOperationException($"{nameof(this._canvasGroup)} is required.");
-            if (this._image == null) throw new InvalidOperationException($"{nameof(this._image)} is required.");
+            if (this._canvasGroup == null) throw new UnassignedReferenceException(nameof(this._canvasGroup));
+            if (this._image == null) throw new UnassignedReferenceException(nameof(this._image));
 
             this.IsOn = isOn;
             var img = this._image;
@@ -72,7 +75,7 @@ namespace Uft.AdvTools.View
 
             cg.DOComplete();
 
-            if (!Equals(keyObject, this.KeyObject))
+            if (!Equals(keyObject, this.KeyObject)) // NOTE: KeyObjectはオーバーライドが機能するようにEquals比較
             {
                 cg.alpha = 0;
                 if (this.Instantiated != null && this.Instantiated.transform.IsChildOf(cg.transform))
@@ -108,8 +111,8 @@ namespace Uft.AdvTools.View
             Vector2 pivot, float scale, Vector2 position, Vector2 offset, float fromAlpha, float toAlpha, float fadeTime_sec)
             where T : class
         {
-            if (this._canvasGroup == null) throw new InvalidOperationException($"{nameof(this._canvasGroup)} is required.");
-            if (this._image == null) throw new InvalidOperationException($"{nameof(this._image)} is required.");
+            if (this._canvasGroup == null) throw new UnassignedReferenceException(nameof(this._canvasGroup));
+            if (this._image == null) throw new UnassignedReferenceException(nameof(this._image));
 
             this.IsOn = isOn;
             var img = this._image;
@@ -117,12 +120,12 @@ namespace Uft.AdvTools.View
 
             cg.DOComplete();
 
-            if (Equals(keyObject, this.KeyObject) && this.Instantiated != instantiated)
+            if (Equals(keyObject, this.KeyObject) && this.Instantiated != instantiated) // NOTE: KeyObjectはオーバーライドが機能するようにEquals比較
             {
                 DevLog.LogWarning($"{NAME} It's the same {nameof(keyObject)}, but a different {nameof(instantiated)}.");
             }
 
-            if (!Equals(keyObject, this.KeyObject))
+            if (!Equals(keyObject, this.KeyObject)) // NOTE: KeyObjectはオーバーライドが機能するようにEquals比較
             {
                 cg.alpha = 0;
                 if (this.Instantiated != null && this.Instantiated.transform.IsChildOf(cg.transform))
@@ -168,14 +171,15 @@ namespace Uft.AdvTools.View
 
         public virtual void Off(float fadeTime_sec)
         {
-            if (this._canvasGroup == null) throw new InvalidOperationException($"{nameof(this._canvasGroup)} is required.");
-            if (this._image == null) throw new InvalidOperationException($"{nameof(this._image)} is required.");
+            if (this._canvasGroup == null) throw new UnassignedReferenceException(nameof(this._canvasGroup));
+            if (this._image == null) throw new UnassignedReferenceException(nameof(this._image));
 
             this.IsOn = false;
             this.KeyObject = null;
             var img = this._image;
             var cg = this._canvasGroup;
             var sprite = img.sprite;
+            var instantiated = this.Instantiated;
             cg.DOComplete();
             if (0 < fadeTime_sec)
             {
@@ -185,12 +189,33 @@ namespace Uft.AdvTools.View
                     {
                         img.sprite = null;
                     }
+                    if (this.Instantiated == instantiated)
+                    {
+                        if (this.Instantiated != null && this.Instantiated.transform.IsChildOf(cg.transform))
+                        {
+                            this.Instantiated.SetActive(false);
+                        }
+                        this.Instantiated = null;
+                        this.SpriteRenderers = null;
+                    }
                 });
             }
             else
             {
                 cg.alpha = 0;
-                img.sprite = null;
+                if (img.sprite == sprite)
+                {
+                    img.sprite = null;
+                }
+                if (this.Instantiated == instantiated)
+                {
+                    if (this.Instantiated != null && this.Instantiated.transform.IsChildOf(cg.transform))
+                    {
+                        this.Instantiated.SetActive(false);
+                    }
+                    this.Instantiated = null;
+                    this.SpriteRenderers = null;
+                }
             }
         }
 
@@ -198,8 +223,8 @@ namespace Uft.AdvTools.View
         public void ToSub(Color grayoutColor) => this.FadeColor(grayoutColor);
         void FadeColor(Color fadeColor)
         {
-            if (this._canvasGroup == null) throw new InvalidOperationException($"{nameof(this._canvasGroup)} is required.");
-            if (this._image == null) throw new InvalidOperationException($"{nameof(this._image)} is required.");
+            if (this._canvasGroup == null) throw new UnassignedReferenceException(nameof(this._canvasGroup));
+            if (this._image == null) throw new UnassignedReferenceException(nameof(this._image));
 
             this._image.DOColor(fadeColor, 0.2f);
             if (this.SpriteRenderers != null)

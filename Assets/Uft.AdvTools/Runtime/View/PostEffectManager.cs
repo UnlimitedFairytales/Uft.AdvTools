@@ -20,7 +20,7 @@ namespace Uft.AdvTools.View
         const string FADE_HORIZONTAL = "FadeHorizontal";
         const string CLOUD = "Cloud";
 
-        [SerializeField] protected SimplePostEffectCollection _wideCameraSimplePostEffectCollection; public SimplePostEffectCollection WideCameraSimplePostEffectCollection => this._wideCameraSimplePostEffectCollection;
+        [SerializeField] protected SimplePostEffectCollection? _wideCameraSimplePostEffectCollection; public SimplePostEffectCollection WideCameraSimplePostEffectCollection => this._wideCameraSimplePostEffectCollection;
         public SimplePostEffectConfig WideCameraDirectionalGhostPostEffect
         {
             get

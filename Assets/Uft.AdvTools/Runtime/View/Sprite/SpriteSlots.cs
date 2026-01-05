@@ -6,6 +6,7 @@ using Uft.AdvTools.Entities;
 using Uft.UnityUtils;
 using Uft.UnityUtils.UI;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Uft.AdvTools.View
 {
@@ -21,13 +22,13 @@ namespace Uft.AdvTools.View
 
         public int GetOnTextureRowIndex(TextureRow textureRow)
         {
-            if (this._oiSpriteList == null) throw new InvalidOperationException($"{nameof(this._oiSpriteList)} is required.");
+            if (this._oiSpriteList == null) throw new UnassignedReferenceException(nameof(this._oiSpriteList));
 
             var list = this._oiSpriteList;
             for (int i = 0; i < list.Length; i++)
             {
                 var oi = list[i];
-                if (oi.IsOn && Equals(textureRow, oi.KeyObject))
+                if (oi.IsOn && Equals(textureRow, oi.KeyObject)) // NOTE: KeyObjectはオーバーライドが機能するようにEquals比較
                 {
                     return i;
                 }
@@ -37,11 +38,14 @@ namespace Uft.AdvTools.View
 
         public void SetSprite(TextureRow row, int i, float? posX, float? posY, float fadeTime_sec)
         {
-            if (this._oiSpriteList == null) throw new InvalidOperationException($"{nameof(this._oiSpriteList)} is required.");
+            if (this._oiSpriteList == null) throw new UnassignedReferenceException(nameof(this._oiSpriteList));
+
             if ((uint)i >= (uint)this._oiSpriteList.Length) throw new ArgumentOutOfRangeException(nameof(i));
 
             var sprite = row.Sprite;
             var instantiated = row.Instantiated;
+            Assert.IsTrue(sprite != null || instantiated != null);
+
             var prevIndex = this.GetOnTextureRowIndex(row);
             var oi = this._oiSpriteList[i];
             var isAlreadyDisplayed = 0 <= prevIndex;
@@ -63,7 +67,7 @@ namespace Uft.AdvTools.View
 
             // NOTE: 上書き対象の確認とReset処理
             var destLayerPrevKey = oi.CastedKey<TextureRow>();
-            if (!Equals(row, destLayerPrevKey) && destLayerPrevKey != null)
+            if (row != destLayerPrevKey && destLayerPrevKey != null)
             {
                 destLayerPrevKey.ResetLastStatus();
             }
@@ -105,7 +109,7 @@ namespace Uft.AdvTools.View
 
         public void SetSpriteOff(TextureRow row, float fadeTime_sec)
         {
-            if (this._oiSpriteList == null) throw new InvalidOperationException($"{nameof(this._oiSpriteList)} is required.");
+            if (this._oiSpriteList == null) throw new UnassignedReferenceException(nameof(this._oiSpriteList));
 
             var i = this.GetOnTextureRowIndex(row);
             if (0 <= i)
@@ -118,7 +122,7 @@ namespace Uft.AdvTools.View
 
         public OffsettableImage? GetTextureRowOi(TextureRow row)
         {
-            if (this._oiSpriteList == null) throw new InvalidOperationException($"{nameof(this._oiSpriteList)} is required.");
+            if (this._oiSpriteList == null) throw new UnassignedReferenceException(nameof(this._oiSpriteList));
 
             var i = this.GetOnTextureRowIndex(row);
             if (0 <= i) return this._oiSpriteList[i];
