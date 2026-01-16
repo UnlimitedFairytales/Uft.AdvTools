@@ -52,7 +52,7 @@ MonoBehaviour:
   _selectionTitle: {fileID: 5270963219702676133}
   _selectionItemPrototype: {fileID: 2277920328879376865, guid: 772593e59e9f24146802672f2c4dcb29, type: 3}
   _maxListLength: 16
-  _itemSpacing: 70
+  _itemSpacing: 105
 --- !u!1001 &3867469997558112061
 PrefabInstance:
   m_ObjectHideFlags: 0

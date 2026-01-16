@@ -20,7 +20,7 @@ namespace Uft.AdvTools.View
         [SerializeField] protected TMP_Text? _txtName;
         [SerializeField] protected TMP_Text? _txtText;
         [SerializeField] protected Image? _imgNextSymbol;
-        [SerializeField] protected Vector2 _offsetImgNext = new(32, 12);
+        [SerializeField] protected Vector2 _offsetImgNext = new(48, 18);
 
         // Status
 
