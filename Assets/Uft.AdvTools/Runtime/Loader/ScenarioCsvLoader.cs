@@ -49,6 +49,9 @@ namespace Uft.AdvTools.Loader
         public const string SelectionTitle = "selectiontitle"; // 宴にない非互換機能
         public const string Selection = "selection";
 
+        // End
+        public const string PauseScenario = "pausescenario";
+
         // instance
 
         public IReadOnlyList<ICommand> Load(FileInfo fileInfo, string sheetName)
@@ -254,6 +257,10 @@ namespace Uft.AdvTools.Loader
                                     InvariantCultureUtil.FloatTryParse(dto.Arg6, out var y) ? y : null,
                                     dto.Text));
                             }
+                            break;
+                        // End
+                        case PauseScenario:
+                            commandList.Add(new CmdPauseScenario());
                             break;
                         default:
                             if (dto.Command.StartsWith("*"))

@@ -56,7 +56,6 @@ namespace Uft.AdvTools
         public Dictionary<string, Param> ParamDictionary { get; protected set; }
 
         public ScenarioExecutor ScenarioExecutor { get; protected set; }
-        public bool IsPausingScenario { get; protected set; } = false;
         public bool IsAutoInputOnce { get; set; } = false;
         // public Dictionary<string, (Camera, List<CinemachineCamera>)> CameraDictionary { get; protected set; } = new Dictionary<string, (Camera, List<CinemachineCamera>)>();
         public List<Animator> UiEffectList { get; protected set; } = new List<Animator>(); // NOTE: Setup() 自動検出
@@ -73,7 +72,7 @@ namespace Uft.AdvTools
         protected virtual void Update()
         {
             if (this.ScenarioExecutor == null) return;
-            if (this.IsPausingScenario) return;
+            if (this.ScenarioExecutor.IsPauseScenario) return;
 
             // IsAutoNextReady制御
             var isCountable = !this.MessageWindowManager.CurrentMessageWindow.IsTypewriting && !this.SoundManager.IsAnyVoicePlaying;
@@ -138,20 +137,16 @@ namespace Uft.AdvTools
                     // this.CameraDictionary.Add(camera.gameObject.name, (camera, vCameraList));
                 }
             }
-            this.UiEffectList = this.GetComponentsInChildrenOrderByName<Animator>(true,component => component.gameObject.name.StartsWith(this._uiEffectPrefix));
+            this.UiEffectList = this.GetComponentsInChildrenOrderByName<Animator>(true, component => component.gameObject.name.StartsWith(this._uiEffectPrefix));
         }
         public virtual void Cleanup()
         {
             this.ScenarioExecutor = null;
-            this.IsPausingScenario = false;
             this.MessageWindowManager?.Cleanup();
             // this.CameraDictionary.Clear();
             this.ObjectDictionary.Clear();
             this.UiEffectList.Clear();
         }
-
-        public virtual void PauseScenario() => this.IsPausingScenario = true;
-        public virtual void ResumeScenario() => this.IsPausingScenario = false;
 
         public virtual void ChangeAutoMode(bool isOn)
         {

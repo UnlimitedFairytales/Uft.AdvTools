@@ -21,6 +21,11 @@ namespace Uft.AdvTools
 
         public bool IsWaiting { get; set; }
         public bool IsWaitingForInput { get; set; }
+        public bool IsAnyWaiting => this.IsWaiting || this.IsWaitingForInput;
+
+        public bool IsEndScenario => (this.CommandList.Count <= this.SeekPoint) && !this.IsWaiting && !this.IsWaitingForInput;
+        public bool IsPauseScenario { get; protected set; }
+        public bool IsEndOrPauseScenario => this.IsEndScenario || this.IsPauseScenario;
 
         protected IReadOnlyList<ICommand> CommandList { get; set; }
         protected int SeekPoint { get; set; }
@@ -40,7 +45,7 @@ namespace Uft.AdvTools
                 advRoot.Next();
             }
 
-            while (this.SeekPoint < this.CommandList.Count && !this.IsWaiting && !this.IsWaitingForInput && this.ReadMode != CommandReadMode.WaitingForSelected)
+            while (!this.IsAnyWaiting && !this.IsEndOrPauseScenario && this.ReadMode != CommandReadMode.WaitingForSelected)
             {
                 // NOTE: 宴仕様に準拠させる。改ページ直後に演出系コマンドが来た場合、MessageWindowを非表示にする
                 if (advRoot.EmulatesUtageEffectCommand)
@@ -133,5 +138,9 @@ namespace Uft.AdvTools
             DevLog.LogError(errorText);
             throw new Exception(errorText);
         }
+
+        public virtual void PauseScenario() => this.IsPauseScenario = true;
+
+        public virtual void ResumeScenario() => this.IsPauseScenario = false;
     }
 }

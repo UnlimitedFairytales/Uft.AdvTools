@@ -14,7 +14,16 @@ namespace Uft.AdvTools.Samples
         [SerializeField] string _resourcesFolderPathPart;
         [SerializeField] AdvRoot _advRoot;
 
+        // NOTE: PauseScenario制御サンプル
+        [SerializeField] SampleMessageBox _sampleMessageBox;
+
         bool _isInitialized = false;
+        bool _lastPauseState = false;
+
+        void Awake()
+        {
+            this._sampleMessageBox.OnClickResume = () => this._advRoot.ScenarioExecutor.ResumeScenario();
+        }
 
         void Update()
         {
@@ -32,7 +41,8 @@ namespace Uft.AdvTools.Samples
                         this._soundFile.text,
                         this._paramFile.text,
                         this._resourcesFolderPathPart);
-                    this._advRoot.ResumeScenario();
+                    this._advRoot.ScenarioExecutor.ResumeScenario();
+                    this._lastPauseState = this._advRoot.ScenarioExecutor.IsPauseScenario;
                 }
             }
 
@@ -40,6 +50,20 @@ namespace Uft.AdvTools.Samples
             {
                 this._advRoot.Next();
             }
+
+            // NOTE: PauseScenario制御サンプル
+            if (this._lastPauseState != this._advRoot.ScenarioExecutor.IsPauseScenario)
+            {
+                if (this._advRoot.ScenarioExecutor.IsPauseScenario)
+                {
+                    this._sampleMessageBox.Show();
+                }
+                else
+                {
+                    this._sampleMessageBox.Hide();
+                }
+            }
+            this._lastPauseState = this._advRoot.ScenarioExecutor.IsPauseScenario;
         }
 
         bool IsPointerOverUI()

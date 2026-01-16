@@ -10,6 +10,7 @@ namespace Uft.AdvTools.Commands
         Effect,
         UI,
         Logic,
+        End,
         Label,
     }
 }
