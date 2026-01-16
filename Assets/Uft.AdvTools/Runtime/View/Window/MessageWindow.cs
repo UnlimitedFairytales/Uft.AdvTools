@@ -12,9 +12,11 @@ namespace Uft.AdvTools.View
     {
         // Parameters
 
-        [SerializeField] protected bool _isTypewritingEnabled = true;
+        [SerializeField] protected bool _isTypewriterEnabled = true;
         [SerializeField] protected float _typewriterInterval_sec = 0.05f;
+        [SerializeField] protected bool _isNameAreaHiddenOnNonCharacterText = false;
 
+        [SerializeField] protected GameObject _goNameAreaRoot;
         [SerializeField] protected TMP_Text? _txtName;
         [SerializeField] protected TMP_Text? _txtText;
         [SerializeField] protected Image? _imgNextSymbol;
@@ -41,6 +43,10 @@ namespace Uft.AdvTools.View
             this._animNextSymbol = this._imgNextSymbol.GetComponent<Animator>();
             this._txtName.text = "";
             this._txtText.text = "";
+            if (this._isNameAreaHiddenOnNonCharacterText)
+            {
+                this._goNameAreaRoot.SetActive(false);
+            }
         }
 
         protected virtual void Update()
@@ -66,6 +72,14 @@ namespace Uft.AdvTools.View
             advRoot.ShowUI();
 
             this._txtName.text = name;
+            if (string.IsNullOrEmpty(this._txtName.text) && this._isNameAreaHiddenOnNonCharacterText)
+            {
+                this._goNameAreaRoot.SetActive(false);
+            }
+            else
+            {
+                this._goNameAreaRoot.SetActive(true);
+            }
             switch (this.LastPageCtrl)
             {
                 // NOTE: defaultはInputBrPage
@@ -73,7 +87,7 @@ namespace Uft.AdvTools.View
                 case CmdText.PageCtrlType.InputBrPageAndNoHide:
                 case CmdText.PageCtrlType.InputBrPage:
                     this._txtText.text = text;
-                    if (this._isTypewritingEnabled)
+                    if (this._isTypewriterEnabled)
                     {
                         this._typewriterIntervalCounter_sec = 0;
                         this._txtText.maxVisibleCharacters = 0;

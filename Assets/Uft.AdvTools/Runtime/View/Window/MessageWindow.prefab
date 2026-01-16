@@ -148,8 +148,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d6e3126df1a32e49867c63f58a4a97c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isTypewritingEnabled: 1
+  _isTypewriterEnabled: 1
   _typewriterInterval_sec: 0.05
+  _isNameAreaHiddenOnNonCharacterText: 0
+  _goNameAreaRoot: {fileID: 5709984184161949296}
   _txtName: {fileID: 7579751356960517129}
   _txtText: {fileID: 5983365990133606030}
   _imgNextSymbol: {fileID: 3903102805593623866}
