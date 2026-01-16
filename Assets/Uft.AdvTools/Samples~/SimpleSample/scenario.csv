@@ -1,142 +1,142 @@
-﻿## 仕様
-#
-### 各設定シート
-#
-### Characterシート : 宴4に対する制限事項
-#
-#- CharacterName, NameText, Pattern, X, Y, Pivot, Scale, FileName, FileType, AnimationStateのみ機能する
-#- FileTypeは、空欄、2DPrefabのみ対応。RenderTextureモードは非対応
-#    - FileTypeに2DPrefabを指定した場合のみ、プレハブ直下に設定されたAnimatorを認識し、AnimationStateでAnimator.Play(stateName)する
-#    - 単一のキャラクターが複数のFileTypeを持つことは出来ず、全てのパターンは同一のFileTypeである必要がある
-#- NameTextはキャラごとの1行目に必須。paramは非対応
-#- Pivotの数値指定は未対応
-#
-### Textureシート : 宴4に対する制限事項
-#
-#- Label, Type, X, Y, Pivot, Scale, FileName, FileTypeのみ機能する
-#- FileTypeは、空欄、2DPrefabのみ対応。RenderTextureモードは非対応
-#    - FileTypeに2DPrefabを指定した場合のみ、プレハブ直下に設定されたAnimatorを認識し、Entryから入るアニメーションが再生される
-#- Typeでは、Bg, Spriteのみ対応
-#- Pivotの数値指定は未対応
-#
-### Soundシート : 宴4に対する制限事項
-#
-#- Label, Type, FileNameのみ対応
-#- Typeでは、Se, Bgmのみ対応
-#- AdvRootのAllowsVoiceLabelをtrueにすると、SoundシートでVoiceタイプを認識し、使用できるようになる
-#    - この機能は宴4互換ではないため、デフォルトではfalseになっている
-#
-### Paramシート : 宴4に対する制限事項
-#
-#- Label, Valueのみ機能する
-#- TypeはIntのみ固定
-#- 変数置換に string.Replace を使用しているため、変数名が部分一致で変換される危険がある
-#
-### 宴4互換フォルダ構成
-#
-#- Resources/ProjectName/Sound/BGM
-#- Resources/ProjectName/Sound/SE
-#- Resources/ProjectName/Sound/Voice
-#- Resources/ProjectName/Texture/BG
-#- Resources/ProjectName/Texture/Character
-#- Resources/ProjectName/Texture/Sprite
-#
-### シナリオとコマンド
-#
-#### Scenarioシート
-#
-#- WaitType, WindowTypeは非対応。ただし、ChangeMessageWindowコマンドは使用可能
-#- 宴レイヤー機能はなく、簡易実装
-#    - Layerシートはない。Bgは専用、SpriteとCharacterはそれぞれ(奥)0～7(手前)を指定する
-#    - SpriteとCharacterが同じレイヤー番号の場合、Characterが手前
-#    - 構造としては、Bg用のCanvasBg、SpriteやCharacter用のCanvasSprite、メッセージウィンドウなどのCanvasUIの3つのCanvasに分かれている
-#- Skipの挙動が宴4と異なる。Wait全般がWaitを待つ
-#
-#### コマンド詳細
-#
-#コマンド           |カテゴリ|制限事項
-#-------------------|--------|--------------------------------------------------------
-#空欄(Arg1未指定)   |Text    |PageCtrlはInput系3種とNextのみ対応。利用可能なタグはTMPが自動的に対応するもののみ
-#空欄(Arg1あり)     |Text    |レイヤーは0～7を指定する簡易実装。Arg1～Arg6でのparamタグ、Characterタグなどは、Arg2へのOffタグ以外は全て非対応。PageCtrlやText等はArg1未指定と同様の制限事項。Voiceは後述
-#CharacterOff       |Object  |Arg1はキャラクター指定のみ対応
-#Bg                 |Object  |レイヤーに非対応
-#BgOff              |Object  |-
-#Sprite             |Object  |スプライト名とラベルに区別がなく、インスタンス化できない。レイヤーは0～7を指定する簡易実装
-#SpriteOff          |Object  |スプライト名とラベルに区別がなく、インスタンス化できない
-#Se                 |Sound   |-
-#Bgm                |Sound   |-
-#StopBgm            |Sound   |-
-#Wait               |Effect  |-
-#FadeIn             |Effect  |カメラ、アニメ指定は非対応。ルール画像はFadeHorizontal、Cloudのみ対応
-#FadeOut            |Effect  |カメラ、アニメ指定は非対応。ルール画像はFadeHorizontal、Cloudのみ対応
-#ImageEffect        |Effect  |カメラ、アニメ指定は非対応。ただし、カメラにはSpriteCameraを指定が必要。GrayScale、Sepiaのみ指定可能
-#ImageEffectOff     |Effect  |カメラ、アニメ指定は非対応。ただし、カメラにはSpriteCameraを指定が必要。GrayScale、Sepiaのみ指定可能
-#Tween              |Effect  |個別名のみ指定可能（背景はBGで指定可能）で、レイヤー指定は未対応。TweenTypeはMoveTo/From/Byの3種、Punch/Shake系のPositionとScale4種で計7種のみ。TweenParameterはislocalが指定可能なものはislocal=trueを指定しないとエラー(グローバルが許容されない)、色関連は非対応、=の左右に空白は許容されない制限あり。Easeはspringだけ非対応。loop非対応。Easeライブラリが宴と異なるため、挙動差がある可能性あり
-#ShowMessageWindow  |UI      |-
-#HideMessageWindow  |UI      |-
-#ChangeMessageWindow|UI      |-
-#Param              |Logic   |宴4互換で使用可能な演算子が少ない。詳細後述。変数にも制限あり
-#Jump               |Logic   |宴4互換で使用可能な演算子が少ない。詳細後述。変数にも制限あり
-#Selection          |Logic   |プレハブ、X、Yの個別指定は非対応。宴と仕様が異なり、直前のテキスト内容は非表示にならない。また、選択肢を出した後にテキストをさらに出すことも出来ない
-#PauseScenario      |End     |-
-#
-#.
-#
-#### 独自コマンド
-#
-#コマンド         |カテゴリ|備考
-#-----------------|--------|----------------
-#SelectionTitle   |Logic   |Textに表示内容。Selectionの手前に置くことで表示できる
-#
-#.
-#
-#### 独自部分の補足
-#
-##### レイヤー全般について
-#
-#- レイヤーの自作等の機能はなく、0～7の指定があるのみ。同一番号ではSpriteとCharacterはCharacterが手前
-#
-##### Voiceについて
-#
-#- デフォルトでは宴4互換でVoiceフォルダ以下からのファイル名のみ許容します
-#- AdvRootのAllowsVoiceLabelをtrueにすると、SoundシートでVoiceタイプを認識し、使用できるようになる
-#    - この機能は宴4互換ではなく、後で宴に移行する際に障壁になりやすいため、デフォルトではfalseになっている
-#
-#### 宴4互換で使用可能な変数、演算子
-#
-#変数について
-#
-#- Paramシート定義はintのみ可能。なお計算式中は自動的にdouble相当になり、除算結果も小数になる。文字列等は非対応
-#- string.Replace を使用しているため、変数名が部分一致で変換される危険がある。
-#
-#演算子について
-#
-#- 四則演算   : 宴4に準ずる
-#- 比較演算子 : 宴4に準ずる
-#- 単項演算   : 非対応
-#- 括弧       : 宴4に準ずる
-#- 論理演算   : 宴4に準ずる
-#- 代入演算   : = のみ可能
-#- 組込み関数 : 全て不可
-#
-#※ DataTable.Compute()を使用しているため、宴4にはない演算子やキーワードが解釈される場合がある
-#いわゆる、SQLに登場するキーワード (AND, OR, NOT, LIKE, IN など)
-#後で宴4などに乗り換える想定がある場合は、使用しないほうが無難
-#
-#### 補足
-#
-#- 改ページ直後の演出コマンド時、自動的にWindowをHide。（宴準拠）
-#    - AdvRootのEmulatesUtageEffectCommandをfalseにすると、演出コマンドに対してWindowが非表示にならなくなる
-#- Text時、自動的にWindowをShow。（宴準拠）
+﻿//# 仕様
+//
+//## 各設定シート
+//
+//## Characterシート : 宴4に対する制限事項
+//
+//- CharacterName, NameText, Pattern, X, Y, Pivot, Scale, FileName, FileType, AnimationStateのみ機能する
+//- FileTypeは、空欄、2DPrefabのみ対応。RenderTextureモードは非対応
+//    - FileTypeに2DPrefabを指定した場合のみ、プレハブ直下に設定されたAnimatorを認識し、AnimationStateでAnimator.Play(stateName)する
+//    - 単一のキャラクターが複数のFileTypeを持つことは出来ず、全てのパターンは同一のFileTypeである必要がある
+//- NameTextはキャラごとの1行目に必須。paramは非対応
+//- Pivotの数値指定は未対応
+//
+//## Textureシート : 宴4に対する制限事項
+//
+//- Label, Type, X, Y, Pivot, Scale, FileName, FileTypeのみ機能する
+//- FileTypeは、空欄、2DPrefabのみ対応。RenderTextureモードは非対応
+//    - FileTypeに2DPrefabを指定した場合のみ、プレハブ直下に設定されたAnimatorを認識し、Entryから入るアニメーションが再生される
+//- Typeでは、Bg, Spriteのみ対応
+//- Pivotの数値指定は未対応
+//
+//## Soundシート : 宴4に対する制限事項
+//
+//- Label, Type, FileNameのみ対応
+//- Typeでは、Se, Bgmのみ対応
+//- AdvRootのAllowsVoiceLabelをtrueにすると、SoundシートでVoiceタイプを認識し、使用できるようになる
+//    - この機能は宴4互換ではないため、デフォルトではfalseになっている
+//
+//## Paramシート : 宴4に対する制限事項
+//
+//- Label, Valueのみ機能する
+//- TypeはIntのみ固定
+//- 変数置換に string.Replace を使用しているため、変数名が部分一致で変換される危険がある
+//
+//## 宴4互換フォルダ構成
+//
+//- Resources/ProjectName/Sound/BGM
+//- Resources/ProjectName/Sound/SE
+//- Resources/ProjectName/Sound/Voice
+//- Resources/ProjectName/Texture/BG
+//- Resources/ProjectName/Texture/Character
+//- Resources/ProjectName/Texture/Sprite
+//
+//## シナリオとコマンド
+//
+//### Scenarioシート
+//
+//- WaitType, WindowTypeは非対応。ただし、ChangeMessageWindowコマンドは使用可能
+//- 宴レイヤー機能はなく、簡易実装
+//    - Layerシートはない。Bgは専用、SpriteとCharacterはそれぞれ(奥)0～7(手前)を指定する
+//    - SpriteとCharacterが同じレイヤー番号の場合、Characterが手前
+//    - 構造としては、Bg用のCanvasBg、SpriteやCharacter用のCanvasSprite、メッセージウィンドウなどのCanvasUIの3つのCanvasに分かれている
+//- Skipの挙動が宴4と異なる。Wait全般がWaitを待つ
+//
+//### コマンド詳細
+//
+//コマンド           |カテゴリ|制限事項
+//-------------------|--------|--------------------------------------------------------
+//空欄(Arg1未指定)   |Text    |PageCtrlはInput系3種とNextのみ対応。利用可能なタグはTMPが自動的に対応するもののみ
+//空欄(Arg1あり)     |Text    |レイヤーは0～7を指定する簡易実装。Arg1～Arg6でのparamタグ、Characterタグなどは、Arg2へのOffタグ以外は全て非対応。PageCtrlやText等はArg1未指定と同様の制限事項。Voiceは後述
+//CharacterOff       |Object  |Arg1はキャラクター指定のみ対応
+//Bg                 |Object  |レイヤーに非対応
+//BgOff              |Object  |-
+//Sprite             |Object  |スプライト名とラベルに区別がなく、インスタンス化できない。レイヤーは0～7を指定する簡易実装
+//SpriteOff          |Object  |スプライト名とラベルに区別がなく、インスタンス化できない
+//Se                 |Sound   |-
+//Bgm                |Sound   |-
+//StopBgm            |Sound   |-
+//Wait               |Effect  |-
+//FadeIn             |Effect  |カメラ、アニメ指定は非対応。ルール画像はFadeHorizontal、Cloudのみ対応
+//FadeOut            |Effect  |カメラ、アニメ指定は非対応。ルール画像はFadeHorizontal、Cloudのみ対応
+//ImageEffect        |Effect  |カメラ、アニメ指定は非対応。ただし、カメラにはSpriteCameraを指定が必要。GrayScale、Sepiaのみ指定可能
+//ImageEffectOff     |Effect  |カメラ、アニメ指定は非対応。ただし、カメラにはSpriteCameraを指定が必要。GrayScale、Sepiaのみ指定可能
+//Tween              |Effect  |個別名のみ指定可能（背景はBGで指定可能）で、レイヤー指定は未対応。TweenTypeはMoveTo/From/Byの3種、Punch/Shake系のPositionとScale4種で計7種のみ。TweenParameterはislocalが指定可能なものはislocal=trueを指定しないとエラー(グローバルが許容されない)、色関連は非対応、=の左右に空白は許容されない制限あり。Easeはspringだけ非対応。loop非対応。Easeライブラリが宴と異なるため、挙動差がある可能性あり
+//ShowMessageWindow  |UI      |-
+//HideMessageWindow  |UI      |-
+//ChangeMessageWindow|UI      |-
+//Param              |Logic   |宴4互換で使用可能な演算子が少ない。詳細後述。変数にも制限あり
+//Jump               |Logic   |宴4互換で使用可能な演算子が少ない。詳細後述。変数にも制限あり
+//Selection          |Logic   |プレハブ、X、Yの個別指定は非対応。宴と仕様が異なり、直前のテキスト内容は非表示にならない。また、選択肢を出した後にテキストをさらに出すことも出来ない
+//PauseScenario      |End     |-
+//
+//.
+//
+//### 独自コマンド
+//
+//コマンド         |カテゴリ|備考
+//-----------------|--------|----------------
+//SelectionTitle   |Logic   |Textに表示内容。Selectionの手前に置くことで表示できる
+//
+//.
+//
+//### 独自部分の補足
+//
+//#### レイヤー全般について
+//
+//- レイヤーの自作等の機能はなく、0～7の指定があるのみ。同一番号ではSpriteとCharacterはCharacterが手前
+//
+//#### Voiceについて
+//
+//- デフォルトでは宴4互換でVoiceフォルダ以下からのファイル名のみ許容します
+//- AdvRootのAllowsVoiceLabelをtrueにすると、SoundシートでVoiceタイプを認識し、使用できるようになる
+//    - この機能は宴4互換ではなく、後で宴に移行する際に障壁になりやすいため、デフォルトではfalseになっている
+//
+//### 宴4互換で使用可能な変数、演算子
+//
+//変数について
+//
+//- Paramシート定義はintのみ可能。なお計算式中は自動的にdouble相当になり、除算結果も小数になる。文字列等は非対応
+//- string.Replace を使用しているため、変数名が部分一致で変換される危険がある。
+//
+//演算子について
+//
+//- 四則演算   : 宴4に準ずる
+//- 比較演算子 : 宴4に準ずる
+//- 単項演算   : 非対応
+//- 括弧       : 宴4に準ずる
+//- 論理演算   : 宴4に準ずる
+//- 代入演算   : = のみ可能
+//- 組込み関数 : 全て不可
+//
+//※ DataTable.Compute()を使用しているため、宴4にはない演算子やキーワードが解釈される場合がある
+//いわゆる、SQLに登場するキーワード (AND, OR, NOT, LIKE, IN など)
+//後で宴4などに乗り換える想定がある場合は、使用しないほうが無難
+//
+//### 補足
+//
+//- 改ページ直後の演出コマンド時、自動的にWindowをHide。（宴準拠）
+//    - AdvRootのEmulatesUtageEffectCommandをfalseにすると、演出コマンドに対してWindowが非表示にならなくなる
+//- Text時、自動的にWindowをShow。（宴準拠）
 
-################################################################################
+//###############################################################################
 
 Command,Arg1,Arg2,Arg3,Arg4,Arg5,Arg6,WaitType,Text,PageCtrl,Voice,WindowType
 Bgm,BGMその1,,,,,,,,,,,
 Bg,背景その1,,,,,,,,,,,
 FadeIn,black,,,,,3,,,,,
 
-################################################################################
+//###############################################################################
 
 *Labelスタート地点,,,,,,,,,,,
 SelectionTitle,,,,,,,,機能説明,,,
@@ -148,7 +148,7 @@ Selection,*LabelUI,,,,,,,UI,,,,
 Selection,*Labelロジック制御,,,,,,,ロジック制御,,,,
 Selection,*Label終了制御,,,,,,,終了制御,,,,
 
-################################################################################
+//###############################################################################
 
 *Labelテキストとキャラクター,,,,,,,,,,,
 SelectionTitle,,,,,,,,テキストとキャラクター,,,
@@ -230,7 +230,7 @@ Jump,*Labelテキストとキャラクター,,,,,,,,,,
 ,,,,,,,,"<align=flush>flush（均等割り付け）</align>",,,
 Jump,*Labelテキストとキャラクター,,,,,,,,,,
 
-################################################################################
+//###############################################################################
 
 *Labelオブジェクト表示,,,,,,,,,,,
 SelectionTitle,,,,,,,,オブジェクト表示,,,
@@ -278,7 +278,7 @@ Sprite,猫2,,1,,,2.0,,,,,,
 Sprite,猫1,,2,,,1.0,,,,,,
 Jump,*Labelオブジェクト表示,,,,,,,,,,
 
-################################################################################
+//###############################################################################
 
 *Labelサウンド,,,,,,,,,,,
 SelectionTitle,,,,,,,,サウンド,,,
@@ -332,7 +332,7 @@ StopBgm,,,,,,2.0,,,,,
 Wait,,,,,,2.0,,,,,
 Jump,*Labelサウンド,,,,,,,,,,
 
-################################################################################
+//###############################################################################
 
 *Label演出,,,,,,,,,,,
 SelectionTitle,,,,,,,,演出,,,
@@ -430,19 +430,19 @@ Tween,猫2,PunchScale,time=2 delay=0 x=0.1 y=0.1,,,,,,,,,
 Tween,猫2,ShakeScale,time=2 delay=0 x=0.1 y=0.1,,,,,,,,,
 Jump,*LabelTween,,,,,,,,,,
 
-################################################################################
+//###############################################################################
 
 *LabelUI,,,,,,,,,,,
 SelectionTitle,,,,,,,,UI,,,
 Selection,*Labelスタート地点,,,,,,,戻る,,,,
 
-################################################################################
+//###############################################################################
 
 *Labelロジック制御,,,,,,,,,,,
 SelectionTitle,,,,,,,,ロジック制御,,,
 Selection,*Labelスタート地点,,,,,,,戻る,,,,
 
-################################################################################
+//###############################################################################
 
 *Label終了制御,,,,,,,,,,,
 SelectionTitle,,,,,,,,終了制御,,,

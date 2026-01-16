@@ -20,6 +20,7 @@ namespace Uft.AdvTools.Loader
         public static IReadOnlyList<TextureCsvDto> Load(FileInfo fileInfo)
         {
             var config =  CsvUtil.GetCsvConfiguration(CsvUtil.UTF8);
+            config.Comment = '/';
             config.MissingFieldFound = null;
             return fileInfo.ReadCsv(
                 config,
@@ -29,6 +30,7 @@ namespace Uft.AdvTools.Loader
         public static IReadOnlyList<TextureCsvDto> Load(string csvText)
         {
             var config =  CsvUtil.GetCsvConfiguration(CsvUtil.UTF8);
+            config.Comment = '/';
             config.MissingFieldFound = null;
             return csvText.ReadCsv(
                 config,

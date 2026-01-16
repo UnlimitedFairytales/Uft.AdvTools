@@ -19,15 +19,21 @@ namespace Uft.AdvTools.Loader
 
         public static IReadOnlyList<ScenarioCsvDto> Load(FileInfo fileInfo)
         {
+            var config =  CsvUtil.GetCsvConfiguration(CsvUtil.UTF8);
+            config.Comment = '/';
+            config.MissingFieldFound = null;
             return fileInfo.ReadCsv(
-                CsvUtil.GetCsvConfiguration(CsvUtil.UTF8),
+                config,
                 (reader) => Map(reader));
         }
 
         public static IReadOnlyList<ScenarioCsvDto> Load(string csvText)
         {
+            var config =  CsvUtil.GetCsvConfiguration(CsvUtil.UTF8);
+            config.Comment = '/';
+            config.MissingFieldFound = null;
             return csvText.ReadCsv(
-                CsvUtil.GetCsvConfiguration(CsvUtil.UTF8),
+                config,
                 (reader) => Map(reader));
         }
 
