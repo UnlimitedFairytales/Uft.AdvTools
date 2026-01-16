@@ -27,6 +27,7 @@ namespace Uft.AdvTools.Loader
         // Sound
         public const string Se = "se";
         public const string Bgm = "bgm";
+        public const string StopSe = "stopse";
         public const string StopBgm = "stopbgm";
 
         // Effect
@@ -147,6 +148,7 @@ namespace Uft.AdvTools.Loader
                                 if (string.IsNullOrWhiteSpace(dto.Arg1)) throw new Exception($"{nameof(CmdSe)} : Arg1 is required.");
                                 commandList.Add(new CmdSe(
                                     dto.Arg1,
+                                    bool.TryParse(dto.Arg2, out var isLoop) ? isLoop : null,
                                     InvariantCultureUtil.FloatTryParse(dto.Arg3, out var volume) ? volume : null));
                             }
                             break;
@@ -159,6 +161,14 @@ namespace Uft.AdvTools.Loader
                                     InvariantCultureUtil.FloatTryParse(dto.Arg3, out var volume) ? volume : null,
                                     InvariantCultureUtil.FloatTryParse(dto.Arg5, out var prevFadeOutSeconds) ? prevFadeOutSeconds : null,
                                     InvariantCultureUtil.FloatTryParse(dto.Arg6, out var fadeInSeconds) ? fadeInSeconds : null));
+                            }
+                            break;
+                        case StopSe:
+                            {
+                                commandList.Add(
+                                    new CmdStopSe(
+                                        dto.Arg1,
+                                        InvariantCultureUtil.FloatTryParse(dto.Arg6, out var fadeOutSeconds) ? fadeOutSeconds : null));
                             }
                             break;
                         case StopBgm:

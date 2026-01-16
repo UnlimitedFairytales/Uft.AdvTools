@@ -9,18 +9,20 @@ namespace Uft.AdvTools.Commands
         public CommandCategory CommandCategory { get; } = CommandCategory.Sound;
 
         protected string Label { get; set; }
+        protected bool IsLoop { get; set; }
         protected float Volume { get; set; }
 
-        public CmdSe(string soundLabel, float? volume)
+        public CmdSe(string soundLabel, bool? isLoop, float? volume)
         {
             this.Label = soundLabel;
+            this.IsLoop = isLoop ?? false;
             this.Volume = Mathf.Clamp(volume ?? 1.0f, 0.0f, 1.0f);
         }
 
         public virtual void Run(ScenarioExecutor scenarioExecutor, AdvRoot advRoot)
         {
             var clip = advRoot.SeDictionary[this.Label];
-            advRoot.SoundManager.PlayOneShotSe(clip, this.Volume);
+            advRoot.SoundManager.PlaySe(clip, this.IsLoop, this.Volume);
         }
     }
 }
