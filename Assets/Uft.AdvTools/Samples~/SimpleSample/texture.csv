@@ -1,7 +1,7 @@
 ﻿Label,Type,X,Y,Z,Pivot,Scale,Conditional,FileName,FileType,SubFileName,Animation,RenderTexture,RenderRect,Thumbnail,CgCategolly
-背景その1,Bg,,,,,,,bg_ryokan_hiroen_1280x720.jpg,,,,,,,
-背景その2,Bg,-10,-20,,,,,bg_chiheisen_green_1280x720.jpg,,,,,,,
+背景その1,Bg,,,,,,,bg_ryokan_hiroen_1920x1080.jpg,,,,,,,
+背景その2,Bg,-15,-30,,,,,bg_chiheisen_green_1920x1080.jpg,,,,,,,
 ,,,,,,,,,,,,,,,
 猫1,Sprite,,,,,,,cat_koubakozuwari_brown.png,,,,,,,
-猫2,Sprite,100,200,,,,,cat_koubakozuwari_gray.png,,,,,,,
-Prefab猫1Sprite,Sprite,200,-100,,,,,prefabcat01/Cat01Sprite.prefab,2DPrefab,,,,,,
+猫2,Sprite,150,300,,,,,cat_koubakozuwari_gray.png,,,,,,,
+Prefab猫1Sprite,Sprite,300,-150,,,,,prefabcat01/Cat01Sprite.prefab,2DPrefab,,,,,,
