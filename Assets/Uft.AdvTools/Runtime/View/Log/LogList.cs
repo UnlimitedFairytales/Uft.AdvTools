@@ -46,13 +46,13 @@ namespace Uft.AdvTools.View
 
         // Methods
 
-        public void AddItemData(LogData data)
+        public virtual void AddItemData(LogData data)
         {
             this.DataList.Add(data);
             this.RefreshVirtualContentSize();
         }
 
-        public void RefreshVirtualContentSize() => ((IVList<LogListItem, LogData>)this).RefreshVirtualContentHeight();
+        public virtual void RefreshVirtualContentSize() => ((IVList<LogListItem, LogData>)this).RefreshVirtualContentHeight();
 
         void AwakeLogic() => ((IVList<LogListItem, LogData>)this).AwakeLogic();
     }

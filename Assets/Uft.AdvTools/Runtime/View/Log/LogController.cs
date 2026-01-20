@@ -39,7 +39,7 @@ namespace Uft.AdvTools.View
 
         // Methods
 
-        public int GetIndexAtPosition(float posY)
+        public virtual int GetIndexAtPosition(float posY)
         {
             if (this._scrollRect == null) throw new UnassignedReferenceException(nameof(this._scrollRect));
             if (this._list == null) throw new UnassignedReferenceException(nameof(this._list));

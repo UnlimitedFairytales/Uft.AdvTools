@@ -23,7 +23,7 @@ namespace Uft.AdvTools.View
 
         // Methods
 
-        public void SetData(CmdSelection data, Vector2 anchoredPosition)
+        public virtual void SetData(CmdSelection data, Vector2 anchoredPosition)
         {
             if (this._canvasGroup == null) throw new UnassignedReferenceException(nameof(this._canvasGroup));
             if (this._button == null) throw new UnassignedReferenceException(nameof(this._button));

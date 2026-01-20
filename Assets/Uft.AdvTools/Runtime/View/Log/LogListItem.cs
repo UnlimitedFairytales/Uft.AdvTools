@@ -34,7 +34,7 @@ namespace Uft.AdvTools.View
 
         // Methods
 
-        public void SetData(LogData data)
+        public virtual void SetData(LogData data)
         {
             if (this._txtText == null) throw new UnassignedReferenceException(nameof(this._txtText));
 
@@ -43,7 +43,7 @@ namespace Uft.AdvTools.View
             this.RefreshLayoutElement();
         }
 
-        public float CalcHeight(LogData data)
+        public virtual float CalcHeight(LogData data)
         {
             string text = data.Text;
             int lineCount = CountLines(text);

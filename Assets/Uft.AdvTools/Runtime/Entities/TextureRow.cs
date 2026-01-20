@@ -67,7 +67,7 @@ namespace Uft.AdvTools.Entities
             this.ResetLastStatus();
         }
 
-        public void ResetLastStatus()
+        public virtual void ResetLastStatus()
         {
             this.LastImageIndex = 0;
         }

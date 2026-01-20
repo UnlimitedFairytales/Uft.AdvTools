@@ -27,7 +27,7 @@ namespace Uft.AdvTools.View
 
         // Unity events
 
-        protected void Awake()
+        protected virtual void Awake()
         {
             if (this._selectionItemPrototype == null) throw new UnassignedReferenceException(nameof(this._selectionItemPrototype));
 

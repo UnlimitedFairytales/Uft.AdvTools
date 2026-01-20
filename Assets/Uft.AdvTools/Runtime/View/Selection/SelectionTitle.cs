@@ -16,7 +16,7 @@ namespace Uft.AdvTools.View
 
         // Methods
 
-        public void SetData(string text, Vector2 anchoredPosition)
+        public virtual void SetData(string text, Vector2 anchoredPosition)
         {
             if (this._canvasGroup == null) throw new UnassignedReferenceException(nameof(this._canvasGroup));
             if (this._txtText == null) throw new UnassignedReferenceException(nameof(this._txtText));
