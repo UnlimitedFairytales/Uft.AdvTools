@@ -115,6 +115,11 @@ namespace Uft.AdvTools.View
             }
         }
 
+        public virtual void ForceSetLastPageCtrl(CmdText.PageCtrlType pageCtrlType)
+        {
+            this.LastPageCtrl = pageCtrlType;
+        }
+
         public virtual void EndTypewriting()
         {
             if (this._txtName == null || this._txtText == null || this._imgNextSymbol == null) throw new InvalidOperationException($"{nameof(this._txtName)}, {nameof(this._txtText)}, {nameof(this._imgNextSymbol)} are required.");
