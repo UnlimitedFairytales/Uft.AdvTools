@@ -21,12 +21,12 @@ namespace Uft.AdvTools.View
         [SerializeField] float _fallbackChildVariableHeight; public float FallbackChildVariableHeight => this._fallbackChildVariableHeight;
 
         // 仮想計算用
-        [SerializeField] float _virtualLineHeight = 30f;
-        [SerializeField] float _virtualPadding = 20f;
+        [SerializeField] float _virtualLineHeight = 30f; protected float VirtualLineHeight => this._virtualLineHeight;
+        [SerializeField] float _virtualPadding = 20f; protected float VirtualPadding => this._virtualPadding;
 
         // 実際のParameter
-        [SerializeField] TMP_Text? _txtName;
-        [SerializeField] TMP_Text? _txtText;
+        [SerializeField] TMP_Text? _txtName; protected TMP_Text? TxtName => this._txtName;
+        [SerializeField] TMP_Text? _txtText; protected TMP_Text? TxtText => this._txtText;
 
         // Status
 
