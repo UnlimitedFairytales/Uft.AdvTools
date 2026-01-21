@@ -11,7 +11,7 @@ namespace Uft.AdvTools
         readonly List<LogData> _logItemList = new();
         public IReadOnlyList<LogData> LogItemList => this._logItemList;
 
-        public void Add(CmdText.PageCtrlType lastPageCtrl, Character? character, string name, string text)
+        public virtual void Add(CmdText.PageCtrlType lastPageCtrl, Character? character, string name, string text, object[]? args = null)
         {
             var isNewEntry = CmdText.IsNewPage(lastPageCtrl);
             if (isNewEntry || this._logItemList.Count == 0)

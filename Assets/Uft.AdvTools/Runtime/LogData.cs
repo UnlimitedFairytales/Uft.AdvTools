@@ -18,7 +18,7 @@ namespace Uft.AdvTools
             this.Text = text;
         }
 
-        public void AddText(CmdText.PageCtrlType lastPageCtrl, string additionalText)
+        public virtual void AddText(CmdText.PageCtrlType lastPageCtrl, string additionalText)
         {
             if (lastPageCtrl == CmdText.PageCtrlType.InputBr)
             {
