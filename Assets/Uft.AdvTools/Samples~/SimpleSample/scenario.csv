@@ -63,8 +63,9 @@
 //BgOff              |Object  |-
 //Sprite             |Object  |スプライト名とラベルに区別がなく、インスタンス化できない。レイヤーは0～7を指定する簡易実装
 //SpriteOff          |Object  |スプライト名とラベルに区別がなく、インスタンス化できない
-//Se                 |Sound   |-
+//Se                 |Sound   |同時に再生可能な数は8つまで。9つ目を再生すると最も古いものが停止される
 //Bgm                |Sound   |-
+//StopSe             |Sound   |-
 //StopBgm            |Sound   |-
 //Wait               |Effect  |-
 //FadeIn             |Effect  |カメラ、アニメ指定は非対応。ルール画像はFadeHorizontal、Cloudのみ対応
