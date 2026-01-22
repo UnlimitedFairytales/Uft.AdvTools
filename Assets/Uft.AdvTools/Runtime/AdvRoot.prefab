@@ -2246,11 +2246,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1851556084476207251, guid: 00967fafb87067743a56fcbe9e1e1d15, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 720
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 1851556084476207251, guid: 00967fafb87067743a56fcbe9e1e1d15, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 360
+      value: 540
       objectReference: {fileID: 0}
     - target: {fileID: 3585817740673098636, guid: 00967fafb87067743a56fcbe9e1e1d15, type: 3}
       propertyPath: m_Name
