@@ -16,7 +16,7 @@ namespace Uft.AdvTools.View
         [SerializeField] protected float _typewriterInterval_sec = 0.05f;
         [SerializeField] protected bool _isNameAreaHiddenOnNonCharacterText = false;
 
-        [SerializeField] protected GameObject _goNameAreaRoot;
+        [SerializeField] protected GameObject? _goNameAreaRoot;
         [SerializeField] protected TMP_Text? _txtName;
         [SerializeField] protected TMP_Text? _txtText;
         [SerializeField] protected Image? _imgNextSymbol;
@@ -37,7 +37,8 @@ namespace Uft.AdvTools.View
 
         protected virtual void Awake()
         {
-            if (this._txtName == null || this._txtText == null || this._imgNextSymbol == null) throw new InvalidOperationException($"{nameof(this._txtName)}, {nameof(this._txtText)}, {nameof(this._imgNextSymbol)} are required.");
+            if (this._goNameAreaRoot == null || this._txtName == null || this._txtText == null || this._imgNextSymbol == null)
+                throw new InvalidOperationException($"{nameof(this._goNameAreaRoot)}, {nameof(this._txtName)}, {nameof(this._txtText)}, {nameof(this._imgNextSymbol)} are required.");
 
             this._parentRectTransform = this._txtText.rectTransform.parent as RectTransform;
             this._animNextSymbol = this._imgNextSymbol.GetComponent<Animator>();
@@ -66,7 +67,8 @@ namespace Uft.AdvTools.View
 
         public virtual void SetText(AdvRoot advRoot, string name, string text, CmdText.PageCtrlType pageCtrl, string windowType)
         {
-            if (this._txtName == null || this._txtText == null || this._imgNextSymbol == null) throw new InvalidOperationException($"{nameof(this._txtName)}, {nameof(this._txtText)}, {nameof(this._imgNextSymbol)} are required.");
+            if (this._goNameAreaRoot == null || this._txtName == null || this._txtText == null || this._imgNextSymbol == null)
+                throw new InvalidOperationException($"{nameof(this._goNameAreaRoot)}, {nameof(this._txtName)}, {nameof(this._txtText)}, {nameof(this._imgNextSymbol)} are required.");
 
             this.DisableImgNextSymbol();
             advRoot.ShowUI();
