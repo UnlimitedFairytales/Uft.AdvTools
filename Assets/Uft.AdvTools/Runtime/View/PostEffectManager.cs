@@ -5,6 +5,7 @@ using DG.Tweening;
 using DG.Tweening.Core;
 using Uft.FadeEffects;
 using Uft.UnityUtils;
+using Uft.UnityUtils.Common;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -20,7 +21,7 @@ namespace Uft.AdvTools.View
         const string FADE_HORIZONTAL = "FadeHorizontal";
         const string CLOUD = "Cloud";
 
-        [SerializeField] protected SimplePostEffectCollection? _wideCameraSimplePostEffectCollection; public SimplePostEffectCollection WideCameraSimplePostEffectCollection => this._wideCameraSimplePostEffectCollection;
+        [SerializeField] protected SimplePostEffectCollection? _wideCameraSimplePostEffectCollection; public SimplePostEffectCollection WideCameraSimplePostEffectCollection => ThrowIf.Unassigned(this._wideCameraSimplePostEffectCollection);
         public SimplePostEffectConfig WideCameraDirectionalGhostPostEffect
         {
             get
