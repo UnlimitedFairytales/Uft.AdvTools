@@ -37,12 +37,12 @@ namespace Uft.AdvTools.View
 
         // Unity events
 
-        void Reset()
+        protected virtual void Reset()
         {
             if (this._verticalLayoutGroup == null) this._verticalLayoutGroup = this.GetComponent<VerticalLayoutGroup>();
         }
 
-        void Awake() => this.AwakeLogic();
+        protected virtual void Awake() => this.AwakeLogic();
 
         // Methods
 

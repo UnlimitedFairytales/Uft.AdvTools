@@ -63,7 +63,7 @@ namespace Uft.AdvTools
 
         // Methods
 
-        void Awake()
+        protected virtual void Awake()
         {
             this._tglAutoNext.onValueChanged.AddListener((isOn) => this.ChangeAutoMode(isOn));
             this._tglLogView.onValueChanged.AddListener((isOn) => this.ChangeLogView(isOn));

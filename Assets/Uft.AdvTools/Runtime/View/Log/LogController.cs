@@ -23,13 +23,13 @@ namespace Uft.AdvTools.View
 
         // Unity events
 
-        void Reset()
+        protected virtual void Reset()
         {
             if (this._scrollRect == null) this._scrollRect = this.GetComponent<ScrollRect>();
             if (this._list == null) this._list = this.GetComponentInChildren<LogList>();
         }
 
-        void Update()
+        protected virtual void Update()
         {
             if (this._scrollRect == null) throw new UnassignedReferenceException(nameof(this._scrollRect));
             if (this._list == null) throw new UnassignedReferenceException(nameof(this._list));

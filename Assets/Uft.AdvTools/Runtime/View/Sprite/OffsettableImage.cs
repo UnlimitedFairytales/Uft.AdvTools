@@ -31,13 +31,13 @@ namespace Uft.AdvTools.View
 
         // Unity events
 
-        void Reset()
+        protected virtual void Reset()
         {
             this._canvasGroup = this.GetComponentInChildren<CanvasGroup>(true);
             this._image = this.GetComponentInChildren<Image>(true);
         }
 
-        public virtual void LateUpdate()
+        protected virtual void LateUpdate()
         {
             if (this._canvasGroup == null) throw new UnassignedReferenceException(nameof(this._canvasGroup));
             if (this._image == null) throw new UnassignedReferenceException(nameof(this._image));
