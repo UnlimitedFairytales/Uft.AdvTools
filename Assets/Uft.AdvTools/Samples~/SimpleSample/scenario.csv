@@ -136,6 +136,7 @@ Command,Arg1,Arg2,Arg3,Arg4,Arg5,Arg6,WaitType,Text,PageCtrl,Voice,WindowType
 Bgm,BGMその1,,,,,,,,,,,
 Bg,背景その1,,,,,,,,,,,
 FadeIn,black,,,,,3,,,,,
+,,,,,,,,"開始時は黒FadeOut状態で始まる。",,,
 
 //###############################################################################
 
