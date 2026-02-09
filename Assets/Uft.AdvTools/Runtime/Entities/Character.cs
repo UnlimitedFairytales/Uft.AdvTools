@@ -22,14 +22,7 @@ namespace Uft.AdvTools.Entities
         /// <summary>単一キャラクター内のPrefabは全て同一な想定しかしない</summary>
         public GameObject? Prefab { get; protected set; }
         GameObject? _instantiated = null;
-        public GameObject? Instantiated
-        {
-            get
-            {
-                this._instantiated = CacheUtil.GetCreatedObject(this._instantiated, this.Prefab);
-                return this._instantiated;
-            }
-        }
+        public GameObject? Instantiated => CacheUtil.GetCreatedObject(ref this._instantiated, this.Prefab);
         bool _hasTriedToGetAnimator;
         Animator? _animator = null;
         public Animator? Animator
@@ -39,7 +32,7 @@ namespace Uft.AdvTools.Entities
                 if (this.Instantiated == null) return null;
                 if (this._hasTriedToGetAnimator) return this._animator;
                 this._hasTriedToGetAnimator = true;
-                this._animator = CacheUtil.GetCachedChildComponent(this._animator, this.Instantiated.transform, true);
+                this._animator = CacheUtil.GetCachedChildComponent(ref this._animator, this.Instantiated.transform, true);
                 return this._animator;
             }
         }
