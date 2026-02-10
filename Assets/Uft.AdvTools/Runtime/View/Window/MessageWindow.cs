@@ -171,16 +171,23 @@ namespace Uft.AdvTools.View
 
         public virtual void Show(float fadeSeconds)
         {
-            if (this._canvasGroup == null) throw new InvalidOperationException($"{nameof(this._canvasGroup)} is required.");
+            if (this._goNameAreaRoot == null || this._txtName == null || this._txtText == null || this._canvasGroup == null)
+                throw new InvalidOperationException($"{nameof(this._goNameAreaRoot)}, {nameof(this._txtName)}, {nameof(this._txtText)}, {nameof(this._canvasGroup)} is required.");
 
             if (!this.gameObject.activeSelf)
             {
+                if (this._isNameAreaHiddenOnNonCharacterText)
+                {
+                    this._goNameAreaRoot.SetActive(false);
+                }
+                this._txtName.text = "";
+                this._txtText.text = "";
+                this._canvasGroup.alpha = 0;
                 this.gameObject.SetActive(true);
                 this._canvasGroup.DOKill();
                 if (fadeSeconds <= 0)
                 {
                     this._canvasGroup.alpha = 1.0f;
-
                 }
                 else
                 {
