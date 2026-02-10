@@ -52,7 +52,7 @@ namespace Uft.AdvTools
                 {
                     if (this.CommandList[this.SeekPoint].CommandCategory == CommandCategory.Effect && advRoot.MessageWindowManager.CurrentMessageWindow.LastPageCtrl == CmdText.PageCtrlType.InputBrPage)
                     {
-                        advRoot.HideUI();
+                        advRoot.HideUI(0);
                     }
                 }
                 advRoot.MessageWindowManager.CurrentMessageWindow.FixLastPageCtrl();

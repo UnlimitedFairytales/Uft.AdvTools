@@ -58,8 +58,7 @@ namespace Uft.AdvTools
             this.MessageWindowList = EMPTY_LIST;
         }
 
-        /// <summary>nextのShowはしない</summary>
-        public void ChangeMessageWindow(string messageWindowName)
+        public void ChangeMessageWindow(string messageWindowName, float fadeSeconds)
         {
             ThrowIf.NullOrEmpty(messageWindowName, nameof(messageWindowName));
             ThrowIf.NullOrEmpty(this.MessageWindowList, nameof(this.MessageWindowList));
@@ -73,9 +72,10 @@ namespace Uft.AdvTools
                         this.CurrentMessageWindow != null &&
                         this.CurrentMessageWindow != next)
                     {
-                        this.CurrentMessageWindow.Hide();
+                        this.CurrentMessageWindow.Hide(fadeSeconds);
                     }
                     this.CurrentMessageWindow = next;
+                    this.CurrentMessageWindow.Show(fadeSeconds);
                     return;
                 }
             }

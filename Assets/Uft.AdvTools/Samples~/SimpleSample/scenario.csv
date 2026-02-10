@@ -73,9 +73,9 @@
 //ImageEffect        |Effect  |カメラ、アニメ指定は非対応。ただし、カメラにはSpriteCameraを指定が必要。GrayScale、Sepiaのみ指定可能
 //ImageEffectOff     |Effect  |カメラ、アニメ指定は非対応。ただし、カメラにはSpriteCameraを指定が必要。GrayScale、Sepiaのみ指定可能
 //Tween              |Effect  |個別名のみ指定可能（背景はBGで指定可能）で、レイヤー指定は未対応。TweenTypeはMoveTo/From/Byの3種、Punch/Shake系のPositionとScale4種で計7種のみ。TweenParameterはislocalが指定可能なものはislocal=trueを指定しないとエラー(グローバルが許容されない)、色関連は非対応、=の左右に空白は許容されない制限あり。Easeはspringだけ非対応。loop非対応。Easeライブラリが宴と異なるため、挙動差がある可能性あり
-//ShowMessageWindow  |UI      |-
-//HideMessageWindow  |UI      |-
-//ChangeMessageWindow|UI      |-
+//ShowMessageWindow  |UI      |独自拡張：Arg6でfadeSeconds指定可能（省略時0秒）。
+//HideMessageWindow  |UI      |独自拡張：Arg6でfadeSeconds指定可能（省略時0秒）。
+//ChangeMessageWindow|UI      |独自拡張：Arg6でfadeSeconds指定可能（省略時0秒）。
 //Param              |Logic   |宴4互換で使用可能な演算子が少ない。詳細後述。変数にも制限あり
 //Jump               |Logic   |宴4互換で使用可能な演算子が少ない。詳細後述。変数にも制限あり
 //Selection          |Logic   |プレハブ、X、Yの個別指定は非対応。宴と仕様が異なり、直前のテキスト内容は非表示にならない。また、選択肢を出した後にテキストをさらに出すことも出来ない

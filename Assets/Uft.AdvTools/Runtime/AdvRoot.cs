@@ -7,7 +7,6 @@ using Uft.AdvTools.View;
 using Uft.FadeEffects;
 using Uft.UnityUtils;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 namespace Uft.AdvTools
@@ -179,16 +178,16 @@ namespace Uft.AdvTools
             this.ScenarioExecutor.IsWaitingForInput = false;
         }
 
-        public virtual void HideUI()
+        public virtual void HideUI(float fadeSeconds)
         {
-            this.MessageWindowManager.CurrentMessageWindow.Hide();
+            this.MessageWindowManager.CurrentMessageWindow.Hide(fadeSeconds);
             this._tglAutoNext.gameObject.SetActive(false);
             this._tglLogView.gameObject.SetActive(false);
         }
 
-        public virtual void ShowUI()
+        public virtual void ShowUI(float fadeSeconds)
         {
-            this.MessageWindowManager.CurrentMessageWindow.Show();
+            this.MessageWindowManager.CurrentMessageWindow.Show(fadeSeconds);
             this._tglAutoNext.gameObject.SetActive(true);
             this._tglLogView.gameObject.SetActive(true);
         }

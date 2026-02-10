@@ -6,11 +6,17 @@ namespace Uft.AdvTools.Commands
     {
         public CommandCategory CommandCategory { get; } = CommandCategory.UI;
 
-        public CmdShowMessageWindow() { }
+        /// <summary>独自拡張</summary>
+        protected float FadeSeconds { get; set; }
+
+        public CmdShowMessageWindow(float? fadeSeconds)
+        {
+            this.FadeSeconds = fadeSeconds ?? 0;
+        }
 
         public virtual void Run(ScenarioExecutor scenarioExecutor, AdvRoot advRoot)
         {
-            advRoot.ShowUI();
+            advRoot.ShowUI(this.FadeSeconds);
         }
     }
 }

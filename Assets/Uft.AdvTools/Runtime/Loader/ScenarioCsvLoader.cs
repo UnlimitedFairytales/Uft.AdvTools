@@ -225,14 +225,20 @@ namespace Uft.AdvTools.Loader
                             break;
                         // UI
                         case HideMessageWindow:
-                            commandList.Add(new CmdHideMessageWindow());
+                            {
+                                commandList.Add(new CmdHideMessageWindow(InvariantCultureUtil.FloatTryParse(dto.Arg6, out var fadeSeconds) ? fadeSeconds : null));
+                            }
                             break;
                         case ShowMessageWindow:
-                            commandList.Add(new CmdShowMessageWindow());
+                            {
+                                commandList.Add(new CmdShowMessageWindow(InvariantCultureUtil.FloatTryParse(dto.Arg6, out var fadeSeconds) ? fadeSeconds : null));
+                            }
                             break;
                         case ChangeMessageWindow:
-                            if (string.IsNullOrWhiteSpace(dto.Arg1)) throw new Exception($"{nameof(CmdChangeMessageWindow)} : Arg1 is required.");
-                            commandList.Add(new CmdChangeMessageWindow(dto.Arg1));
+                            {
+                                if (string.IsNullOrWhiteSpace(dto.Arg1)) throw new Exception($"{nameof(CmdChangeMessageWindow)} : Arg1 is required.");
+                                commandList.Add(new CmdChangeMessageWindow(dto.Arg1, InvariantCultureUtil.FloatTryParse(dto.Arg6, out var fadeSeconds) ? fadeSeconds : null));
+                            }
                             break;
                         // Logic
                         case Param:

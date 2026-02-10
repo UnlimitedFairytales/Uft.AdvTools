@@ -1,5 +1,6 @@
 #nullable enable
 
+using DG.Tweening;
 using System;
 using TMPro;
 using Uft.AdvTools.Commands;
@@ -16,6 +17,7 @@ namespace Uft.AdvTools.View
         [SerializeField] protected float _typewriterInterval_sec = 0.05f;
         [SerializeField] protected bool _isNameAreaHiddenOnNonCharacterText = false;
 
+        [SerializeField] protected CanvasGroup? _canvasGroup;
         [SerializeField] protected GameObject? _goNameAreaRoot;
         [SerializeField] protected TMP_Text? _txtName;
         [SerializeField] protected TMP_Text? _txtText;
@@ -71,7 +73,7 @@ namespace Uft.AdvTools.View
                 throw new InvalidOperationException($"{nameof(this._goNameAreaRoot)}, {nameof(this._txtName)}, {nameof(this._txtText)}, {nameof(this._imgNextSymbol)} are required.");
 
             this.DisableImgNextSymbol();
-            advRoot.ShowUI();
+            advRoot.ShowUI(0);
 
             this._txtName.text = name;
             if (string.IsNullOrEmpty(this._txtName.text) && this._isNameAreaHiddenOnNonCharacterText)
@@ -167,19 +169,43 @@ namespace Uft.AdvTools.View
             this._imgNextSymbol.rectTransform.anchoredPosition = anchoredPos;
         }
 
-        public virtual void Show()
+        public virtual void Show(float fadeSeconds)
         {
+            if (this._canvasGroup == null) throw new InvalidOperationException($"{nameof(this._canvasGroup)} is required.");
+
             if (!this.gameObject.activeSelf)
             {
                 this.gameObject.SetActive(true);
+                this._canvasGroup.DOKill();
+                if (fadeSeconds <= 0)
+                {
+                    this._canvasGroup.alpha = 1.0f;
+
+                }
+                else
+                {
+                    this._canvasGroup.DOFade(1, fadeSeconds);
+                }
             }
         }
 
-        public virtual void Hide()
+        public virtual void Hide(float fadeSeconds)
         {
+            if (this._canvasGroup == null) throw new InvalidOperationException($"{nameof(this._canvasGroup)} is required.");
+
             if (this.gameObject.activeSelf)
             {
-                this.gameObject.SetActive(false);
+                this._canvasGroup.DOKill();
+                if (fadeSeconds <= 0)
+                {
+                    this.gameObject.SetActive(false);
+                }
+                else
+                {
+                    this._canvasGroup
+                        .DOFade(0, fadeSeconds)
+                        .OnComplete(() => this.gameObject.SetActive(false));
+                }
             }
         }
     }

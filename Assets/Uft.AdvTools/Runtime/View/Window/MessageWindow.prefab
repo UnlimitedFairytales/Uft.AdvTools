@@ -108,6 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7783307963262255237}
   - component: {fileID: 4310710679803516163}
+  - component: {fileID: 3051412061327122754}
   m_Layer: 5
   m_Name: MessageWindow
   m_TagString: Untagged
@@ -151,11 +152,24 @@ MonoBehaviour:
   _isTypewriterEnabled: 1
   _typewriterInterval_sec: 0.05
   _isNameAreaHiddenOnNonCharacterText: 0
+  _canvasGroup: {fileID: 3051412061327122754}
   _goNameAreaRoot: {fileID: 5709984184161949296}
   _txtName: {fileID: 7579751356960517129}
   _txtText: {fileID: 5983365990133606030}
   _imgNextSymbol: {fileID: 3903102805593623866}
   _offsetImgNext: {x: 48, y: 18}
+--- !u!225 &3051412061327122754
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3585817740673098636}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &4737502933041561179
 GameObject:
   m_ObjectHideFlags: 0
