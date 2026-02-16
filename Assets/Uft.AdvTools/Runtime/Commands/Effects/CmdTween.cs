@@ -140,19 +140,22 @@ namespace Uft.AdvTools.Commands
         protected TweenType Tween { get; set; }
         protected TweenParameter Parameter { get; set; }
         protected Ease? Ease { get; set; }
+        protected WaitType WaitType { get; set; }
 
         /// <summary>背景を動かす場合は"BG"を指定</summary>
-        public CmdTween(string targetName, TweenType tween, TweenParameter parameter, Ease? ease)
+        public CmdTween(string targetName, TweenType tween, TweenParameter parameter, Ease? ease, WaitType waitType = WaitType.Default)
         {
             this.TargetName = targetName;
             this.Tween = tween;
             this.Parameter = parameter;
             this.Ease = ease;
+            this.WaitType = waitType;
         }
 
         public virtual void Run(ScenarioExecutor scenarioExecutor, AdvRoot advRoot)
         {
-            scenarioExecutor.IsWaiting = true;
+            var noWait = this.WaitType == WaitType.NoWait;
+            if (!noWait) scenarioExecutor.IsWaiting = true;
             UniTask.Void(async () =>
             {
                 try
@@ -169,7 +172,7 @@ namespace Uft.AdvTools.Commands
                 }
                 finally
                 {
-                    scenarioExecutor.IsWaiting = false;
+                    if (!noWait) scenarioExecutor.IsWaiting = false;
                 }
             });
         }

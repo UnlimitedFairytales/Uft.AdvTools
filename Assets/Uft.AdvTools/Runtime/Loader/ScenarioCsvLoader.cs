@@ -211,7 +211,9 @@ namespace Uft.AdvTools.Loader
                                 if (!CmdTween.TweenTypeTryParse(dto.Arg2, out var tween)) throw new Exception($"{nameof(CmdTween)} : Arg2 is unsupported tweenType. : {dto.Arg2}");
                                 if (!CmdTween.TweenParameter.TryParse(tween, dto.Arg3, out var tweenParameter)) throw new Exception($"{nameof(CmdTween)} : Arg3 is unsupported tweenParameter. : {dto.Arg3}");
                                 if (!CmdTween.EaseTryParse(dto.Arg4, out var ease) && arg4IsSpecified) throw new Exception($"{nameof(CmdTween)} : Arg4 is unsupported ease. : {dto.Arg4}");
-                                commandList.Add(new CmdTween(dto.Arg1, tween, tweenParameter, arg4IsSpecified ? ease : null));
+                                var waitType = WaitType.Default;
+                                if (!string.IsNullOrWhiteSpace(dto.WaitType) && !Enum.TryParse(dto.WaitType, true, out waitType)) throw new Exception($"{nameof(CmdTween)} : WaitType is unsupported. : {dto.WaitType}");
+                                commandList.Add(new CmdTween(dto.Arg1, tween, tweenParameter, arg4IsSpecified ? ease : null, waitType));
                             }
                             break;
                         case ImageEffect:
