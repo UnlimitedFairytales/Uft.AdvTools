@@ -222,7 +222,9 @@ namespace Uft.AdvTools.Loader
                                 var isOn = cmd == ImageEffect;
                                 if (string.IsNullOrWhiteSpace(dto.Arg1) ||
                                     string.IsNullOrWhiteSpace(dto.Arg2)) throw new Exception($"{nameof(CmdImageEffect)} or Off : Arg1,Arg2 are required.");
-                                commandList.Add(new CmdImageEffect(isOn, dto.Arg1, dto.Arg2, InvariantCultureUtil.FloatTryParse(dto.Arg6, out var fadeSeconds) ? fadeSeconds : null));
+                                var waitType = WaitType.Default;
+                                if (!string.IsNullOrWhiteSpace(dto.WaitType) && !Enum.TryParse(dto.WaitType, true, out waitType)) throw new Exception($"{nameof(CmdImageEffect)} : WaitType is unsupported. : {dto.WaitType}");
+                                commandList.Add(new CmdImageEffect(isOn, dto.Arg1, dto.Arg2, InvariantCultureUtil.FloatTryParse(dto.Arg6, out var fadeSeconds) ? fadeSeconds : null, waitType));
                             }
                             break;
                         // UI
