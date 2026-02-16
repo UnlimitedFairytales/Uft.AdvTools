@@ -45,7 +45,8 @@
 //
 //### Scenarioシート
 //
-//- WaitType, WindowTypeは非対応。ただし、ChangeMessageWindowコマンドは使用可能
+//- WaitTypeは、未指定かNoWaitのみ対応
+//- WindowTypeは非対応。代わりに、ChangeMessageWindowコマンドは使用可能
 //- 宴レイヤー機能はなく、簡易実装
 //    - Layerシートはない。Bgは専用、SpriteとCharacterはそれぞれ(奥)0～7(手前)を指定する
 //    - SpriteとCharacterが同じレイヤー番号の場合、Characterが手前
@@ -360,9 +361,12 @@ FadeIn,"#446600",,,,,1.0,,,,,
 FadeOut,"#441100",,FadeHorizontal,0.2,,1,,,,,
 Wait,,,,,,1,,,,,
 FadeIn,"#441100",,Cloud,0.2,,1,,,,,
-FadeOut,"#999988",,Cloud,0.2,,1,,,,,
+,,,,,,,,"WaitTypeにNoWaitの指定も可能。",,,
+FadeOut,"#999988",,Cloud,0.2,,1,NoWait,,,,,
+,,,,,,,,"こんな感じ1",,,
 Wait,,,,,,1,,,,,
-FadeIn,"#999988",,FadeHorizontal,0.2,,1,,,,,
+FadeIn,"#999988",,FadeHorizontal,0.2,,1,NoWait,,,,,
+,,,,,,,,"こんな感じ2",,,
 Jump,*Label演出,,,,,,,,,,
 
 *LabelImageEffect,,,,,,,,,,,

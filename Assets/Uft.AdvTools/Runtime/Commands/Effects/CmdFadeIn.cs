@@ -14,8 +14,9 @@ namespace Uft.AdvTools.Commands
         protected string? RuleName { get; set; }
         protected float RuleSoftness { get; set; }
         protected float FadeSeconds { get; set; }
+        protected WaitType WaitType { get; set; }
 
-        public CmdFadeIn(string? fadeColor, string? cameraName, string? ruleName, float? ruleSoftness, float? fadeSeconds)
+        public CmdFadeIn(string? fadeColor, string? cameraName, string? ruleName, float? ruleSoftness, float? fadeSeconds, WaitType waitType = WaitType.Default)
         {
             if (!ColorUtility.TryParseHtmlString(fadeColor, out var colorValue))
             {
@@ -26,11 +27,13 @@ namespace Uft.AdvTools.Commands
             this.RuleName = ruleName;
             this.RuleSoftness = Mathf.Clamp01(ruleSoftness ?? 0.2f);
             this.FadeSeconds = fadeSeconds ?? 0.2f;
+            this.WaitType = waitType;
         }
 
         public virtual void Run(ScenarioExecutor scenarioExecutor, AdvRoot advRoot)
         {
-            scenarioExecutor.IsWaiting = true;
+            var noWait = this.WaitType == WaitType.NoWait;
+            if (!noWait) scenarioExecutor.IsWaiting = true;
             UniTask.Void(async () =>
             {
                 try
@@ -46,7 +49,7 @@ namespace Uft.AdvTools.Commands
                 }
                 finally
                 {
-                    scenarioExecutor.IsWaiting = false;
+                    if (!noWait) scenarioExecutor.IsWaiting = false;
                 }
             });
         }

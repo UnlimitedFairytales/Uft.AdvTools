@@ -188,18 +188,24 @@ namespace Uft.AdvTools.Loader
                             break;
                         case FadeOut:
                             {
+                                var waitType = WaitType.Default;
+                                if (!string.IsNullOrWhiteSpace(dto.WaitType) && !Enum.TryParse(dto.WaitType, true, out waitType)) throw new Exception($"{nameof(CmdFadeOut)} : WaitType is unsupported. : {dto.WaitType}");
                                 commandList.Add(new CmdFadeOut(dto.Arg1, dto.Arg2,
                                     dto.Arg3,
                                     InvariantCultureUtil.FloatTryParse(dto.Arg4, out var softness) ? softness : null,
-                                    InvariantCultureUtil.FloatTryParse(dto.Arg6, out var fadeSeconds) ? fadeSeconds : null));
+                                    InvariantCultureUtil.FloatTryParse(dto.Arg6, out var fadeSeconds) ? fadeSeconds : null,
+                                    waitType));
                             }
                             break;
                         case FadeIn:
                             {
+                                var waitType = WaitType.Default;
+                                if (!string.IsNullOrWhiteSpace(dto.WaitType) && !Enum.TryParse(dto.WaitType, true, out waitType)) throw new Exception($"{nameof(CmdFadeIn)} : WaitType is unsupported. : {dto.WaitType}");
                                 commandList.Add(new CmdFadeIn(dto.Arg1, dto.Arg2,
                                     dto.Arg3,
                                     InvariantCultureUtil.FloatTryParse(dto.Arg4, out var softness) ? softness : null,
-                                    InvariantCultureUtil.FloatTryParse(dto.Arg6, out var fadeSeconds) ? fadeSeconds : null));
+                                    InvariantCultureUtil.FloatTryParse(dto.Arg6, out var fadeSeconds) ? fadeSeconds : null,
+                                    waitType));
                             }
                             break;
                         case Tween:
