@@ -19,6 +19,9 @@ namespace Uft.AdvTools.View
         const string RULE = "RULE";
 
         const string FADE_HORIZONTAL = "FadeHorizontal";
+        const string FADE_VERTICAL = "FadeVertical";
+        const string MOSES_H = "MosesH";
+        const string MOSES_V = "MosesV";
         const string CLOUD = "Cloud";
 
         [SerializeField] protected SimplePostEffectCollection? _wideCameraSimplePostEffectCollection; public SimplePostEffectCollection WideCameraSimplePostEffectCollection => ThrowIf.Unassigned(this._wideCameraSimplePostEffectCollection);
@@ -60,6 +63,9 @@ namespace Uft.AdvTools.View
         }
 
         [SerializeField] Texture? _texFadeHorizontal;
+        [SerializeField] Texture? _texFadeVertical;
+        [SerializeField] Texture? _texMosesH;
+        [SerializeField] Texture? _texMosesV;
         [SerializeField] Texture? _texCloud;
 
 
@@ -123,6 +129,10 @@ namespace Uft.AdvTools.View
             if (this._advRootRef == null) return;
 
             Texture? rule =
+                ruleName == FADE_HORIZONTAL ? this._texFadeHorizontal :
+                ruleName == FADE_VERTICAL ? this._texFadeVertical :
+                ruleName == MOSES_H ? this._texMosesH :
+                ruleName == MOSES_V ? this._texMosesV :
                 ruleName == FADE_HORIZONTAL ? this._texFadeHorizontal :
                 ruleName == CLOUD ? this._texCloud :
                 null;

@@ -44,5 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae94621804d82c44a773e531f66c12d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _wideCameraSimplePostEffectCollection: {fileID: 0}
   _texFadeHorizontal: {fileID: 2800000, guid: 6bc70aad78d738b45bc8bbbf78000838, type: 3}
+  _texFadeVertical: {fileID: 2800000, guid: e3c3427f89696394cb0527388d0e3c93, type: 3}
+  _texMosesH: {fileID: 2800000, guid: 277fce27708bee744a40108bb7eeca0f, type: 3}
+  _texMosesV: {fileID: 2800000, guid: 03f0d92198439784d9a50c2418c64f60, type: 3}
   _texCloud: {fileID: 2800000, guid: 5b06f50a1f3919b438a081bb71d546b6, type: 3}
