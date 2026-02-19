@@ -1,6 +1,7 @@
 #nullable enable
 
 using Cysharp.Threading.Tasks;
+using Uft.AdvTools.View;
 using UnityEngine;
 
 namespace Uft.AdvTools.Commands
@@ -8,6 +9,12 @@ namespace Uft.AdvTools.Commands
     public class CmdFadeIn : ICommand
     {
         public CommandCategory CommandCategory { get; } = CommandCategory.Effect;
+
+        public static string WIPE_RIGHT_ = "WipeRight";
+        public static string WIPE_LEFT__ = "WipeLeft";
+        public static string WIPE_UP____ = "WipeUp";
+        public static string WIPE_DOWN__ = "WipeDown";
+        public static string WIPE_CENTER = "WipeCenter";
 
         protected Color FadeColor { get; set; }
         protected string? CameraName { get; set; } // TODO: 対応
@@ -30,6 +37,30 @@ namespace Uft.AdvTools.Commands
             this.IsInvert = isInvert ?? false;
             this.FadeSeconds = fadeSeconds ?? 0.2f;
             this.WaitType = waitType;
+
+            if (this.RuleName == WIPE_RIGHT_)
+            {
+                this.RuleName = PostEffectManager.FADE_HORIZONTAL;
+            }
+            else if (this.RuleName == WIPE_LEFT__)
+            {
+                this.RuleName = PostEffectManager.FADE_HORIZONTAL;
+                this.IsInvert = !this.IsInvert;
+            }
+            else if (this.RuleName == WIPE_UP____)
+            {
+                this.RuleName = PostEffectManager.FADE_VERTICAL;
+                this.IsInvert = !this.IsInvert;
+            }
+            else if (this.RuleName == WIPE_DOWN__)
+            {
+                this.RuleName = PostEffectManager.FADE_VERTICAL;
+            }
+            else if (this.RuleName == WIPE_CENTER)
+            {
+                this.RuleName = PostEffectManager.MOSES_V;
+                this.IsInvert = !this.IsInvert;
+            }
         }
 
         public virtual void Run(ScenarioExecutor scenarioExecutor, AdvRoot advRoot)

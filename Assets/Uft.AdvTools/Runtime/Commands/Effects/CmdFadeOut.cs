@@ -1,6 +1,7 @@
 #nullable enable
 
 using Cysharp.Threading.Tasks;
+using Uft.AdvTools.View;
 using UnityEngine;
 
 namespace Uft.AdvTools.Commands
@@ -30,6 +31,30 @@ namespace Uft.AdvTools.Commands
             this.IsInvert = isInvert ?? false;
             this.FadeSeconds = fadeSeconds ?? 0.2f;
             this.WaitType = waitType;
+
+            if (this.RuleName == CmdFadeIn.WIPE_RIGHT_)
+            {
+                this.RuleName = PostEffectManager.FADE_HORIZONTAL;
+                this.IsInvert = !this.IsInvert;
+            }
+            else if (this.RuleName == CmdFadeIn.WIPE_LEFT__)
+            {
+                this.RuleName = PostEffectManager.FADE_HORIZONTAL;
+            }
+            else if (this.RuleName == CmdFadeIn.WIPE_UP____)
+            {
+                this.RuleName = PostEffectManager.FADE_VERTICAL;
+            }
+            else if (this.RuleName == CmdFadeIn.WIPE_DOWN__)
+            {
+                this.RuleName = PostEffectManager.FADE_VERTICAL;
+                this.IsInvert = !this.IsInvert;
+            }
+            else if (this.RuleName == CmdFadeIn.WIPE_CENTER)
+            {
+                this.RuleName = PostEffectManager.MOSES_V;
+                this.IsInvert = !this.IsInvert;
+            }
         }
 
         public virtual void Run(ScenarioExecutor scenarioExecutor, AdvRoot advRoot)

@@ -18,11 +18,11 @@ namespace Uft.AdvTools.View
         const string Sepia = "Sepia";
         const string RULE = "RULE";
 
-        const string FADE_HORIZONTAL = "FadeHorizontal";
-        const string FADE_VERTICAL = "FadeVertical";
-        const string MOSES_H = "MosesH";
-        const string MOSES_V = "MosesV";
-        const string CLOUD = "Cloud";
+        public const string FADE_HORIZONTAL = "FadeHorizontal";
+        public const string FADE_VERTICAL = "FadeVertical";
+        public const string MOSES_H = "MosesH";
+        public const string MOSES_V = "MosesV";
+        public const string CLOUD = "Cloud";
 
         [SerializeField] protected SimplePostEffectCollection? _wideCameraSimplePostEffectCollection; public SimplePostEffectCollection WideCameraSimplePostEffectCollection => ThrowIf.Unassigned(this._wideCameraSimplePostEffectCollection);
         public SimplePostEffectConfig WideCameraDirectionalGhostPostEffect
