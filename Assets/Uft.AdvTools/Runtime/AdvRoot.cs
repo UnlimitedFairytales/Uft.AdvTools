@@ -137,6 +137,7 @@ namespace Uft.AdvTools
                 }
             }
             this.UiEffectList = this.GetComponentsInChildrenOrderByName<Animator>(true, component => component.gameObject.name.StartsWith(this._uiEffectPrefix));
+            this.HideUI(0);
         }
         public virtual void Cleanup()
         {
