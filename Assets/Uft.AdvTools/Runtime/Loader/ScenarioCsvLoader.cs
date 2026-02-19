@@ -193,6 +193,7 @@ namespace Uft.AdvTools.Loader
                                 commandList.Add(new CmdFadeOut(dto.Arg1, dto.Arg2,
                                     dto.Arg3,
                                     InvariantCultureUtil.FloatTryParse(dto.Arg4, out var softness) ? softness : null,
+                                    bool.TryParse(dto.Arg5, out var isInvert) ? isInvert : null,
                                     InvariantCultureUtil.FloatTryParse(dto.Arg6, out var fadeSeconds) ? fadeSeconds : null,
                                     waitType));
                             }
@@ -204,6 +205,7 @@ namespace Uft.AdvTools.Loader
                                 commandList.Add(new CmdFadeIn(dto.Arg1, dto.Arg2,
                                     dto.Arg3,
                                     InvariantCultureUtil.FloatTryParse(dto.Arg4, out var softness) ? softness : null,
+                                    bool.TryParse(dto.Arg5, out var isInvert) ? isInvert : null,
                                     InvariantCultureUtil.FloatTryParse(dto.Arg6, out var fadeSeconds) ? fadeSeconds : null,
                                     waitType));
                             }

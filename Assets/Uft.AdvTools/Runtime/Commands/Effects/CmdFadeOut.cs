@@ -13,10 +13,11 @@ namespace Uft.AdvTools.Commands
         protected string? CameraName { get; set; } // TODO: 対応
         protected string? RuleName { get; set; }
         protected float RuleSoftness { get; set; }
+        protected bool IsInvert { get; set; }
         protected float FadeSeconds { get; set; }
         protected WaitType WaitType { get; set; }
 
-        public CmdFadeOut(string? fadeColor, string? cameraName, string? ruleName, float? ruleSoftness, float? fadeSeconds, WaitType waitType = WaitType.Default)
+        public CmdFadeOut(string? fadeColor, string? cameraName, string? ruleName, float? ruleSoftness, bool? isInvert, float? fadeSeconds, WaitType waitType = WaitType.Default)
         {
             if (!ColorUtility.TryParseHtmlString(fadeColor, out var colorValue))
             {
@@ -26,6 +27,7 @@ namespace Uft.AdvTools.Commands
             this.CameraName = cameraName;
             this.RuleName = ruleName;
             this.RuleSoftness = Mathf.Clamp01(ruleSoftness ?? 0.2f);
+            this.IsInvert = isInvert ?? false;
             this.FadeSeconds = fadeSeconds ?? 0.2f;
             this.WaitType = waitType;
         }
@@ -44,7 +46,7 @@ namespace Uft.AdvTools.Commands
                     }
                     else
                     {
-                        await advRoot.PostEffectManager.SetRuleFadeAsync(this.RuleName, this.FadeColor, this.RuleSoftness, 1.0f, false, this.FadeSeconds);
+                        await advRoot.PostEffectManager.SetRuleFadeAsync(this.RuleName, this.FadeColor, this.RuleSoftness, 1.0f, this.IsInvert, this.FadeSeconds);
                     }
                 }
                 finally

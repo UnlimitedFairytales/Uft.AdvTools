@@ -69,8 +69,8 @@
 //StopSe             |Sound   |-
 //StopBgm            |Sound   |-
 //Wait               |Effect  |-
-//FadeIn             |Effect  |カメラ、アニメ指定は非対応。ルール画像はFadeHorizontal、FadeVertical、MosesH、MosesV、Cloudのみ対応
-//FadeOut            |Effect  |カメラ、アニメ指定は非対応。ルール画像はFadeHorizontal、FadeVertical、MosesH、MosesV、Cloudのみ対応
+//FadeIn             |Effect  |カメラ、アニメ指定は非対応。ルール画像はFadeHorizontal、FadeVertical、MosesH、MosesV、Cloudのみ対応。独自拡張として、Arg5にtrueを指定すると、ルール画像をネガポジ反転して使用できる
+//FadeOut            |Effect  |カメラ、アニメ指定は非対応。ルール画像はFadeHorizontal、FadeVertical、MosesH、MosesV、Cloudのみ対応。独自拡張として、Arg5にtrueを指定すると、ルール画像をネガポジ反転して使用できる
 //ImageEffect        |Effect  |カメラ、アニメ指定は非対応。ただし、カメラにはSpriteCameraを指定が必要。GrayScale、Sepiaのみ指定可能
 //ImageEffectOff     |Effect  |カメラ、アニメ指定は非対応。ただし、カメラにはSpriteCameraを指定が必要。GrayScale、Sepiaのみ指定可能
 //Tween              |Effect  |個別名のみ指定可能（背景はBGで指定可能）で、レイヤー指定は未対応。TweenTypeはMoveTo/From/Byの3種、Punch/Shake系のPositionとScale4種で計7種のみ。TweenParameterはislocalが指定可能なものはislocal=trueを指定しないとエラー(グローバルが許容されない)、色関連は非対応、=の左右に空白は許容されない制限あり。Easeはspringだけ非対応。loop非対応。Easeライブラリが宴と異なるため、挙動差がある可能性あり
@@ -357,10 +357,13 @@ Jump,*Label演出,,,,,,,,,,
 FadeOut,"#446600",,,,,1.0,,,,,
 FadeIn,"#446600",,,,,1.0,,,,,
 ,,,,,,,,"ルール画像指定フェードは、FadeHorizontal、FadeVertical、MosesH、MosesV、Cloudのみ対応。",,,
+,,,,,,,,"また、独自拡張として、Arg5にtrueを指定すると、ルール画像をネガポジ反転して使用できる。",,,
 ,,,,,,,,"コマンドはFadeOutとFadeInだが、ルール画像を指定した場合は内部的にはImageEffectと同じ仕組みで駆動する。",,,
 ,,,,,,,,"URPでは事前に初期設定が必要になるため注意。\n（詳細はImageEffectを参照のこと）",,,
 FadeOut,"#441100",,FadeHorizontal,0.2,,1,,,,,
 FadeIn,"#441100",,FadeHorizontal,0.2,,1,,,,,
+FadeOut,"#441100",,FadeHorizontal,0.2,true,1,,,,,
+FadeIn,"#441100",,FadeHorizontal,0.2,true,1,,,,,
 FadeOut,"#444400",,FadeVertical,0.2,,1,,,,,
 FadeIn,"#444400",,FadeVertical,0.2,,1,,,,,
 FadeOut,"#114400",,MosesH,0.2,,1,,,,,
