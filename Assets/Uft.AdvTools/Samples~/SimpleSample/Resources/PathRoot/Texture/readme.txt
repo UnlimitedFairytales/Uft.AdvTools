@@ -15,11 +15,13 @@ https://www.irasutoya.com/
 本プロジェクトへの同梱は規約に基づく適法な利用です。
 
 地平線のイラスト（背景素材）
-bg_chiheisen_green.jpg
+※ リサイズ済み
+bg_chiheisen_green_1920x1080.jpg
 https://www.irasutoya.com/2019/05/blog-post_64.html
 
 旅館の室内イラスト（背景素材）
-bg_ryokan_hiroen.jpg
+※ リサイズ済み
+bg_ryokan_hiroen_1920x1080.jpg
 https://www.irasutoya.com/2019/04/blog-post_38.html
 
 香箱座りのイラスト（茶トラ）
