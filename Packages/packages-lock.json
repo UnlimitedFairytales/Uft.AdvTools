@@ -309,7 +309,7 @@
       "dependencies": {
         "com.unity.ugui": "2.0.0"
       },
-      "hash": "bcda3b79689d031911619761f1a9e1c0d1b2eb1b"
+      "hash": "b11039c36220e1cfdae34949d66b4e0a5e1a3c01"
     },
     "com.unlimited-fairytales.virtualizedlist": {
       "version": "https://github.com/UnlimitedFairytales/Uft.VirtualizedList.git?path=Assets/Uft.VirtualizedList",
