@@ -245,6 +245,7 @@ SelectionTitle,,,,,,,,オブジェクト表示,,,
 Selection,*Labelスタート地点,,,,,,,戻る,,,,
 Selection,*LabelBg表示,,,,,,,Bg表示,,,,
 Selection,*LabelSprite表示,,,,,,,Sprite表示,,,,
+Selection,*Label2DPrefabのSprite表示,,,,,,,2DPrefabのSprite表示,,,,
 
 *LabelBg表示,,,,,,,,,,,
 ,,,,,,,,"Bgで背景を変更。\n演出系コマンド以外はコマンドの完了を待たないため、待ちたい場合はWaitコマンドも併用する。",,,
@@ -284,6 +285,11 @@ Sprite,猫2,,,,,2.0,,,,,,
 Sprite,猫2,,1,,,2.0,,,,,,
 ,,,,,,,,"レイヤー2を指定して再表示。",,,
 Sprite,猫1,,2,,,1.0,,,,,,
+Jump,*Labelオブジェクト表示,,,,,,,,,,
+
+*Label2DPrefabのSprite表示,,,,,,,,,,,
+,,,,,,,,"Spriteで2DPrefabスプライトを表示。",,,
+Sprite,Prefab猫1Sprite,,7,300,200,,,,,,
 Jump,*Labelオブジェクト表示,,,,,,,,,,
 
 //###############################################################################
