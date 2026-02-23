@@ -995,7 +995,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 8025926332305904443}
-  m_PlaneDistance: 935.3075
+  m_PlaneDistance: 9.353075
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -1097,7 +1097,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 8025926332305904443}
-  m_PlaneDistance: 935.3075
+  m_PlaneDistance: 9.353075
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -1280,7 +1280,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 2310202696384541243}
-  m_PlaneDistance: 935.3075
+  m_PlaneDistance: 9.353075
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
