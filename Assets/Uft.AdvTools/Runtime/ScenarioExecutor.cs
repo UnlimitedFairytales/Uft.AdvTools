@@ -68,10 +68,11 @@ namespace Uft.AdvTools
                             var visibleList = this.SelectionList
                                 .Where(s => s.IsVisible(advRoot))
                                 .ToList();
-                            var result = await advRoot.SelectionList.ShowAsync(this.SelectionTitle?.Title, visibleList);
-                            if (result.Value == null || result.Status != View.OperationResultStatus.Accepted) return;
+                            var logic = new SelectionList(advRoot.SelectionListView, advRoot.InputProxy);
+                            var result = await logic.ShowAsync(this.SelectionTitle?.Title, visibleList);
+                            if (result.value == null || result.status != OperationResultStatus.Accepted) return;
 
-                            var cmdSelection = result.Value;
+                            var cmdSelection = result.value;
 
                             var lastPageCtrl = CmdText.PageCtrlType.InputBrPage;
                             advRoot.MessageWindowManager.CurrentMessageWindow.ForceSetLastPageCtrl(lastPageCtrl);

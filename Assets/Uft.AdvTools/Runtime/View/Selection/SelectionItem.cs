@@ -44,5 +44,11 @@ namespace Uft.AdvTools.View
             this._txtText.text = string.Empty;
             this.CmdSelection = null;
         }
+
+        public virtual void SetFocus()
+        {
+            if (this._button == null) throw new UnassignedReferenceException(nameof(this._button));
+            this._button.Select();
+        }
     }
 }

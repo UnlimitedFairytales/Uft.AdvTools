@@ -1,6 +1,7 @@
 #nullable enable
 
 using System.Collections.Generic;
+using Uft.UnityUtils;
 using Uft.UnityUtils.Common;
 using Uft.VirtualizedList;
 using UnityEngine;
@@ -12,7 +13,7 @@ namespace Uft.AdvTools.View
     {
         // Static members
 
-        protected static readonly OperationResult<int> CANCEL_RESULT = new(0, OperationResultStatus.Canceled);
+        protected static readonly OperationResult<int> CANCEL_RESULT = new(OperationResultStatus.Canceled, 0);
 
         // Instance members
 

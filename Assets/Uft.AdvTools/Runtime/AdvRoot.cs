@@ -23,7 +23,7 @@ namespace Uft.AdvTools
         [SerializeField] protected SpriteManager _spriteManager; public SpriteManager SpriteManager => this._spriteManager;
         [SerializeField] protected SoundManager _soundManager; public SoundManager SoundManager => this._soundManager;
         [SerializeField] protected PostEffectManager _postEffectManager; public PostEffectManager PostEffectManager => this._postEffectManager;
-        [SerializeField] protected SelectionList _selectionList; public SelectionList SelectionList => this._selectionList;
+        [SerializeField] protected SelectionListView _selectionListView; public SelectionListView SelectionListView => this._selectionListView;
 
         [SerializeField] protected LogController _logController; public bool LogControllerIsVisible => this._logController.gameObject.activeSelf;
 
@@ -36,6 +36,8 @@ namespace Uft.AdvTools
         [SerializeField] protected FadeEffect _fadeEffect; public FadeEffect FadeEffect => this._fadeEffect;
 
         // Status
+
+        public IInputProxy InputProxy = new SimpleInput();
 
         public MessageWindowManager MessageWindowManager { get; protected set; }
         public AutoNext AutoNext { get; protected set; }

@@ -2,6 +2,7 @@
 
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
+using Uft.UnityUtils;
 using Uft.UnityUtils.Common;
 using Uft.VirtualizedList;
 using UnityEngine;
@@ -62,7 +63,7 @@ namespace Uft.AdvTools.View
 
         // Show, Close
 
-        static readonly OperationResult<int> CANCEL_RESULT = new(0, OperationResultStatus.Canceled);
+        static readonly OperationResult<int> CANCEL_RESULT = new(OperationResultStatus.Canceled, 0);
 
         public virtual async UniTask<OperationResult<int>> ShowAsync(IReadOnlyList<LogData> dataList)
         {

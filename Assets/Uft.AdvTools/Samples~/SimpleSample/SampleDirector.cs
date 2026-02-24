@@ -46,7 +46,7 @@ namespace Uft.AdvTools.Samples
                 }
             }
 
-            if (Input.GetButtonUp("Submit") || (Input.GetMouseButtonUp(0) && !this.IsPointerOverUI()))
+            if (Input.GetKeyUp(KeyCode.Z) || Input.GetButtonUp("Submit") || (Input.GetMouseButtonUp(0) && !this.IsPointerOverUI()))
             {
                 this._advRoot.Next();
             }

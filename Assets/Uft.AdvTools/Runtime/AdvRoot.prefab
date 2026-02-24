@@ -473,7 +473,7 @@ MonoBehaviour:
   _spriteManager: {fileID: 4815723313035957612}
   _soundManager: {fileID: 8048299226933598990}
   _postEffectManager: {fileID: 2879592881480441499}
-  _selectionList: {fileID: 7366029907825876559}
+  _selectionListView: {fileID: 7366029907825876559}
   _logController: {fileID: 8485549884975987682}
   _tglAutoNext: {fileID: 1054747244624601679}
   _tglLogView: {fileID: 1787108953969938846}
