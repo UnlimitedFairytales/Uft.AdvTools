@@ -48,17 +48,17 @@ namespace Uft.AdvTools
             var length = data.Count;
             while (selected == null && this._view != null && this._view.gameObject.activeSelf)
             {
-                if (this._inputProxy.GetUp(InputState.Triggered))
+                if (this._inputProxy.Up(InputState.Triggered))
                 {
                     this._focusIndex = Mathf.Max(0, this._focusIndex - 1);
                     this._view.SetFocus(this._focusIndex);
                 }
-                if (this._inputProxy.GetDown(InputState.Triggered))
+                if (this._inputProxy.Down(InputState.Triggered))
                 {
                     this._focusIndex = Mathf.Min(this._focusIndex + 1, length - 1);
                     this._view.SetFocus(this._focusIndex);
                 }
-                if (this._inputProxy.GetConfirm(InputState.Triggered))
+                if (this._inputProxy.Submit(InputState.Triggered))
                 {
                     selected = this._data[this._focusIndex];
                 }

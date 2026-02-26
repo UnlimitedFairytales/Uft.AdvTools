@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace Uft.AdvTools.Samples
 {
+    [DefaultExecutionOrder(-1)]
     public class SampleDirector : MonoBehaviour
     {
         [SerializeField] TextAsset _scenarioFile;
@@ -27,6 +28,8 @@ namespace Uft.AdvTools.Samples
 
         void Update()
         {
+            this._advRoot.InputProxy.Update();
+
             // HACK: シーン配置ActiveオブジェクトStart済み保証タイミング
             if (!this._isInitialized)
             {

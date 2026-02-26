@@ -13,6 +13,7 @@
         "UniTask.Linq",
         "UniTask.TextMeshPro",
         "Unity.Cinemachine",
+        "Uft.UnityUtils",
         "Uft.AdvTools"
     ],
     "includePlatforms": [],
