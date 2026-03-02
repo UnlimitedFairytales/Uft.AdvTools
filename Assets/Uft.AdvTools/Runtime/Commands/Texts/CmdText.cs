@@ -74,8 +74,8 @@ namespace Uft.AdvTools.Commands
             if (characterOrNull != null)
             {
                 this.SetCharacter(advRoot, characterOrNull);
-                this.PlayVoice(advRoot);
             }
+            this.PlayVoice(advRoot);
 
             // NOTE: 本文がEmptyの場合、キャラクター名も表示せず、Next扱いにする
             var name
