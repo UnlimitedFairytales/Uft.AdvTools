@@ -99,24 +99,39 @@ namespace Uft.AdvTools.View
                 case CmdText.PageCtrlType.InputBrPageAndNoHide:
                 case CmdText.PageCtrlType.InputBrPage:
                     this._txtText.text = text;
+                    this._txtText.ForceMeshUpdate();
                     if (this._isTypewriterEnabled)
                     {
                         this._typewriterIntervalCounter_sec = 0;
                         this._txtText.maxVisibleCharacters = 0;
                     }
+                    else
+                    {
+                        this._txtText.maxVisibleCharacters = this._txtText.textInfo.characterCount;
+                    }
                     break;
                 case CmdText.PageCtrlType.InputBr:
                     this._txtText.text += "\n" + text;
+                    this._txtText.ForceMeshUpdate();
+                    if (!this._isTypewriterEnabled)
+                    {
+                        this._txtText.maxVisibleCharacters = this._txtText.textInfo.characterCount;
+                    }
                     break;
                 case CmdText.PageCtrlType.Input:
                 case CmdText.PageCtrlType.Next:
                     this._txtText.text += text;
+                    this._txtText.ForceMeshUpdate();
+                    if (!this._isTypewriterEnabled)
+                    {
+                        this._txtText.maxVisibleCharacters = this._txtText.textInfo.characterCount;
+                    }
                     break;
             }
             this.LastPageCtrl = pageCtrl;
             // NOTE: windowType は 対応予定なし
 
-            this._txtText.ForceMeshUpdate();
+            
         }
 
         public virtual void FixLastPageCtrl()
