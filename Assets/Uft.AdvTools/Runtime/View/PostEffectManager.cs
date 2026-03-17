@@ -124,10 +124,14 @@ namespace Uft.AdvTools.View
             }
         }
 
-        public async UniTask SetRuleFadeAsync(string ruleName, Color color, float ruleSoftness, float endValue, bool isInvert, float fadeSeconds, bool completesPrevious = false)
+        public bool RuleFadeIsVisible() => 0 < this.WideCameraRuleFadePostEffect.Amount;
+
+        public async UniTask SetRuleFadeAsync(string? ruleName, Color color, float ruleSoftness, float endValue, bool isInvert, float fadeSeconds, bool completesPrevious = false)
         {
             if (this._advRootRef == null) return;
 
+            var effectConfig =  this.WideCameraRuleFadePostEffect;
+            var defaultRule = this._texFadeHorizontal;
             Texture? rule =
                 ruleName == FADE_HORIZONTAL ? this._texFadeHorizontal :
                 ruleName == FADE_VERTICAL ? this._texFadeVertical :
@@ -135,10 +139,9 @@ namespace Uft.AdvTools.View
                 ruleName == MOSES_V ? this._texMosesV :
                 ruleName == FADE_HORIZONTAL ? this._texFadeHorizontal :
                 ruleName == CLOUD ? this._texCloud :
-                null;
-            if (rule == null) return;
+                effectConfig.RuleTex != null ? effectConfig.RuleTex :
+                defaultRule;
 
-            var effectConfig = this.WideCameraRuleFadePostEffect;
             effectConfig.RuleTex = rule;
             effectConfig.SubTexColor = color;
             effectConfig.Softness = ruleSoftness;
