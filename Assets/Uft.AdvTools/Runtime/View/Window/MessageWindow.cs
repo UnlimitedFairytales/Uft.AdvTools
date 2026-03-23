@@ -32,7 +32,7 @@ namespace Uft.AdvTools.View
 
         public bool IsDisplayed => this.gameObject.activeSelf;
 
-        public bool IsTypewriting => this._txtText != null && this._txtText.textInfo.characterCount != this._txtText.maxVisibleCharacters;
+        public bool IsTypewriting => this._txtText != null && this._txtText.maxVisibleCharacters < this._txtText.textInfo.characterCount;
         public CmdText.PageCtrlType LastPageCtrl { get; protected set; } = CmdText.PageCtrlType.InputBrPageAndNoHide;
 
         // Unity events
