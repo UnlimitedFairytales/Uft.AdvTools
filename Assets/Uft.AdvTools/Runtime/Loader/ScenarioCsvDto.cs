@@ -1,6 +1,5 @@
 #nullable enable
 
-using CsvHelper;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -24,7 +23,8 @@ namespace Uft.AdvTools.Loader
             config.MissingFieldFound = null;
             return fileInfo.ReadCsv(
                 config,
-                (reader) => Map(reader));
+                (csvHeaders) => MapperFactory(csvHeaders),
+                256);
         }
 
         public static IReadOnlyList<ScenarioCsvDto> Load(string csvText)
@@ -34,26 +34,43 @@ namespace Uft.AdvTools.Loader
             config.MissingFieldFound = null;
             return csvText.ReadCsv(
                 config,
-                (reader) => Map(reader));
+                (csvHeaders) => MapperFactory(csvHeaders),
+                256);
         }
 
-        public static ScenarioCsvDto Map(CsvReader reader)
+        public static CsvRowMapper<ScenarioCsvDto> MapperFactory(string[] csvHeaders)
         {
-            return new ScenarioCsvDto
+            var iCommand = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "Command");
+            var iArg1 = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "Arg1");
+            var iArg2 = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "Arg2");
+            var iArg3 = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "Arg3");
+            var iArg4 = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "Arg4");
+            var iArg5 = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "Arg5");
+            var iArg6 = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "Arg6");
+            var iWaitType = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "WaitType");
+            var iText = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "Text");
+            var iPageCtrl = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "PageCtrl");
+            var iVoice = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "Voice");
+            var iWindowType = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "WindowType");
+            ScenarioCsvDto mapper(CsvRow csvRow)
             {
-                Command = reader.GetField<string>("Command"),
-                Arg1 = reader.GetField<string>("Arg1"),
-                Arg2 = reader.GetField<string>("Arg2"),
-                Arg3 = reader.GetField<string>("Arg3"),
-                Arg4 = reader.GetField<string>("Arg4"),
-                Arg5 = reader.GetField<string>("Arg5"),
-                Arg6 = reader.GetField<string>("Arg6"),
-                WaitType = reader.GetField<string>("WaitType"),
-                Text = reader.GetField<string>("Text"),
-                PageCtrl = reader.GetField<string>("PageCtrl"),
-                Voice = reader.GetField<string>("Voice"),
-                WindowType = reader.GetField<string>("WindowType"),
-            };
+                return new ScenarioCsvDto
+                {
+                    Command = csvRow.GetString(iCommand),
+                    Arg1 = csvRow.GetString(iArg1),
+                    Arg2 = csvRow.GetString(iArg2),
+                    Arg3 = csvRow.GetString(iArg3),
+                    Arg4 = csvRow.GetString(iArg4),
+                    Arg5 = csvRow.GetString(iArg5),
+                    Arg6 = csvRow.GetString(iArg6),
+                    WaitType = csvRow.GetString(iWaitType),
+                    Text = csvRow.GetString(iText),
+                    PageCtrl = csvRow.GetString(iPageCtrl),
+                    Voice = csvRow.GetString(iVoice),
+                    WindowType = csvRow.GetString(iWindowType),
+                };
+            }
+            return mapper;
         }
 
         public string? Command { get; set; }

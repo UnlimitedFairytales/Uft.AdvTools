@@ -1,6 +1,5 @@
 #nullable enable
 
-using CsvHelper;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -24,7 +23,8 @@ namespace Uft.AdvTools.Loader
             config.MissingFieldFound = null;
             return fileInfo.ReadCsv(
                 config,
-                (reader) => Map(reader));
+                (csvHeaders) => MapperFactory(csvHeaders),
+                64);
         }
 
         public static IReadOnlyList<ParamCsvDto> Load(string csvText)
@@ -34,18 +34,27 @@ namespace Uft.AdvTools.Loader
             config.MissingFieldFound = null;
             return csvText.ReadCsv(
                 config,
-                (reader) => Map(reader));
+                (csvHeaders) => MapperFactory(csvHeaders),
+                64);
         }
 
-        public static ParamCsvDto Map(CsvReader reader)
+        public static CsvRowMapper<ParamCsvDto> MapperFactory(string[] csvHeaders)
         {
-            return new ParamCsvDto
+            var iLabel = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "Label");
+            var iType = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "Type");
+            var iValue = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "Value");
+            var iFileType = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "FileType");
+            ParamCsvDto mapper(CsvRow csvRow)
             {
-                Label = reader.GetField<string>("Label"),
-                Type = reader.GetField<string>("Type"),
-                Value = reader.GetField<string>("Value"),
-                FileType = reader.GetField<string>("FileType"),
-            };
+                return new ParamCsvDto()
+                {
+                    Label = csvRow.GetString(iLabel),
+                    Type = csvRow.GetString(iType),
+                    Value = csvRow.GetString(iValue),
+                    FileType = csvRow.GetString(iFileType)
+                };
+            }
+            return mapper;
         }
 
         public string? Label { get; set; }

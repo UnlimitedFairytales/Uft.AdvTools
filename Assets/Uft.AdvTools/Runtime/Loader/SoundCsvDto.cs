@@ -1,6 +1,5 @@
 #nullable enable
 
-using CsvHelper;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -24,7 +23,8 @@ namespace Uft.AdvTools.Loader
             config.MissingFieldFound = null;
             return fileInfo.ReadCsv(
                 config,
-                (reader) => Map(reader));
+                (csvHeaders) => MapperFactory(csvHeaders),
+                64);
         }
 
         public static IReadOnlyList<SoundCsvDto> Load(string csvText)
@@ -34,21 +34,34 @@ namespace Uft.AdvTools.Loader
             config.MissingFieldFound = null;
             return csvText.ReadCsv(
                 config,
-                (reader) => Map(reader));
+                (csvHeaders) => MapperFactory(csvHeaders),
+                64);
         }
 
-        public static SoundCsvDto Map(CsvReader reader)
+        public static CsvRowMapper<SoundCsvDto> MapperFactory(string[] csvHeaders)
         {
-            return new SoundCsvDto
-            {
-                Label = reader.GetField<string>("Label"),
-                Title = reader.GetField<string>("Title"),
-                Type = reader.GetField<string>("Type"),
-                FileName = reader.GetField<string>("FileName"),
-                IntroTime = reader.GetField<string>("IntroTime"),
+            var iLabel = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "Label");
+            var iTitle = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "Title");
+            var iType = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "Type");
+            var iFileName = CsvUtil.FindColumnIndexOrMinus1(csvHeaders,"FileName");
+            var iIntroTime = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "IntroTime");
 
-                Volume = reader.GetField<string>("Volume"),
-            };
+            var iVolume = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "Volume");
+
+            SoundCsvDto mapper(CsvRow csvRow)
+            {
+                return new SoundCsvDto
+                {
+                    Label = csvRow.GetString(iLabel),
+                    Title = csvRow.GetString(iTitle),
+                    Type = csvRow.GetString(iType),
+                    FileName = csvRow.GetString(iFileName),
+                    IntroTime = csvRow.GetString(iIntroTime),
+
+                    Volume = csvRow.GetString(iVolume),
+                };
+            }
+            return mapper;
         }
 
         public string? Label { get; set; }

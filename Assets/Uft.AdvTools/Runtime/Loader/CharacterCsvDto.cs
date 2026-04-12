@@ -1,6 +1,5 @@
 #nullable enable
 
-using CsvHelper;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -24,7 +23,8 @@ namespace Uft.AdvTools.Loader
             config.MissingFieldFound = null;
             return fileInfo.ReadCsv(
                 config,
-                (reader) => Map(reader));
+                (csvHeaders) => MapperFactory(csvHeaders),
+                64);
         }
 
         public static IReadOnlyList<CharacterCsvDto> Load(string csvText)
@@ -34,35 +34,61 @@ namespace Uft.AdvTools.Loader
             config.MissingFieldFound = null;
             return csvText.ReadCsv(
                 config,
-                (reader) => Map(reader));
+                (csvHeaders) => MapperFactory(csvHeaders),
+                64);
         }
 
-        public static CharacterCsvDto Map(CsvReader reader)
+        public static CsvRowMapper<CharacterCsvDto> MapperFactory(string[] csvHeaders)
         {
-            return new CharacterCsvDto
+            var iCharacterName = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "CharacterName");
+            var iNameText = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "NameText");
+            var iPattern = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "Pattern");
+            var iX = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "X");
+            var iY = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "Y");
+            var iZ = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "Z");
+
+            var iPivot = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "Pivot");
+            var iScale = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "Scale");
+            var iConditional = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "Conditional");
+            var iFileName = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "FileName");
+            var iSubFileName = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "SubFileName");
+
+            var iFileType = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "FileType");
+            var iAnimationState = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "AnimationState");
+            var iAnimation = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "Animation");
+            var iRenderTexture = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "RenderTexture");
+            var iRenderRect = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "RenderRect");
+            var iRenderTextureScale = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "RenderTextureScale");
+
+            var iLoop = CsvUtil.FindColumnIndexOrMinus1(csvHeaders, "Loop");
+            CharacterCsvDto mapper(CsvRow csvRow)
             {
-                CharacterName = reader.GetField<string>("CharacterName"),
-                NameText = reader.GetField<string>("NameText"),
-                Pattern = reader.GetField<string>("Pattern"),
-                X = reader.GetField<string>("X"),
-                Y = reader.GetField<string>("Y"),
-                Z = reader.GetField<string>("Z"),
+                return new CharacterCsvDto
+                {
+                    CharacterName = csvRow.GetString(iCharacterName),
+                    NameText = csvRow.GetString(iNameText),
+                    Pattern = csvRow.GetString(iPattern),
+                    X = csvRow.GetString(iX),
+                    Y = csvRow.GetString(iY),
+                    Z = csvRow.GetString(iZ),
 
-                Pivot = reader.GetField<string>("Pivot"),
-                Scale = reader.GetField<string>("Scale"),
-                Conditional = reader.GetField<string>("Conditional"),
-                FileName = reader.GetField<string>("FileName"),
-                SubFileName = reader.GetField<string>("SubFileName"),
+                    Pivot = csvRow.GetString(iPivot),
+                    Scale = csvRow.GetString(iScale),
+                    Conditional = csvRow.GetString(iConditional),
+                    FileName = csvRow.GetString(iFileName),
+                    SubFileName = csvRow.GetString(iSubFileName),
 
-                FileType = reader.GetField<string>("FileType"),
-                AnimationState = reader.GetField<string>("AnimationState"),
-                Animation = reader.GetField<string>("Animation"),
-                RenderTexture = reader.GetField<string>("RenderTexture"),
-                RenderRect = reader.GetField<string>("RenderRect"),
-                RenderTextureScale = reader.GetField<string>("RenderTextureScale"),
+                    FileType = csvRow.GetString(iFileType),
+                    AnimationState = csvRow.GetString(iAnimationState),
+                    Animation = csvRow.GetString(iAnimation),
+                    RenderTexture = csvRow.GetString(iRenderTexture),
+                    RenderRect = csvRow.GetString(iRenderRect),
+                    RenderTextureScale = csvRow.GetString(iRenderTextureScale),
 
-                Loop = reader.GetField<string>("Loop"),
-            };
+                    Loop = csvRow.GetString(iLoop),
+                };
+            }
+            return mapper;
         }
 
         public string? CharacterName { get; set; }
