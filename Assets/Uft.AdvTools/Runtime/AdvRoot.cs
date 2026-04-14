@@ -1,3 +1,5 @@
+using Cysharp.Threading.Tasks;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Uft.AdvTools.Commands;
@@ -11,6 +13,12 @@ using UnityEngine.UI;
 
 namespace Uft.AdvTools
 {
+    /// <summary>
+    /// 選択肢が開く瞬間の把握は、<see cref="ScenarioExecutor.OnSelectionShowing"/><br/>
+    /// 選択肢が閉じる瞬間の把握は、<see cref="ScenarioExecutor.OnSelectionHidden"/><br/>
+    /// ログが開く瞬間の把握は、<see cref="OnLogShowing"/><br/>
+    /// ログが閉じきった後の把握は、<see cref="OnLogHidden"/><br/>
+    /// </summary>
     public class AdvRoot : MonoBehaviour
     {
         // Parameters
@@ -39,6 +47,9 @@ namespace Uft.AdvTools
 
         public IInputProxy InputProxy = new SimpleInput();
 
+        public Action OnLogShowing { get; set; }
+        public Action OnLogHidden { get; set; }
+
         public MessageWindowManager MessageWindowManager { get; protected set; }
         public AutoNext AutoNext { get; protected set; }
         public LogManager LogManager { get; protected set; }
@@ -60,7 +71,7 @@ namespace Uft.AdvTools
         public bool IsAutoInputOnce { get; set; } = false;
         // public Dictionary<string, (Camera, List<CinemachineCamera>)> CameraDictionary { get; protected set; } = new Dictionary<string, (Camera, List<CinemachineCamera>)>();
         public List<Animator> UiEffectList { get; protected set; } = new List<Animator>(); // NOTE: Setup() 自動検出
-        public Dictionary<string, (Object, Animator, SpriteRenderer)> ObjectDictionary { get; protected set; } = new Dictionary<string, (Object, Animator, SpriteRenderer)>(); // NOTE: 調整中
+        public Dictionary<string, (UnityEngine.Object, Animator, SpriteRenderer)> ObjectDictionary { get; protected set; } = new Dictionary<string, (UnityEngine.Object, Animator, SpriteRenderer)>(); // NOTE: 調整中
 
         // Methods
 
@@ -161,11 +172,16 @@ namespace Uft.AdvTools
             if (isOn)
             {
                 this.ChangeAutoMode(false); // NOTE: Logを表示したら自動的にAutoNextをオフにする
+                this.OnLogShowing?.Invoke();
                 _ = this._logController.ShowAsync(this.LogManager.LogItemList);
             }
             else
             {
-                _ = this._logController.CloseAsync();
+                UniTask.Void(async () =>
+                {
+                    await this._logController.CloseAsync();
+                    this.OnLogHidden?.Invoke();
+                });
             }
 
             this._tglLogView.SetIsOnWithoutNotify(isOn);

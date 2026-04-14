@@ -19,6 +19,9 @@ namespace Uft.AdvTools
 
         public bool IsAutoNext { get; set; }
 
+        public Action OnSelectionShowing { get; set; }
+        public Action OnSelectionHidden { get; set; }
+
         public bool IsWaiting { get; set; }
         public bool IsWaitingForInput { get; set; }
         public bool IsAnyWaiting => this.IsWaiting || this.IsWaitingForInput;
@@ -69,7 +72,9 @@ namespace Uft.AdvTools
                                 .Where(s => s.IsVisible(advRoot))
                                 .ToList();
                             var logic = new SelectionList(advRoot.SelectionListView, advRoot.InputProxy);
+                            this.OnSelectionShowing?.Invoke();
                             var result = await logic.ShowDialogAsync(this.SelectionTitle?.Title, visibleList);
+                            this.OnSelectionHidden?.Invoke();
                             if (result.value == null || result.status != OperationResultStatus.Accepted) return;
 
                             var cmdSelection = result.value;
