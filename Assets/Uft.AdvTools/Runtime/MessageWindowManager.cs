@@ -19,12 +19,16 @@ namespace Uft.AdvTools
         public IReadOnlyList<MessageWindow> MessageWindowList { get; protected set; } = EMPTY_LIST;
         public MessageWindow? CurrentMessageWindow { get; protected set; }
 
-        public void Setup(IReadOnlyList<MessageWindow> messageWindowList)
+        public void Setup(IReadOnlyList<MessageWindow> messageWindowList, string? defaultMessageWindowName = null)
         {
             ThrowIf.NullOrEmpty(messageWindowList, nameof(messageWindowList));
 
             this.CurrentMessageWindow = null;
             this.MessageWindowList = messageWindowList;
+            if (defaultMessageWindowName != null)
+            {
+                this.DefaultMessageWindowName = defaultMessageWindowName;
+            }
 
             // 初期ウィンドウの決定
             for (int i = 0; i < this.MessageWindowList.Count; i++)
@@ -41,14 +45,10 @@ namespace Uft.AdvTools
                 this.CurrentMessageWindow = messageWindowList[0];
             }
 
-            // 初期ウィンドウ以外を非表示に
+            // 一旦すべて非表示に
             for (int i = 0; i < this.MessageWindowList.Count; i++)
             {
-                if (this.MessageWindowList[i].name != this.DefaultMessageWindowName)
-                {
-                    this.MessageWindowList[i].gameObject.SetActive(false);
-                    break;
-                }
+                this.MessageWindowList[i].gameObject.SetActive(false);
             }
         }
 
