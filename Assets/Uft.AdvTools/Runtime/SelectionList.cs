@@ -25,7 +25,7 @@ namespace Uft.AdvTools
             this._inputProxy = inputProxy;
         }
 
-        public virtual async UniTask<OperationResult<CmdSelection?>> ShowAsync(string? title, List<CmdSelection> data)
+        public virtual async UniTask<OperationResult<CmdSelection?>> ShowDialogAsync(string? title, List<CmdSelection> data)
         {
             // 引数チェック
             if (data.Count == 0) return CANCEL_RESULT;

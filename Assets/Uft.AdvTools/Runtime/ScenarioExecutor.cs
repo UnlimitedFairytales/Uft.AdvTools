@@ -69,7 +69,7 @@ namespace Uft.AdvTools
                                 .Where(s => s.IsVisible(advRoot))
                                 .ToList();
                             var logic = new SelectionList(advRoot.SelectionListView, advRoot.InputProxy);
-                            var result = await logic.ShowAsync(this.SelectionTitle?.Title, visibleList);
+                            var result = await logic.ShowDialogAsync(this.SelectionTitle?.Title, visibleList);
                             if (result.value == null || result.status != OperationResultStatus.Accepted) return;
 
                             var cmdSelection = result.value;
