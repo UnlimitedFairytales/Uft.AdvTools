@@ -129,11 +129,12 @@ namespace Uft.AdvTools.Commands
                 var voiceClip = advRoot.AllowsVoiceLabel && advRoot.VoiceDictionary.ContainsKey(this.Voice) ?
                             advRoot.VoiceDictionary[this.Voice] :
                             Resources.Load<AudioClip>(advRoot.VoiceRoot + Path.ChangeExtension(this.Voice, null));
+                advRoot.SoundManager.StopVoice(0);
                 advRoot.SoundManager.PlayVoice(voiceClip, false, 1.0f);
             }
             else
             {
-                advRoot.SoundManager.StopVoice();
+                advRoot.SoundManager.StopVoice(0);
             }
         }
     }

@@ -300,7 +300,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "7b6cf1d24baf745b3b6569a2f54f9c078fcaa819"
+      "hash": "afcd0d679ffe3ee48ef7bf4b5f8b8693e5c5f0f7"
     },
     "com.unlimited-fairytales.unityutils": {
       "version": "https://github.com/UnlimitedFairytales/Uft.UnityUtils.git?path=Assets/Uft.UnityUtils",
@@ -309,7 +309,7 @@
       "dependencies": {
         "com.unity.ugui": "2.0.0"
       },
-      "hash": "7be29ebfb3ba3fa3934fddf9c3e62c8e79544892"
+      "hash": "7b22ac00a2d984e513c9356a89e6d22f43f034ae"
     },
     "com.unlimited-fairytales.virtualizedlist": {
       "version": "https://github.com/UnlimitedFairytales/Uft.VirtualizedList.git?path=Assets/Uft.VirtualizedList",
