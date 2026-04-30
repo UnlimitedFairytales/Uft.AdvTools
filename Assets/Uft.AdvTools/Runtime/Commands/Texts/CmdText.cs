@@ -88,7 +88,7 @@ namespace Uft.AdvTools.Commands
             }
             advRoot.SetText(characterOrNull, name, this.Text, pageCtrl, this.WindowType);
             advRoot.AutoNext.ClearCounter();
-            advRoot.AutoNext.SetIsAutoNextReadyTimeAdjust(this.Text.Length, string.IsNullOrWhiteSpace(this.Voice) ? AutoNext.DEFAULT_ADJUST_WEIGHT : 0.01f);
+            advRoot.AutoNext.SetIsAutoNextReadyTimeAdjust(this.Text.Length, AutoNext.DEFAULT_ADJUST_WEIGHT, !string.IsNullOrWhiteSpace(this.Voice));
         }
 
         void SetCharacter(AdvRoot advRoot, Character character)

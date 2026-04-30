@@ -7,10 +7,29 @@ namespace Uft.AdvTools
         public const float DEFAULT_ADJUST_WEIGHT = 0.07f;
 
         protected float _counter = 0;
-        protected float _baseTime = 2.0f;
+        protected float _baseTime = 1.0f;
+        protected float _textOnlyAdditionalTime = 1.0f;
         protected float _adjustTime = 0.0f;
-        public void SetIsAutoNextReadyTimeAdjust(int textLength, float perAdjust = DEFAULT_ADJUST_WEIGHT) => this._adjustTime = textLength * perAdjust;
-        public virtual bool IsReady => (this._baseTime + this._adjustTime) <= this._counter;
+        protected bool _voiceExists;
+        public void SetIsAutoNextReadyTimeAdjust(int textLength, float perAdjust = DEFAULT_ADJUST_WEIGHT, bool voiceExists = false)
+        {
+            this._voiceExists = voiceExists;
+            this._adjustTime = textLength * perAdjust;
+        }
+        public virtual bool IsReady
+        {
+            get
+            {
+                if (this._voiceExists)
+                {
+                    return this._baseTime < this._counter;
+                }
+                else
+                {
+                    return (this._baseTime + this._textOnlyAdditionalTime + this._adjustTime) <= this._counter;
+                }
+            }
+        }
 
         public void ClearCounter()
         {
