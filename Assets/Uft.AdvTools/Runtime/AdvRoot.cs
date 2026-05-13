@@ -55,6 +55,8 @@ namespace Uft.AdvTools
         public AutoNext AutoNext { get; protected set; }
         public LogManager LogManager { get; protected set; }
 
+        public AssetLoadProxy AssetLoadProxy { get; protected set; }
+
         public string ResourcesFolderPathPart { get; protected set; }
         public string VoiceRoot => this.ResourcesFolderPathPart + "Sound/Voice/";
 
@@ -107,12 +109,15 @@ namespace Uft.AdvTools
             }
         }
 
-        public virtual void Setup(string scenarioCsvText, string characterCsvText, string textureCsvText, string soundCsvText, string paramCsvText, string resourcesFolderPathPart,
+        public virtual void Setup(string scenarioCsvText, string characterCsvText, string textureCsvText, string soundCsvText, string paramCsvText, AssetLoadProxy assetLoadProxy, string resourcesFolderPathPart,
             ScenarioCsvLoader scenarioCsvLoader = null, string defaultMessageWindowName = null)
         {
-            scenarioCsvLoader ??= new ScenarioCsvLoader();
-
             this.Cleanup();
+
+            this.AssetLoadProxy = assetLoadProxy;
+            this.ResourcesFolderPathPart = resourcesFolderPathPart;
+
+            scenarioCsvLoader ??= new ScenarioCsvLoader(assetLoadProxy);
 
             this.MessageWindowManager = new MessageWindowManager();
             this.AutoNext = new AutoNext();
@@ -121,15 +126,13 @@ namespace Uft.AdvTools
 
             this.PostEffectManager.Setup(this);
 
-            this.ResourcesFolderPathPart = resourcesFolderPathPart;
+            this.CharacterDictionary = new CharacterCsvLoader(assetLoadProxy).Load(characterCsvText, resourcesFolderPathPart);
 
-            this.CharacterDictionary = new CharacterCsvLoader().Load(characterCsvText, resourcesFolderPathPart);
-
-            var textures = new TextureCsvLoader().Load(textureCsvText, resourcesFolderPathPart);
+            var textures = new TextureCsvLoader(assetLoadProxy).Load(textureCsvText, resourcesFolderPathPart);
             this.BgDictionary = textures._bgDict;
             this.SpriteDictionary = textures._spriteDict;
 
-            var sounds = new SoundCsvLoader().Load(soundCsvText, resourcesFolderPathPart);
+            var sounds = new SoundCsvLoader(assetLoadProxy).Load(soundCsvText, resourcesFolderPathPart);
             this.BgmDictionary = sounds._bgmDict;
             this.SeDictionary = sounds._seDict;
             this.VoiceDictionary = sounds._voiceDict;

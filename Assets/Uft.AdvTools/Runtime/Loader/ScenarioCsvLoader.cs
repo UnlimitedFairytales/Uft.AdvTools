@@ -54,6 +54,13 @@ namespace Uft.AdvTools.Loader
 
         // instance
 
+        readonly AssetLoadProxy _assetLoadProxy;
+
+        public ScenarioCsvLoader(AssetLoadProxy assetLoadProxy)
+        {
+            this._assetLoadProxy = assetLoadProxy;
+        }
+
         public IReadOnlyList<ICommand> Load(FileInfo fileInfo, string sheetName)
         {
             var csvDtoList = ScenarioCsvDto.Load(fileInfo);
@@ -98,7 +105,8 @@ namespace Uft.AdvTools.Loader
                                     int.TryParse(dto.Arg3, out var index) ? index : null,
                                     InvariantCultureUtil.FloatTryParse(dto.Arg4, out var x) ? x : null,
                                     InvariantCultureUtil.FloatTryParse(dto.Arg5, out var y) ? y : null,
-                                    InvariantCultureUtil.FloatTryParse(dto.Arg6, out var fadeSeconds) ? fadeSeconds : null));
+                                    InvariantCultureUtil.FloatTryParse(dto.Arg6, out var fadeSeconds) ? fadeSeconds : null,
+                                    this._assetLoadProxy));
                             }
                             break;
                         // Object

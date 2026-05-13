@@ -21,6 +21,13 @@ namespace Uft.AdvTools.Loader
         public const string Se = "se";
         public const string Voice = "voice";
 
+        readonly AssetLoadProxy _assetLoadProxy;
+
+        public SoundCsvLoader(AssetLoadProxy assetLoadProxy)
+        {
+            this._assetLoadProxy = assetLoadProxy;
+        }
+
         public SoundDictionaries Load(FileInfo fileInfo, string resourcesFolderPathPart)
         {
             var csvDtoList = SoundCsvDto.Load(fileInfo);
@@ -55,7 +62,7 @@ namespace Uft.AdvTools.Loader
                     switch (type)
                     {
                         case Bgm:
-                            bgmDict[dto.Label] = Resources.Load<AudioClip>(soundBgmRoot + Path.ChangeExtension(dto.FileName, null));
+                            bgmDict[dto.Label] = this._assetLoadProxy.Load<AudioClip>(soundBgmRoot + Path.ChangeExtension(dto.FileName, null));
                             var bgmClip = bgmDict[dto.Label];
                             if (bgmClip != null && bgmClip.length >= 10 && bgmClip.loadType != AudioClipLoadType.Streaming)
                             {
@@ -63,10 +70,10 @@ namespace Uft.AdvTools.Loader
                             }
                             break;
                         case Se:
-                            seDict[dto.Label] = Resources.Load<AudioClip>(soundSeRoot + Path.ChangeExtension(dto.FileName, null));
+                            seDict[dto.Label] = this._assetLoadProxy.Load<AudioClip>(soundSeRoot + Path.ChangeExtension(dto.FileName, null));
                             break;
                         case Voice:
-                            voiceDict[dto.Label] = Resources.Load<AudioClip>(soundVoiceRoot + Path.ChangeExtension(dto.FileName, null));
+                            voiceDict[dto.Label] = this._assetLoadProxy.Load<AudioClip>(soundVoiceRoot + Path.ChangeExtension(dto.FileName, null));
                             break;
                         default:
                             break;

@@ -43,6 +43,7 @@ namespace Uft.AdvTools.Samples
                         this._textureFile.text,
                         this._soundFile.text,
                         this._paramFile.text,
+                        new AssetLoadProxy(null),
                         this._resourcesFolderPathPart);
                     this._advRoot.ScenarioExecutor.ResumeScenario();
                     this._lastPauseState = this._advRoot.ScenarioExecutor.IsPauseScenario;

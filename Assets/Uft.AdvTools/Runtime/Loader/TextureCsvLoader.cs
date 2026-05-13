@@ -22,6 +22,13 @@ namespace Uft.AdvTools.Loader
         public const string Bg = "bg";
         public const string Sprite = "sprite";
 
+        readonly AssetLoadProxy _assetLoadProxy;
+
+        public TextureCsvLoader(AssetLoadProxy assetLoadProxy)
+        {
+            this._assetLoadProxy = assetLoadProxy;
+        }
+
         public TextureDictionaries Load(FileInfo fileInfo, string resourcesFolderPathPart)
         {
             var csvDtoList = TextureCsvDto.Load(fileInfo);
@@ -61,11 +68,11 @@ namespace Uft.AdvTools.Loader
                                 GameObject? prefab = null;
                                 if (fileType == FileType.None)
                                 {
-                                    sprite = Resources.Load<Sprite>(textureBgRoot + Path.ChangeExtension(dto.FileName, null));
+                                    sprite = this._assetLoadProxy.Load<Sprite>(textureBgRoot + Path.ChangeExtension(dto.FileName, null));
                                 }
                                 else if (fileType == FileType.Prefab2D || fileType == FileType.Prefab3D)
                                 {
-                                    prefab = Resources.Load<GameObject>(textureBgRoot + Path.ChangeExtension(dto.FileName, null));
+                                    prefab = this._assetLoadProxy.Load<GameObject>(textureBgRoot + Path.ChangeExtension(dto.FileName, null));
                                 }
                                 bgDict[dto.Label] = new TextureRow(
                                     dto.Label,
@@ -84,11 +91,11 @@ namespace Uft.AdvTools.Loader
                                 GameObject? prefab = null;
                                 if (fileType == FileType.None)
                                 {
-                                    sprite = Resources.Load<Sprite>(textureSpriteRoot + Path.ChangeExtension(dto.FileName, null));
+                                    sprite = this._assetLoadProxy.Load<Sprite>(textureSpriteRoot + Path.ChangeExtension(dto.FileName, null));
                                 }
                                 else if (fileType == FileType.Prefab2D || fileType == FileType.Prefab3D)
                                 {
-                                    prefab = Resources.Load<GameObject>(textureSpriteRoot + Path.ChangeExtension(dto.FileName, null));
+                                    prefab = this._assetLoadProxy.Load<GameObject>(textureSpriteRoot + Path.ChangeExtension(dto.FileName, null));
                                 }
                                 spriteDict[dto.Label] = new TextureRow(
                                     dto.Label,

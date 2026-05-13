@@ -47,8 +47,10 @@ namespace Uft.AdvTools.Commands
         protected float? PosY { get; set; }
         protected float FadeSeconds { get; set; }
 
+        readonly AssetLoadProxy _assetLoadProxy;
+
         public CmdText(string? name, string? text, string? pageCtrl, string? voice, string? windowType,
-            string? pattern, int? imageIndex, float? posX, float? posY, float? fadeSeconds)
+            string? pattern, int? imageIndex, float? posX, float? posY, float? fadeSeconds, AssetLoadProxy assetLoadProxy)
         {
             this.Name = name ?? "";
             this.Text = text ?? "";
@@ -64,6 +66,8 @@ namespace Uft.AdvTools.Commands
             this.PosX = posX;
             this.PosY = posY;
             this.FadeSeconds = fadeSeconds ?? 0.2f;
+
+            this._assetLoadProxy = assetLoadProxy;
         }
 
         public virtual void Run(ScenarioExecutor scenarioExecutor, AdvRoot advRoot)
@@ -128,7 +132,7 @@ namespace Uft.AdvTools.Commands
                 // NOTE: 宴と異なりSoundシートでのType=Voiceに対応してある (本来の宴4はファイル直接記入のみ)
                 var voiceClip = advRoot.AllowsVoiceLabel && advRoot.VoiceDictionary.ContainsKey(this.Voice) ?
                             advRoot.VoiceDictionary[this.Voice] :
-                            Resources.Load<AudioClip>(advRoot.VoiceRoot + Path.ChangeExtension(this.Voice, null));
+                            this._assetLoadProxy.Load<AudioClip>(advRoot.VoiceRoot + Path.ChangeExtension(this.Voice, null));
                 advRoot.SoundManager.StopVoice(0);
                 advRoot.SoundManager.PlayVoice(voiceClip, false, 1.0f);
             }

@@ -13,6 +13,13 @@ namespace Uft.AdvTools.Loader
 {
     public class CharacterCsvLoader
     {
+        readonly AssetLoadProxy _assetLoadProxy;
+
+        public CharacterCsvLoader(AssetLoadProxy assetLoadProxy)
+        {
+            this._assetLoadProxy = assetLoadProxy;
+        }
+
         public Dictionary<string, Character> Load(FileInfo fileInfo, string resourcesFolderPathPart)
         {
             var csvDtoList = CharacterCsvDto.Load(fileInfo);
@@ -46,11 +53,11 @@ namespace Uft.AdvTools.Loader
                     GameObject? prefab = null;
                     if (fileType == FileType.None)
                     {
-                        sprite = Resources.Load<Sprite>(textureCharacterRoot + Path.ChangeExtension(dto.FileName, null));
+                        sprite = this._assetLoadProxy.Load<Sprite>(textureCharacterRoot + Path.ChangeExtension(dto.FileName, null));
                     }
                     else if (fileType == FileType.Prefab2D || fileType == FileType.Prefab3D)
                     {
-                        prefab = Resources.Load<GameObject>(textureCharacterRoot + Path.ChangeExtension(dto.FileName, null));
+                        prefab = this._assetLoadProxy.Load<GameObject>(textureCharacterRoot + Path.ChangeExtension(dto.FileName, null));
                     }
                     var pattern = new CharacterDetail(
                         dto.Pattern!,
