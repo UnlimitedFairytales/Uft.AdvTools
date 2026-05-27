@@ -173,17 +173,18 @@ namespace Uft.AdvTools
 
         public virtual void ChangeLogView(bool isOn)
         {
+            var ct = this.destroyCancellationToken;
             if (isOn)
             {
                 this.ChangeAutoMode(false); // NOTE: Logを表示したら自動的にAutoNextをオフにする
                 this.OnLogShowing?.Invoke();
-                _ = this._logController.ShowAsync(this.LogManager.LogItemList);
+                this._logController.ShowAsync(ct, this.LogManager.LogItemList).Forget();
             }
             else
             {
                 UniTask.Void(async () =>
                 {
-                    await this._logController.CloseAsync();
+                    await this._logController.CloseAsync(ct);
                     this.OnLogHidden?.Invoke();
                 });
             }

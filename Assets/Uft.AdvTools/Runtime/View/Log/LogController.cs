@@ -2,6 +2,7 @@
 
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
+using System.Threading;
 using Uft.UnityUtils;
 using Uft.UnityUtils.Common;
 using Uft.VirtualizedList;
@@ -65,10 +66,12 @@ namespace Uft.AdvTools.View
 
         static readonly OperationResult<int> CANCEL_RESULT = new(OperationResultStatus.Canceled, 0);
 
-        public virtual async UniTask<OperationResult<int>> ShowAsync(IReadOnlyList<LogData> dataList)
+        public virtual async UniTask<OperationResult<int>> ShowAsync(CancellationToken cancellationToken, IReadOnlyList<LogData> dataList)
         {
             if (this._scrollRect == null) throw new UnassignedReferenceException(nameof(this._scrollRect));
             if (this._list == null) throw new UnassignedReferenceException(nameof(this._list));
+
+            var cts = CancellationTokenSource.CreateLinkedTokenSource(this.destroyCancellationToken, cancellationToken);
 
             // Awake保証
             this.gameObject.SetActive(true);
@@ -81,17 +84,19 @@ namespace Uft.AdvTools.View
             this._list.RefreshVirtualContentSize();
 
             // 表示終了待ち
-            await UniTask.WaitUntil(() => this == null || !this.gameObject.activeSelf);
+            await UniTask.WaitUntil(() => this == null || !this.gameObject.activeSelf, cancellationToken: cts.Token);
             if (this == null) return CANCEL_RESULT;
 
             // 返却
             return CANCEL_RESULT;
         }
 
-        public virtual async UniTask CloseAsync()
+        public virtual async UniTask CloseAsync(CancellationToken cancellationToken)
         {
+            var cts = CancellationTokenSource.CreateLinkedTokenSource(this.destroyCancellationToken, cancellationToken);
+
             // HACK: フェード対応するべき
-            await UniTask.Delay(0);
+            await UniTask.Delay(0, cancellationToken: cts.Token);
             this.gameObject.SetActive(false);
         }
     }
