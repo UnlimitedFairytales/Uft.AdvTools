@@ -1,9 +1,12 @@
 #nullable enable
 
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using System;
+using System.Threading;
 using TMPro;
 using Uft.AdvTools.Commands;
+using Uft.UnityUtils.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,7 +31,7 @@ namespace Uft.AdvTools.View
 
         protected RectTransform? _parentRectTransform;
         protected Animator? _animNextSymbol; // NOTE: nullでも動くように
-        protected float _typewriterIntervalCounter_sec = 0;
+        protected CancellationTokenSource? _lastCts;
 
         public bool IsDisplayed => this.gameObject.activeSelf;
 
@@ -58,17 +61,11 @@ namespace Uft.AdvTools.View
             }
         }
 
-        protected virtual void Update()
+        protected virtual void OnDestroy()
         {
-            if (this._txtText == null) throw new InvalidOperationException($"{nameof(this._txtText)} is required.");
-            if (!this.IsTypewriting) return;
-
-            this._typewriterIntervalCounter_sec += Time.deltaTime;
-            while (this.IsTypewriting && this._typewriterInterval_sec <= this._typewriterIntervalCounter_sec)
-            {
-                this._typewriterIntervalCounter_sec -= this._typewriterInterval_sec;
-                this._txtText.maxVisibleCharacters++;
-            }
+            this._lastCts?.Cancel();
+            this._lastCts?.Dispose();
+            this._lastCts = null;
         }
 
         // Methods
@@ -77,6 +74,13 @@ namespace Uft.AdvTools.View
         {
             if (this._txtText == null) throw new InvalidOperationException($"{nameof(this._txtText)} is required.");
 
+            if (this._lastCts != null)
+            {
+                this._lastCts.Cancel();
+                this._lastCts.Dispose();
+                this._lastCts = null;
+            }
+            this._lastCts = CancellationTokenSource.CreateLinkedTokenSource(this.destroyCancellationToken);
             this.DisableImgNextSymbol();
             advRoot.ShowUI(0);
 
@@ -98,40 +102,46 @@ namespace Uft.AdvTools.View
                 default:
                 case CmdText.PageCtrlType.InputBrPageAndNoHide:
                 case CmdText.PageCtrlType.InputBrPage:
-                    this._txtText.text = text;
-                    this._txtText.ForceMeshUpdate();
                     if (this._isTypewriterEnabled)
                     {
-                        this._typewriterIntervalCounter_sec = 0;
-                        this._txtText.maxVisibleCharacters = 0;
+                        this._txtText.TypeWriterEffectAsync(this._lastCts.Token, text, false, this._typewriterInterval_sec).Forget();
                     }
                     else
                     {
+                        this._txtText.text = text;
+                        this._txtText.ForceMeshUpdate();
                         this._txtText.maxVisibleCharacters = this._txtText.textInfo.characterCount;
                     }
                     break;
                 case CmdText.PageCtrlType.InputBr:
-                    this._txtText.text += "\n" + text;
-                    this._txtText.ForceMeshUpdate();
-                    if (!this._isTypewriterEnabled)
+                    var t1 = "\n" + text;
+                    if (this._isTypewriterEnabled)
                     {
+                        this._txtText.TypeWriterEffectAsync(this._lastCts.Token, t1, true, this._typewriterInterval_sec).Forget();
+                    }
+                    else
+                    {
+                        this._txtText.text += t1;
+                        this._txtText.ForceMeshUpdate();
                         this._txtText.maxVisibleCharacters = this._txtText.textInfo.characterCount;
                     }
                     break;
                 case CmdText.PageCtrlType.Input:
                 case CmdText.PageCtrlType.Next:
-                    this._txtText.text += text;
-                    this._txtText.ForceMeshUpdate();
-                    if (!this._isTypewriterEnabled)
+                    if (this._isTypewriterEnabled)
                     {
+                        this._txtText.TypeWriterEffectAsync(this._lastCts.Token, text, true, this._typewriterInterval_sec).Forget();
+                    }
+                    else
+                    {
+                        this._txtText.text += text;
+                        this._txtText.ForceMeshUpdate();
                         this._txtText.maxVisibleCharacters = this._txtText.textInfo.characterCount;
                     }
                     break;
             }
             this.LastPageCtrl = pageCtrl;
             // NOTE: windowType は 対応予定なし
-
-            
         }
 
         public virtual void FixLastPageCtrl()
@@ -151,6 +161,12 @@ namespace Uft.AdvTools.View
         {
             if (this._txtText == null) throw new InvalidOperationException($"{nameof(this._txtText)} is required.");
 
+            if (this._lastCts != null)
+            {
+                this._lastCts.Cancel();
+                this._lastCts.Dispose();
+                this._lastCts = null;
+            }
             this._txtText.maxVisibleCharacters = this._txtText.textInfo.characterCount;
         }
 
