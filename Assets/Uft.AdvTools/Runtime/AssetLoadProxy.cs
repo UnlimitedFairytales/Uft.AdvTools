@@ -7,32 +7,15 @@ namespace Uft.AdvTools
 {
     public class AssetLoadProxy
     {
-        public enum LoadType
-        {
-            Resources,
-            ExternalLoader,
-        }
+        readonly Func<string, Type, UnityEngine.Object>? _externalLoader;
 
-        public LoadType loadType = LoadType.Resources;
-
-        readonly Func<string, Type, UnityEngine.Object> _externalLoader;
-
-        public AssetLoadProxy(Func<string, Type, UnityEngine.Object> externalLoader)
-        {
-            this._externalLoader = externalLoader;
-        }
+        public AssetLoadProxy(Func<string, Type, UnityEngine.Object>? externalLoader) => this._externalLoader = externalLoader;
 
         public T Load<T>(string path) where T : UnityEngine.Object
         {
-
-            if (this.loadType == LoadType.Resources)
-            {
-                return Resources.Load<T>(path);
-            }
-            else
-            {
-                return (T)this._externalLoader(path, typeof(T));
-            }
+            return this._externalLoader != null ?
+                (T)this._externalLoader(path, typeof(T)) :
+                Resources.Load<T>(path);
         }
     }
 }
