@@ -67,7 +67,7 @@ namespace Uft.AdvTools.Commands
                 {
                     if (string.IsNullOrWhiteSpace(this.RuleName))
                     {
-                        await advRoot.FadeEffect.StartFadeAsync(true, this.FadeSeconds, this.FadeColor);
+                        await advRoot.FadeEffect.StartFadeAsync(advRoot.destroyCancellationToken, true, this.FadeSeconds, this.FadeColor);
                     }
                     else
                     {
