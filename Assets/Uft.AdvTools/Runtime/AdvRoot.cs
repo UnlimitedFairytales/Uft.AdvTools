@@ -62,11 +62,9 @@ namespace Uft.AdvTools
         public Dictionary<string, Character> CharacterDictionary { get; protected set; }
         public Dictionary<string, TextureRow> BgDictionary { get; protected set; }
         public Dictionary<string, TextureRow> SpriteDictionary { get; protected set; }
-
         public Dictionary<string, AudioClip> BgmDictionary { get; protected set; }
         public Dictionary<string, AudioClip> SeDictionary { get; protected set; }
         public Dictionary<string, AudioClip> VoiceDictionary { get; protected set; }
-
         public Dictionary<string, Param> ParamDictionary { get; protected set; }
 
         public ScenarioExecutor ScenarioExecutor { get; protected set; }
@@ -113,33 +111,34 @@ namespace Uft.AdvTools
         {
             this.Cleanup();
 
+            // Asset
             this.AssetLoadProxy = assetLoadProxy;
             this.ResourcesFolderPathPart = resourcesFolderPathPart;
             scenarioCsvLoader ??= new ScenarioCsvLoader(assetLoadProxy);
 
+            // new or setup
             this.MessageWindowManager = new MessageWindowManager();
             this.AutoNext = new AutoNext();
             this.LogManager = new LogManager();
             this._tglLogView.SetIsOnWithoutNotify(false);
-
             this.PostEffectManager.Setup(this);
 
+            // Dictionary
             this.CharacterDictionary = new CharacterCsvLoader(assetLoadProxy).Load(characterCsvText, resourcesFolderPathPart);
-
             var textures = new TextureCsvLoader(assetLoadProxy).Load(textureCsvText, resourcesFolderPathPart);
             this.BgDictionary = textures._bgDict;
             this.SpriteDictionary = textures._spriteDict;
-
             var sounds = new SoundCsvLoader(assetLoadProxy).Load(soundCsvText, resourcesFolderPathPart);
             this.BgmDictionary = sounds._bgmDict;
             this.SeDictionary = sounds._seDict;
             this.VoiceDictionary = sounds._voiceDict;
-
             this.ParamDictionary = new ParamCsvLoader().Load(paramCsvText);
 
+            // ScenarioExecutor
             this.ScenarioExecutor = new ScenarioExecutor(scenarioCsvLoader.Load(scenarioCsvText, "test"));
             this._tglAutoNext.SetIsOnWithoutNotify(this.ScenarioExecutor.IsAutoNext);
             this.MessageWindowManager.Setup(this.GetComponentsInChildren<MessageWindow>(true), defaultMessageWindowName);
+
             foreach (var cameraPrefix in this._cameraPrefixes)
             {
                 var camera =
