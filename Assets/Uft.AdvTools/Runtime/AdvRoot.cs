@@ -51,14 +51,13 @@ namespace Uft.AdvTools
         public Action OnLogShowing { get; set; }
         public Action OnLogHidden { get; set; }
 
+        public AssetLoadProxy AssetLoadProxy { get; protected set; }
+        public string ResourcesFolderPathPart { get; protected set; }
+        public string VoiceRoot => this.ResourcesFolderPathPart + "Sound/Voice/";
+
         public MessageWindowManager MessageWindowManager { get; protected set; }
         public AutoNext AutoNext { get; protected set; }
         public LogManager LogManager { get; protected set; }
-
-        public AssetLoadProxy AssetLoadProxy { get; protected set; }
-
-        public string ResourcesFolderPathPart { get; protected set; }
-        public string VoiceRoot => this.ResourcesFolderPathPart + "Sound/Voice/";
 
         public Dictionary<string, Character> CharacterDictionary { get; protected set; }
         public Dictionary<string, TextureRow> BgDictionary { get; protected set; }
@@ -116,7 +115,6 @@ namespace Uft.AdvTools
 
             this.AssetLoadProxy = assetLoadProxy;
             this.ResourcesFolderPathPart = resourcesFolderPathPart;
-
             scenarioCsvLoader ??= new ScenarioCsvLoader(assetLoadProxy);
 
             this.MessageWindowManager = new MessageWindowManager();
