@@ -1,3 +1,5 @@
+#nullable enable
+
 using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
@@ -27,50 +29,50 @@ namespace Uft.AdvTools
         [SerializeField] protected bool _emulatesUtageEffectCommand = true; public bool EmulatesUtageEffectCommand => this._emulatesUtageEffectCommand;
         [SerializeField] protected bool _allowsVoiceLabel = false; public bool AllowsVoiceLabel => this._allowsVoiceLabel;
 
-        [SerializeField] protected Bg _bg; public Bg Bg => this._bg;
+        [SerializeField] protected Bg _bg = null!; public Bg Bg => this._bg;
 
-        [SerializeField] protected SpriteManager _spriteManager; public SpriteManager SpriteManager => this._spriteManager;
-        [SerializeField] protected SoundManager _soundManager; public SoundManager SoundManager => this._soundManager;
-        [SerializeField] protected PostEffectManager _postEffectManager; public PostEffectManager PostEffectManager => this._postEffectManager;
-        [SerializeField] protected SelectionListView _selectionListView; public SelectionListView SelectionListView => this._selectionListView;
+        [SerializeField] protected SpriteManager _spriteManager = null!; public SpriteManager SpriteManager => this._spriteManager;
+        [SerializeField] protected SoundManager _soundManager = null!; public SoundManager SoundManager => this._soundManager;
+        [SerializeField] protected PostEffectManager _postEffectManager = null!; public PostEffectManager PostEffectManager => this._postEffectManager;
+        [SerializeField] protected SelectionListView _selectionListView = null!; public SelectionListView SelectionListView => this._selectionListView;
 
-        [SerializeField] protected LogController _logController; public bool LogControllerIsVisible => this._logController.gameObject.activeSelf;
+        [SerializeField] protected LogController _logController = null!; public bool LogControllerIsVisible => this._logController.gameObject.activeSelf;
 
-        [SerializeField] protected Toggle _tglAutoNext;
-        [SerializeField] protected Toggle _tglLogView;
+        [SerializeField] protected Toggle _tglAutoNext = null!;
+        [SerializeField] protected Toggle _tglLogView = null!;
 
         [SerializeField] protected string[] _cameraPrefixes = new[] { "WideCamera", "ACamera", "BCamera" };
         [SerializeField] protected string _uiEffectPrefix = "UIEffect_";
         [SerializeField] protected string _defaultParentName = "Stage"; public string DefaultParentName => this._defaultParentName;
-        [SerializeField] protected FadeEffect _fadeEffect; public FadeEffect FadeEffect => this._fadeEffect;
+        [SerializeField] protected FadeEffect _fadeEffect = null!; public FadeEffect FadeEffect => this._fadeEffect;
 
         // Status
 
         public IInputProxy InputProxy = new SimpleInput();
 
-        public Action OnLogShowing { get; set; }
-        public Action OnLogHidden { get; set; }
+        public Action? OnLogShowing { get; set; }
+        public Action? OnLogHidden { get; set; }
 
-        public AssetLoadProxy AssetLoadProxy { get; protected set; }
-        public string ResourcesFolderPathPart { get; protected set; }
+        public AssetLoadProxy AssetLoadProxy { get; protected set; } = null!;
+        public string ResourcesFolderPathPart { get; protected set; } = null!;
         public string VoiceRoot => this.ResourcesFolderPathPart + "Sound/Voice/";
 
-        public MessageWindowManager MessageWindowManager { get; protected set; }
-        public AutoNext AutoNext { get; protected set; }
-        public LogManager LogManager { get; protected set; }
+        public MessageWindowManager MessageWindowManager { get; protected set; } = null!;
+        public AutoNext AutoNext { get; protected set; } = null!;
+        public LogManager LogManager { get; protected set; } = null!;
 
-        public Dictionary<string, Character> CharacterDictionary { get; protected set; }
-        public Dictionary<string, TextureRow> BgDictionary { get; protected set; }
-        public Dictionary<string, TextureRow> SpriteDictionary { get; protected set; }
-        public Dictionary<string, AudioClip> BgmDictionary { get; protected set; }
-        public Dictionary<string, AudioClip> SeDictionary { get; protected set; }
-        public Dictionary<string, AudioClip> VoiceDictionary { get; protected set; }
-        public Dictionary<string, Param> ParamDictionary { get; protected set; }
+        public Dictionary<string, Character> CharacterDictionary { get; protected set; } = null!;
+        public Dictionary<string, TextureRow> BgDictionary { get; protected set; } = null!;
+        public Dictionary<string, TextureRow> SpriteDictionary { get; protected set; } = null!;
+        public Dictionary<string, AudioClip> BgmDictionary { get; protected set; } = null!;
+        public Dictionary<string, AudioClip> SeDictionary { get; protected set; } = null!;
+        public Dictionary<string, AudioClip> VoiceDictionary { get; protected set; } = null!;
+        public Dictionary<string, Param> ParamDictionary { get; protected set; } = null!;
 
-        public ScenarioExecutor ScenarioExecutor { get; protected set; }
+        public ScenarioExecutor? ScenarioExecutor { get; protected set; }
         public bool IsAutoInputOnce { get; set; } = false;
         // public Dictionary<string, (Camera, List<CinemachineCamera>)> CameraDictionary { get; protected set; } = new Dictionary<string, (Camera, List<CinemachineCamera>)>();
-        public List<Animator> UiEffectList { get; protected set; } = new List<Animator>(); // NOTE: Setup() 自動検出
+        public List<Animator> UiEffectList { get; protected set; } = null!; // NOTE: Setup() 自動検出
         public Dictionary<string, (UnityEngine.Object, Animator, SpriteRenderer)> ObjectDictionary { get; protected set; } = new Dictionary<string, (UnityEngine.Object, Animator, SpriteRenderer)>(); // NOTE: 調整中
 
         // Methods
@@ -87,27 +89,28 @@ namespace Uft.AdvTools
             if (this.ScenarioExecutor.IsPauseScenario) return;
 
             // IsAutoNextReady制御
-            var isCountable = !this.MessageWindowManager.CurrentMessageWindow.IsTypewriting && !this.SoundManager.IsAnyVoicePlaying;
+            var w = this.MessageWindowManager.CurrentMessageWindow;
+            var isCountable = !(w != null && w.IsTypewriting) && !this.SoundManager.IsAnyVoicePlaying;
             this.AutoNext.UpdateFrame(isCountable, Time.deltaTime);
 
             this.ScenarioExecutor.UpdateFrame(this);
-            if (!this.ScenarioExecutor.IsWaiting && this.ScenarioExecutor.IsWaitingForInput && !this.MessageWindowManager.CurrentMessageWindow.IsTypewriting)
+            if (!this.ScenarioExecutor.IsWaiting && this.ScenarioExecutor.IsWaitingForInput && !(w != null && w.IsTypewriting))
             {
                 if (this.IsAutoInputOnce)
                 {
                     this.IsAutoInputOnce = false;
                     this.Next();
                 }
-                this.MessageWindowManager.CurrentMessageWindow.EnableImgNextSymbol();
+                if (w != null) w.EnableImgNextSymbol();
             }
             else
             {
-                this.MessageWindowManager.CurrentMessageWindow.DisableImgNextSymbol();
+                if (w != null) w.DisableImgNextSymbol();
             }
         }
 
         public virtual void Setup(string scenarioCsvText, string characterCsvText, string textureCsvText, string soundCsvText, string paramCsvText, AssetLoadProxy assetLoadProxy, string resourcesFolderPathPart,
-            ScenarioCsvLoader scenarioCsvLoader = null, string defaultMessageWindowName = null)
+            ScenarioCsvLoader? scenarioCsvLoader = null, string? defaultMessageWindowName = null)
         {
             this.Cleanup();
 
@@ -159,11 +162,13 @@ namespace Uft.AdvTools
             this.MessageWindowManager?.Cleanup();
             // this.CameraDictionary.Clear();
             this.ObjectDictionary.Clear();
-            this.UiEffectList.Clear();
+            this.UiEffectList?.Clear();
         }
 
         public virtual void ChangeAutoMode(bool isOn)
         {
+            if (this.ScenarioExecutor == null) return;
+
             this.ScenarioExecutor.IsAutoNext = isOn;
             this._tglAutoNext.SetIsOnWithoutNotify(isOn);
         }
@@ -191,33 +196,39 @@ namespace Uft.AdvTools
 
         public virtual void Next(bool playsNextSound = true)
         {
-            if (this.MessageWindowManager.CurrentMessageWindow.IsTypewriting)
+            var w = this.MessageWindowManager.CurrentMessageWindow;
+            if (w != null && w.IsTypewriting)
             {
-                this.MessageWindowManager.CurrentMessageWindow.EndTypewriting();
+                w.EndTypewriting();
                 return;
             }
+
+            if (this.ScenarioExecutor == null) return;
             this.ScenarioExecutor.IsWaitingForInput = false;
         }
 
         public virtual void HideUI(float fadeSeconds)
         {
-            this.MessageWindowManager.CurrentMessageWindow.Hide(fadeSeconds);
+            var w = this.MessageWindowManager.CurrentMessageWindow;
+            if (w != null) w.Hide(fadeSeconds);
             this._tglAutoNext.gameObject.SetActive(false);
             this._tglLogView.gameObject.SetActive(false);
         }
 
         public virtual void ShowUI(float fadeSeconds)
         {
-            this.MessageWindowManager.CurrentMessageWindow.Show(fadeSeconds);
+            var w = this.MessageWindowManager.CurrentMessageWindow;
+            if (w != null) w.Show(fadeSeconds);
             this._tglAutoNext.gameObject.SetActive(true);
             this._tglLogView.gameObject.SetActive(true);
         }
 
         public virtual void SetText(Character character, string name, string text, CmdText.PageCtrlType pageCtrl, string windowType)
         {
-            var lastPageCtrl = this.MessageWindowManager.CurrentMessageWindow.LastPageCtrl;
+            var w = this.MessageWindowManager.CurrentMessageWindow;
+            var lastPageCtrl = w != null ? w.LastPageCtrl : CmdText.PageCtrlType.InputBrPageAndNoHide;
             this.LogManager.Add(lastPageCtrl, character, name, text);
-            this.MessageWindowManager.CurrentMessageWindow.SetText(this, name, text, pageCtrl, windowType);
+            if (w != null) w.SetText(this, name, text, pageCtrl, windowType);
             this.SpriteManager.ControlCharacterGrayout(character, !string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(text));
         }
     }
