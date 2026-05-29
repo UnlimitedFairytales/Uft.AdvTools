@@ -77,8 +77,8 @@ namespace Uft.AdvTools.Commands
                         {
                             // HACK: 通常フェード表示、ルールフェード非表示、1フレーム
                             await advRoot.FadeEffect.StartFadeAsync(advRoot.destroyCancellationToken, true, 0, this.FadeColor);
-                            await advRoot.PostEffectManager.SetRuleFadeAsync(null, this.FadeColor, 0, 0, false, 0);
-                            await UniTask.NextFrame();
+                            await advRoot.PostEffectManager.SetRuleFadeAsync(advRoot.destroyCancellationToken, null, this.FadeColor, 0, 0, false, 0);
+                            await UniTask.NextFrame(advRoot.destroyCancellationToken);
                         }
                         await advRoot.FadeEffect.StartFadeAsync(advRoot.destroyCancellationToken, false, this.FadeSeconds, this.FadeColor);
                     }
@@ -87,11 +87,11 @@ namespace Uft.AdvTools.Commands
                         if (advRoot.FadeEffect.IsOn)
                         {
                             // HACK: ルールフェード表示、通常フェード非表示、1フレーム
-                            await advRoot.PostEffectManager.SetRuleFadeAsync(null, this.FadeColor, 0, 1, false, 0);
+                            await advRoot.PostEffectManager.SetRuleFadeAsync(advRoot.destroyCancellationToken, null, this.FadeColor, 0, 1, false, 0);
                             await advRoot.FadeEffect.StartFadeAsync(advRoot.destroyCancellationToken, false, 0, this.FadeColor);
-                            await UniTask.NextFrame();
+                            await UniTask.NextFrame(advRoot.destroyCancellationToken);
                         }
-                        await advRoot.PostEffectManager.SetRuleFadeAsync(this.RuleName, this.FadeColor, this.RuleSoftness, 0.0f, this.IsInvert, this.FadeSeconds);
+                        await advRoot.PostEffectManager.SetRuleFadeAsync(advRoot.destroyCancellationToken, this.RuleName, this.FadeColor, this.RuleSoftness, 0.0f, this.IsInvert, this.FadeSeconds);
                     }
                 }
                 finally

@@ -71,7 +71,7 @@ namespace Uft.AdvTools.Commands
                     }
                     else
                     {
-                        await advRoot.PostEffectManager.SetRuleFadeAsync(this.RuleName, this.FadeColor, this.RuleSoftness, 1.0f, this.IsInvert, this.FadeSeconds);
+                        await advRoot.PostEffectManager.SetRuleFadeAsync(advRoot.destroyCancellationToken, this.RuleName, this.FadeColor, this.RuleSoftness, 1.0f, this.IsInvert, this.FadeSeconds);
                     }
                 }
                 finally

@@ -3,6 +3,7 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using DG.Tweening.Core;
+using System.Threading;
 using Uft.FadeEffects;
 using Uft.UnityUtils;
 using Uft.UnityUtils.Common;
@@ -81,11 +82,13 @@ namespace Uft.AdvTools.View
             this._advRootRef = advRootRef;
         }
 
-        public async UniTask SetDirectionalGhostAsync(float endValue, float fadeSeconds, bool completesPrevious = false)
+        public async UniTask SetDirectionalGhostAsync(CancellationToken cancellationToken, float endValue, float fadeSeconds, bool completesPrevious = false)
         {
             if (this._advRootRef == null) return;
+            using var cts = CancellationTokenSource.CreateLinkedTokenSource(this.destroyCancellationToken, cancellationToken);
 
             await this.SetEffectAsync(
+                cts.Token,
                 DIRECTIONAL_GHOST,
                 () => this.WideCameraDirectionalGhostPostEffect.Amount,
                 x => this.WideCameraDirectionalGhostPostEffect.Amount = x,
@@ -94,13 +97,15 @@ namespace Uft.AdvTools.View
                 completesPrevious);
         }
 
-        public async UniTask SetImageEffectAsync(string imageEffectName, float endValue, float fadeSeconds, bool completesPrevious = false)
+        public async UniTask SetImageEffectAsync(CancellationToken cancellationToken, string imageEffectName, float endValue, float fadeSeconds, bool completesPrevious = false)
         {
             if (this._advRootRef == null) return;
+            using var cts = CancellationTokenSource.CreateLinkedTokenSource(this.destroyCancellationToken, cancellationToken);
 
             if (imageEffectName == Sepia)
             {
                 await this.SetEffectAsync(
+                    cts.Token,
                     Sepia,
                     () => this.WideCameraSepiaPostEffect.Amount,
                     x => this.WideCameraSepiaPostEffect.Amount = x,
@@ -111,6 +116,7 @@ namespace Uft.AdvTools.View
             else if (imageEffectName == GrayScale)
             {
                 await this.SetEffectAsync(
+                    cts.Token,
                     GrayScale,
                     () => this.WideCameraGrayscalePostEffect.Amount,
                     x => this.WideCameraGrayscalePostEffect.Amount = x,
@@ -126,9 +132,10 @@ namespace Uft.AdvTools.View
 
         public bool RuleFadeIsVisible() => 0 < this.WideCameraRuleFadePostEffect.Amount;
 
-        public async UniTask SetRuleFadeAsync(string? ruleName, Color color, float ruleSoftness, float endValue, bool isInvert, float fadeSeconds, bool completesPrevious = false)
+        public async UniTask SetRuleFadeAsync(CancellationToken cancellationToken, string? ruleName, Color color, float ruleSoftness, float endValue, bool isInvert, float fadeSeconds, bool completesPrevious = false)
         {
             if (this._advRootRef == null) return;
+            using var cts = CancellationTokenSource.CreateLinkedTokenSource(this.destroyCancellationToken, cancellationToken);
 
             var effectConfig =  this.WideCameraRuleFadePostEffect;
             var defaultRule = this._texFadeHorizontal;
@@ -137,7 +144,6 @@ namespace Uft.AdvTools.View
                 ruleName == FADE_VERTICAL ? this._texFadeVertical :
                 ruleName == MOSES_H ? this._texMosesH :
                 ruleName == MOSES_V ? this._texMosesV :
-                ruleName == FADE_HORIZONTAL ? this._texFadeHorizontal :
                 ruleName == CLOUD ? this._texCloud :
                 effectConfig.RuleTex != null ? effectConfig.RuleTex :
                 defaultRule;
@@ -148,6 +154,7 @@ namespace Uft.AdvTools.View
             effectConfig.Invert = isInvert ? 1 : 0;
 
             await this.SetEffectAsync(
+                cts.Token,
                 RULE,
                 () => effectConfig.Amount,
                 x => effectConfig.Amount = x,
@@ -157,6 +164,7 @@ namespace Uft.AdvTools.View
         }
 
         async UniTask SetEffectAsync(
+            CancellationToken cancellationToken,
             string key,
             DOGetter<float> getter,
             DOSetter<float> setter,
@@ -184,7 +192,7 @@ namespace Uft.AdvTools.View
                 Mathf.Clamp01(endValue),
                 Mathf.Clamp(fadeSeconds, 0, 60));
             this.SetTweener(key, tweenerField);
-            await tweenerField;
+            await tweenerField.WithCancellation(cancellationToken);
         }
 
         Tweener? GetTweener(string key)
