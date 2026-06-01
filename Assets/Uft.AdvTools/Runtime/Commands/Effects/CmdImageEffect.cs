@@ -31,7 +31,7 @@ namespace Uft.AdvTools.Commands
             {
                 try
                 {
-                    await advRoot.PostEffectManager.SetImageEffectAsync(this.ImageEffectName, this.IsOn ? 1.0f : 0.0f, this.FadeSeconds);
+                    await advRoot.PostEffectManager.SetImageEffectAsync(advRoot.destroyCancellationToken, this.ImageEffectName, this.IsOn ? 1.0f : 0.0f, this.FadeSeconds);
                 }
                 finally
                 {
