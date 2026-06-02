@@ -24,11 +24,12 @@ namespace Uft.AdvTools.Commands
             if (0 < this.FadeSeconds)
             {
                 scenarioExecutor.IsWaiting = true;
+                var ct = advRoot.destroyCancellationToken;
                 UniTask.Void(async () =>
                 {
                     try
                     {
-                        await UniTask.Delay((int)(this.FadeSeconds * 1000));
+                        await UniTask.Delay((int)(this.FadeSeconds * 1000), cancellationToken: ct);
                     }
                     finally
                     {
