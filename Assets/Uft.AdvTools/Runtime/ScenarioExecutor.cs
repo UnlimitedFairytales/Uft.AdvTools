@@ -1,3 +1,5 @@
+#nullable enable
+
 using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
@@ -73,7 +75,7 @@ namespace Uft.AdvTools
                                 .ToList();
                             var logic = new SelectionList(advRoot.SelectionListView, advRoot.InputProxy);
                             this.OnSelectionShowing?.Invoke();
-                            var result = await logic.ShowDialogAsync(this.SelectionTitle?.Title, visibleList);
+                            var result = await logic.ShowDialogAsync(advRoot.destroyCancellationToken, this.SelectionTitle?.Title, visibleList);
                             this.OnSelectionHidden?.Invoke();
                             if (result.value == null || result.status != OperationResultStatus.Accepted) return;
 

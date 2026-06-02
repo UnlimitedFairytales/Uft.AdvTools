@@ -2,6 +2,7 @@
 
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
+using System.Threading;
 using Uft.AdvTools.Commands;
 using Uft.AdvTools.View;
 using Uft.UnityUtils;
@@ -25,7 +26,7 @@ namespace Uft.AdvTools
             this._inputProxy = inputProxy;
         }
 
-        public virtual async UniTask<OperationResult<CmdSelection?>> ShowDialogAsync(string? title, List<CmdSelection> data)
+        public virtual async UniTask<OperationResult<CmdSelection?>> ShowDialogAsync(CancellationToken cancellationToken, string? title, List<CmdSelection> data)
         {
             // 引数チェック
             if (data.Count == 0) return CANCEL_RESULT;
@@ -43,7 +44,7 @@ namespace Uft.AdvTools
                     selected = this._data[this._focusIndex];
                 }
             };
-            await this._view.ShowAsync(title, data);
+            await this._view.ShowAsync(cancellationToken, title, data);
 
             var length = data.Count;
             while (selected == null && this._view != null && this._view.gameObject.activeSelf)
@@ -62,14 +63,14 @@ namespace Uft.AdvTools
                 {
                     selected = this._data[this._focusIndex];
                 }
-                await UniTask.NextFrame();
+                await UniTask.NextFrame(cancellationToken);
             }
 
             // 後処理
             if (this._view != null)
             {
                 this._view.OnSelectionItemClicked = null;
-                await this._view.HideAsync();
+                await this._view.HideAsync(cancellationToken);
             }
 
             // 返却

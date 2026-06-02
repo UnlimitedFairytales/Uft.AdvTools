@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using Uft.AdvTools.Commands;
 using Uft.UnityUtils;
 using UnityEngine;
@@ -12,8 +13,6 @@ namespace Uft.AdvTools.View
 {
     public class SelectionListView : MonoBehaviour
     {
-        protected static readonly OperationResult<CmdSelection?> CANCEL_RESULT = new(OperationResultStatus.Canceled, null);
-
         // Parameters
 
         [SerializeField] protected SelectionTitle? _selectionTitle;
@@ -50,8 +49,9 @@ namespace Uft.AdvTools.View
 
         // Methods
 
-        public virtual async UniTask ShowAsync(string? title, List<CmdSelection> data)
+        public virtual async UniTask ShowAsync(CancellationToken cancellationToken, string? title, List<CmdSelection> data)
         {
+            using var cts = CancellationTokenSource.CreateLinkedTokenSource(this.destroyCancellationToken, cancellationToken);
             // Awake保証
             this.gameObject.SetActive(true);
 
@@ -76,7 +76,7 @@ namespace Uft.AdvTools.View
 
                 var canvasGroup = this._selectionItemList[i].CanvasGroup;
                 canvasGroup.alpha = 0;
-                tasks.Add(canvasGroup.DOFade(1, 0.2f).SetEase(ease).AwaitForComplete());
+                tasks.Add(canvasGroup.DOFade(1, 0.2f).SetEase(ease).AwaitForComplete(cancellationToken: cts.Token));
             }
             if (this._selectionTitle != null && title != null)
             {
@@ -85,25 +85,26 @@ namespace Uft.AdvTools.View
 
                 var canvasGroup = this._selectionTitle.CanvasGroup;
                 canvasGroup.alpha = 0;
-                tasks.Add(canvasGroup.DOFade(1, 0.2f).SetEase(ease).AwaitForComplete());
+                tasks.Add(canvasGroup.DOFade(1, 0.2f).SetEase(ease).AwaitForComplete(cancellationToken: cts.Token));
             }
             this.SetFocus(0);
             await UniTask.WhenAll(tasks);
         }
 
-        public virtual async UniTask HideAsync()
+        public virtual async UniTask HideAsync(CancellationToken cancellationToken)
         {
+            using var cts = CancellationTokenSource.CreateLinkedTokenSource(this.destroyCancellationToken, cancellationToken);
             // 非表示
             var ease = Ease.OutQuad;
             var tasks = new List<UniTask>();
             for (int i = 0; i < this._length; i++)
             {
                 this._selectionItemList[i].CanvasGroup.DOComplete();
-                tasks.Add(this._selectionItemList[i].CanvasGroup.DOFade(0, 0.2f).SetEase(ease).AwaitForComplete());
+                tasks.Add(this._selectionItemList[i].CanvasGroup.DOFade(0, 0.2f).SetEase(ease).AwaitForComplete(cancellationToken: cts.Token));
             }
             if (this._selectionTitle != null)
             {
-                tasks.Add(this._selectionTitle.CanvasGroup.DOFade(0, 0.2f).SetEase(ease).AwaitForComplete());
+                tasks.Add(this._selectionTitle.CanvasGroup.DOFade(0, 0.2f).SetEase(ease).AwaitForComplete(cancellationToken: cts.Token));
             }
             await UniTask.WhenAll(tasks);
             if (this._selectionTitle != null)
