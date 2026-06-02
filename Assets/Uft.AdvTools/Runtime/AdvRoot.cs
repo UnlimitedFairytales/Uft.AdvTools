@@ -223,7 +223,7 @@ namespace Uft.AdvTools
             this._tglLogView.gameObject.SetActive(true);
         }
 
-        public virtual void SetText(Character character, string name, string text, CmdText.PageCtrlType pageCtrl, string windowType)
+        public virtual void SetText(Character? character, string name, string text, CmdText.PageCtrlType pageCtrl, string windowType)
         {
             var w = this.MessageWindowManager.CurrentMessageWindow;
             var lastPageCtrl = w != null ? w.LastPageCtrl : CmdText.PageCtrlType.InputBrPageAndNoHide;

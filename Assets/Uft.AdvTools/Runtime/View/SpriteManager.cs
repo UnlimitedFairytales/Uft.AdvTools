@@ -34,7 +34,7 @@ namespace Uft.AdvTools.View
         public OffsettableImage? GetTextureRowOi(TextureRow sprite)
             => this._spriteSlots!.GetTextureRowOi(sprite);
 
-        public CharacterView? GetCharacterView(Character character)
+        public CharacterView? GetCharacterView(Character? character)
             => this._characterSlots!.GetCharacterView(character);
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Uft.AdvTools.View
         /// 1. 指定キャラクターを通常カラーにする(発言の有無は問わない)<br/>
         /// 2. 「手前に発言者がいた」かつ「手前の発言者と異なる」かつ「名前と発言がある」場合、指定キャラクター以外をグレーアウトする。
         /// </summary>
-        public void ControlCharacterGrayout(Character currentCharacter, bool hasNameAndText)
+        public void ControlCharacterGrayout(Character? currentCharacter, bool hasNameAndText)
             => this._characterSlots!.ControlCharacterGrayout(currentCharacter, hasNameAndText);
     }
 }

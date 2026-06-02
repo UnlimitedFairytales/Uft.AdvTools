@@ -53,14 +53,15 @@ namespace Uft.AdvTools
             while (!this.IsAnyWaiting && !this.IsEndOrPauseScenario && this.ReadMode != CommandReadMode.WaitingForSelected)
             {
                 // NOTE: 宴仕様に準拠させる。改ページ直後に演出系コマンドが来た場合、MessageWindowを非表示にする
+                var currentWindow = advRoot.MessageWindowManager.CurrentMessageWindow;
                 if (advRoot.EmulatesUtageEffectCommand)
                 {
-                    if (this.CommandList[this.SeekPoint].CommandCategory == CommandCategory.Effect && advRoot.MessageWindowManager.CurrentMessageWindow.LastPageCtrl == CmdText.PageCtrlType.InputBrPage)
+                    if (this.CommandList[this.SeekPoint].CommandCategory == CommandCategory.Effect && currentWindow != null && currentWindow.LastPageCtrl == CmdText.PageCtrlType.InputBrPage)
                     {
                         advRoot.HideUI(0);
                     }
                 }
-                advRoot.MessageWindowManager.CurrentMessageWindow.FixLastPageCtrl();
+                if (currentWindow != null) currentWindow.FixLastPageCtrl();
 
                 // Selection制御
                 if (this.ReadMode == CommandReadMode.Selection && this.CommandList[this.SeekPoint] is not CmdSelection)
@@ -82,7 +83,8 @@ namespace Uft.AdvTools
                             var cmdSelection = result.value;
 
                             var lastPageCtrl = CmdText.PageCtrlType.InputBrPage;
-                            advRoot.MessageWindowManager.CurrentMessageWindow.ForceSetLastPageCtrl(lastPageCtrl);
+                            var mw = advRoot.MessageWindowManager.CurrentMessageWindow;
+                            if (mw != null) mw.ForceSetLastPageCtrl(lastPageCtrl);
                             advRoot.LogManager.Add(lastPageCtrl, null, "", "[" + cmdSelection.Text + "]");
                             if (!string.IsNullOrWhiteSpace(cmdSelection.OnSelectExpression))
                             {

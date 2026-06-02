@@ -39,7 +39,7 @@ namespace Uft.AdvTools.View
             return false;
         }
 
-        protected int GetOnCharacterViewIndex(Character character)
+        protected int GetOnCharacterViewIndex(Character? character)
         {
             if (this._characterViewList == null) throw new UnassignedReferenceException(nameof(this._characterViewList));
 
@@ -143,7 +143,7 @@ namespace Uft.AdvTools.View
             DevLog.LogWarning($"{NAME} Displayed character is not found : character.CharacterName={character.CharacterName}");
         }
 
-        public CharacterView? GetCharacterView(Character character)
+        public CharacterView? GetCharacterView(Character? character)
         {
             if (this._characterViewList == null) throw new UnassignedReferenceException(nameof(this._characterViewList));
 
@@ -157,7 +157,7 @@ namespace Uft.AdvTools.View
         /// 1. 指定キャラクターを通常カラーにする(発言の有無は問わない)<br/>
         /// 2. 「手前に発言者がいた」かつ「手前の発言者と異なる」かつ「名前と発言がある」場合、指定キャラクター以外をグレーアウトする。
         /// </summary>
-        public void ControlCharacterGrayout(Character currentCharacter, bool hasNameAndText)
+        public void ControlCharacterGrayout(Character? currentCharacter, bool hasNameAndText)
         {
             if (this._characterViewList == null) throw new UnassignedReferenceException(nameof(this._characterViewList));
 
