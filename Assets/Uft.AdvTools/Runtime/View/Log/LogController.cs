@@ -71,7 +71,7 @@ namespace Uft.AdvTools.View
             if (this._scrollRect == null) throw new UnassignedReferenceException(nameof(this._scrollRect));
             if (this._list == null) throw new UnassignedReferenceException(nameof(this._list));
 
-            var cts = CancellationTokenSource.CreateLinkedTokenSource(this.destroyCancellationToken, cancellationToken);
+            using var cts = CancellationTokenSource.CreateLinkedTokenSource(this.destroyCancellationToken, cancellationToken);
 
             // Awake保証
             this.gameObject.SetActive(true);
@@ -93,7 +93,7 @@ namespace Uft.AdvTools.View
 
         public virtual async UniTask CloseAsync(CancellationToken cancellationToken)
         {
-            var cts = CancellationTokenSource.CreateLinkedTokenSource(this.destroyCancellationToken, cancellationToken);
+            using var cts = CancellationTokenSource.CreateLinkedTokenSource(this.destroyCancellationToken, cancellationToken);
 
             // HACK: フェード対応するべき
             await UniTask.Delay(0, cancellationToken: cts.Token);
