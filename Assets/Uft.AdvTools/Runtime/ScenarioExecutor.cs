@@ -21,8 +21,8 @@ namespace Uft.AdvTools
 
         public bool IsAutoNext { get; set; }
 
-        public Action OnSelectionShowing { get; set; }
-        public Action OnSelectionHidden { get; set; }
+        public Action? OnSelectionShowing { get; set; }
+        public Action? OnSelectionHidden { get; set; }
 
         public bool IsWaiting { get; set; }
         public bool IsWaitingForInput { get; set; }
@@ -35,7 +35,7 @@ namespace Uft.AdvTools
         protected IReadOnlyList<ICommand> CommandList { get; set; }
         protected int SeekPoint { get; set; }
         protected CommandReadMode ReadMode { get; set; } = CommandReadMode.Normal;
-        protected CmdSelectionTitle SelectionTitle { get; private set; }
+        protected CmdSelectionTitle? SelectionTitle { get; private set; }
         protected List<CmdSelection> SelectionList { get; private set; } = new();
 
         public ScenarioExecutor(IReadOnlyList<ICommand> commandList)
@@ -90,7 +90,7 @@ namespace Uft.AdvTools
                             }
                             this.JumpTo(cmdSelection.ScenarioLabel);
                         }
-                        catch (Exception ex)
+                        catch (Exception ex) when (ex is not OperationCanceledException)
                         {
                             DevLog.LogError($"[{nameof(ScenarioExecutor)}] Selection handling error\n{ex.Message}");
                             throw;
