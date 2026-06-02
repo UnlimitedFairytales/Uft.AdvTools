@@ -5,6 +5,7 @@ using DG.Tweening;
 using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using System.Threading;
 using Uft.UnityUtils;
 using Uft.UnityUtils.Common;
 using UnityEngine;
@@ -156,6 +157,7 @@ namespace Uft.AdvTools.Commands
         {
             var noWait = this.WaitType == WaitType.NoWait;
             if (!noWait) scenarioExecutor.IsWaiting = true;
+            var ct = advRoot.destroyCancellationToken;
             UniTask.Void(async () =>
             {
                 try
@@ -167,7 +169,7 @@ namespace Uft.AdvTools.Commands
                         null;
                     if (rt != null)
                     {
-                        await TweenAsync(rt, this.Tween, this.Parameter, this.Ease);
+                        await TweenAsync(ct, rt, this.Tween, this.Parameter, this.Ease);
                     }
                 }
                 finally
@@ -177,7 +179,7 @@ namespace Uft.AdvTools.Commands
             });
         }
 
-        static async UniTask TweenAsync(RectTransform rt, TweenType tweenType, TweenParameter parameter, Ease? ease)
+        static async UniTask TweenAsync(CancellationToken cancellationToken, RectTransform rt, TweenType tweenType, TweenParameter parameter, Ease? ease)
         {
             ease ??= DG.Tweening.Ease.OutQuad;
             switch (tweenType)
@@ -196,7 +198,8 @@ namespace Uft.AdvTools.Commands
                         await tweener
                             .SetSpeedBased(parameter.IsSpeed)
                             .SetDelay(parameter.delay)
-                            .SetEase(ease!.Value);
+                            .SetEase(ease!.Value)
+                            .WithCancellation(cancellationToken);
                     }
                     break;
                 case TweenType.MoveBy:
@@ -208,7 +211,8 @@ namespace Uft.AdvTools.Commands
                             .SetSpeedBased(parameter.IsSpeed)
                             .SetDelay(parameter.delay)
                             .SetEase(ease!.Value)
-                            .SetRelative();
+                            .SetRelative()
+                            .WithCancellation(cancellationToken);
                     }
                     break;
                 case TweenType.PunchPosition:
@@ -218,7 +222,8 @@ namespace Uft.AdvTools.Commands
                                 new Vector2(parameter.x ?? 0, parameter.y ?? 0),
                                 parameter.time!.Value)
                             .SetDelay(parameter.delay)
-                            .SetEase(ease!.Value);
+                            .SetEase(ease!.Value)
+                            .WithCancellation(cancellationToken);
                     }
                     break;
                 case TweenType.ShakePosition:
@@ -229,7 +234,8 @@ namespace Uft.AdvTools.Commands
                                 new Vector3(parameter.x ?? 0, parameter.y ?? 0, parameter.z ?? 0),
                                 20, 90, false, false)
                             .SetDelay(parameter.delay)
-                            .SetEase(ease!.Value);
+                            .SetEase(ease!.Value)
+                            .WithCancellation(cancellationToken);
                     }
                     break;
                 case TweenType.PunchScale:
@@ -238,7 +244,8 @@ namespace Uft.AdvTools.Commands
                             new Vector3(parameter.x ?? 0, parameter.y ?? 0, 0),
                             parameter.time!.Value)
                         .SetDelay(parameter.delay)
-                        .SetEase(ease!.Value);
+                        .SetEase(ease!.Value)
+                        .WithCancellation(cancellationToken);
                     break;
                 case TweenType.ShakeScale:
                     await rt
@@ -246,7 +253,8 @@ namespace Uft.AdvTools.Commands
                              new Vector3(parameter.x ?? 0, parameter.y ?? 0, 0),
                              20, 90, false)
                         .SetDelay(parameter.delay)
-                        .SetEase(ease!.Value);
+                        .SetEase(ease!.Value)
+                        .WithCancellation(cancellationToken);
                     break;
                 default:
                     break;
