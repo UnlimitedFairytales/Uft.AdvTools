@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b16655119ee2bc40b2076d56336c322, type: 3}
+  m_Name: texture_so
+  m_EditorClassIdentifier: 
+  entries:
+  - label: "\u80CC\u666F\u305D\u306E1"
+    type: Bg
+    x: 0
+    y: 0
+    pivot: 4
+    scale: 1
+    sprite: {fileID: 21300000, guid: d49ca5c302dcbde4583aa75543f69633, type: 3}
+    prefab: {fileID: 0}
+  - label: "\u80CC\u666F\u305D\u306E2"
+    type: Bg
+    x: -15
+    y: -30
+    pivot: 4
+    scale: 1
+    sprite: {fileID: 21300000, guid: 24debaf9f41cb7042888eccc1244eb84, type: 3}
+    prefab: {fileID: 0}
+  - label: "\u732B1"
+    type: Sprite
+    x: 0
+    y: 0
+    pivot: 4
+    scale: 1
+    sprite: {fileID: 21300000, guid: 7a78cadca6d41014e835c2958fd6323e, type: 3}
+    prefab: {fileID: 0}
+  - label: "\u732B2"
+    type: Sprite
+    x: 150
+    y: 300
+    pivot: 4
+    scale: 1
+    sprite: {fileID: 21300000, guid: dbf642df60f2e61418b50258c2ed4173, type: 3}
+    prefab: {fileID: 0}
+  - label: "Prefab\u732B1Sprite"
+    type: Sprite
+    x: 300
+    y: -150
+    pivot: 4
+    scale: 1
+    sprite: {fileID: 0}
+    prefab: {fileID: 1697505372788578342, guid: 6fe17a46adc8b8b4b87bad924519f03f, type: 3}

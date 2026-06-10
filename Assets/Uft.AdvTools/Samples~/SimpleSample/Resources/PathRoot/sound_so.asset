@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b517e0efab940742a8a234b582498e6, type: 3}
+  m_Name: sound_so
+  m_EditorClassIdentifier: 
+  entries:
+  - label: "BGM\u305D\u306E1"
+    type: bgm
+    clip: {fileID: 8300000, guid: f38e91fc41eddc84ca993dda780d02e5, type: 3}
+  - label: "BGM\u305D\u306E2"
+    type: bgm
+    clip: {fileID: 8300000, guid: 460a4bc94352a424791b097be982880f, type: 3}
+  - label: "SE\u305D\u306E1"
+    type: se
+    clip: {fileID: 8300000, guid: 527a86f4297032f4eaf96735767fb3ce, type: 3}
+  - label: "SE\u305D\u306E2"
+    type: se
+    clip: {fileID: 8300000, guid: 17b0fbb0d667c454c845af551548bfe5, type: 3}
+  - label: "Voice\u305D\u306E1"
+    type: voice
+    clip: {fileID: 8300000, guid: dfb46c0b2f0ed9c4c93a06fee2289f92, type: 3}
+  - label: "Voice\u305D\u306E2"
+    type: voice
+    clip: {fileID: 8300000, guid: fcf092ad69692dc44bba518923ceeb75, type: 3}

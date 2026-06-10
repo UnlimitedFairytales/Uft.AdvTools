@@ -578,11 +578,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28528d92a5f80b248bed27813173859b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isScriptableObject: 1
   _scenarioFile: {fileID: 4900000, guid: a9b96c4ed4130f440ae23ad91cc87f38, type: 3}
   _characterFile: {fileID: 4900000, guid: 6366c1235741e3441955994be0317b58, type: 3}
   _textureFile: {fileID: 4900000, guid: c3142265db132604bafe1f3e1d994256, type: 3}
   _soundFile: {fileID: 4900000, guid: 4101c6bf213dd3e45ab7928e9524c318, type: 3}
   _paramFile: {fileID: 4900000, guid: f141ca8094668884c9b072cec4516033, type: 3}
+  _scenarioSO: {fileID: 11400000, guid: 492a511d4e3cf4b428c45d3a8a478046, type: 2}
+  _characterSO: {fileID: 11400000, guid: 7469b19789edc214ba3a8e567eb37889, type: 2}
+  _textureSO: {fileID: 11400000, guid: 3ce7ecef58952864b91da57bbc535f6f, type: 2}
+  _soundSO: {fileID: 11400000, guid: 0feda5ea83fd63f41b8edf32368fb565, type: 2}
+  _paramSO: {fileID: 11400000, guid: 791ffd89e1032f949b9a27b1ab66e667, type: 2}
   _resourcesFolderPathPart: PathRoot/
   _advRoot: {fileID: 2055303364}
   _sampleMessageBox: {fileID: 151338019}

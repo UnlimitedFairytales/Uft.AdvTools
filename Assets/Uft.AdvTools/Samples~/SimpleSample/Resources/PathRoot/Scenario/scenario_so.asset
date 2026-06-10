@@ -1,0 +1,5294 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 525018a9514d8b24f9e12c1ccda3f1e1, type: 3}
+  m_Name: scenario_so
+  m_EditorClassIdentifier: 
+  rows:
+  - command: Bgm
+    arg1: "BGM\u305D\u306E1"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 0
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Bg
+    arg1: "\u80CC\u666F\u305D\u306E1"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Wait
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeIn
+    arg1: black
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 3
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u958B\u59CB\u6642\u306F\u9ED2FadeOut\u72B6\u614B\u30FB\u30E1\u30C3\u30BB\u30FC\u30B8\u30A6\u30A3\u30F3\u30C9\u30A6\u8868\u793A\u306A\u3057\u3067\u59CB\u307E\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: "*Label\u30B9\u30BF\u30FC\u30C8\u5730\u70B9"
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: SelectionTitle
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u6A5F\u80FD\u8AAC\u660E"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*Label\u30C6\u30AD\u30B9\u30C8\u3068\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30C6\u30AD\u30B9\u30C8\u3068\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*Label\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u8868\u793A"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u8868\u793A"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*Label\u30B5\u30A6\u30F3\u30C9"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30B5\u30A6\u30F3\u30C9"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*Label\u6F14\u51FA"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u6F14\u51FA"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: '*LabelUI'
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: UI
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*Label\u30ED\u30B8\u30C3\u30AF\u5236\u5FA1"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30ED\u30B8\u30C3\u30AF\u5236\u5FA1"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*Label\u7D42\u4E86\u5236\u5FA1"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u7D42\u4E86\u5236\u5FA1"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: "*Label\u30C6\u30AD\u30B9\u30C8\u3068\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC"
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: SelectionTitle
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30C6\u30AD\u30B9\u30C8\u3068\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*Label\u30B9\u30BF\u30FC\u30C8\u5730\u70B9"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u623B\u308B"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*Label\u30C8\u66F8\u304D\u30C6\u30AD\u30B9\u30C8"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30C8\u66F8\u304D\u30C6\u30AD\u30B9\u30C8"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*Label\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC\u53F0\u8A5E"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC\u53F0\u8A5E"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*Label\u6F14\u51FA\u30B3\u30DE\u30F3\u30C9\u3068\u306E\u5E72\u6E09"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u6F14\u51FA\u30B3\u30DE\u30F3\u30C9\u3068\u306E\u5E72\u6E09"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*LabelTMP_Text\u88DC\u8DB3"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "TMP_Text\u88DC\u8DB3"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*Label2DPrefab\u306E\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC\u8868\u793A"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "2DPrefab\u306E\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC\u8868\u793A"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: "*Label\u30C8\u66F8\u304D\u30C6\u30AD\u30B9\u30C8"
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Command\u304C\u7A7A\u6B04\u3067\u30C6\u30AD\u30B9\u30C8\u8868\u793A\u3002\\n\u534A\u89D2\u30D0\u30C3\u30AF\u30B9\u30E9\u30C3\u30B7\u30E5n\u3067\u6539\u884C\u3002\\nPageCtrl\u306BInputBrPage\u3092\u6307\u5B9A\u3057\u305F\u5834\u5408\u3001"
+    pageCtrl: InputBrPage
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u6539\u30DA\u30FC\u30B8\u3055\u308C\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "PageCtrl\u3092\u7701\u7565\u3057\u305F\u5834\u5408\u3001"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "InputBrPage\u3068\u540C\u3058\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "PageCtrl\u306BInputBr\u3092\u6307\u5B9A\u3057\u305F\u5834\u5408\u3001"
+    pageCtrl: InputBr
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u6539\u884C\u3060\u3051\u3055\u308C\u3001\u540C\u3058\u30DA\u30FC\u30B8\u3068\u3057\u3066\u7D9A\u304F\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "PageCtrl\u306BNext\u3092\u6307\u5B9A\u3057\u305F\u5834\u5408\u3001"
+    pageCtrl: Next
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u6B21\u306E\u30B3\u30DE\u30F3\u30C9\u304C\u5373\u5EA7\u306B\u5B9F\u884C\u3055\u308C\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Jump
+    arg1: "*Label\u30C6\u30AD\u30B9\u30C8\u3068\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: "*Label\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC\u53F0\u8A5E"
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\u540D\u7121\u3057"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Arg1\u306B\u540D\u524D\u3092\u6307\u5B9A\u3067\u304D\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\u7537\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Arg1\u306BCharacter\u30B7\u30FC\u30C8\u306B\u3042\u308B\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC\u8B58\u5225\u5B50\u3092\u6307\u5B9A\u3059\u308B\u3068\u3001\u305D\u306E\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC\u306E\u8868\u793A\u3082\u884C\u308F\u308C\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\u7537\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Arg2\uFF5EArg5\u304C\u7A7A\u6B04\u306A\u3089\u6700\u5F8C\u306E\u72B6\u614B\u3092\u7D99\u7D9A\u3002\\n(\u30D1\u30BF\u30FC\u30F3\u30FB\u5EA7\u6A19\u30FB\u30EC\u30A4\u30E4\u30FC\u304C\u7D99\u7D9A\u3055\u308C\u308B)"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\u7537\u5B50\u5B66\u751F"
+    arg2: "\u7B11\u3044"
+    arg3: 1
+    arg4: 525
+    arg5: -180
+    arg6: 1.0
+    waitType: 
+    text: "Arg2\uFF5EArg6\u3082\u5FC5\u8981\u306B\u5FDC\u3058\u3066\u6307\u5B9A\u53EF\u80FD\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\u7537\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Arg2\uFF5EArg5\u304C\u7A7A\u6B04\u306A\u3089\u6700\u5F8C\u306E\u72B6\u614B\u3092\u7D99\u7D9A\u3002\\n(\u30D1\u30BF\u30FC\u30F3\u30FB\u5EA7\u6A19\u30FB\u30EC\u30A4\u30E4\u30FC\u304C\u7D99\u7D9A\u3055\u308C\u308B)"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\u5973\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 2
+    arg4: -525
+    arg5: 
+    arg6: 1.0
+    waitType: 
+    text: "\u30EC\u30A4\u30E4\u30FC\u9055\u3044\u3092\u6307\u5B9A\u3057\u3066\u8907\u6570\u306E\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC\u304C\u8868\u793A\u53EF\u80FD\u3067\u3059\u3002\\n\u767A\u8A00\u8005\u4EE5\u5916\u306F\u30B0\u30EC\u30FC\u30A2\u30A6\u30C8\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\u5973\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u79C1\u306E\u767A\u8A00\u304C\u7D9A\u304F\u3068\u7279\u306B\u5909\u5316\u306F\u3042\u308A\u307E\u305B\u3093\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\u7537\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u4FFA\u304C\u767A\u8A00\u3059\u308B\u3068\u767A\u8A00\u8005\u304C\u5909\u308F\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC\u3082\u540D\u524D\u3082\u6307\u5B9A\u304C\u306A\u3044\u5834\u5408\u306F\u3001\u30C8\u66F8\u304D\u6271\u3044\u3067\u767A\u8A00\u8005\u304C\u5909\u308F\u3063\u305F\u3053\u3068\u306B\u306A\u3089\u306A\u3044\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\uFF1F\uFF1F\uFF1F"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Arg1\u306B\u540D\u524D\u306E\u6307\u5B9A\u304C\u3042\u308B\u5834\u5408\u3001\u767A\u8A00\u8005\u304C\u5909\u308F\u3063\u305F\u6271\u3044\u306B\u306A\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\u7537\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 2
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC\u3092\u8868\u793A\u3057\u3066\u3044\u308B\u30EC\u30A4\u30E4\u30FC\u3092\u6307\u5B9A\u3059\u308B\u3068\u524D\u306E\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC\u306F\u6D88\u3048\u308B\u3002\\n\uFF08\u79FB\u52D5\u306B\u3088\u308B\u30EC\u30A4\u30E4\u30FC2\u3078\u306E\u4E0A\u66F8\u304D\uFF09"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\u5973\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 2
+    arg4: -300
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC\u3092\u8868\u793A\u3057\u3066\u3044\u308B\u30EC\u30A4\u30E4\u30FC\u3092\u6307\u5B9A\u3059\u308B\u3068\u524D\u306E\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC\u306F\u6D88\u3048\u307E\u3059\u3002\\n\uFF08\u8868\u793A\u958B\u59CB\u306B\u3088\u308B\u30EC\u30A4\u30E4\u30FC2\u3078\u306E\u4E0A\u66F8\u304D\uFF09"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\u7537\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 1
+    arg4: 525
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u518D\u5EA6\u8868\u793A(\u30EC\u30A4\u30E4\u30FC1)"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\u7537\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "CharacterOff\u3067\u6307\u5B9A\u3057\u305F\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC\u3092\u975E\u8868\u793A\u306B\u3067\u304D\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: CharacterOff
+    arg1: "\u7537\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\u5973\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u4F55\u3089\u304B\u306E\u624B\u6BB5\u3067\u975E\u8868\u793A\u306B\u3057\u305F\u5F8C\u306F\u3001\u72B6\u614B\uFF08\u30D1\u30BF\u30FC\u30F3\u30FB\u5EA7\u6A19\u30FB\u30EC\u30A4\u30E4\u30FC\uFF09\u304C\u30EA\u30BB\u30C3\u30C8\u3055\u308C\u307E\u3059\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\u7537\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u72B6\u614B\u304C\u30EA\u30BB\u30C3\u30C8\u3055\u308C\u305F\u305F\u3081\u3001Arg2\uFF5EArg5\u304C\u7A7A\u6B04\u306A\u3089\u30C7\u30D5\u30A9\u30EB\u30C8\u30D1\u30BF\u30FC\u30F3\u30FB\u4E2D\u592E\u30FB\u30EC\u30A4\u30E4\u30FC0\u3067\u8868\u793A\u3055\u308C\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\u7537\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30D5\u30A7\u30FC\u30C9\u6642\u9593\u30921\u79D2\u3067CharacterOff\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: CharacterOff
+    arg1: "\u7537\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 1.0
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\u5973\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30D5\u30A7\u30FC\u30C9\u6642\u9593\u30922\u79D2\u3067CharacterOff\u3057\u307E\u3059\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: CharacterOff
+    arg1: "\u5973\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 2.0
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30C6\u30AD\u30B9\u30C8\u304C\u7A7A\u6B04\u306E\u5834\u5408\u3001\u5F37\u5236\u7684\u306BNext\u6271\u3044\u306B\u306A\u308B\u3002\\n\u30D5\u30A7\u30FC\u30C9\u6642\u9593\u3068Wait\u30B3\u30DE\u30F3\u30C9\u3092\u7D44\u307F\u5408\u308F\u305B\u308C\u3070\u3001"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\u7537\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 1
+    arg4: 525
+    arg5: 
+    arg6: 1.0
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\u5973\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 2
+    arg4: -525
+    arg5: 
+    arg6: 1.0
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Wait
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\u5973\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u8907\u6570\u30AD\u30E3\u30E9\u306E\u540C\u6642\u8868\u793A\u3082\u5B9F\u73FE\u53EF\u80FD\u3067\u3059\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\u5973\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Voice\u3082\u5BFE\u5FDC\u3057\u3066\u3044\u307E\u3059\u3002\\n\uFF08VOICEVOX:
+      \u56DB\u56FD\u3081\u305F\u3093\uFF09"
+    pageCtrl: 
+    voice: sample_voice1.wav
+    windowType: 
+  - command: 
+    arg1: "\u5973\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "AdvRoot\u306EAllowsVoiceLabel\u3092true\u306B\u3057\u305F\u5834\u5408\u306E\u307F\u3001Sound\u5074\u3067Voice\u30E9\u30D9\u30EB\u5B9A\u7FA9\u304C\u53EF\u80FD\u306B\u306A\u308A\u307E\u3059\u3002"
+    pageCtrl: 
+    voice: "Voice\u305D\u306E2"
+    windowType: 
+  - command: 
+    arg1: "\u5973\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u8AB0\u3082\u8868\u793A\u3057\u3066\u3044\u306A\u3044\u72B6\u614B\u304B\u3089\u4E00\u6589\u306B\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC\u3092\u8868\u793A\u3057\u305F\u969B\u3001\\n\u767A\u8A00\u8005\u304C\u5909\u308F\u308B\u307E\u3067\u5168\u54E1\u30B0\u30EC\u30FC\u30A2\u30A6\u30C8\u3057\u307E\u305B\u3093\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\u7537\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u3053\u3053\u3067\u4FFA\u306B\u767A\u8A00\u304C\u5909\u308F\u3063\u305F\u305F\u3081\u3001\u30B0\u30EC\u30FC\u30A2\u30A6\u30C8\u5236\u5FA1\u304C\u5165\u3063\u305F\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\u5973\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Arg2\u306B<Off>\u30BF\u30B0\uFF08\u4E92\u63DB\u6027\u306E\u305F\u3081\u306B\u5927\u6587\u5B57\u5C0F\u6587\u5B57\u533A\u5225\u3057\u307E\u3059\uFF09\u3092\u6307\u5B9A\u3059\u308B\u3068\u3001"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\u5973\u5B50\u5B66\u751F"
+    arg2: <Off>
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30AD\u30E3\u30E9\u8868\u793A\u3092\u6291\u5236\u3067\u304D\u307E\u3059\u3002\\n\u3053\u306E\u5834\u5408\u3082\u3001\u72B6\u614B\uFF08\u30D1\u30BF\u30FC\u30F3\u30FB\u5EA7\u6A19\u30FB\u30EC\u30A4\u30E4\u30FC\uFF09\u306F\u30EA\u30BB\u30C3\u30C8\u3055\u308C\u307E\u3059\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\u5973\u5B50\u5B66\u751F"
+    arg2: <Off>
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u6D88\u3057\u7D9A\u3051\u308B\u306B\u306F<Off>\u30BF\u30B0\u3092\u6307\u5B9A\u3057\u7D9A\u3051\u308B\u5FC5\u8981\u304C\u3042\u308A\u307E\u3059\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\u5973\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u4F55\u3082\u6307\u5B9A\u3057\u306A\u3051\u308C\u3070\u518D\u8868\u793A\u3055\u308C\u307E\u3059\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Jump
+    arg1: "*Label\u30C6\u30AD\u30B9\u30C8\u3068\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: "*Label\u6F14\u51FA\u30B3\u30DE\u30F3\u30C9\u3068\u306E\u5E72\u6E09"
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u6539\u30DA\u30FC\u30B8\u76F4\u5F8C\u306B\u6F14\u51FA\u7CFB\u30B3\u30DE\u30F3\u30C9\u304C\u914D\u7F6E\u3055\u308C\u305F\u5834\u5408\u3001"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Wait
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 2
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30E1\u30C3\u30BB\u30FC\u30B8\u30A6\u30A3\u30F3\u30C9\u30A6\u304C\u975E\u8868\u793A\u306B\u306A\u308B\u3002\\n\u30C6\u30AD\u30B9\u30C8\u8868\u793A\u3092\u3059\u308B\u3068\u81EA\u52D5\u7684\u306B\u30A6\u30A3\u30F3\u30C9\u30A6\u304C\u518D\u8868\u793A\u3055\u308C\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u6539\u30DA\u30FC\u30B8\u76F4\u5F8C\u3067\u306F\u306A\u3044\u6642\u306B\u6F14\u51FA\u7CFB\u30B3\u30DE\u30F3\u30C9\u304C\u914D\u7F6E\u3055\u308C\u305F\u5834\u5408\u3001"
+    pageCtrl: InputBr
+    voice: 
+    windowType: 
+  - command: Wait
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 2
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30E1\u30C3\u30BB\u30FC\u30B8\u30A6\u30A3\u30F3\u30C9\u30A6\u306F\u305D\u306E\u307E\u307E\u306B\u306A\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u6539\u30DA\u30FC\u30B8\u76F4\u5F8C\u306B\u6F14\u51FA\u7CFB\u30B3\u30DE\u30F3\u30C9\u3092\u7F6E\u304D\u305F\u3044\u304C\u3001\u30E1\u30C3\u30BB\u30FC\u30B8\u30A6\u30A3\u30F3\u30C9\u30A6\u3092\u6D88\u3057\u305F\u304F\u306A\u3044\u5834\u5408\u306F\u3001"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: ShowMessageWindow
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Wait
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 2
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "ShowMessageWindow\u306A\u3069\u4F55\u3089\u304B\u306E\u30B3\u30DE\u30F3\u30C9\u3092\u5148\u306B\u7F6E\u3044\u3066\u304B\u3089\u6F14\u51FA\u7CFB\u30B3\u30DE\u30F3\u30C9\u3092\u7F6E\u304F\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Jump
+    arg1: "*Label\u30C6\u30AD\u30B9\u30C8\u3068\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: "*LabelTMP_Text\u88DC\u8DB3"
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u540D\u524D\u3084\u672C\u6587\u306FTMP\u304C\u8A8D\u8B58\u3059\u308B\u30BF\u30B0\u3092\u4F7F\u7528\u53EF\u80FD\u3002\\n\u305F\u3060\u3057\u3001\u30B7\u30CA\u30EA\u30AA\u30D5\u30A1\u30A4\u30EB\u8AAD\u307F\u53D6\u308A\u306E\u95A2\u4FC2\u4E0A\u3001\u30BF\u30B0\u306E\u5C5E\u6027\u5024\u3092\u30C0\u30D6\u30EB\u30AF\u30A9\u30FC\u30C6\u30FC\u30B7\u30E7\u30F3\u3067\u56F2\u308F\u306A\u3044\u3067\u304F\u3060\u3055\u3044\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u4EE5\u4E0B\u4EE3\u8868\u7684\u306A\u3082\u306E\u3092\u629C\u7C8B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "color\u30BF\u30B0\u306E\u4F8B\uFF1A<color=red>\u8D64\u6587\u5B57</color>\\nsize\u30BF\u30B0\u306E\u4F8B<size=150%>150%\u30B5\u30A4\u30BA</size>"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "b\u30BF\u30B0\u306E\u4F8B\uFF1A<b>\u30DC\u30EB\u30C9\uFF08\u592A\u5B57\uFF09</b>\\ni\u30BF\u30B0\u306E\u4F8B\uFF1A<i>\u30A4\u30BF\u30EA\u30C3\u30AF\uFF08\u659C\u4F53\uFF09</i>"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "s\u30BF\u30B0\u306E\u4F8B\uFF1A<s>\u30B9\u30C8\u30E9\u30A4\u30AF\uFF08\u53D6\u308A\u6D88\u3057\u7DDA\uFF09</s>\\nu\u30BF\u30B0\u306E\u4F8B\uFF1A<u>\u30A2\u30F3\u30C0\u30FC\u30E9\u30A4\u30F3\uFF08\u4E0B\u7DDA\uFF09</u>"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "mark\u30BF\u30B0\u306E\u4F8B\uFF1A<mark=yellow>\u30DE\u30FC\u30AB\u30FC</mark>\\nsup\u30BF\u30B0\u306E\u4F8B\uFF1A10<sup>2</sup>\\nsub\u30BF\u30B0\u306E\u4F8B\uFF1AH<sub>2</sub>O"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "<align=right>\u53F3\u5BC4\u305B</align>\\n<align=center>\u4E2D\u592E\u5BC4\u305B</align>\\n<align=left>\u5DE6\u5BC4\u305B</align>"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "<align=flush>flush\uFF08\u5747\u7B49\u5272\u308A\u4ED8\u3051\uFF09</align>"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Jump
+    arg1: "*Label\u30C6\u30AD\u30B9\u30C8\u3068\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: "*Label2DPrefab\u306E\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC\u8868\u793A"
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Prefab\u3092\u4F7F\u7528\u3057\u305F\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC\u8868\u793A\u306E\u4F8B\u3002Character\u30B7\u30FC\u30C8\u3067FileType\u306B2DPrefab\u3092\u6307\u5B9A\u3059\u308B\u3068\u3001\u753B\u50CF\u3067\u306F\u306A\u304FPrefab\u3092\u8AAD\u307F\u8FBC\u3080"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "2DPrefab\u306F\u5185\u90E8\u306ESpriteRenderer\u30FBAnimator\u3092\u8A8D\u8B58\u3057\u3066\u63CF\u753B\u3059\u308B\u3002\\n\uFF08\u73FE\u72B6\u306F\u54041\u3064\u305A\u3064\u306E\u307F\u60F3\u5B9A\uFF09"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "SpriteRenderer\u306F\u72EC\u81EA\u306BOrderInLayer\u3092\u6301\u3066\u308B\u305F\u3081\u3001\u305D\u3061\u3089\u3067\u524D\u5F8C\u95A2\u4FC2\u3092\u5236\u5FA1\u3067\u304D\u308B\u3002\u306A\u304A\u3001\u80CC\u666F\u306F-200\u3001Prefab\u3067\u306A\u3044\u8868\u793A\u306F-100\u3002\u203B
+      UI\u306F\u5225\u30AB\u30E1\u30E9\u304B\u3064\u30AA\u30FC\u30D0\u30FC\u30EC\u30A4\u3055\u305B\u3066\u3044\u308B\u305F\u3081\u3001\u305D\u308C\u3088\u308A\u624B\u524D\u306F\u73FE\u72B6\u4E0D\u53EF\u80FD\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u307E\u305FScale\u306B\u95A2\u3057\u3066\u306FPPU\u3092\u8AAD\u307F\u53D6\u308A\u3001\u305D\u306E\u5024\u3092\u30A4\u30F3\u30B9\u30BF\u30F3\u30B9\u306EScale\u306B\u304B\u3051\u3001Sprite\u306EPPU\u5F71\u97FF\u3092\u306A\u304F\u3057\u3066\u3044\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "AnimationState\u3067Animator.Play(stateName)\u3059\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "Prefab\u732B01"
+    arg2: 
+    arg3: 1
+    arg4: 300
+    arg5: 100
+    arg6: 2.0
+    waitType: 
+    text: "Prefab\u3092\u4F7F\u7528\u3057\u305F\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC\u8868\u793A\u306E\u4F8B\u3002\uFF08PPU=100\uFF09"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "Prefab\u732B02"
+    arg2: 
+    arg3: 2
+    arg4: -300
+    arg5: -100
+    arg6: 2.0
+    waitType: 
+    text: "Prefab\u3092\u4F7F\u7528\u3057\u305F\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC\u8868\u793A\u306E\u4F8B\u3002\uFF08PPU=50\uFF09"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "Prefab\u732B01"
+    arg2: 
+    arg3: 2
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u540C\u3058\u30EC\u30A4\u30E4\u30FC\u306B\u4E0A\u66F8\u304D\u3057\u305F\u5834\u5408"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\u7537\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 2
+    arg4: 0
+    arg5: 0
+    arg6: 2.0
+    waitType: 
+    text: "\u975E2DPrefab\u3067\u540C\u3058\u30EC\u30A4\u30E4\u30FC\u306B\u4E0A\u66F8\u304D\u3057\u305F\u5834\u5408"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "Prefab\u732B01"
+    arg2: 
+    arg3: 3
+    arg4: 300
+    arg5: 100
+    arg6: 2.0
+    waitType: 
+    text: "\u8868\u793A"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\u5973\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 4
+    arg4: 400
+    arg5: 0
+    arg6: 2.0
+    waitType: 
+    text: "\u8868\u793A"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "Prefab\u732B01"
+    arg2: 
+    arg3: 4
+    arg4: -640
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u4E0A\u66F8\u304D"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\uFF1F\uFF1F\uFF1F"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u8A71\u3057\u3066\u3044\u308B\u4EBA\u306E\u5224\u5B9A\u306E\u5207\u308A\u66FF\u308F\u308A"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "Prefab\u732B02"
+    arg2: 
+    arg3: 3
+    arg4: -300
+    arg5: -100
+    arg6: 2.0
+    waitType: 
+    text: "\u8868\u793A"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\u5973\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 1
+    arg4: 400
+    arg5: 0
+    arg6: 2.0
+    waitType: 
+    text: "\u8868\u793A"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\u7537\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 2
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u8A71\u8005\u5207\u308A\u66FF\u308F\u308A"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "Prefab\u732B01"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u8A71\u8005\u5207\u308A\u66FF\u308F\u308A"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "Prefab\u732B01"
+    arg2: "\u65E9\u3044"
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u5225\u30D1\u30BF\u30FC\u30F3\u6307\u5B9A"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "Prefab\u732B01"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u7D99\u7D9A"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "Prefab\u732B01"
+    arg2: "\u901A\u5E38"
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u901A\u5E38\u306B\u623B\u3059"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Jump
+    arg1: "*Label\u30C6\u30AD\u30B9\u30C8\u3068\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: "*Label\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u8868\u793A"
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: SelectionTitle
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u8868\u793A"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*Label\u30B9\u30BF\u30FC\u30C8\u5730\u70B9"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u623B\u308B"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*LabelBg\u8868\u793A"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Bg\u8868\u793A"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*LabelSprite\u8868\u793A"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Sprite\u8868\u793A"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*Label2DPrefab\u306ESprite\u8868\u793A"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "2DPrefab\u306ESprite\u8868\u793A"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: "*LabelBg\u8868\u793A"
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Bg\u3067\u80CC\u666F\u3092\u5909\u66F4\u3002\\n\u6F14\u51FA\u7CFB\u30B3\u30DE\u30F3\u30C9\u4EE5\u5916\u306F\u30B3\u30DE\u30F3\u30C9\u306E\u5B8C\u4E86\u3092\u5F85\u305F\u306A\u3044\u305F\u3081\u3001\u5F85\u3061\u305F\u3044\u5834\u5408\u306FWait\u30B3\u30DE\u30F3\u30C9\u3082\u4F75\u7528\u3059\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Bg
+    arg1: "\u80CC\u666F\u305D\u306E2"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 2.0
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Wait
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 2
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u80CC\u666F\u305D\u306E2\u306F\u308F\u3056\u3068Offset\u3092\u5165\u308C\u3066\u3044\u307E\u3059\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "BgOff\u3067\u80CC\u666F\u3092\u975E\u8868\u793A\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: BgOff
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 1.0
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u88DC\u8DB3\u3068\u3057\u3066\u3001Bg\u306F\u5E38\u306BSprite\u3084Character\u3088\u308A\u5965\u306B\u8868\u793A\u3055\u308C\u308B\u3002\u76F8\u5BFE\u5EA7\u6A19\u6307\u5B9A\u3082\u53EF\u80FD\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Bg
+    arg1: "\u80CC\u666F\u305D\u306E2"
+    arg2: 
+    arg3: 
+    arg4: -300
+    arg5: -150
+    arg6: 2.0
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "BG\u3092\u5207\u308A\u66FF\u3048\u305F\u969B\u3001\u5EA7\u6A19\u304C\u672A\u6307\u5B9A\u306A\u3089\u76F4\u524D\u306E\u6307\u5B9A\u304C\u5F15\u304D\u7D99\u304C\u308C\u308B\u3002(\u305F\u3060\u3057Texture\u5B9A\u7FA9\u5074\u306Eoffset\u306F\u5225\u6271\u3044)"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Bg
+    arg1: "\u80CC\u666F\u305D\u306E1"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 1.0
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30AA\u30D5\u30BB\u30C3\u30C8\u8A2D\u5B9A\u306E\u3042\u308B\u80CC\u666F\u306E\u518D\u8868\u793A\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Bg
+    arg1: "\u80CC\u666F\u305D\u306E2"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 1.0
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Jump
+    arg1: "*Label\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u8868\u793A"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: "*LabelSprite\u8868\u793A"
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Sprite\u3067\u30B9\u30D7\u30E9\u30A4\u30C8\u3092\u8868\u793A\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Sprite
+    arg1: "\u732B1"
+    arg2: 
+    arg3: 
+    arg4: 150
+    arg5: 0
+    arg6: 2.0
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u540C\u540D\u306ESprite\u3092\u518D\u6307\u5B9A\u3059\u308B\u3068\u79FB\u52D5\u3059\u308B\u3002\u8907\u6570\u8868\u793A\u3055\u308C\u306A\u3044\u3002(\u30B9\u30D7\u30E9\u30A4\u30C8\u540D\u306F\u975E\u5BFE\u5FDC)"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Sprite
+    arg1: "\u732B1"
+    arg2: 
+    arg3: 
+    arg4: 300
+    arg5: 150
+    arg6: 2.0
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Arg3\u3001x\u3001y\u306F\u7701\u7565\u6642\u306B\u6700\u5F8C\u306E\u5024\u304C\u7D99\u7D9A\u3055\u308C\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Sprite
+    arg1: "\u732B1"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Arg3\u306B\u306F0\uFF5E7\u3092\u6307\u5B9A\u53EF\u80FD\u3002\u5225\u306E\u30B9\u30D7\u30E9\u30A4\u30C8\u306E\u6307\u5B9A\u4F8B\\n(\u30EC\u30A4\u30E4\u30FC\u5468\u8FBA\u306F\u5BB4\u3068\u4E92\u63DB\u6027\u304C\u306A\u3044\u7C21\u6613\u4ED5\u69D8\u306A\u305F\u3081\u6CE8\u610F)"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Sprite
+    arg1: "\u732B2"
+    arg2: 
+    arg3: 1
+    arg4: 
+    arg5: -150
+    arg6: 2.0
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Arg3\u306E\u5909\u66F4\u3082\u53EF\u80FD\u3002\u524D\u5F8C\u95A2\u4FC2\u306F\u77AC\u6642\u306B\u5909\u308F\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Sprite
+    arg1: "\u732B1"
+    arg2: 
+    arg3: 2
+    arg4: -150
+    arg5: 0
+    arg6: 2.0
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "SpriteOff\u3067\u975E\u8868\u793A\u306B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: SpriteOff
+    arg1: "\u732B1"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 3.0
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "SpriteOff\u5F8C\u306B\u8868\u793A\u3059\u308B\u5834\u5408\u3001\u672A\u6307\u5B9A\u6642\u306E\u30D1\u30E9\u30E1\u30FC\u30BF\u306F\u5168\u3066\u30EA\u30BB\u30C3\u30C8\u3055\u308C\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Sprite
+    arg1: "\u732B1"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 1.0
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30EC\u30A4\u30E4\u30FC0\u306B\u8868\u793A\u3055\u308C\u307E\u3057\u305F\u3002\\n\u6B21\u306B\u30EC\u30A4\u30E4\u30FC1\u306B\u79FB\u52D5\u3002\uFF08\u4E0A\u66F8\u304D\u304C\u767A\u751F\uFF09"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Sprite
+    arg1: "\u732B1"
+    arg2: 
+    arg3: 1
+    arg4: 300
+    arg5: 
+    arg6: 1.0
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u732B2\u3092\u518D\u8868\u793A\u3002\u4E0A\u66F8\u304D\u3055\u308C\u305F\u5F8C\u306B\u672A\u6307\u5B9A\u306E\u5834\u5408\u3082\u3001\u30EC\u30A4\u30E4\u30FC\u6307\u5B9A\u306A\u3069\u306F\u30EA\u30BB\u30C3\u30C8\u3055\u308C\u30660\u6271\u3044\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Sprite
+    arg1: "\u732B2"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 2.0
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30EC\u30A4\u30E4\u30FC\u306B1\u3092\u6307\u5B9A\u3057\u3066\u4E0A\u66F8\u304D\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Sprite
+    arg1: "\u732B2"
+    arg2: 
+    arg3: 1
+    arg4: 
+    arg5: 
+    arg6: 2.0
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30EC\u30A4\u30E4\u30FC2\u3092\u6307\u5B9A\u3057\u3066\u518D\u8868\u793A\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Sprite
+    arg1: "\u732B1"
+    arg2: 
+    arg3: 2
+    arg4: 
+    arg5: 
+    arg6: 1.0
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Jump
+    arg1: "*Label\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u8868\u793A"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: "*Label2DPrefab\u306ESprite\u8868\u793A"
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "2DPrefab\u306E\u52D5\u4F5C\u4ED5\u69D8\u306F\u3001\u300C2DPrefab\u306E\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC\u8868\u793A\u300D\u306E\u8AAC\u660E\u306B\u8A18\u8F09\u3042\u308A\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Sprite\u30672DPrefab\u30B9\u30D7\u30E9\u30A4\u30C8\u3092\u8868\u793A\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Sprite
+    arg1: "Prefab\u732B1Sprite"
+    arg2: 
+    arg3: 7
+    arg4: 300
+    arg5: 200
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Jump
+    arg1: "*Label\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8\u8868\u793A"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: "*Label\u30B5\u30A6\u30F3\u30C9"
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: SelectionTitle
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30B5\u30A6\u30F3\u30C9"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*Label\u30B9\u30BF\u30FC\u30C8\u5730\u70B9"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u623B\u308B"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*LabelSe\u518D\u751F"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Se\u518D\u751F"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*LabelBgm\u518D\u751F"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Bgm\u518D\u751F"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: "*LabelSe\u518D\u751F"
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Se\u3067Se\u3092\u518D\u751F\u3002Se\u306F\u591A\u91CD\u306B\u518D\u751F\u53EF\u80FD\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Se
+    arg1: "SE\u305D\u306E1"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Wait
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 0.5
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Se
+    arg1: "SE\u305D\u306E1"
+    arg2: 
+    arg3: 0.6
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Wait
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Se
+    arg1: "SE\u305D\u306E2"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Wait
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Se\u306F\u6700\u59278\u3064\u540C\u6642\u306B\u518D\u751F\u53EF\u80FD\u30029\u3064\u76EE\u3092\u518D\u751F\u3059\u308B\u3068\u3001\u6700\u3082\u53E4\u3044Se\u304C\u6D88\u3048\u3066\u4E0A\u66F8\u304D\u3055\u308C\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Se
+    arg1: "SE\u305D\u306E1"
+    arg2: 
+    arg3: 0.6
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Wait
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 0.2
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Se
+    arg1: "SE\u305D\u306E2"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Wait
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 0.2
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Se
+    arg1: "SE\u305D\u306E2"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Wait
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 0.2
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Se
+    arg1: "SE\u305D\u306E2"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Wait
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 0.2
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Se
+    arg1: "SE\u305D\u306E2"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Wait
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 0.2
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Se
+    arg1: "SE\u305D\u306E2"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Wait
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 0.2
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Se
+    arg1: "SE\u305D\u306E2"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Wait
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 0.2
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Se
+    arg1: "SE\u305D\u306E2"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u6B21\u30679\u3064\u76EE\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Se
+    arg1: "SE\u305D\u306E2"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30EB\u30FC\u30D7\u3082\u53EF\u80FD\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Se
+    arg1: "SE\u305D\u306E1"
+    arg2: true
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Se
+    arg1: "SE\u305D\u306E2"
+    arg2: true
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "StopSe\u3067\u6307\u5B9A\u3057\u305FSe\u3092\u7D42\u4E86\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: StopSe
+    arg1: "SE\u305D\u306E1"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u518D\u5EA62\u3064\u3092\u30EB\u30FC\u30D7\u518D\u751F\u72B6\u614B\u306B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Se
+    arg1: "SE\u305D\u306E1"
+    arg2: true
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "StopSe\u3067Label\u3092\u6307\u5B9A\u3057\u306A\u3044\u5834\u5408\u306F\u3001\u5168\u3066\u306ESe\u3092\u7D42\u4E86\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: StopSe
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 3.0
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Jump
+    arg1: "*Label\u30B5\u30A6\u30F3\u30C9"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: "*LabelBgm\u518D\u751F"
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Bgm\u3067BGM\u3092\u5909\u66F4\u3002\\nArg5\u3068Arg6\u3092\u4E21\u65B9\u6307\u5B9A\u3059\u308C\u3070\u3001\u30AF\u30ED\u30B9\u30D5\u30A7\u30FC\u30C9\u53EF\u80FD\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Bgm
+    arg1: "BGM\u305D\u306E2"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 2.0
+    arg6: 2.0
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Wait
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 2.0
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "StopBgm\u3067\u73FE\u5728\u306EBGM\u3092\u7D42\u4E86\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: StopBgm
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 2.0
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Wait
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 2.0
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Jump
+    arg1: "*Label\u30B5\u30A6\u30F3\u30C9"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: "*Label\u6F14\u51FA"
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: SelectionTitle
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u6F14\u51FA"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*Label\u30B9\u30BF\u30FC\u30C8\u5730\u70B9"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u623B\u308B"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: '*LabelWait'
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: Wait
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*Label\u30D5\u30A7\u30FC\u30C9"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30D5\u30A7\u30FC\u30C9"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*Label\u30D5\u30A7\u30FC\u30C9\u30EB\u30FC\u30EB\u753B\u50CF\u5225\u540D"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30D5\u30A7\u30FC\u30C9\u30EB\u30FC\u30EB\u753B\u50CF\u5225\u540D"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: '*LabelImageEffect'
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: ImageEffect
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: '*LabelTween'
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: Tween
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: '*LabelWait'
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Wait\u306F\u4E00\u5B9A\u6642\u9593\u305D\u306E\u6B21\u306E\u30B3\u30DE\u30F3\u30C9\u306E\u5B9F\u884C\u305B\u305A\u306B\u5F85\u3064\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Wait
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 1.0
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u4ED6\u3068\u306E\u30B3\u30DE\u30F3\u30C9\u3068\u4F75\u7528\u3059\u308B\u3053\u3068\u304C\u57FA\u672C\u3068\u306A\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Jump
+    arg1: "*Label\u6F14\u51FA"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: "*Label\u30D5\u30A7\u30FC\u30C9"
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u203B \u6F14\u51FA\u30B3\u30DE\u30F3\u30C9\u306F\u5B8C\u4E86\u3059\u308B\u307E\u3067\u6B21\u306E\u30B3\u30DE\u30F3\u30C9\u3092\u5F85\u3064\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "FadeOut\u3067\u30D5\u30A7\u30FC\u30C9\u30A2\u30A6\u30C8\u3057\u3001FadeIn\u3067\u305D\u308C\u3092\u89E3\u9664\u3059\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeOut
+    arg1: '#446600'
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 1.0
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeIn
+    arg1: '#446600'
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 1.0
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30EB\u30FC\u30EB\u753B\u50CF\u6307\u5B9A\u30D5\u30A7\u30FC\u30C9\u306F\u3001FadeHorizontal\u3001FadeVertical\u3001MosesH\u3001MosesV\u3001Cloud\u306E\u307F\u5BFE\u5FDC\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u307E\u305F\u3001\u72EC\u81EA\u62E1\u5F35\u3068\u3057\u3066\u3001Arg5\u306Btrue\u3092\u6307\u5B9A\u3059\u308B\u3068\u3001\u30EB\u30FC\u30EB\u753B\u50CF\u3092\u30CD\u30AC\u30DD\u30B8\u53CD\u8EE2\u3057\u3066\u4F7F\u7528\u3067\u304D\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30B3\u30DE\u30F3\u30C9\u306FFadeOut\u3068FadeIn\u3060\u304C\u3001\u30EB\u30FC\u30EB\u753B\u50CF\u3092\u6307\u5B9A\u3057\u305F\u5834\u5408\u306F\u5185\u90E8\u7684\u306B\u306FImageEffect\u3068\u540C\u3058\u4ED5\u7D44\u307F\u3067\u99C6\u52D5\u3059\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "URP\u3067\u306F\u4E8B\u524D\u306B\u521D\u671F\u8A2D\u5B9A\u304C\u5FC5\u8981\u306B\u306A\u308B\u305F\u3081\u6CE8\u610F\u3002\\n\uFF08\u8A73\u7D30\u306FImageEffect\u3092\u53C2\u7167\u306E\u3053\u3068\uFF09"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeOut
+    arg1: '#441100'
+    arg2: 
+    arg3: FadeHorizontal
+    arg4: 0.2
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeIn
+    arg1: '#441100'
+    arg2: 
+    arg3: FadeHorizontal
+    arg4: 0.2
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeOut
+    arg1: '#441100'
+    arg2: 
+    arg3: FadeHorizontal
+    arg4: 0.2
+    arg5: true
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeIn
+    arg1: '#441100'
+    arg2: 
+    arg3: FadeHorizontal
+    arg4: 0.2
+    arg5: true
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeOut
+    arg1: '#444400'
+    arg2: 
+    arg3: FadeVertical
+    arg4: 0.2
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeIn
+    arg1: '#444400'
+    arg2: 
+    arg3: FadeVertical
+    arg4: 0.2
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeOut
+    arg1: '#114400'
+    arg2: 
+    arg3: MosesH
+    arg4: 0.2
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeIn
+    arg1: '#114400'
+    arg2: 
+    arg3: MosesH
+    arg4: 0.2
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeOut
+    arg1: '#114400'
+    arg2: 
+    arg3: MosesV
+    arg4: 0.2
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeIn
+    arg1: '#114400'
+    arg2: 
+    arg3: MosesV
+    arg4: 0.2
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeOut
+    arg1: '#114444'
+    arg2: 
+    arg3: Cloud
+    arg4: 0.2
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeIn
+    arg1: '#114444'
+    arg2: 
+    arg3: Cloud
+    arg4: 0.2
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "WaitType\u306BNoWait\u306E\u6307\u5B9A\u3082\u53EF\u80FD\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeOut
+    arg1: '#999988'
+    arg2: 
+    arg3: 
+    arg4: 0.2
+    arg5: 
+    arg6: 1
+    waitType: NoWait
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u3053\u3093\u306A\u611F\u30581"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeIn
+    arg1: '#999988'
+    arg2: 
+    arg3: 
+    arg4: 0.2
+    arg5: 
+    arg6: 1
+    waitType: NoWait
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u3053\u3093\u306A\u611F\u30582"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeOut
+    arg1: '#999988'
+    arg2: 
+    arg3: Cloud
+    arg4: 0.2
+    arg5: 
+    arg6: 1
+    waitType: NoWait
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u3053\u3093\u306A\u611F\u30583"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeIn
+    arg1: '#999988'
+    arg2: 
+    arg3: Cloud
+    arg4: 0.2
+    arg5: 
+    arg6: 1
+    waitType: NoWait
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u3053\u3093\u306A\u611F\u30584"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "RuleFade\u6709\u308A\u7121\u3057\u306E\u6DF7\u5728\u3082\u5BFE\u5FDC"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeOut
+    arg1: '#001144'
+    arg2: 
+    arg3: FadeHorizontal
+    arg4: 0.2
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeIn
+    arg1: '#001144'
+    arg2: 
+    arg3: 
+    arg4: 0.2
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeOut
+    arg1: '#001144'
+    arg2: 
+    arg3: 
+    arg4: 0.2
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeIn
+    arg1: '#001144'
+    arg2: 
+    arg3: FadeHorizontal
+    arg4: 0.2
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Jump
+    arg1: "*Label\u6F14\u51FA"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: "*Label\u30D5\u30A7\u30FC\u30C9\u30EB\u30FC\u30EB\u753B\u50CF\u5225\u540D"
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30EB\u30FC\u30EB\u753B\u50CF\u540D\u306E\u72EC\u81EA\u62E1\u5F35\u3068\u3057\u3066\u3001WipeRight\u3001WipeLeft\u3001WipeUp\u3001WipeDown\u3001WipeCenter\u304C\u6307\u5B9A\u53EF\u80FD\u3002\\nFadeHorizontal\u306A\u3069\u306E\u30D1\u30E9\u30E1\u30FC\u30BF\u6307\u5B9A\u9055\u3044\u3068\u3057\u3066\u52D5\u4F5C\u3059\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeOut
+    arg1: '#441100'
+    arg2: 
+    arg3: WipeRight
+    arg4: 0.2
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeIn
+    arg1: '#441100'
+    arg2: 
+    arg3: WipeRight
+    arg4: 0.2
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeOut
+    arg1: '#441100'
+    arg2: 
+    arg3: WipeLeft
+    arg4: 0.2
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeIn
+    arg1: '#441100'
+    arg2: 
+    arg3: WipeLeft
+    arg4: 0.2
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeOut
+    arg1: '#441100'
+    arg2: 
+    arg3: WipeUp
+    arg4: 0.2
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeIn
+    arg1: '#441100'
+    arg2: 
+    arg3: WipeUp
+    arg4: 0.2
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeOut
+    arg1: '#441100'
+    arg2: 
+    arg3: WipeDown
+    arg4: 0.2
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeIn
+    arg1: '#441100'
+    arg2: 
+    arg3: WipeDown
+    arg4: 0.2
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeOut
+    arg1: '#441100'
+    arg2: 
+    arg3: WipeCenter
+    arg4: 0.2
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeIn
+    arg1: '#441100'
+    arg2: 
+    arg3: WipeCenter
+    arg4: 0.2
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeOut
+    arg1: '#001144'
+    arg2: 
+    arg3: WipeRight
+    arg4: 0.2
+    arg5: true
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeIn
+    arg1: '#001144'
+    arg2: 
+    arg3: WipeRight
+    arg4: 0.2
+    arg5: true
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeOut
+    arg1: '#001144'
+    arg2: 
+    arg3: WipeLeft
+    arg4: 0.2
+    arg5: true
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeIn
+    arg1: '#001144'
+    arg2: 
+    arg3: WipeLeft
+    arg4: 0.2
+    arg5: true
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeOut
+    arg1: '#001144'
+    arg2: 
+    arg3: WipeUp
+    arg4: 0.2
+    arg5: true
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeIn
+    arg1: '#001144'
+    arg2: 
+    arg3: WipeUp
+    arg4: 0.2
+    arg5: true
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeOut
+    arg1: '#001144'
+    arg2: 
+    arg3: WipeDown
+    arg4: 0.2
+    arg5: true
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeIn
+    arg1: '#001144'
+    arg2: 
+    arg3: WipeDown
+    arg4: 0.2
+    arg5: true
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeOut
+    arg1: '#001144'
+    arg2: 
+    arg3: WipeCenter
+    arg4: 0.2
+    arg5: true
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: FadeIn
+    arg1: '#001144'
+    arg2: 
+    arg3: WipeCenter
+    arg4: 0.2
+    arg5: true
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Jump
+    arg1: "*Label\u6F14\u51FA"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: '*LabelImageEffect'
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u203B \u6F14\u51FA\u30B3\u30DE\u30F3\u30C9\u306F\u5B8C\u4E86\u3059\u308B\u307E\u3067\u6B21\u306E\u30B3\u30DE\u30F3\u30C9\u3092\u5F85\u3064\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "ImageEffect\u306F\u3001URP\u306E\u5834\u5408\u306F\u4E92\u63DB\u30E2\u30FC\u30C9\u8A2D\u5B9A\u3001\u30D1\u30A4\u30D7\u30E9\u30A4\u30F3\u306B\u8FFD\u52A0\u306E2\u624B\u9806\u304C\u5FC5\u8981\u306B\u306A\u308A\u307E\u3059\u3002\\n\uFF08Builtin\u306E\u5834\u5408\u306F\u7279\u306B\u4F55\u3082\u3057\u306A\u304F\u3066\u3082\u52D5\u304D\u307E\u3059\u3002\uFF09"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "URP\u306E\u5834\u5408\u306F\u3001\u4EE5\u4E0B\u3092\u8A2D\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\\n1.
+      \u30E1\u30CB\u30E5\u30FC\u306EEdit\u304B\u3089 Project Settings > Graphics
+      > Render Graph\\nCompatibility Mode (Render Graph Disabled) \u306B\u30C1\u30A7\u30C3\u30AF"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "URP\u306E\u5834\u5408\u306F\u3001\u4EE5\u4E0B\u3092\u8A2D\u5B9A\u3057\u3066\u304F\u3060\u3055\u3044\\n2.
+      \u30D7\u30ED\u30B8\u30A7\u30AF\u30C8\u30D3\u30E5\u30FC\u304B\u3089 Assets >
+      Settings > XX_Renderer \u30D5\u30A1\u30A4\u30EB\\nRenderer Feature \u306B SimplePostEffectRenderer
+      \u3092\u8FFD\u52A0"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "ImageEffect\u3067GrayScale\u307E\u305F\u306FSepia\u304C\u53EF\u80FD\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: ImageEffect
+    arg1: SpriteCamera
+    arg2: GrayScale
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 2
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "ImageEffectOff\u3067\u89E3\u9664\u53EF\u80FD\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: ImageEffectOff
+    arg1: SpriteCamera
+    arg2: GrayScale
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 2
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Sepia\u306E\u5834\u5408\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: ImageEffect
+    arg1: SpriteCamera
+    arg2: Sepia
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u89E3\u9664\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: ImageEffectOff
+    arg1: SpriteCamera
+    arg2: Sepia
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "NoWait\u3067\u307E\u305F\u305A\u306B\u5B9F\u884C"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: ImageEffect
+    arg1: SpriteCamera
+    arg2: Sepia
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 1
+    waitType: NoWait
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u3053\u3093\u306A\u611F\u30581"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: ImageEffectOff
+    arg1: SpriteCamera
+    arg2: Sepia
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 1
+    waitType: NoWait
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u3053\u3093\u306A\u611F\u30582"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Jump
+    arg1: "*Label\u6F14\u51FA"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: '*LabelTween'
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: SelectionTitle
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u6F14\u51FA > Tween"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*Label\u6F14\u51FA"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u623B\u308B"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*LabelBg\u306ETween\u4F8B"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Bg\u306ETween\u4F8B"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*LabelCharacter\u306ETween\u4F8B"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Character\u306ETween\u4F8B"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*LabelSprite\u306ETween\u4F8B"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Sprite\u306ETween\u4F8B"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*LabelSprite\u306ETween\u4F8B(NoWait)"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Sprite\u306ETween\u4F8B(NoWait)"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: "*LabelBg\u306ETween\u4F8B"
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u203B \u6F14\u51FA\u30B3\u30DE\u30F3\u30C9\u306F\u5B8C\u4E86\u3059\u308B\u307E\u3067\u6B21\u306E\u30B3\u30DE\u30F3\u30C9\u3092\u5F85\u3064\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Tween\u30B3\u30DE\u30F3\u30C9\u306EArg1\u306BBG\u3092\u6307\u5B9A\u3057\u3066\u5236\u5FA1\u53EF\u80FD"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: BG
+    arg2: MoveTo
+    arg3: time=2 delay=0 x=150 y=300 islocal=true
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: BG
+    arg2: MoveFrom
+    arg3: time=1 delay=2 x=300 y=75 islocal=true
+    arg4: easeInQuad
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: BG
+    arg2: MoveBy
+    arg3: time=1 delay=0 x=30 y=15
+    arg4: easeInOutCubic
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: BG
+    arg2: MoveTo
+    arg3: time=2 delay=0 x=0 y=0 islocal=true
+    arg4: easeInOutBounce
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Tween\u30B3\u30DE\u30F3\u30C9\u3067PunchPosition, ShakePosition, PunchScale,
+      ShakeScale\u306B\u5BFE\u5FDC\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: BG
+    arg2: PunchPosition
+    arg3: time=2 delay=0 x=15 y=15
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: BG
+    arg2: ShakePosition
+    arg3: time=2 delay=0 x=15 y=15 islocal=true
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: BG
+    arg2: PunchScale
+    arg3: time=2 delay=0 x=0.15 y=0.15
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: BG
+    arg2: ShakeScale
+    arg3: time=2 delay=0 x=0.15 y=0.15
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Jump
+    arg1: '*LabelTween'
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: "*LabelCharacter\u306ETween\u4F8B"
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u203B \u6F14\u51FA\u30B3\u30DE\u30F3\u30C9\u306F\u5B8C\u4E86\u3059\u308B\u307E\u3067\u6B21\u306E\u30B3\u30DE\u30F3\u30C9\u3092\u5F85\u3064\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: "\u7537\u5B50\u5B66\u751F"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Character\u3082Tween\u30B3\u30DE\u30F3\u30C9\u3067\u79FB\u52D5\u3067\u304D\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: "\u7537\u5B50\u5B66\u751F"
+    arg2: MoveTo
+    arg3: time=2 delay=0 x=150 y=300 islocal=true
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: "\u7537\u5B50\u5B66\u751F"
+    arg2: MoveFrom
+    arg3: time=1 delay=2 x=300 y=75 islocal=true
+    arg4: easeInQuad
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: "\u7537\u5B50\u5B66\u751F"
+    arg2: MoveBy
+    arg3: time=1 delay=0 x=30 y=15
+    arg4: easeInOutCubic
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: "\u7537\u5B50\u5B66\u751F"
+    arg2: MoveTo
+    arg3: time=2 delay=0 x=0 y=0 islocal=true
+    arg4: easeInOutBounce
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: "\u7537\u5B50\u5B66\u751F"
+    arg2: MoveTo
+    arg3: time=2 delay=0 x=300 y=0 islocal=true
+    arg4: easeInOutBounce
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Character\u3082Tween\u30B3\u30DE\u30F3\u30C9\u3067PunchPosition, ShakePosition,
+      PunchScale, ShakeScale\u306B\u5BFE\u5FDC\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: "\u7537\u5B50\u5B66\u751F"
+    arg2: PunchPosition
+    arg3: time=2 delay=0 x=15 y=15
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: "\u7537\u5B50\u5B66\u751F"
+    arg2: ShakePosition
+    arg3: time=2 delay=0 x=15 y=15 islocal=true
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: "\u7537\u5B50\u5B66\u751F"
+    arg2: PunchScale
+    arg3: time=2 delay=0 x=0.15 y=0.1
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: "\u7537\u5B50\u5B66\u751F"
+    arg2: ShakeScale
+    arg3: time=2 delay=0 x=0.15 y=0.15
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Jump
+    arg1: '*LabelTween'
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: "*LabelSprite\u306ETween\u4F8B"
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u203B \u6F14\u51FA\u30B3\u30DE\u30F3\u30C9\u306F\u5B8C\u4E86\u3059\u308B\u307E\u3067\u6B21\u306E\u30B3\u30DE\u30F3\u30C9\u3092\u5F85\u3064\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Sprite\u3082Tween\u30B3\u30DE\u30F3\u30C9\u3067\u79FB\u52D5\u3067\u304D\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Sprite
+    arg1: "\u732B2"
+    arg2: 
+    arg3: 0
+    arg4: 0
+    arg5: 0
+    arg6: 2.0
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: "\u732B2"
+    arg2: MoveTo
+    arg3: time=2 delay=0 x=150 y=300 islocal=true
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: "\u732B2"
+    arg2: MoveFrom
+    arg3: time=1 delay=2 x=300 y=75 islocal=true
+    arg4: easeInQuad
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: "\u732B2"
+    arg2: MoveBy
+    arg3: time=1 delay=0 x=30 y=15
+    arg4: easeInOutCubic
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: "\u732B2"
+    arg2: MoveTo
+    arg3: time=2 delay=0 x=0 y=0 islocal=true
+    arg4: easeInOutBounce
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: "\u732B2"
+    arg2: MoveTo
+    arg3: time=2 delay=0 x=-300 y=0 islocal=true
+    arg4: easeInOutBounce
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Sprite\u3082Tween\u30B3\u30DE\u30F3\u30C9\u3067PunchPosition, ShakePosition,
+      PunchScale, ShakeScale\u306B\u5BFE\u5FDC\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: "\u732B2"
+    arg2: PunchPosition
+    arg3: time=2 delay=0 x=15 y=15
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: "\u732B2"
+    arg2: ShakePosition
+    arg3: time=2 delay=0 x=15 y=15 islocal=true
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: "\u732B2"
+    arg2: PunchScale
+    arg3: time=2 delay=0 x=0.15 y=0.15
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: "\u732B2"
+    arg2: ShakeScale
+    arg3: time=2 delay=0 x=0.15 y=0.15
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Jump
+    arg1: '*LabelTween'
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: "*LabelSprite\u306ETween\u4F8B(NoWait)"
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u203B \u6F14\u51FA\u30B3\u30DE\u30F3\u30C9\u306F\u5B8C\u4E86\u3059\u308B\u307E\u3067\u6B21\u306E\u30B3\u30DE\u30F3\u30C9\u3092\u5F85\u3064\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "WaitType\u306BNoWait\u3092\u6307\u5B9A\u3059\u308B\u3068\u3001Tween\u30B3\u30DE\u30F3\u30C9\u3092\u5F85\u305F\u305A\u306B\u5373\u5EA7\u306B\u6B21\u306E\u30B3\u30DE\u30F3\u30C9\u3078\u9032\u3080\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Sprite
+    arg1: "\u732B2"
+    arg2: 
+    arg3: 0
+    arg4: 0
+    arg5: 0
+    arg6: 2.0
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: "\u732B2"
+    arg2: MoveTo
+    arg3: time=2 delay=0 x=150 y=300 islocal=true
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: NoWait
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u3053\u3093\u306A\u611F\u30581"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: "\u732B2"
+    arg2: MoveFrom
+    arg3: time=1 delay=2 x=300 y=75 islocal=true
+    arg4: easeInQuad
+    arg5: 
+    arg6: 
+    waitType: NoWait
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u3053\u3093\u306A\u611F\u30582"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: "\u732B2"
+    arg2: MoveBy
+    arg3: time=1 delay=0 x=30 y=15
+    arg4: easeInOutCubic
+    arg5: 
+    arg6: 
+    waitType: NoWait
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u3053\u3093\u306A\u611F\u30583"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: "\u732B2"
+    arg2: MoveTo
+    arg3: time=2 delay=0 x=0 y=0 islocal=true
+    arg4: easeInOutBounce
+    arg5: 
+    arg6: 
+    waitType: NoWait
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u3053\u3093\u306A\u611F\u30584"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Tween
+    arg1: "\u732B2"
+    arg2: MoveTo
+    arg3: time=2 delay=0 x=-300 y=0 islocal=true
+    arg4: easeInOutBounce
+    arg5: 
+    arg6: 
+    waitType: NoWait
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u4EE5\u4E0A\u3001\u4F8B\u3067\u3057\u305F\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Jump
+    arg1: '*LabelTween'
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: '*LabelUI'
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: SelectionTitle
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: UI
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*Label\u30B9\u30BF\u30FC\u30C8\u5730\u70B9"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u623B\u308B"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*Label\u30E1\u30C3\u30BB\u30FC\u30B8\u30A6\u30A3\u30F3\u30C9\u30A6\u306E\u8868\u793A\u30FB\u975E\u8868\u793A"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30E1\u30C3\u30BB\u30FC\u30B8\u30A6\u30A3\u30F3\u30C9\u30A6\u306E\u8868\u793A\u30FB\u975E\u8868\u793A"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*Label\u30E1\u30C3\u30BB\u30FC\u30B8\u30A6\u30A3\u30F3\u30C9\u30A6\u306E\u5207\u308A\u66FF\u3048"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30E1\u30C3\u30BB\u30FC\u30B8\u30A6\u30A3\u30F3\u30C9\u30A6\u306E\u5207\u308A\u66FF\u3048"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: "*Label\u30E1\u30C3\u30BB\u30FC\u30B8\u30A6\u30A3\u30F3\u30C9\u30A6\u306E\u8868\u793A\u30FB\u975E\u8868\u793A"
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Wait\u306E\u524D\u306BShowMessageWindow\u3092\u7F6E\u3051\u3070\u3001\u30E1\u30C3\u30BB\u30FC\u30B8\u30A6\u30A3\u30F3\u30C9\u30A6\u304C\u975E\u8868\u793A\u306B\u306A\u308B\u306E\u3092\u9632\u6B62\u3067\u304D\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: ShowMessageWindow
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Wait
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 2
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "HideMessageWindow\u3067\u660E\u793A\u7684\u306B\u30A6\u30A3\u30F3\u30C9\u30A6\u3092\u975E\u8868\u793A\u306B\u3067\u304D\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: ShowMessageWindow
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: HideMessageWindow
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Wait
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 2
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: ShowMessageWindow
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u72EC\u81EA\u62E1\u5F35\u3068\u3057\u3066\u3001ShowMessageWindow\u306BArg6\u3067fadeSeconds\u3092\u6307\u5B9A\u53EF\u80FD\uFF08\u7701\u7565\u66420\u79D2\uFF09"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u72EC\u81EA\u62E1\u5F35\u3068\u3057\u3066\u3001HideMessageWindow\u306BArg6\u3067fadeSeconds\u3092\u6307\u5B9A\u53EF\u80FD\uFF08\u7701\u7565\u66420\u79D2\uFF09"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: HideMessageWindow
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 1
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Jump
+    arg1: '*LabelUI'
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: "*Label\u30E1\u30C3\u30BB\u30FC\u30B8\u30A6\u30A3\u30F3\u30C9\u30A6\u306E\u5207\u308A\u66FF\u3048"
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "ChangeMessageWindow\u3067\u30E1\u30C3\u30BB\u30FC\u30B8\u30A6\u30A3\u30F3\u30C9\u30A6\u306E\u5207\u308A\u66FF\u3048\u304C\u53EF\u80FD\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: ChangeMessageWindow
+    arg1: MessageWindowFull
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u5207\u308A\u66FF\u308F\u308A\u307E\u3057\u305F\u3002InputBr\u6307\u5B9A\u30C6\u30B9\u30C8\u3002"
+    pageCtrl: InputBr
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u6539\u884C\u30C6\u30B9\u30C8\\n\u6539\u884C\u30C6\u30B9\u30C8\\n\u6B21\u306F\u901A\u5E38\u306ECtrlPage\u7701\u7565"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u6539\u884C\u30C6\u30B9\u30C82\\n\u6539\u884C\u30C6\u30B9\u30C82"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: ChangeMessageWindow
+    arg1: MessageWindow
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u5143\u306E\u30A6\u30A3\u30F3\u30C9\u30A6\u306B\u5207\u308A\u66FF\u3048\u307E\u3057\u305F\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30E1\u30C3\u30BB\u30FC\u30B8\u30A6\u30A3\u30F3\u30C9\u30A6\u306E\u4ED5\u7D44\u307F\u306B\u3064\u3044\u3066\u3002\\nAdvRoot\u306E\u521D\u671F\u5316\u6642\u306B\u3001MessageWindow\u30B3\u30F3\u30DD\u30FC\u30CD\u30F3\u30C8\u304C\u30A2\u30BF\u30C3\u30C1\u3055\u308C\u305F\u30CE\u30FC\u30C9\u3092\u81EA\u52D5\u53CE\u96C6\u3059\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "ChangeMessageWindow\u306F\u3001\u6307\u5B9A\u3057\u305F\u5185\u5BB9\u3068\u305D\u308C\u3089\u306E\u30CE\u30FC\u30C9\u306EgameObject.name\u3068\u4E00\u81F4\u3059\u308B\u3082\u306E\u306B\u5207\u308A\u66FF\u3048\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u72EC\u81EA\u62E1\u5F35\u3068\u3057\u3066\u3001ChangeMessageWindow\u306BArg6\u3067fadeSeconds\u3092\u6307\u5B9A\u53EF\u80FD\uFF08\u7701\u7565\u66420\u79D2\uFF09"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: ChangeMessageWindow
+    arg1: MessageWindowFull
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 2
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u901A\u5E38Window\u306B\u623B\u3057\u307E\u3059\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: ChangeMessageWindow
+    arg1: MessageWindow
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 2
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Jump
+    arg1: '*LabelUI'
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: "*Label\u30ED\u30B8\u30C3\u30AF\u5236\u5FA1"
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: SelectionTitle
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30ED\u30B8\u30C3\u30AF\u5236\u5FA1"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*Label\u30B9\u30BF\u30FC\u30C8\u5730\u70B9"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u623B\u308B"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*LabelParam\u3001Jump\u3001Selection"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Param\u3001Jump\u3001Selection"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*LabelSelection\u306E\u88DC\u8DB3"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Selection\u306E\u88DC\u8DB3"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: "*LabelParam\u3001Jump\u3001Selection"
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "Param\u3001Jump\u3001Selection\u306F\u5BB4\u306B\u6BD4\u3079\u308B\u3068\u6A5F\u80FD\u304C\u5C11\u306A\u3044\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30FB\u4F7F\u7528\u3067\u304D\u308B\u5909\u6570\u306FParam\u30B7\u30FC\u30C8\u3067\u5B9A\u7FA9\u3057\u305FInt\u578B\u306E\u307F\u3002\\n\u30FB\u8A08\u7B97\u4E2D\u306F\u81EA\u52D5\u7684\u306BDouble\u306B\u306A\u308A\u3001\u6574\u6570\xF7\u6574\u6570\u3082\u5C0F\u6570\u306B\u306A\u308B\u3002\\n\u30FB\u6700\u7D42\u7684\u306B\u4EE3\u5165\u3055\u308C\u308B\u969B\u306F\u3001Int\u578B\u306B\u6841\u843D\u3061\u3059\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30FB\u4F7F\u7528\u53EF\u80FD\u306A\u6F14\u7B97\u306F\u3001\u56DB\u5247\u6F14\u7B97\u3001\u6BD4\u8F03\u6F14\u7B97\u5B50\u3001\u62EC\u5F27\u3001\u8AD6\u7406\u6F14\u7B97\u3002\\n\u30FB\u4EE3\u5165\u6F14\u7B97\u306F
+      = \u306E\u307F\u53EF\u80FD\u3002\\n\u30FB\u5358\u9805\u6F14\u7B97\u3084\u3001\u5BB4\u306E\u7D44\u307F\u8FBC\u307F\u95A2\u6570\u7B49\u306F\u5168\u3066\u4F7F\u7528\u3067\u304D\u306A\u3044\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30FB\u5185\u90E8\u7684\u306B\u306FDataTable.Compute()\u3092\u4F7F\u7528\u3057\u3066\u3044\u308B\u305F\u3081\u3001\u5BB4\u304C\u975E\u5BFE\u5FDC\u306A\u6F14\u7B97\u5B50\u3082\u4F7F\u3048\u308B\u5834\u5408\u304C\u3042\u308B\u304C\u3001\u4E57\u308A\u63DB\u3048\u4E88\u5B9A\u304C\u3042\u308B\u306A\u3089\u975E\u63A8\u5968\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: "*Label\u4F8B\u306E\u958B\u59CB"
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u4EE5\u4E0B\u3001\u6570\u5F0F\u306E\u3042\u308BParam\u3084Jump\u3084Selection\u306E\u4F8B"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Jump
+    arg1: "*Label\u9078\u629E\u80A2\u8868\u793A"
+    arg2: 0 < flag_a
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u3053\u3053\u306Fflag_a\u304C0\u4EE5\u4E0B\u3067\u306A\u3044\u3068\u5230\u9054\u3057\u306A\u3044\u3002\\n\u3053\u3053\u306Fflag_a\u304C0\u4EE5\u4E0B\u3067\u306A\u3044\u3068\u5230\u9054\u3057\u306A\u3044\u3002\\n\u3053\u3053\u306Fflag_a\u304C0\u4EE5\u4E0B\u3067\u306A\u3044\u3068\u5230\u9054\u3057\u306A\u3044\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Param
+    arg1: flag_a = flag_a+1
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "flag_a\u304C+1\u3055\u308C\u305F\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: "*Label\u9078\u629E\u80A2\u8868\u793A"
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*Label\u30ED\u30B8\u30C3\u30AF\u5236\u5FA1"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u623B\u308B"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*Label\u4F8B\u306E\u958B\u59CB"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u9078\u629E\u80A21\uFF1A\u300C\u4F8B\u306E\u958B\u59CB\u300D\u306B\u623B\u308B"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*Label\u6B21\u306E\u98DB\u3073\u5148"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u9078\u629E\u80A22\uFF1A\u6B21\u3078\u9032\u3080"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*Label\u4F8B\u306E\u958B\u59CB"
+    arg2: 0 <flag_b
+    arg3: flag_a = 0
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u9078\u629E\u80A23\uFF1Aflag_a \u3092 0\u306B\u3057\u3066\u300C\u4F8B\u306E\u958B\u59CB\u300D\u306B\u623B\u308B"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*Label\u4F8B\u306E\u958B\u59CB"
+    arg2: 0 <flag_b
+    arg3: flag_b = 0
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u9078\u629E\u80A24\uFF1Aflag_b \u3092 0\u306B\u3057\u3066\u300C\u4F8B\u306E\u958B\u59CB\u300D\u306B\u623B\u308B"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: "*Label\u6B21\u306E\u98DB\u3073\u5148"
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Param
+    arg1: flag_b = flag_b+1
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "flag_b\u304C+1\u3055\u308C\u305F\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u9078\u629E\u80A2\u306B\u623B\u308A\u307E\u3059\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Jump
+    arg1: "*Label\u9078\u629E\u80A2\u8868\u793A"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: "*LabelSelection\u306E\u88DC\u8DB3"
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30FB\u30D7\u30EC\u30CF\u30D6\u3001X\u3001Y\u306E\u500B\u5225\u6307\u5B9A\u306F\u975E\u5BFE\u5FDC\u3002\\n\u30FB\u5BB4\u3068\u7570\u306A\u308A\u3001\u30E1\u30C3\u30BB\u30FC\u30B8\u30A6\u30A3\u30F3\u30C9\u30A6\u306F\u975E\u8868\u793A\u306B\u306A\u3089\u306A\u3044\u3002\\n\u30FB\u5BB4\u3068\u7570\u306A\u308A\u3001PageCtrl\u306B\u975E\u5BFE\u5FDC\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30FB\u5BB4\u306B\u306F\u306A\u3044SelectionTitle\u304C\u3042\u308A\u3001Selection\u306E\u624B\u524D\u306B\u914D\u7F6E\u3059\u308B\u3068\u6A5F\u80FD\u3059\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Jump
+    arg1: "*Label\u30ED\u30B8\u30C3\u30AF\u5236\u5FA1"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: "*Label\u7D42\u4E86\u5236\u5FA1"
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: SelectionTitle
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u7D42\u4E86\u5236\u5FA1"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: "*Label\u30B9\u30BF\u30FC\u30C8\u5730\u70B9"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u623B\u308B"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Selection
+    arg1: '*LabelPauseScenario'
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: PauseScenario
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: '*LabelPauseScenario'
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u4F1A\u8A71\u30B7\u30FC\u30F3\u306A\u3069\u3092\u4E2D\u65AD\u3057\u3001\u72EC\u81EA\u30D7\u30ED\u30B0\u30E9\u30E0\u5074\u306B\u5236\u5FA1\u3092\u6E21\u3057\u305F\u3044\u5834\u5408\u3001PauseScenario\u3067\u30B7\u30CA\u30EA\u30AA\u3092\u4E2D\u65AD\u3059\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u72EC\u81EA\u30D7\u30ED\u30B0\u30E9\u30E0\u5074\u306F\u3001IsEndOrPauseScenario\u3067Pause\u4E2D\u304B\u3092\u5224\u5225\u3067\u304D\u308B\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: PauseScenario
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: 
+    arg1: 
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: "\u30B7\u30CA\u30EA\u30AA\u52D5\u4F5C\u304C\u518D\u958B\u3055\u308C\u307E\u3057\u305F\u3002"
+    pageCtrl: 
+    voice: 
+    windowType: 
+  - command: Jump
+    arg1: "*Label\u7D42\u4E86\u5236\u5FA1"
+    arg2: 
+    arg3: 
+    arg4: 
+    arg5: 
+    arg6: 
+    waitType: 
+    text: 
+    pageCtrl: 
+    voice: 
+    windowType: 

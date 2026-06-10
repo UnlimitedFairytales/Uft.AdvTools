@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b95f00f7b3c518d4fbdc715989e3e574, type: 3}
+  m_Name: character_so
+  m_EditorClassIdentifier: 
+  characters:
+  - characterName: "\u7537\u5B50\u5B66\u751F"
+    nameText: "\u5B66\u751F\u592A\u90CE"
+    fileTypeValue: 
+    prefab: {fileID: 0}
+    details:
+    - pattern: "\u901A\u5E38"
+      x: 0
+      y: -180
+      z: 0
+      pivot: 4
+      scale: 0.8
+      sprite: {fileID: 21300000, guid: df119a5bbbfaed246b5ad6d62f5ab3c8, type: 3}
+      animationState: 
+    - pattern: "\u7B11\u3044"
+      x: 0
+      y: -630
+      z: 0
+      pivot: 7
+      scale: 1
+      sprite: {fileID: 21300000, guid: fc648c52edd8ff54a975e41977175c40, type: 3}
+      animationState: 
+  - characterName: "\u5973\u5B50\u5B66\u751F"
+    nameText: "\u5B66\u751F\u82B1\u5B50"
+    fileTypeValue: 
+    prefab: {fileID: 0}
+    details:
+    - pattern: "\u901A\u5E38"
+      x: 0
+      y: -630
+      z: 0
+      pivot: 7
+      scale: 0.8
+      sprite: {fileID: 21300000, guid: 8279f9ed9504dec419dbe6dfdcb51655, type: 3}
+      animationState: 
+    - pattern: "\u7B11\u3044"
+      x: 0
+      y: -180
+      z: 0
+      pivot: 4
+      scale: 0.8
+      sprite: {fileID: 21300000, guid: 3673236fc003b8043ad2c43410990833, type: 3}
+      animationState: 
+  - characterName: "Prefab\u732B01"
+    nameText: "\u8336\u732B"
+    fileTypeValue: 2DPrefab
+    prefab: {fileID: 1697505372788578342, guid: 67cd799ef52de6f4dae0cf2e1363ccbc, type: 3}
+    details:
+    - pattern: "\u901A\u5E38"
+      x: 150
+      y: -150
+      z: 0
+      pivot: 4
+      scale: 1
+      sprite: {fileID: 0}
+      animationState: Normal
+    - pattern: "\u65E9\u3044"
+      x: 0
+      y: 0
+      z: 0
+      pivot: 4
+      scale: 1
+      sprite: {fileID: 0}
+      animationState: Fast
+  - characterName: "Prefab\u732B02"
+    nameText: "\u7070\u732B"
+    fileTypeValue: 2DPrefab
+    prefab: {fileID: 1697505372788578342, guid: 581d32632b731164a851f4e1e4968b19, type: 3}
+    details:
+    - pattern: "\u901A\u5E38"
+      x: 0
+      y: 0
+      z: 0
+      pivot: 4
+      scale: 1
+      sprite: {fileID: 0}
+      animationState: Normal
