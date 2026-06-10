@@ -73,6 +73,26 @@ namespace Uft.AdvTools.Loader
             return this.LoadInner(csvDtoList, sheetName);
         }
 
+        public IReadOnlyList<ICommand> Load(ScenarioTableSO so, string sheetName)
+        {
+            var dtoList = so.rows.ConvertAll(r => new ScenarioCsvDto
+            {
+                Command = r.command,
+                Arg1 = r.arg1,
+                Arg2 = r.arg2,
+                Arg3 = r.arg3,
+                Arg4 = r.arg4,
+                Arg5 = r.arg5,
+                Arg6 = r.arg6,
+                WaitType = r.waitType,
+                Text = r.text,
+                PageCtrl = r.pageCtrl,
+                Voice = r.voice,
+                WindowType = r.windowType,
+            });
+            return this.LoadInner(dtoList, sheetName);
+        }
+
         IReadOnlyList<ICommand> LoadInner(IReadOnlyList<ScenarioCsvDto> csvDtoList, string sheetName)
         {
             var commandList = new List<ICommand>();

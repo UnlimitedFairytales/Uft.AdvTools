@@ -22,6 +22,18 @@ namespace Uft.AdvTools.Loader
             return this.LoadInner(csvDtoList);
         }
 
+        public Dictionary<string, Param> Load(ParamTableSO so)
+        {
+            var paramDict = new Dictionary<string, Param>(so.entries.Count);
+            foreach (var data in so.entries)
+            {
+                if (string.IsNullOrWhiteSpace(data.label)) continue;
+                paramDict[data.label] = new Param(data.label, data.value);
+            }
+            DevLog.Log($"[{nameof(ParamCsvLoader)}] Load(SO) done. count={paramDict.Count}");
+            return paramDict;
+        }
+
         Dictionary<string, Param> LoadInner(IReadOnlyList<ParamCsvDto> csvDtoList)
         {
             var paramDict = new Dictionary<string, Param>();

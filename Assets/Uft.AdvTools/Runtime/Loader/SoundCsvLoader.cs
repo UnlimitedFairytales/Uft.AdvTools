@@ -40,6 +40,25 @@ namespace Uft.AdvTools.Loader
             return this.LoadInner(csvDtoList, resourcesFolderPathPart);
         }
 
+        public SoundDictionaries Load(SoundTableSO so)
+        {
+            var bgmDict = new Dictionary<string, AudioClip>(so.entries.Count);
+            var seDict = new Dictionary<string, AudioClip>(so.entries.Count);
+            var voiceDict = new Dictionary<string, AudioClip>(so.entries.Count);
+            foreach (var data in so.entries)
+            {
+                if (string.IsNullOrWhiteSpace(data.label) || data.clip == null) continue;
+                switch (data.type?.ToLower())
+                {
+                    case Bgm: bgmDict[data.label] = data.clip; break;
+                    case Se: seDict[data.label] = data.clip; break;
+                    case Voice: voiceDict[data.label] = data.clip; break;
+                }
+            }
+            DevLog.Log($"[{nameof(SoundCsvLoader)}] Load(SO) done. bgm={bgmDict.Count}, se={seDict.Count}, voice={voiceDict.Count}");
+            return new SoundDictionaries { _bgmDict = bgmDict, _seDict = seDict, _voiceDict = voiceDict };
+        }
+
         SoundDictionaries LoadInner(IReadOnlyList<SoundCsvDto> csvDtoList, string resourcesFolderPathPart)
         {
             var soundBgmRoot = resourcesFolderPathPart + "Sound/BGM/";

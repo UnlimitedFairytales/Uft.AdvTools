@@ -32,6 +32,32 @@ namespace Uft.AdvTools.Loader
             return this.LoadInner(csvDtoList, resourcesFolderPathPart);
         }
 
+        public Dictionary<string, Character> Load(CharacterTableSO so)
+        {
+            var characterDict = new Dictionary<string, Character>(so.characters.Count);
+            foreach (var charData in so.characters)
+            {
+                if (string.IsNullOrWhiteSpace(charData.characterName)) continue;
+                if (charData.details == null || charData.details.Count == 0) continue;
+                if (!FileType.TryParse(charData.fileTypeValue, out var fileType)) continue;
+
+                var defaultDetail = ToDetail(charData.details[0]);
+                var character = new Character(charData.characterName, charData.nameText, fileType, charData.prefab, defaultDetail);
+                for (int i = 1; i < charData.details.Count; i++)
+                {
+                    var detail = ToDetail(charData.details[i]);
+                    character.CharacterDetailDictionary.Add(detail.Pattern, detail);
+                }
+                characterDict.Add(charData.characterName, character);
+            }
+            DevLog.Log($"[{nameof(CharacterCsvLoader)}] Load(SO) done. count={characterDict.Count}");
+            return characterDict;
+        }
+
+        static CharacterDetail ToDetail(CharacterTableSO.DetailData d) =>
+            new(d.pattern, d.x, d.y, d.z, d.pivot, d.scale, d.sprite,
+                string.IsNullOrEmpty(d.animationState) ? null : d.animationState);
+
         Dictionary<string, Character> LoadInner(IReadOnlyList<CharacterCsvDto> csvDtoList, string resourcesFolderPathPart)
         {
             var textureCharacterRoot = resourcesFolderPathPart + "Texture/Character/";

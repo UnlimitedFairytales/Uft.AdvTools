@@ -113,49 +113,75 @@ namespace Uft.AdvTools
             ScenarioCsvLoader? scenarioCsvLoader = null, string? defaultMessageWindowName = null)
         {
             this.Cleanup();
+            scenarioCsvLoader ??= new ScenarioCsvLoader(assetLoadProxy);
+            this.SetupInner(
+                assetLoadProxy,
+                resourcesFolderPathPart,
+                new CharacterCsvLoader(assetLoadProxy).Load(characterCsvText, resourcesFolderPathPart),
+                new TextureCsvLoader(assetLoadProxy).Load(textureCsvText, resourcesFolderPathPart),
+                new SoundCsvLoader(assetLoadProxy).Load(soundCsvText, resourcesFolderPathPart),
+                new ParamCsvLoader().Load(paramCsvText),
+                new ScenarioExecutor(scenarioCsvLoader.Load(scenarioCsvText, "test")),
+                defaultMessageWindowName);
+        }
 
-            // Asset
+        public virtual void Setup(ScenarioTableSO scenarioSO, CharacterTableSO characterSO, TextureTableSO textureSO, SoundTableSO soundSO, ParamTableSO paramSO,
+            AssetLoadProxy assetLoadProxy, string resourcesFolderPathPart,
+            ScenarioCsvLoader? scenarioCsvLoader = null, string? defaultMessageWindowName = null)
+        {
+            this.Cleanup();
+            scenarioCsvLoader ??= new ScenarioCsvLoader(assetLoadProxy);
+            this.SetupInner(
+                assetLoadProxy,
+                resourcesFolderPathPart,
+                new CharacterCsvLoader(assetLoadProxy).Load(characterSO),
+                new TextureCsvLoader(assetLoadProxy).Load(textureSO),
+                new SoundCsvLoader(assetLoadProxy).Load(soundSO),
+                new ParamCsvLoader().Load(paramSO),
+                new ScenarioExecutor(scenarioCsvLoader.Load(scenarioSO, "test")),
+                defaultMessageWindowName);
+        }
+
+        protected virtual void SetupInner(
+            AssetLoadProxy assetLoadProxy,
+            string resourcesFolderPathPart,
+            Dictionary<string, Character> characterDict,
+            TextureCsvLoader.TextureDictionaries textures,
+            SoundCsvLoader.SoundDictionaries sounds,
+            Dictionary<string, Param> paramDict,
+            ScenarioExecutor scenarioExecutor,
+            string? defaultMessageWindowName)
+        {
             this.AssetLoadProxy = assetLoadProxy;
             this.ResourcesFolderPathPart = resourcesFolderPathPart;
-            scenarioCsvLoader ??= new ScenarioCsvLoader(assetLoadProxy);
 
-            // new or setup
             this.MessageWindowManager = new MessageWindowManager();
             this.AutoNext = new AutoNext();
             this.LogManager = new LogManager();
             this._tglLogView.SetIsOnWithoutNotify(false);
             this.PostEffectManager.Setup(this);
 
-            // Dictionary
-            this.CharacterDictionary = new CharacterCsvLoader(assetLoadProxy).Load(characterCsvText, resourcesFolderPathPart);
-            var textures = new TextureCsvLoader(assetLoadProxy).Load(textureCsvText, resourcesFolderPathPart);
+            this.CharacterDictionary = characterDict;
             this.BgDictionary = textures._bgDict;
             this.SpriteDictionary = textures._spriteDict;
-            var sounds = new SoundCsvLoader(assetLoadProxy).Load(soundCsvText, resourcesFolderPathPart);
             this.BgmDictionary = sounds._bgmDict;
             this.SeDictionary = sounds._seDict;
             this.VoiceDictionary = sounds._voiceDict;
-            this.ParamDictionary = new ParamCsvLoader().Load(paramCsvText);
+            this.ParamDictionary = paramDict;
 
-            // ScenarioExecutor
-            this.ScenarioExecutor = new ScenarioExecutor(scenarioCsvLoader.Load(scenarioCsvText, "test"));
-            this._tglAutoNext.SetIsOnWithoutNotify(this.ScenarioExecutor.IsAutoNext);
+            this.ScenarioExecutor = scenarioExecutor;
+            this._tglAutoNext.SetIsOnWithoutNotify(scenarioExecutor.IsAutoNext);
             this.MessageWindowManager.Setup(this.GetComponentsInChildren<MessageWindow>(true), defaultMessageWindowName);
 
             foreach (var cameraPrefix in this._cameraPrefixes)
             {
-                var camera =
-                    this.GetComponentsInChildrenOrderByName<Camera>(true, component => component.gameObject.name.StartsWith(cameraPrefix))
-                    .FirstOrDefault();
-                if (camera != null)
-                {
-                    // var vCameraList = this.GetComponentsInChildrenOrderByName<CinemachineCamera>(component => component.gameObject.name.StartsWith(cameraPrefix));
-                    // this.CameraDictionary.Add(camera.gameObject.name, (camera, vCameraList));
-                }
+                var camera = this.GetComponentsInChildrenOrderByName<Camera>(true, c => c.gameObject.name.StartsWith(cameraPrefix)).FirstOrDefault();
+                if (camera != null) { }
             }
-            this.UiEffectList = this.GetComponentsInChildrenOrderByName<Animator>(true, component => component.gameObject.name.StartsWith(this._uiEffectPrefix));
+            this.UiEffectList = this.GetComponentsInChildrenOrderByName<Animator>(true, c => c.gameObject.name.StartsWith(this._uiEffectPrefix));
             this.HideUI(0);
         }
+
         public virtual void Cleanup()
         {
             this.ScenarioExecutor = null;

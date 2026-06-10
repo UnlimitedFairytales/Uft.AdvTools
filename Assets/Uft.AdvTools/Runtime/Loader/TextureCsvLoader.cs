@@ -41,6 +41,24 @@ namespace Uft.AdvTools.Loader
             return this.LoadInner(csvDtoList, resourcesFolderPathPart);
         }
 
+        public TextureDictionaries Load(TextureTableSO so)
+        {
+            var bgDict = new Dictionary<string, TextureRow>(so.entries.Count);
+            var spriteDict = new Dictionary<string, TextureRow>(so.entries.Count);
+            foreach (var data in so.entries)
+            {
+                if (string.IsNullOrWhiteSpace(data.label)) continue;
+                var row = new TextureRow(data.label, data.type, data.x, data.y, data.pivot, data.scale, data.sprite, data.prefab);
+                switch (data.type.ToLower())
+                {
+                    case Bg: bgDict[data.label] = row; break;
+                    case Sprite: spriteDict[data.label] = row; break;
+                }
+            }
+            DevLog.Log($"[{nameof(TextureCsvLoader)}] Load(SO) done. bg={bgDict.Count}, sprite={spriteDict.Count}");
+            return new TextureDictionaries { _bgDict = bgDict, _spriteDict = spriteDict };
+        }
+
         TextureDictionaries LoadInner(IReadOnlyList<TextureCsvDto> csvDtoList, string resourcesFolderPathPart)
         {
             var textureBgRoot = resourcesFolderPathPart + "Texture/BG/";
