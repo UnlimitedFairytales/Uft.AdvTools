@@ -1,7 +1,7 @@
 ﻿{
   "name": "com.unlimited-fairytales.advtools",
   "displayName": "Uft.AdvTools",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "unity": "6000.0",
   "description": "This is simple adv tools.\n\n* Dependencies must be installed manually.\n\nDependencies\n\n- com.unity.ugui 2.0.0\n    - Import TMP Essentials\n- com.unity.2d.sprite 1.0.0\n- com.unity.cinemachine 3.1.5\n- https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask\n- https://assetstore.unity.com/packages/tools/animation/dotween-hotween-v2-27676\n    - Setup DOTween\n    - Create ASMDEF\n    - Project Settings > Player > Scripting Define Symbols > UNITASK_DOTWEEN_SUPPORT\n- https://github.com/GlitchEnzo/NuGetForUnity.git?path=/src/NuGetForUnity\n    - CsvHelper 33.1.0\n- https://github.com/UnlimitedFairytales/Uft.UnityUtils.git?path=Assets/Uft.UnityUtils\n    - Project Settings > Player > Scripting Define Symbols > UNITYUTILS_CSVHELPER_SUPPORT\n- https://github.com/UnlimitedFairytales/Uft.FadeEffects.git?path=Assets/Uft.FadeEffects\n- https://github.com/UnlimitedFairytales/Uft.VirtualizedList.git?path=Assets/Uft.VirtualizedList",
   "author": {
