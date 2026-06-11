@@ -138,7 +138,7 @@ namespace Uft.AdvTools
                 assetLoadProxy,
                 resourcesFolderPathPart,
                 new CharacterCsvLoader(assetLoadProxy).Load(characterSO),
-                new TextureCsvLoader(assetLoadProxy).Load(textureSO),
+                new TextureCsvLoader(assetLoadProxy).Load(textureSO, resourcesFolderPathPart),
                 new SoundCsvLoader(assetLoadProxy).Load(soundSO, resourcesFolderPathPart),
                 new ParamCsvLoader().Load(paramSO),
                 new ScenarioExecutor(scenarioCsvLoader.Load(scenarioSO, "test")),

@@ -258,8 +258,16 @@ namespace Uft.AdvTools.Editor
 
         void ConvertTexture()
         {
-            static TextureTableSO.TextureData ToTextureData(TextureRow r) =>
-                new()
+            if (this._textureCsv == null) return;
+            var resourcesFolderPathPart = this._inputFolder + "/";
+            var bgRoot = resourcesFolderPathPart + "Texture/BG/";
+            var spriteRoot = resourcesFolderPathPart + "Texture/Sprite/";
+
+            TextureTableSO.TextureData ToTextureData(TextureRow r)
+            {
+                var typeRoot = r.Type.ToLower() == TextureCsvLoader.Bg ? bgRoot : spriteRoot;
+                var relFileName = RelativeFileName(r.AssetPath, typeRoot);
+                return new()
                 {
                     label = r.Label,
                     type = r.Type,
@@ -267,12 +275,12 @@ namespace Uft.AdvTools.Editor
                     y = r.OffsetY,
                     pivot = r.Pivot,
                     scale = r.Scale,
-                    sprite = r.Sprite,
-                    prefab = r.Prefab,
+                    fileName = relFileName,
+                    fileType = r.FileType.ToString(),
                 };
+            }
 
-            if (this._textureCsv == null) return;
-            var dicts = new TextureCsvLoader(this._proxy).Load(this._textureCsv.text, this._inputFolder + "/");
+            var dicts = new TextureCsvLoader(this._proxy).Load(this._textureCsv.text, resourcesFolderPathPart);
             var soName = Path.GetFileNameWithoutExtension(AssetDatabase.GetAssetPath(this._textureCsv));
             var so = this.LoadOrCreate<TextureTableSO>(this._outputFolder + $"/{soName}_so.asset");
             so.entries = new List<TextureTableSO.TextureData>(dicts._bgDict.Count + dicts._spriteDict.Count);

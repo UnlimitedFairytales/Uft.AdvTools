@@ -18,8 +18,8 @@ namespace Uft.AdvTools.Loader
             public float y;
             public AnchorPreset pivot = AnchorPreset.MiddleCenter;
             public float scale = 1f;
-            public Sprite? sprite;
-            public GameObject? prefab;
+            public string fileName = "";
+            public string fileType = "";
         }
 
         public List<TextureData> entries = new();

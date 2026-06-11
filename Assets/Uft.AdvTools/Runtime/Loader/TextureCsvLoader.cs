@@ -7,7 +7,6 @@ using Uft.AdvTools.Entities;
 using Uft.UnityUtils;
 using Uft.UnityUtils.Common;
 using Uft.UnityUtils.UI;
-using UnityEngine;
 
 namespace Uft.AdvTools.Loader
 {
@@ -41,14 +40,18 @@ namespace Uft.AdvTools.Loader
             return this.LoadInner(csvDtoList, resourcesFolderPathPart);
         }
 
-        public TextureDictionaries Load(TextureTableSO so)
+        public TextureDictionaries Load(TextureTableSO so, string resourcesFolderPathPart)
         {
+            var textureBgRoot = resourcesFolderPathPart + "Texture/BG/";
+            var textureSpriteRoot = resourcesFolderPathPart + "Texture/Sprite/";
             var bgDict = new Dictionary<string, TextureRow>(so.entries.Count);
             var spriteDict = new Dictionary<string, TextureRow>(so.entries.Count);
             foreach (var data in so.entries)
             {
-                if (string.IsNullOrWhiteSpace(data.label)) continue;
-                var row = new TextureRow(data.label, data.type, data.x, data.y, data.pivot, data.scale, data.sprite, data.prefab);
+                if (string.IsNullOrWhiteSpace(data.label) || string.IsNullOrWhiteSpace(data.fileName)) continue;
+                if (!FileType.TryParse(data.fileType, out FileType fileType)) continue;
+                var root = data.type.ToLower() == Bg ? textureBgRoot : textureSpriteRoot;
+                var row = new TextureRow(data.label, data.type, data.x, data.y, data.pivot, data.scale, this._assetLoadProxy, root + data.fileName, fileType);
                 switch (data.type.ToLower())
                 {
                     case Bg: bgDict[data.label] = row; break;
@@ -76,22 +79,12 @@ namespace Uft.AdvTools.Loader
                     if (string.IsNullOrWhiteSpace(dto.Label)) continue;
 
                     var type = dto.Type!.ToLower();
-                    if (!FileType.TryParse(dto.FileType, out FileType fileType)) throw new Exception($"{nameof(Character)} : FileType is unsupported value. : {dto.FileType}");
+                    if (!FileType.TryParse(dto.FileType, out FileType fileType)) throw new Exception($"{nameof(TextureRow)} : FileType is unsupported value. : {dto.FileType}");
 
                     switch (type)
                     {
                         case Bg:
                             {
-                                Sprite? sprite = null;
-                                GameObject? prefab = null;
-                                if (fileType == FileType.None)
-                                {
-                                    sprite = this._assetLoadProxy.Load<Sprite>(textureBgRoot + Path.ChangeExtension(dto.FileName, null));
-                                }
-                                else if (fileType == FileType.Prefab2D || fileType == FileType.Prefab3D)
-                                {
-                                    prefab = this._assetLoadProxy.Load<GameObject>(textureBgRoot + Path.ChangeExtension(dto.FileName, null));
-                                }
                                 bgDict[dto.Label] = new TextureRow(
                                     dto.Label,
                                     dto.Type,
@@ -99,22 +92,13 @@ namespace Uft.AdvTools.Loader
                                     InvariantCultureUtil.FloatTryParse(dto.Y, out var y) ? y : null,
                                     AnchorPresetUtil.TryParseLooseAnchorPreset(dto.Pivot, out var pivot) ? pivot : null,
                                     InvariantCultureUtil.FloatTryParse(dto.Scale, out var scale) ? scale : null,
-                                    sprite,
-                                    prefab);
+                                    this._assetLoadProxy,
+                                    textureBgRoot + Path.ChangeExtension(dto.FileName, null),
+                                    fileType);
                             }
                             break;
                         case Sprite:
                             {
-                                Sprite? sprite = null;
-                                GameObject? prefab = null;
-                                if (fileType == FileType.None)
-                                {
-                                    sprite = this._assetLoadProxy.Load<Sprite>(textureSpriteRoot + Path.ChangeExtension(dto.FileName, null));
-                                }
-                                else if (fileType == FileType.Prefab2D || fileType == FileType.Prefab3D)
-                                {
-                                    prefab = this._assetLoadProxy.Load<GameObject>(textureSpriteRoot + Path.ChangeExtension(dto.FileName, null));
-                                }
                                 spriteDict[dto.Label] = new TextureRow(
                                     dto.Label,
                                     dto.Type,
@@ -122,8 +106,9 @@ namespace Uft.AdvTools.Loader
                                     InvariantCultureUtil.FloatTryParse(dto.Y, out var y) ? y : null,
                                     AnchorPresetUtil.TryParseLooseAnchorPreset(dto.Pivot, out var pivot) ? pivot : null,
                                     InvariantCultureUtil.FloatTryParse(dto.Scale, out var scale) ? scale : null,
-                                    sprite,
-                                    prefab);
+                                    this._assetLoadProxy,
+                                    textureSpriteRoot + Path.ChangeExtension(dto.FileName, null),
+                                    fileType);
                             }
                             break;
                         default:

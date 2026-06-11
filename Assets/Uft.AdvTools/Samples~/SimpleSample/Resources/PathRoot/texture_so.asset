@@ -19,37 +19,37 @@ MonoBehaviour:
     y: 0
     pivot: 4
     scale: 1
-    sprite: {fileID: 21300000, guid: d49ca5c302dcbde4583aa75543f69633, type: 3}
-    prefab: {fileID: 0}
+    fileName: bg_ryokan_hiroen_1920x1080
+    fileType: 
   - label: "\u80CC\u666F\u305D\u306E2"
     type: Bg
     x: -15
     y: -30
     pivot: 4
     scale: 1
-    sprite: {fileID: 21300000, guid: 24debaf9f41cb7042888eccc1244eb84, type: 3}
-    prefab: {fileID: 0}
+    fileName: bg_chiheisen_green_1920x1080
+    fileType: 
   - label: "\u732B1"
     type: Sprite
     x: 0
     y: 0
     pivot: 4
     scale: 1
-    sprite: {fileID: 21300000, guid: 7a78cadca6d41014e835c2958fd6323e, type: 3}
-    prefab: {fileID: 0}
+    fileName: cat_koubakozuwari_brown
+    fileType: 
   - label: "\u732B2"
     type: Sprite
     x: 150
     y: 300
     pivot: 4
     scale: 1
-    sprite: {fileID: 21300000, guid: dbf642df60f2e61418b50258c2ed4173, type: 3}
-    prefab: {fileID: 0}
+    fileName: cat_koubakozuwari_gray
+    fileType: 
   - label: "Prefab\u732B1Sprite"
     type: Sprite
     x: 300
     y: -150
     pivot: 4
     scale: 1
-    sprite: {fileID: 0}
-    prefab: {fileID: 1697505372788578342, guid: 6fe17a46adc8b8b4b87bad924519f03f, type: 3}
+    fileName: prefabcat01/Cat01Sprite
+    fileType: 2DPrefab
