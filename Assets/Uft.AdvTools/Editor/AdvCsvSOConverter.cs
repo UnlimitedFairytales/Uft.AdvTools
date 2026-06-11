@@ -5,7 +5,6 @@ using System.IO;
 using Uft.AdvTools.Entities;
 using Uft.AdvTools.Loader;
 using Uft.UnityUtils;
-using Uft.UnityUtils.UI;
 using UnityEditor;
 using UnityEngine;
 
@@ -239,16 +238,20 @@ namespace Uft.AdvTools.Editor
         void ConvertSound()
         {
             if (this._soundCsv == null) return;
-            var sounds = new SoundCsvLoader(this._proxy).Load(this._soundCsv.text, this._inputFolder + "/");
+            var resourcesFolderPathPart = this._inputFolder + "/";
+            var bgmRoot = resourcesFolderPathPart + "Sound/BGM/";
+            var seRoot = resourcesFolderPathPart + "Sound/SE/";
+            var voiceRoot = resourcesFolderPathPart + "Sound/Voice/";
+            var sounds = new SoundCsvLoader(this._proxy).Load(this._soundCsv.text, resourcesFolderPathPart);
             var soName = Path.GetFileNameWithoutExtension(AssetDatabase.GetAssetPath(this._soundCsv));
             var so = this.LoadOrCreate<SoundTableSO>(this._outputFolder + $"/{soName}_so.asset");
-            so.entries = new List<SoundTableSO.SoundData>(sounds._bgmDict.Count + sounds._seDict.Count + sounds._voiceDict.Count);
-            foreach (var (label, clip) in sounds._bgmDict)
-                so.entries.Add(new SoundTableSO.SoundData { label = label, type = SoundCsvLoader.Bgm, clip = clip });
-            foreach (var (label, clip) in sounds._seDict)
-                so.entries.Add(new SoundTableSO.SoundData { label = label, type = SoundCsvLoader.Se, clip = clip });
-            foreach (var (label, clip) in sounds._voiceDict)
-                so.entries.Add(new SoundTableSO.SoundData { label = label, type = SoundCsvLoader.Voice, clip = clip });
+            so.entries = new List<SoundTableSO.SoundData>(sounds._bgmPathDict.Count + sounds._sePathDict.Count + sounds._voicePathDict.Count);
+            foreach (var (label, path) in sounds._bgmPathDict)
+                so.entries.Add(new SoundTableSO.SoundData { label = label, type = SoundCsvLoader.Bgm, fileName = RelativeFileName(path, bgmRoot) });
+            foreach (var (label, path) in sounds._sePathDict)
+                so.entries.Add(new SoundTableSO.SoundData { label = label, type = SoundCsvLoader.Se, fileName = RelativeFileName(path, seRoot) });
+            foreach (var (label, path) in sounds._voicePathDict)
+                so.entries.Add(new SoundTableSO.SoundData { label = label, type = SoundCsvLoader.Voice, fileName = RelativeFileName(path, voiceRoot) });
             EditorUtility.SetDirty(so);
             DevLog.Log($"Sound converted. count={so.entries.Count}");
         }
@@ -339,6 +342,9 @@ namespace Uft.AdvTools.Editor
             AssetDatabase.Refresh();
             DevLog.Log("Convert All done.");
         }
+
+        static string RelativeFileName(string fullPath, string root) =>
+            fullPath.StartsWith(root, System.StringComparison.Ordinal) ? fullPath[root.Length..] : Path.GetFileName(fullPath);
 
         T LoadOrCreate<T>(string path) where T : ScriptableObject
         {

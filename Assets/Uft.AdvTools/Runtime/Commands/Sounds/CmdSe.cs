@@ -21,7 +21,11 @@ namespace Uft.AdvTools.Commands
 
         public virtual void Run(ScenarioExecutor scenarioExecutor, AdvRoot advRoot)
         {
-            var clip = advRoot.SeDictionary[this.Label];
+            if (!advRoot.SeDictionary.TryGetValue(this.Label, out var clip))
+            {
+                clip = advRoot.AssetLoadProxy.Load<AudioClip>(advRoot.SePathDictionary[this.Label]);
+                advRoot.SeDictionary[this.Label] = clip;
+            }
             advRoot.SoundManager.PlaySe(clip, this.IsLoop, this.Volume);
         }
     }

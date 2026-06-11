@@ -13,8 +13,11 @@ namespace Uft.AdvTools.Loader
         public struct SoundDictionaries
         {
             public Dictionary<string, AudioClip> _bgmDict;
+            public Dictionary<string, string> _bgmPathDict;
             public Dictionary<string, AudioClip> _seDict;
+            public Dictionary<string, string> _sePathDict;
             public Dictionary<string, AudioClip> _voiceDict;
+            public Dictionary<string, string> _voicePathDict;
         }
 
         public const string Bgm = "bgm";
@@ -40,23 +43,34 @@ namespace Uft.AdvTools.Loader
             return this.LoadInner(csvDtoList, resourcesFolderPathPart);
         }
 
-        public SoundDictionaries Load(SoundTableSO so)
+        public SoundDictionaries Load(SoundTableSO so, string resourcesFolderPathPart)
         {
-            var bgmDict = new Dictionary<string, AudioClip>(so.entries.Count);
-            var seDict = new Dictionary<string, AudioClip>(so.entries.Count);
-            var voiceDict = new Dictionary<string, AudioClip>(so.entries.Count);
+            var soundBgmRoot = resourcesFolderPathPart + "Sound/BGM/";
+            var soundSeRoot = resourcesFolderPathPart + "Sound/SE/";
+            var soundVoiceRoot = resourcesFolderPathPart + "Sound/Voice/";
+            var bgmPathDict = new Dictionary<string, string>(so.entries.Count);
+            var sePathDict = new Dictionary<string, string>(so.entries.Count);
+            var voicePathDict = new Dictionary<string, string>(so.entries.Count);
             foreach (var data in so.entries)
             {
-                if (string.IsNullOrWhiteSpace(data.label) || data.clip == null) continue;
+                if (string.IsNullOrWhiteSpace(data.label) || string.IsNullOrWhiteSpace(data.fileName)) continue;
                 switch (data.type?.ToLower())
                 {
-                    case Bgm: bgmDict[data.label] = data.clip; break;
-                    case Se: seDict[data.label] = data.clip; break;
-                    case Voice: voiceDict[data.label] = data.clip; break;
+                    case Bgm: bgmPathDict[data.label] = soundBgmRoot + data.fileName; break;
+                    case Se: sePathDict[data.label] = soundSeRoot + data.fileName; break;
+                    case Voice: voicePathDict[data.label] = soundVoiceRoot + data.fileName; break;
                 }
             }
-            DevLog.Log($"[{nameof(SoundCsvLoader)}] Load(SO) done. bgm={bgmDict.Count}, se={seDict.Count}, voice={voiceDict.Count}");
-            return new SoundDictionaries { _bgmDict = bgmDict, _seDict = seDict, _voiceDict = voiceDict };
+            DevLog.Log($"[{nameof(SoundCsvLoader)}] Load(SO) done. bgm={bgmPathDict.Count}, se={sePathDict.Count}, voice={voicePathDict.Count}");
+            return new SoundDictionaries
+            {
+                _bgmDict = new Dictionary<string, AudioClip>(),
+                _bgmPathDict = bgmPathDict,
+                _seDict = new Dictionary<string, AudioClip>(),
+                _sePathDict = sePathDict,
+                _voiceDict = new Dictionary<string, AudioClip>(),
+                _voicePathDict = voicePathDict,
+            };
         }
 
         SoundDictionaries LoadInner(IReadOnlyList<SoundCsvDto> csvDtoList, string resourcesFolderPathPart)
@@ -64,9 +78,9 @@ namespace Uft.AdvTools.Loader
             var soundBgmRoot = resourcesFolderPathPart + "Sound/BGM/";
             var soundSeRoot = resourcesFolderPathPart + "Sound/SE/";
             var soundVoiceRoot = resourcesFolderPathPart + "Sound/Voice/";
-            var bgmDict = new Dictionary<string, AudioClip>();
-            var seDict = new Dictionary<string, AudioClip>();
-            var voiceDict = new Dictionary<string, AudioClip>();
+            var bgmPathDict = new Dictionary<string, string>();
+            var sePathDict = new Dictionary<string, string>();
+            var voicePathDict = new Dictionary<string, string>();
             int i = 0;
             SoundCsvDto? dto = null;
             try
@@ -81,29 +95,27 @@ namespace Uft.AdvTools.Loader
                     switch (type)
                     {
                         case Bgm:
-                            bgmDict[dto.Label] = this._assetLoadProxy.Load<AudioClip>(soundBgmRoot + Path.ChangeExtension(dto.FileName, null));
-                            var bgmClip = bgmDict[dto.Label];
-                            if (bgmClip != null && bgmClip.length >= 10 && bgmClip.loadType != AudioClipLoadType.Streaming)
-                            {
-                                DevLog.LogWarning($"[{nameof(SoundCsvLoader)}] Bgm is not streaming (>=10sec) : length={bgmClip.length:0}, loadType={bgmClip.loadType}, dto=({dto})");
-                            }
+                            bgmPathDict[dto.Label] = soundBgmRoot + Path.ChangeExtension(dto.FileName, null);
                             break;
                         case Se:
-                            seDict[dto.Label] = this._assetLoadProxy.Load<AudioClip>(soundSeRoot + Path.ChangeExtension(dto.FileName, null));
+                            sePathDict[dto.Label] = soundSeRoot + Path.ChangeExtension(dto.FileName, null);
                             break;
                         case Voice:
-                            voiceDict[dto.Label] = this._assetLoadProxy.Load<AudioClip>(soundVoiceRoot + Path.ChangeExtension(dto.FileName, null));
+                            voicePathDict[dto.Label] = soundVoiceRoot + Path.ChangeExtension(dto.FileName, null);
                             break;
                         default:
                             break;
                     }
                 }
-                DevLog.Log($"[{nameof(SoundCsvLoader)}] {nameof(Load)} done. bgmDict.Count={bgmDict.Count}, seDict.Count={seDict.Count}, voiceDict.Count={voiceDict.Count}");
+                DevLog.Log($"[{nameof(SoundCsvLoader)}] {nameof(Load)} done. bgmPathDict.Count={bgmPathDict.Count}, sePathDict.Count={sePathDict.Count}, voicePathDict.Count={voicePathDict.Count}");
                 return new SoundDictionaries()
                 {
-                    _bgmDict = bgmDict,
-                    _seDict = seDict,
-                    _voiceDict = voiceDict,
+                    _bgmDict = new Dictionary<string, AudioClip>(),
+                    _bgmPathDict = bgmPathDict,
+                    _seDict = new Dictionary<string, AudioClip>(),
+                    _sePathDict = sePathDict,
+                    _voiceDict = new Dictionary<string, AudioClip>(),
+                    _voicePathDict = voicePathDict,
                 };
             }
             catch (Exception ex)

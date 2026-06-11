@@ -25,7 +25,11 @@ namespace Uft.AdvTools.Commands
 
         public virtual void Run(ScenarioExecutor scenarioExecutor, AdvRoot advRoot)
         {
-            var clip = advRoot.BgmDictionary[this.Label];
+            if (!advRoot.BgmDictionary.TryGetValue(this.Label, out var clip))
+            {
+                clip = advRoot.AssetLoadProxy.Load<AudioClip>(advRoot.BgmPathDictionary[this.Label]);
+                advRoot.BgmDictionary[this.Label] = clip;
+            }
             advRoot.SoundManager.ChangeBgm(clip, this.IsLoop, this.Volume, this.PrevFadeOutSeconds, this.FadeInSeconds);
         }
     }

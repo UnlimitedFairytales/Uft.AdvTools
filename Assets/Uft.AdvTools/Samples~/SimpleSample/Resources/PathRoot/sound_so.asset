@@ -15,19 +15,19 @@ MonoBehaviour:
   entries:
   - label: "BGM\u305D\u306E1"
     type: bgm
-    clip: {fileID: 8300000, guid: f38e91fc41eddc84ca993dda780d02e5, type: 3}
+    fileName: 003_BPM95
   - label: "BGM\u305D\u306E2"
     type: bgm
-    clip: {fileID: 8300000, guid: 460a4bc94352a424791b097be982880f, type: 3}
+    fileName: 012_BPM117
   - label: "SE\u305D\u306E1"
     type: se
-    clip: {fileID: 8300000, guid: 527a86f4297032f4eaf96735767fb3ce, type: 3}
+    fileName: jihou01
   - label: "SE\u305D\u306E2"
     type: se
-    clip: {fileID: 8300000, guid: 17b0fbb0d667c454c845af551548bfe5, type: 3}
+    fileName: water08
   - label: "Voice\u305D\u306E1"
     type: voice
-    clip: {fileID: 8300000, guid: dfb46c0b2f0ed9c4c93a06fee2289f92, type: 3}
+    fileName: sample_voice1
   - label: "Voice\u305D\u306E2"
     type: voice
-    clip: {fileID: 8300000, guid: fcf092ad69692dc44bba518923ceeb75, type: 3}
+    fileName: sample_voice2

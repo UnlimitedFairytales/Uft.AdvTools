@@ -65,8 +65,11 @@ namespace Uft.AdvTools
         public Dictionary<string, TextureRow> BgDictionary { get; protected set; } = null!;
         public Dictionary<string, TextureRow> SpriteDictionary { get; protected set; } = null!;
         public Dictionary<string, AudioClip> BgmDictionary { get; protected set; } = null!;
+        public Dictionary<string, string> BgmPathDictionary { get; protected set; } = null!;
         public Dictionary<string, AudioClip> SeDictionary { get; protected set; } = null!;
+        public Dictionary<string, string> SePathDictionary { get; protected set; } = null!;
         public Dictionary<string, AudioClip> VoiceDictionary { get; protected set; } = null!;
+        public Dictionary<string, string> VoicePathDictionary { get; protected set; } = null!;
         public Dictionary<string, Param> ParamDictionary { get; protected set; } = null!;
 
         public ScenarioExecutor? ScenarioExecutor { get; protected set; }
@@ -136,7 +139,7 @@ namespace Uft.AdvTools
                 resourcesFolderPathPart,
                 new CharacterCsvLoader(assetLoadProxy).Load(characterSO),
                 new TextureCsvLoader(assetLoadProxy).Load(textureSO),
-                new SoundCsvLoader(assetLoadProxy).Load(soundSO),
+                new SoundCsvLoader(assetLoadProxy).Load(soundSO, resourcesFolderPathPart),
                 new ParamCsvLoader().Load(paramSO),
                 new ScenarioExecutor(scenarioCsvLoader.Load(scenarioSO, "test")),
                 defaultMessageWindowName);
@@ -165,8 +168,11 @@ namespace Uft.AdvTools
             this.BgDictionary = textures._bgDict;
             this.SpriteDictionary = textures._spriteDict;
             this.BgmDictionary = sounds._bgmDict;
+            this.BgmPathDictionary = sounds._bgmPathDict;
             this.SeDictionary = sounds._seDict;
+            this.SePathDictionary = sounds._sePathDict;
             this.VoiceDictionary = sounds._voiceDict;
+            this.VoicePathDictionary = sounds._voicePathDict;
             this.ParamDictionary = paramDict;
 
             this.ScenarioExecutor = scenarioExecutor;

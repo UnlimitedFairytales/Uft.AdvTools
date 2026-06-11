@@ -130,9 +130,19 @@ namespace Uft.AdvTools.Commands
             if (!string.IsNullOrWhiteSpace(this.Voice))
             {
                 // NOTE: 宴と異なりSoundシートでのType=Voiceに対応してある (本来の宴4はファイル直接記入のみ)
-                var voiceClip = advRoot.AllowsVoiceLabel && advRoot.VoiceDictionary.ContainsKey(this.Voice) ?
-                            advRoot.VoiceDictionary[this.Voice] :
-                            this._assetLoadProxy.Load<AudioClip>(advRoot.VoiceRoot + Path.ChangeExtension(this.Voice, null));
+                AudioClip voiceClip;
+                if (advRoot.AllowsVoiceLabel && advRoot.VoicePathDictionary.ContainsKey(this.Voice))
+                {
+                    if (!advRoot.VoiceDictionary.TryGetValue(this.Voice, out voiceClip))
+                    {
+                        voiceClip = advRoot.AssetLoadProxy.Load<AudioClip>(advRoot.VoicePathDictionary[this.Voice]);
+                        advRoot.VoiceDictionary[this.Voice] = voiceClip;
+                    }
+                }
+                else
+                {
+                    voiceClip = this._assetLoadProxy.Load<AudioClip>(advRoot.VoiceRoot + Path.ChangeExtension(this.Voice, null));
+                }
                 advRoot.SoundManager.StopVoice(0);
                 advRoot.SoundManager.PlayVoice(voiceClip, false, 1.0f);
             }

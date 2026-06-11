@@ -13,7 +13,7 @@ namespace Uft.AdvTools.Loader
         {
             public string label = "";
             public string type = "";
-            public AudioClip? clip;
+            public string fileName = "";
         }
 
         public List<SoundData> entries = new();
