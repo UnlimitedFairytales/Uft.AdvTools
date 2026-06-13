@@ -302,6 +302,13 @@
       "dependencies": {},
       "hash": "01a59dcc285079de480ad74d50a547a10cdcd0c2"
     },
+    "com.unlimited-fairytales.fonts": {
+      "version": "https://github.com/UnlimitedFairytales/Fonts.git?path=Assets/Fonts",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "6d654f79e08a24646fe664f0689c7a79bd41f5c4"
+    },
     "com.unlimited-fairytales.unityutils": {
       "version": "https://github.com/UnlimitedFairytales/Uft.UnityUtils.git?path=Assets/Uft.UnityUtils",
       "depth": 0,
