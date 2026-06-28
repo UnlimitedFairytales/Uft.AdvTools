@@ -1,10 +1,12 @@
 #nullable enable
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Uft.AdvTools.Entities;
 using Uft.AdvTools.Loader;
 using Uft.UnityUtils;
+using Uft.UnityUtils.Asset;
 using UnityEditor;
 using UnityEngine;
 
@@ -33,7 +35,24 @@ namespace Uft.AdvTools.Editor
         string _inputFolder = "";
         string _outputFolder = "Assets";
         Vector2 _scenarioScrollPos;
-        readonly AssetLoadProxy _proxy = EditorAssetLoadProxy.Create();
+        readonly AssetLoadProxy _proxy = new((path, type) =>
+        {
+            if (Path.HasExtension(path))
+                return AssetDatabase.LoadAssetAtPath(path, type);
+            var dir = Path.GetDirectoryName(path)?.Replace('\\', '/');
+            var name = Path.GetFileName(path);
+            var guids = AssetDatabase.FindAssets($"t:{type.Name} {name}", dir != null ? new[] { dir } : null);
+            foreach (var guid in guids)
+            {
+                var assetPath = AssetDatabase.GUIDToAssetPath(guid);
+                if (string.Equals(Path.GetFileNameWithoutExtension(assetPath), name, StringComparison.OrdinalIgnoreCase))
+                {
+                    var asset = AssetDatabase.LoadAssetAtPath(assetPath, type);
+                    if (asset != null) return asset;
+                }
+            }
+            return null;
+        });
 
         void OnGUI()
         {
