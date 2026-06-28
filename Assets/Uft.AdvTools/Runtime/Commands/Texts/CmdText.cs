@@ -4,7 +4,6 @@ using System;
 using System.IO;
 using Uft.AdvTools.Entities;
 using Uft.AdvTools.View;
-using Uft.UnityUtils.Asset;
 using UnityEngine;
 
 namespace Uft.AdvTools.Commands
@@ -48,10 +47,8 @@ namespace Uft.AdvTools.Commands
         protected float? PosY { get; set; }
         protected float FadeSeconds { get; set; }
 
-        readonly AssetLoadProxy _assetLoadProxy;
-
         public CmdText(string? name, string? text, string? pageCtrl, string? voice, string? windowType,
-            string? pattern, int? imageIndex, float? posX, float? posY, float? fadeSeconds, AssetLoadProxy assetLoadProxy)
+            string? pattern, int? imageIndex, float? posX, float? posY, float? fadeSeconds)
         {
             this.Name = name ?? "";
             this.Text = text ?? "";
@@ -67,8 +64,6 @@ namespace Uft.AdvTools.Commands
             this.PosX = posX;
             this.PosY = posY;
             this.FadeSeconds = fadeSeconds ?? 0.2f;
-
-            this._assetLoadProxy = assetLoadProxy;
         }
 
         public virtual void Run(ScenarioExecutor scenarioExecutor, AdvRoot advRoot)

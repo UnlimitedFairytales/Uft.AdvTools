@@ -261,7 +261,7 @@ namespace Uft.AdvTools.Editor
             var bgmRoot = resourcesFolderPathPart + "Sound/BGM/";
             var seRoot = resourcesFolderPathPart + "Sound/SE/";
             var voiceRoot = resourcesFolderPathPart + "Sound/Voice/";
-            var sounds = new SoundCsvLoader(this._proxy).Load(this._soundCsv.text, resourcesFolderPathPart);
+            var sounds = new SoundCsvLoader().Load(this._soundCsv.text, resourcesFolderPathPart);
             var soName = Path.GetFileNameWithoutExtension(AssetDatabase.GetAssetPath(this._soundCsv));
             var so = this.LoadOrCreate<SoundTableSO>(this._outputFolder + $"/{soName}_so.asset");
             so.entries = new List<SoundTableSO.SoundData>(sounds._bgmPathDict.Count + sounds._sePathDict.Count + sounds._voicePathDict.Count);

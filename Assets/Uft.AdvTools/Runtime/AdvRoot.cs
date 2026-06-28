@@ -65,11 +65,8 @@ namespace Uft.AdvTools
         public Dictionary<string, Character> CharacterDictionary { get; protected set; } = null!;
         public Dictionary<string, TextureRow> BgDictionary { get; protected set; } = null!;
         public Dictionary<string, TextureRow> SpriteDictionary { get; protected set; } = null!;
-        public Dictionary<string, AudioClip> BgmDictionary { get; protected set; } = null!;
         public Dictionary<string, string> BgmPathDictionary { get; protected set; } = null!;
-        public Dictionary<string, AudioClip> SeDictionary { get; protected set; } = null!;
         public Dictionary<string, string> SePathDictionary { get; protected set; } = null!;
-        public Dictionary<string, AudioClip> VoiceDictionary { get; protected set; } = null!;
         public Dictionary<string, string> VoicePathDictionary { get; protected set; } = null!;
         public Dictionary<string, Param> ParamDictionary { get; protected set; } = null!;
 
@@ -117,13 +114,13 @@ namespace Uft.AdvTools
             ScenarioCsvLoader? scenarioCsvLoader = null, string? defaultMessageWindowName = null)
         {
             this.Cleanup();
-            scenarioCsvLoader ??= new ScenarioCsvLoader(assetLoadProxy);
+            scenarioCsvLoader ??= new ScenarioCsvLoader();
             this.SetupInner(
                 assetLoadProxy,
                 resourcesFolderPathPart,
                 new CharacterCsvLoader(assetLoadProxy).Load(characterCsvText, resourcesFolderPathPart),
                 new TextureCsvLoader(assetLoadProxy).Load(textureCsvText, resourcesFolderPathPart),
-                new SoundCsvLoader(assetLoadProxy).Load(soundCsvText, resourcesFolderPathPart),
+                new SoundCsvLoader().Load(soundCsvText, resourcesFolderPathPart),
                 new ParamCsvLoader().Load(paramCsvText),
                 new ScenarioExecutor(scenarioCsvLoader.Load(scenarioCsvText, "test")),
                 defaultMessageWindowName);
@@ -134,13 +131,13 @@ namespace Uft.AdvTools
             ScenarioCsvLoader? scenarioCsvLoader = null, string? defaultMessageWindowName = null)
         {
             this.Cleanup();
-            scenarioCsvLoader ??= new ScenarioCsvLoader(assetLoadProxy);
+            scenarioCsvLoader ??= new ScenarioCsvLoader();
             this.SetupInner(
                 assetLoadProxy,
                 resourcesFolderPathPart,
                 new CharacterCsvLoader(assetLoadProxy).Load(characterSO),
                 new TextureCsvLoader(assetLoadProxy).Load(textureSO, resourcesFolderPathPart),
-                new SoundCsvLoader(assetLoadProxy).Load(soundSO, resourcesFolderPathPart),
+                new SoundCsvLoader().Load(soundSO, resourcesFolderPathPart),
                 new ParamCsvLoader().Load(paramSO),
                 new ScenarioExecutor(scenarioCsvLoader.Load(scenarioSO, "test")),
                 defaultMessageWindowName);
@@ -169,11 +166,8 @@ namespace Uft.AdvTools
             this.CharacterDictionary = characterDict;
             this.BgDictionary = textures._bgDict;
             this.SpriteDictionary = textures._spriteDict;
-            this.BgmDictionary = sounds._bgmDict;
             this.BgmPathDictionary = sounds._bgmPathDict;
-            this.SeDictionary = sounds._seDict;
             this.SePathDictionary = sounds._sePathDict;
-            this.VoiceDictionary = sounds._voiceDict;
             this.VoicePathDictionary = sounds._voicePathDict;
             this.ParamDictionary = paramDict;
 

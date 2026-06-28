@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.IO;
 using Uft.AdvTools.Commands;
 using Uft.UnityUtils;
-using Uft.UnityUtils.Asset;
 using Uft.UnityUtils.Common;
 
 namespace Uft.AdvTools.Loader
@@ -54,13 +53,6 @@ namespace Uft.AdvTools.Loader
         public const string PauseScenario = "pausescenario";
 
         // instance
-
-        readonly AssetLoadProxy _assetLoadProxy;
-
-        public ScenarioCsvLoader(AssetLoadProxy assetLoadProxy)
-        {
-            this._assetLoadProxy = assetLoadProxy;
-        }
 
         public IReadOnlyList<ICommand> Load(FileInfo fileInfo, string sheetName)
         {
@@ -126,8 +118,7 @@ namespace Uft.AdvTools.Loader
                                     int.TryParse(dto.Arg3, out var index) ? index : null,
                                     InvariantCultureUtil.FloatTryParse(dto.Arg4, out var x) ? x : null,
                                     InvariantCultureUtil.FloatTryParse(dto.Arg5, out var y) ? y : null,
-                                    InvariantCultureUtil.FloatTryParse(dto.Arg6, out var fadeSeconds) ? fadeSeconds : null,
-                                    this._assetLoadProxy));
+                                    InvariantCultureUtil.FloatTryParse(dto.Arg6, out var fadeSeconds) ? fadeSeconds : null));
                             }
                             break;
                         // Object

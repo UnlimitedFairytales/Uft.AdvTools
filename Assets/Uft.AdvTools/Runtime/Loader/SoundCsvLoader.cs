@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Uft.UnityUtils;
-using Uft.UnityUtils.Asset;
-using UnityEngine;
 
 namespace Uft.AdvTools.Loader
 {
@@ -13,24 +11,14 @@ namespace Uft.AdvTools.Loader
     {
         public struct SoundDictionaries
         {
-            public Dictionary<string, AudioClip> _bgmDict;
             public Dictionary<string, string> _bgmPathDict;
-            public Dictionary<string, AudioClip> _seDict;
             public Dictionary<string, string> _sePathDict;
-            public Dictionary<string, AudioClip> _voiceDict;
             public Dictionary<string, string> _voicePathDict;
         }
 
         public const string Bgm = "bgm";
         public const string Se = "se";
         public const string Voice = "voice";
-
-        readonly AssetLoadProxy _assetLoadProxy;
-
-        public SoundCsvLoader(AssetLoadProxy assetLoadProxy)
-        {
-            this._assetLoadProxy = assetLoadProxy;
-        }
 
         public SoundDictionaries Load(FileInfo fileInfo, string resourcesFolderPathPart)
         {
@@ -65,11 +53,8 @@ namespace Uft.AdvTools.Loader
             DevLog.Log($"[{nameof(SoundCsvLoader)}] Load(SO) done. bgm={bgmPathDict.Count}, se={sePathDict.Count}, voice={voicePathDict.Count}");
             return new SoundDictionaries
             {
-                _bgmDict = new Dictionary<string, AudioClip>(),
                 _bgmPathDict = bgmPathDict,
-                _seDict = new Dictionary<string, AudioClip>(),
                 _sePathDict = sePathDict,
-                _voiceDict = new Dictionary<string, AudioClip>(),
                 _voicePathDict = voicePathDict,
             };
         }
@@ -111,11 +96,8 @@ namespace Uft.AdvTools.Loader
                 DevLog.Log($"[{nameof(SoundCsvLoader)}] {nameof(Load)} done. bgmPathDict.Count={bgmPathDict.Count}, sePathDict.Count={sePathDict.Count}, voicePathDict.Count={voicePathDict.Count}");
                 return new SoundDictionaries()
                 {
-                    _bgmDict = new Dictionary<string, AudioClip>(),
                     _bgmPathDict = bgmPathDict,
-                    _seDict = new Dictionary<string, AudioClip>(),
                     _sePathDict = sePathDict,
-                    _voiceDict = new Dictionary<string, AudioClip>(),
                     _voicePathDict = voicePathDict,
                 };
             }
