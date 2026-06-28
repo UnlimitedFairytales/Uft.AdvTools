@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using Uft.AdvTools.Commands;
 using Uft.UnityUtils;
+using Uft.UnityUtils.Asset;
 using Uft.UnityUtils.Common;
 
 namespace Uft.AdvTools.Loader

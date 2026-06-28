@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Uft.UnityUtils;
+using Uft.UnityUtils.Asset;
 using UnityEngine;
 
 namespace Uft.AdvTools.Loader
