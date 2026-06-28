@@ -10,6 +10,7 @@ using Uft.AdvTools.Loader;
 using Uft.AdvTools.View;
 using Uft.FadeEffects;
 using Uft.UnityUtils;
+using Uft.UnityUtils.Asset;
 using Uft.UnityUtils.Audio;
 using UnityEngine;
 using UnityEngine.UI;
@@ -163,6 +164,7 @@ namespace Uft.AdvTools
             this.LogManager = new LogManager();
             this._tglLogView.SetIsOnWithoutNotify(false);
             this.PostEffectManager.Setup(this);
+            this.SoundManager.Setup(new Dictionary<string, AudioInfo>(), assetLoadProxy);
 
             this.CharacterDictionary = characterDict;
             this.BgDictionary = textures._bgDict;

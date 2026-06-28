@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using Uft.AdvTools.Entities;
 using Uft.AdvTools.View;
+using Uft.UnityUtils.Asset;
 using UnityEngine;
 
 namespace Uft.AdvTools.Commands
@@ -130,21 +131,17 @@ namespace Uft.AdvTools.Commands
             if (!string.IsNullOrWhiteSpace(this.Voice))
             {
                 // NOTE: 宴と異なりSoundシートでのType=Voiceに対応してある (本来の宴4はファイル直接記入のみ)
-                AudioClip voiceClip;
+                string voicePath;
                 if (advRoot.AllowsVoiceLabel && advRoot.VoicePathDictionary.ContainsKey(this.Voice))
                 {
-                    if (!advRoot.VoiceDictionary.TryGetValue(this.Voice, out voiceClip))
-                    {
-                        voiceClip = advRoot.AssetLoadProxy.Load<AudioClip>(advRoot.VoicePathDictionary[this.Voice]);
-                        advRoot.VoiceDictionary[this.Voice] = voiceClip;
-                    }
+                    voicePath = advRoot.VoicePathDictionary[this.Voice];
                 }
                 else
                 {
-                    voiceClip = this._assetLoadProxy.Load<AudioClip>(advRoot.VoiceRoot + Path.ChangeExtension(this.Voice, null));
+                    voicePath = advRoot.VoiceRoot + Path.ChangeExtension(this.Voice, null);
                 }
                 advRoot.SoundManager.StopVoice(0);
-                advRoot.SoundManager.PlayVoice(voiceClip, false, 1.0f);
+                advRoot.SoundManager.PlayVoice(voicePath, false, 1.0f);
             }
             else
             {

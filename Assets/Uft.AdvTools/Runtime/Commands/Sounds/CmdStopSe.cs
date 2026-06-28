@@ -17,8 +17,8 @@ namespace Uft.AdvTools.Commands
 
         public virtual void Run(ScenarioExecutor scenarioExecutor, AdvRoot advRoot)
         {
-            var clip = !string.IsNullOrWhiteSpace(this.Label) ? advRoot.SeDictionary[this.Label] : null;
-            advRoot.SoundManager.StopSe(this.FadeOutSeconds, clip);
+            var path = !string.IsNullOrWhiteSpace(this.Label) ? advRoot.SePathDictionary[this.Label] : null;
+            advRoot.SoundManager.StopSe(this.FadeOutSeconds, path);
         }
     }
 }
