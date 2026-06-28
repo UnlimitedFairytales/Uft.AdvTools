@@ -17,6 +17,7 @@
     "com.unity.timeline": "1.8.10",
     "com.unity.ugui": "2.0.0",
     "com.unity.visualscripting": "1.9.7",
+    "com.unlimited-fairytales.assetbundletools": "https://github.com/UnlimitedFairytales/Uft.AssetBundleTools.git?path=Assets/Uft.AssetBundleTools",
     "com.unlimited-fairytales.fadeeffects": "https://github.com/UnlimitedFairytales/Uft.FadeEffects.git?path=Assets/Uft.FadeEffects",
     "com.unlimited-fairytales.fonts": "https://github.com/UnlimitedFairytales/Fonts.git?path=Assets/Fonts",
     "com.unlimited-fairytales.unityutils": "https://github.com/UnlimitedFairytales/Uft.UnityUtils.git?path=Assets/Uft.UnityUtils",

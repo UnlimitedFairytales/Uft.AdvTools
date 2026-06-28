@@ -295,12 +295,21 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.unlimited-fairytales.assetbundletools": {
+      "version": "https://github.com/UnlimitedFairytales/Uft.AssetBundleTools.git?path=Assets/Uft.AssetBundleTools",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.ugui": "2.0.0"
+      },
+      "hash": "32fae5132c753b9c5499aebd860b05ad1ae5fe0a"
+    },
     "com.unlimited-fairytales.fadeeffects": {
       "version": "https://github.com/UnlimitedFairytales/Uft.FadeEffects.git?path=Assets/Uft.FadeEffects",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "01a59dcc285079de480ad74d50a547a10cdcd0c2"
+      "hash": "7114b2695b2214c8cd95689ef89b5993c2c97b4e"
     },
     "com.unlimited-fairytales.fonts": {
       "version": "https://github.com/UnlimitedFairytales/Fonts.git?path=Assets/Fonts",
@@ -316,14 +325,14 @@
       "dependencies": {
         "com.unity.ugui": "2.0.0"
       },
-      "hash": "afd37297ee62699b6e01932dd3ea7f6e8a4b2afc"
+      "hash": "827de79a66bb934dc3fdca3b2a87dd8017297378"
     },
     "com.unlimited-fairytales.virtualizedlist": {
       "version": "https://github.com/UnlimitedFairytales/Uft.VirtualizedList.git?path=Assets/Uft.VirtualizedList",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "bc66177b030415c2ad85e513dbd3003ca4901b38"
+      "hash": "00ee844110202a09ba329bade4f12f7a8a673e4e"
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
